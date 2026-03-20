@@ -60,7 +60,7 @@ export default async function handler(req, res) {
         'X-Title': 'TenderStore.id AI Assistant'
       },
       body: JSON.stringify({
-                                        model: 'google/gemini-2.0-flash-exp:free',
+                                                  model: 'stepfun/step-3.5-flash:free',
         messages: messages,
         max_tokens: 800,
         temperature: 0.7
