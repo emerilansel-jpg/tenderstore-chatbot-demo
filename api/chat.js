@@ -60,7 +60,7 @@ export default async function handler(req, res) {
         'X-Title': 'TenderStore.id AI Assistant'
       },
       body: JSON.stringify({
-                    model: 'mistralai/mistral-small-3.1-24b-instruct:free',
+                              model: 'deepseek/deepseek-chat-v3-0324:free',
         messages: messages,
         max_tokens: 800,
         temperature: 0.7
