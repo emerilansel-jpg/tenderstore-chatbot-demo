@@ -112,6 +112,7 @@ ${KNOWLEDGEBASE}
 
 ATURAN PENTING:
 - Jawab dalam Bahasa Indonesia yang profesional tapi friendly
+- PENTING: Jawab SINGKAT & PADAT, maksimal 3-4 kalimat. Jangan bertele-tele. User butuh jawaban cepat dan to the point.
 - Gunakan format markdown: **bold** untuk penekanan, bullet points untuk daftar
 - Jika ditanya tentang tender terbaru, sebutkan contoh dari data Week 2 Maret 2026
 - Selalu dorong user untuk menghubungi tim atau mendaftar membership
@@ -144,8 +145,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: 'meta-llama/llama-3.3-70b-instruct',
         messages,
-        max_tokens: 800,
-        temperature: 0.7
+        max_tokens: 400,
+              temperature: 0.3
       })
     });
 
