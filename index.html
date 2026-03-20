@@ -1,1 +1,160 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>TenderStore.id - AI Assistant Demo</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}:root{--blue:#0055a5;--blue-dark:#003d7a;--blue-light:#e8f1fb;--gold:#f5a623;--gold-light:#fef3d8;--white:#ffffff;--gray-50:#f8f9fa;--gray-100:#e9ecef;--gray-600:#6c757d;--gray-800:#343a40;--gray-900:#212529}body{font-family:'Inter',sans-serif;background:var(--white);color:var(--gray-900);line-height:1.6}.header{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);padding:0;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,85,165,0.3)}.header-inner{max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between}.logo-section{display:flex;align-items:center;gap:12px}.logo-icon{width:48px;height:48px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--blue-dark);line-height:1;text-align:center;box-shadow:0 2px 8px rgba(245,166,35,0.4)}.logo-text{color:white}.logo-text h1{font-size:22px;font-weight:700;letter-spacing:-0.5px}.logo-text h1 span{color:var(--gold)}.logo-text p{font-size:11px;opacity:0.8;letter-spacing:0.5px}.header-badge{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:6px 16px;color:white;font-size:12px;font-weight:500;display:flex;align-items:center;gap:6px}.header-badge .dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}.hero{background:linear-gradient(180deg,#f0f6ff 0%,var(--white) 100%);padding:48px 24px 32px;text-align:center}.hero h2{font-size:28px;font-weight:700;color:var(--blue-dark);margin-bottom:8px}.hero p{color:var(--gray-600);font-size:15px;max-width:600px;margin:0 auto 24px}.stats{display:flex;justify-content:center;gap:40px;margin-top:24px}.stat{text-align:center}.stat .num{font-size:32px;font-weight:800;color:var(--blue);line-height:1}.stat .label{font-size:12px;color:var(--gray-600);margin-top:4px}.chat-section{max-width:800px;margin:0 auto;padding:0 24px 40px}.chat-container{border:1px solid var(--gray-100);border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.06)}.chat-header{background:var(--blue);padding:16px 20px;display:flex;align-items:center;gap:12px}.chat-avatar{width:40px;height:40px;background:var(--gold);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}.chat-header-text h3{color:white;font-size:15px;font-weight:600}.chat-header-text p{color:rgba(255,255,255,0.7);font-size:12px}.chat-messages{height:400px;overflow-y:auto;padding:20px;background:var(--gray-50);display:flex;flex-direction:column;gap:16px}.msg{max-width:85%;animation:fadeIn 0.3s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.msg.bot{align-self:flex-start}.msg.user{align-self:flex-end}.msg .bubble{padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.6}.msg.bot .bubble{background:white;color:var(--gray-800);border:1px solid var(--gray-100);border-bottom-left-radius:4px}.msg.user .bubble{background:var(--blue);color:white;border-bottom-right-radius:4px}.msg .sender{font-size:11px;color:var(--gray-600);margin-bottom:4px;font-weight:500}.msg.user .sender{text-align:right}.typing{display:flex;gap:4px;padding:12px 16px;background:white;border-radius:12px;border:1px solid var(--gray-100);width:fit-content;border-bottom-left-radius:4px}.typing span{width:6px;height:6px;background:var(--gray-600);border-radius:50%;animation:typingDot 1.4s infinite}.typing span:nth-child(2){animation-delay:0.2s}.typing span:nth-child(3){animation-delay:0.4s}@keyframes typingDot{0%,100%{opacity:0.3;transform:scale(0.8)}50%{opacity:1;transform:scale(1)}}.quick-btns{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px;background:white;border-top:1px solid var(--gray-100)}.quick-btn{background:var(--blue-light);color:var(--blue);border:1px solid rgba(0,85,165,0.2);border-radius:20px;padding:8px 16px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:500;transition:all 0.2s}.quick-btn:hover{background:var(--blue);color:white}.chat-input-area{display:flex;gap:8px;padding:16px 20px;background:white;border-top:1px solid var(--gray-100)}.chat-input-area input{flex:1;border:1px solid var(--gray-100);border-radius:12px;padding:12px 16px;font-size:14px;font-family:inherit;outline:none;transition:border 0.2s}.chat-input-area input:focus{border-color:var(--blue)}.send-btn{width:44px;height:44px;background:var(--blue);border:none;border-radius:12px;color:white;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}.send-btn:hover{background:var(--blue-dark)}.send-btn:disabled{background:var(--gray-100);color:var(--gray-600);cursor:not-allowed}.features{max-width:1000px;margin:0 auto;padding:40px 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.feature-card{text-align:center;padding:32px 24px;border-radius:16px;border:1px solid var(--gray-100);transition:all 0.3s}.feature-card:hover{border-color:var(--blue);box-shadow:0 8px 30px rgba(0,85,165,0.1)}.feature-card .icon{font-size:36px;margin-bottom:12px}.feature-card h4{font-size:16px;font-weight:600;color:var(--gray-900);margin-bottom:8px}.feature-card p{font-size:13px;color:var(--gray-600)}.cta{max-width:800px;margin:0 auto;padding:0 24px 48px}.cta-box{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%);border-radius:20px;padding:40px;text-align:center;color:white}.cta-box h3{font-size:22px;font-weight:700;margin-bottom:8px}.cta-box p{opacity:0.8;font-size:14px;margin-bottom:24px}.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.cta-btns a{padding:12px 28px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.2s;font-family:inherit}.btn-wa{background:var(--gold);color:var(--blue-dark)}.btn-wa:hover{background:#e6991a}.btn-web{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)}.btn-web:hover{background:rgba(255,255,255,0.25)}.footer{text-align:center;padding:24px;color:var(--gray-600);font-size:12px;border-top:1px solid var(--gray-100)}.powered{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;font-size:11px;color:var(--gray-600)}.powered img{height:20px;opacity:0.5}@media(max-width:768px){.stats{gap:24px}.stat .num{font-size:24px}.features{grid-template-columns:1fr}.chat-messages{height:350px}.header-badge{display:none}}</style></head><body><header class="header"><div class="header-inner"><div class="logo-section"><div class="logo-icon">TENDER<br>Store</div><div class="logo-text"><h1>Tender<span>Store</span>.id</h1><p>Powered by PT. Tender Indonesia</p></div></div><div class="header-badge"><span class="dot"></span>AI Assistant Aktif</div></div></header><section class="hero"><h2>Direktori B2B & Hard Selling Tool #1 Indonesia</h2><p>Temukan supplier, kontraktor, dan vendor terpercaya dari 75+ kategori industri. Tanyakan langsung ke AI Assistant kami.</p><div class="stats"><div class="stat"><div class="num">75+</div><div class="label">Kategori Industri</div></div><div class="stat"><div class="num">2.000+</div><div class="label">Perusahaan</div></div><div class="stat"><div class="num">24+</div><div class="label">Tahun Pengalaman</div></div></div></section><section class="chat-section"><div class="chat-container"><div class="chat-header"><div class="chat-avatar">&#129302;</div><div class="chat-header-text"><h3>Asisten TenderStore.id</h3><p>Online - Siap membantu Anda</p></div></div><div class="chat-messages" id="chatMessages"><div class="msg bot"><div class="sender">Asisten AI</div><div class="bubble">Halo! Selamat datang di <strong>TenderStore.id</strong> &#128075;<br><br>Saya asisten AI yang siap membantu Anda menemukan informasi seputar direktori B2B terlengkap di Indonesia. Ada yang bisa saya bantu?</div></div></div><div class="quick-btns" id="quickBtns"><button class="quick-btn" onclick="sendQuick('Apa itu TenderStore.id?')">Apa itu TenderStore.id?</button><button class="quick-btn" onclick="sendQuick('Kategori industri apa saja yang tersedia?')">Kategori Industri</button><button class="quick-btn" onclick="sendQuick('Apa keuntungan menjadi member?')">Keuntungan Member</button><button class="quick-btn" onclick="sendQuick('Bagaimana cara menghubungi tim TenderStore?')">Hubungi Kami</button></div><div class="chat-input-area"><input type="text" id="chatInput" placeholder="Ketik pertanyaan Anda di sini..." onkeypress="if(event.key==='Enter')sendMessage()"><button class="send-btn" id="sendBtn" onclick="sendMessage()">&#10148;</button></div></div></section><section class="features"><div class="feature-card"><div class="icon">&#9889;</div><h4>Respon Instan</h4><p>Jawaban cepat 24/7 untuk semua pertanyaan seputar layanan TenderStore.id</p></div><div class="feature-card"><div class="icon">&#127919;</div><h4>Pencarian Akurat</h4><p>Temukan supplier, kontraktor, dan vendor yang tepat dari 75+ kategori industri</p></div><div class="feature-card"><div class="icon">&#128640;</div><h4>Integrasi Tender</h4><p>Terhubung langsung dengan ekosistem Tender-Indonesia.com sejak tahun 2000</p></div></section><section class="cta"><div class="cta-box"><h3>&#128640; Siap Meningkatkan Bisnis Anda?</h3><p>Hubungi tim kami untuk informasi lengkap tentang pendaftaran dan promosi di TenderStore.id</p><div class="cta-btns"><a href="https://wa.me/6281282248240?text=Halo%20TenderStore.id%2C%20saya%20tertarik%20untuk%20mendaftar" class="btn-wa" target="_blank">&#128172; Chat WhatsApp</a><a href="https://tenderstore.id" class="btn-web" target="_blank">&#127760; Kunjungi Website</a></div></div></section><footer class="footer"><p>&copy; 2024 TenderStore.id - PT. Tender Indonesia | Powered by AI Chatbot</p><p class="powered">Demo chatbot knowledgebase oleh JetDigitalPro.com</p></footer><script>let history=[];const chatMessages=document.getElementById('chatMessages');const chatInput=document.getElementById('chatInput');const sendBtn=document.getElementById('sendBtn');function addMsg(text,type){const div=document.createElement('div');div.className='msg '+type;div.innerHTML='<div class="sender">'+(type==='bot'?'Asisten AI':'Anda')+'</div><div class="bubble">'+text+'</div>';chatMessages.appendChild(div);chatMessages.scrollTop=chatMessages.scrollHeight}function showTyping(){const div=document.createElement('div');div.className='msg bot';div.id='typing';div.innerHTML='<div class="sender">Asisten AI</div><div class="typing"><span></span><span></span><span></span></div>';chatMessages.appendChild(div);chatMessages.scrollTop=chatMessages.scrollHeight}function hideTyping(){const el=document.getElementById('typing');if(el)el.remove()}function sendQuick(text){document.getElementById('quickBtns').style.display='none';sendMsg(text)}function sendMessage(){const text=chatInput.value.trim();if(!text)return;chatInput.value='';sendMsg(text)}async function sendMsg(text){addMsg(text,'user');sendBtn.disabled=true;showTyping();try{const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,history:history})});const data=await res.json();hideTyping();if(data.reply){addMsg(data.reply.replace(/\n/g,'<br>'),'bot');history.push({role:'user',content:text});history.push({role:'assistant',content:data.reply});if(history.length>10)history=history.slice(-10)}else{addMsg('Maaf, terjadi kesalahan: '+(data.error||'Silakan coba lagi.'),'bot')}}catch(e){hideTyping();addMsg('Maaf, layanan sedang tidak tersedia. Silakan coba beberapa saat lagi.','bot')}sendBtn.disabled=false;chatInput.focus()}</script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TenderStore.id - AI Assistant Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0a1628;color:#fff;min-height:100vh}
+.navbar{background:linear-gradient(135deg,#0052a5,#003d7a);padding:14px 30px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 20px rgba(0,0,0,0.3)}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-area img{height:42px;border-radius:6px}
+.logo-text h1{font-size:20px;font-weight:800;color:#fff}
+.logo-text h1 span{color:#f5a623}
+.logo-text p{font-size:11px;color:rgba(255,255,255,0.7)}
+.status-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);padding:8px 16px;border-radius:20px;font-size:13px}
+.status-dot{width:8px;height:8px;background:#4ade80;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.hero{text-align:center;padding:40px 20px 30px;background:linear-gradient(180deg,#0d1f3c,#0a1628)}
+.hero h2{font-size:28px;font-weight:800;margin-bottom:12px;background:linear-gradient(to right,#4da6ff,#f5a623);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:rgba(255,255,255,0.6);font-size:14px;max-width:500px;margin:0 auto 24px}
+.stats{display:flex;justify-content:center;gap:40px;margin-top:20px}
+.stat-item{text-align:center}
+.stat-item .num{font-size:32px;font-weight:800;color:#4da6ff}
+.stat-item .label{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px}
+.chat-container{max-width:700px;margin:0 auto 40px;padding:0 16px}
+.chat-box{background:#111d32;border-radius:16px;overflow:hidden;border:1px solid rgba(77,166,255,0.15);box-shadow:0 8px 40px rgba(0,0,0,0.4)}
+.chat-header{background:linear-gradient(135deg,#0052a5,#003d7a);padding:16px 20px;display:flex;align-items:center;gap:12px}
+.chat-avatar{width:40px;height:40px;background:#f5a623;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.chat-header-text h3{font-size:15px;font-weight:700}
+.chat-header-text p{font-size:12px;color:rgba(255,255,255,0.6)}
+.chat-messages{height:380px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.chat-messages::-webkit-scrollbar{width:4px}
+.chat-messages::-webkit-scrollbar-thumb{background:rgba(77,166,255,0.3);border-radius:2px}
+.msg{max-width:85%}
+.msg-label{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px}
+.msg-bubble{padding:14px 18px;border-radius:14px;font-size:13.5px;line-height:1.7}
+.msg-ai .msg-bubble{background:#1a2a45;color:rgba(255,255,255,0.9);border-bottom-left-radius:4px}
+.msg-user{align-self:flex-end}
+.msg-user .msg-bubble{background:linear-gradient(135deg,#0052a5,#2874cc);color:#fff;border-bottom-right-radius:4px}
+.msg-user .msg-label{text-align:right}
+.msg-bubble strong{color:#4da6ff;font-weight:600}
+.typing{display:flex;gap:4px;padding:10px 18px;background:#1a2a45;border-radius:14px;border-bottom-left-radius:4px;width:fit-content}
+.typing span{width:6px;height:6px;background:rgba(255,255,255,0.4);border-radius:50%;animation:typingAnim 1.4s infinite}
+.typing span:nth-child(2){animation-delay:0.2s}
+.typing span:nth-child(3){animation-delay:0.4s}
+@keyframes typingAnim{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.quick-btns{padding:12px 20px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid rgba(77,166,255,0.1)}
+.quick-btn{background:rgba(77,166,255,0.1);color:#4da6ff;border:1px solid rgba(77,166,255,0.2);padding:8px 16px;border-radius:20px;font-size:12px;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.quick-btn:hover{background:rgba(77,166,255,0.2);border-color:rgba(77,166,255,0.4)}
+.chat-input-area{padding:16px 20px;border-top:1px solid rgba(77,166,255,0.1);display:flex;gap:10px}
+.chat-input-area input{flex:1;background:#1a2a45;border:1px solid rgba(77,166,255,0.2);color:#fff;padding:12px 16px;border-radius:12px;font-size:14px;font-family:inherit;outline:none}
+.chat-input-area input:focus{border-color:#4da6ff}
+.chat-input-area input::placeholder{color:rgba(255,255,255,0.3)}
+.send-btn{background:linear-gradient(135deg,#f5a623,#e09000);border:none;color:#fff;width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:18px;transition:transform 0.2s}
+.send-btn:hover{transform:scale(1.05)}
+.send-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.footer{text-align:center;padding:20px;color:rgba(255,255,255,0.3);font-size:12px}
+.footer a{color:#4da6ff;text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="logo-area">
+<img src="https://tenderstore.id/images/logotenderstore.png" alt="TenderStore Logo" onerror="this.style.display='none'">
+<div class="logo-text"><h1>Tender<span>Store</span>.id</h1><p>Powered by PT. Tender Indonesia</p></div>
+</div>
+<div class="status-badge"><span class="status-dot"></span> AI Assistant Aktif</div>
+</nav>
+
+<section class="hero">
+<h2>Smart B2B Directory & Hard Selling Tool #1 Indonesia</h2>
+<p>Temukan supplier, kontraktor, dan vendor terpercaya dari 75+ kategori industri. Tanyakan langsung ke AI Assistant kami.</p>
+<div class="stats">
+<div class="stat-item"><div class="num">75+</div><div class="label">Kategori Industri</div></div>
+<div class="stat-item"><div class="num">2.000+</div><div class="label">Perusahaan</div></div>
+<div class="stat-item"><div class="num">24+</div><div class="label">Tahun Pengalaman</div></div>
+</div>
+</section>
+
+<div class="chat-container">
+<div class="chat-box">
+<div class="chat-header">
+<div class="chat-avatar">🤖</div>
+<div class="chat-header-text"><h3>Asisten TenderStore.id</h3><p>Online - Siap membantu Anda</p></div>
+</div>
+<div class="chat-messages" id="chatMessages">
+<div class="msg msg-ai">
+<div class="msg-label">Asisten AI</div>
+<div class="msg-bubble">Halo! Selamat datang di <strong>TenderStore.id</strong> 👋<br><br>Saya asisten AI yang siap membantu Anda menemukan informasi seputar direktori B2B terlengkap di Indonesia. Ada yang bisa saya bantu?</div>
+</div>
+</div>
+<div class="quick-btns">
+<button class="quick-btn" onclick="sendMsg('Apa itu TenderStore.id?')">Apa itu TenderStore.id?</button>
+<button class="quick-btn" onclick="sendMsg('Kategori industri apa saja?')">Kategori Industri</button>
+<button class="quick-btn" onclick="sendMsg('Apa keuntungan menjadi member?')">Keuntungan Member</button>
+<button class="quick-btn" onclick="sendMsg('Bagaimana cara menghubungi?')">Hubungi Kami</button>
+</div>
+<div class="chat-input-area">
+<input type="text" id="chatInput" placeholder="Ketik pertanyaan Anda di sini..." onkeydown="if(event.key==='Enter')sendMsg()">
+<button class="send-btn" id="sendBtn" onclick="sendMsg()">➤</button>
+</div>
+</div>
+</div>
+
+<div class="footer">Powered by <a href="https://tenderstore.id" target="_blank">TenderStore.id</a> &bull; PT. Tender Indonesia &bull; AI-Powered Knowledgebase</div>
+
+<script>
+const chatMessages=document.getElementById('chatMessages');
+const chatInput=document.getElementById('chatInput');
+const sendBtn=document.getElementById('sendBtn');
+let history=[];
+
+function formatMd(t){
+  return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+}
+
+async function sendMsg(text){
+  const msg=text||chatInput.value.trim();
+  if(!msg)return;
+  chatInput.value='';
+  sendBtn.disabled=true;
+
+  // user msg
+  const userDiv=document.createElement('div');
+  userDiv.className='msg msg-user';
+  userDiv.innerHTML='<div class="msg-label">Anda</div><div class="msg-bubble">'+msg.replace(/</g,'&lt;')+'</div>';
+  chatMessages.appendChild(userDiv);
+
+  // typing
+  const typingDiv=document.createElement('div');
+  typingDiv.className='msg msg-ai';
+  typingDiv.innerHTML='<div class="msg-label">Asisten AI</div><div class="typing"><span></span><span></span><span></span></div>';
+  chatMessages.appendChild(typingDiv);
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+
+  try{
+    const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,history:history})});
+    const data=await res.json();
+    typingDiv.remove();
+    const aiDiv=document.createElement('div');
+    aiDiv.className='msg msg-ai';
+    aiDiv.innerHTML='<div class="msg-label">Asisten AI</div><div class="msg-bubble">'+formatMd(data.reply||data.error||'Maaf, terjadi kesalahan.')+'</div>';
+    chatMessages.appendChild(aiDiv);
+    history.push({role:'user',content:msg},{role:'assistant',content:data.reply});
+  }catch(e){
+    typingDiv.remove();
+    const errDiv=document.createElement('div');
+    errDiv.className='msg msg-ai';
+    errDiv.innerHTML='<div class="msg-label">Asisten AI</div><div class="msg-bubble">Maaf, terjadi gangguan koneksi. Silakan coba lagi.</div>';
+    chatMessages.appendChild(errDiv);
+  }
+  chatMessages.scrollTop=chatMessages.scrollHeight;
+  sendBtn.disabled=false;
+  chatInput.focus();
+}
+</script>
+</body>
+</html>
