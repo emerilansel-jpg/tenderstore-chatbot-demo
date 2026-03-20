@@ -292,51 +292,88 @@ footer a:hover{text-decoration:underline}
 </footer>
 
 <script>
-const responses={
-'Apa itu Tender Indonesia?':'Tender Indonesia (PT. Tender Indonesia) adalah perusahaan yang berdiri sejak tahun 2000, bergerak di bidang penyedia informasi tender dan procurement untuk berbagai sektor industri di Indonesia, termasuk Oil & Gas, Mining, Energy, Infrastruktur, dan Telekomunikasi. Saat ini memiliki komunitas B2B dengan lebih dari 3.000 member aktif di seluruh Indonesia.\n\n<div class="msg-source">&#128218; Sumber: Knowledge Base TenderStore \u2014 Profil Perusahaan</div>',
-'Bagaimana cara ikut tender?':'Untuk mengikuti tender melalui Tender Indonesia, Anda perlu:\n\n1. Mendaftar sebagai member di platform Tender Indonesia\n2. Melengkapi profil perusahaan dan dokumen legalitas\n3. Memilih sektor industri yang sesuai\n4. Memantau daftar tender yang tersedia\n5. Mengajukan penawaran sesuai persyaratan\n\nUntuk informasi lebih detail, hubungi tim Tender Indonesia.\n\n<div class="msg-source">&#128218; Sumber: Knowledge Base TenderStore \u2014 Panduan Member</div>',
-'Sektor apa saja yang dilayani?':'Tender Indonesia melayani berbagai sektor industri utama di Indonesia:\n\n\u2022 Oil & Gas \u2014 Eksplorasi, produksi, dan distribusi\n\u2022 Mining \u2014 Pertambangan mineral dan batubara\n\u2022 Energy \u2014 Energi terbarukan dan konvensional\n\u2022 Infrastruktur \u2014 Pembangunan dan konstruksi\n\u2022 Telekomunikasi \u2014 Jaringan dan layanan telco\n\n<div class="msg-source">&#128218; Sumber: Knowledge Base TenderStore \u2014 Sektor Industri</div>'
-};
-const fallback='Mohon maaf, saya tidak menemukan informasi tersebut di knowledge base saat ini. Saya hanya menjawab berdasarkan data yang sudah diverifikasi. Silakan hubungi tim Tender Indonesia untuk pertanyaan lebih lanjut.\n\n<div class="msg-source">&#9888;&#65039; Tidak ditemukan di Knowledge Base</div>';
-function addMsg(text,type){
-const m=document.getElementById('chatMessages');
-const d=document.createElement('div');
-d.className='msg msg-'+type;
-const label=document.createElement('div');
-label.className='msg-label';
-label.textContent=type==='user'?'Anda':'AI Assistant';
-const b=document.createElement('div');
-b.className='msg-bubble';
-b.innerHTML=text;
+const API_URL = window.location.hostname === 'localhost' ? '/api/chat' : 'https://tenderstore-chatbot-demo.vercel.app/api/chat';
+let chatHistory = [];
+
+function addMsg(text, type) {
+const m = document.getElementById('chatMessages');
+const d = document.createElement('div');
+d.className = 'msg msg-' + type;
+const label = document.createElement('div');
+label.className = 'msg-label';
+label.textContent = type === 'user' ? 'Anda' : 'AI Assistant';
+const b = document.createElement('div');
+b.className = 'msg-bubble';
+b.innerHTML = text;
 d.appendChild(label);
 d.appendChild(b);
+if (type === 'bot') {
+const src = document.createElement('div');
+src.className = 'msg-source';
+src.innerHTML = '&#128218; Sumber: Knowledge Base TenderStore';
+d.appendChild(src);
+}
 m.appendChild(d);
-m.scrollTop=m.scrollHeight;
+m.scrollTop = m.scrollHeight;
 }
-function sendMessage(){
-const i=document.getElementById('chatInput');
-const t=i.value.trim();
-if(!t)return;
-addMsg(t,'user');
-i.value='';
-setTimeout(()=>{
-const r=responses[t]||fallback;
-addMsg(r,'bot');
-},800);
+
+function addTyping() {
+const m = document.getElementById('chatMessages');
+const d = document.createElement('div');
+d.className = 'msg msg-bot';
+d.id = 'typing-indicator';
+const b = document.createElement('div');
+b.className = 'msg-bubble';
+b.innerHTML = '<em>Sedang mengetik...</em>';
+d.appendChild(b);
+m.appendChild(d);
+m.scrollTop = m.scrollHeight;
 }
-function sendQuick(q){
-addMsg(q,'user');
-setTimeout(()=>{
-const r=responses[q]||fallback;
-addMsg(r,'bot');
-},800);
+
+function removeTyping() {
+const t = document.getElementById('typing-indicator');
+if (t) t.remove();
+}
+
+async function callAPI(message) {
+addTyping();
+try {
+chatHistory.push({ role: 'user', content: message });
+const res = await fetch(API_URL, {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ message, history: chatHistory.slice(-6) })
+});
+const data = await res.json();
+removeTyping();
+const reply = data.reply || 'Maaf, terjadi kesalahan. Silakan coba lagi.';
+chatHistory.push({ role: 'assistant', content: reply });
+addMsg(reply, 'bot');
+} catch (err) {
+removeTyping();
+addMsg('Maaf, terjadi gangguan koneksi. Silakan coba lagi.', 'bot');
+}
+}
+
+function sendMessage() {
+const i = document.getElementById('chatInput');
+const t = i.value.trim();
+if (!t) return;
+addMsg(t, 'user');
+i.value = '';
+callAPI(t);
+}
+
+function sendQuick(q) {
+addMsg(q, 'user');
+callAPI(q);
 }
 
 // Fade in on scroll
-const obs=new IntersectionObserver((entries)=>{
-entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
-},{threshold:0.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+const obs = new IntersectionObserver((entries) => {
+entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
