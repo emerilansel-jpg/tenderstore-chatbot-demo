@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TenderStore.id — AI Assistant Tender Indonesia</title>
+    <title>TenderStore.id â AI Assistant Tender Indonesia</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
@@ -13,19 +13,19 @@
         .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
         .logo-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2}
         .header-text h1{font-size:20px;font-weight:800;color:#fff}
-        .header-text p{font-size:13px;color:#8899bb}
+        .header-text p{font-size:16px;color:#8899bb}
         .main{max-width:860px;margin:0 auto;padding:0 16px}
         .quick-section{padding:20px 0 8px}
-        .quick-label{font-size:13px;color:#6b7eaa;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+        .quick-label{font-size:16px;color:#6b7eaa;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
         .quick-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px}
         .quick-btn{background:#141820;border:1px solid #1e2533;border-radius:12px;padding:12px 16px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px;color:#dde4f5;transition:all 0.2s}
         .quick-btn:hover{background:#1a2135;border-color:#3b82f6}
         .qicon{width:32px;height:32px;border-radius:8px;background:#1e2a42;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-        .qlabel{font-size:15px;font-weight:600}
+        .qlabel{font-size:16px;font-weight:600}
         .chat-area{padding:20px 0;display:flex;flex-direction:column;gap:16px;min-height:200px}
         .msg{display:flex;gap:10px;align-items:flex-start}
         .msg.user{flex-direction:row-reverse}
-        .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700}
+        .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;font-weight:700}
         .avatar.bot{background:#1e2a42;color:#3b82f6}
         .avatar.user{background:#1e3a5f;color:#60a5fa}
         .bubble{max-width:85%;border-radius:16px;padding:12px 16px;font-size:16px;line-height:1.7}
@@ -39,17 +39,25 @@
         .footer-stats{padding:24px 16px;margin-top:20px;background:#141820;border-radius:16px}
         .stats-inner{display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;text-align:center}
         .stat-val{font-size:24px;font-weight:800}
-        .stat-lbl{font-size:11px;color:#5e7099;text-transform:uppercase}
+        .stat-lbl{font-size:16px;color:#5e7099;text-transform:uppercase}
         .reply-list{margin:8px 0;padding-left:20px}
         .reply-list li{margin-bottom:6px}
         @media(max-width:600px){
             .stat-val{font-size:20px}
-            .stat-lbl{font-size:10px}
+            .stat-lbl{font-size:16px}
             .header-text h1{font-size:18px}
             .bubble{max-width:90%}
             .quick-grid{grid-template-columns:1fr}
         }
-    </style>
+    
+.typing-indicator{display:flex;align-items:center;gap:10px;padding:10px 0}
+.typing-dots{display:flex;gap:6px;background:#141820;border:1px solid #1e2533;border-radius:16px;padding:12px 18px;border-top-left-radius:4px}
+.typing-dots span{width:10px;height:10px;border-radius:50%;background:#3b82f6;animation:typingBounce .6s infinite ease-in-out}
+.typing-dots span:nth-child(2){animation-delay:.15s}
+.typing-dots span:nth-child(3){animation-delay:.3s}
+@keyframes typingBounce{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-6px);opacity:1}}
+@media(max-width:600px){.header-inner{padding:12px 16px;gap:10px}.logo-icon{width:36px;height:36px}.header-text h1{font-size:18px}.main{padding:0 8px}.quick-section{padding:16px 0 4px}.quick-grid{grid-template-columns:1fr;gap:8px}.quick-btn{padding:10px 12px}.input-container{padding:8px 12px}.bubble{max-width:90%;padding:12px 16px}.footer-stats{padding:16px}.stats-inner{grid-template-columns:1fr 1fr 1fr;gap:8px}.stat-val{font-size:18px}.footer-copy{padding:12px 8px;font-size:16px}}
+</style>
 </head>
 <body>
     <header class="header">
@@ -66,22 +74,22 @@
 
     <main class="main">
         <section class="quick-section">
-            <p class="quick-label">💡 Pertanyaan Populer</p>
+            <p class="quick-label">ð¡ Pertanyaan Populer</p>
             <div class="quick-grid">
                 <button class="quick-btn" onclick="quickAsk('Apakah ada tender drilling?')">
-                    <div class="qicon">⚡</div>
+                    <div class="qicon">â¡</div>
                     <span class="qlabel">Tender Drilling</span>
                 </button>
                 <button class="quick-btn" onclick="quickAsk('Apakah ada tender Pertamina?')">
-                    <div class="qicon">⛽</div>
+                    <div class="qicon">â½</div>
                     <span class="qlabel">Tender Pertamina</span>
                 </button>
                 <button class="quick-btn" onclick="quickAsk('Ada tender nilainya > 20 miliar?')">
-                    <div class="qicon">💰</div>
+                    <div class="qicon">ð°</div>
                     <span class="qlabel">Nilai > 20 Miliar</span>
                 </button>
                 <button class="quick-btn" onclick="quickAsk('Ada tender apa saja hari ini?')">
-                    <div class="qicon">📋</div>
+                    <div class="qicon">ð</div>
                     <span class="qlabel">Semua Tender</span>
                 </button>
             </div>
@@ -91,7 +99,7 @@
             <div class="msg">
                 <div class="avatar bot">AI</div>
                 <div class="bubble bot">
-                    Halo Pak/Bu, selamat datang di <strong>TenderStore.id</strong> 👋<br><br>
+                    Halo Pak/Bu, selamat datang di <strong>TenderStore.id</strong> ð<br><br>
                     Saya asisten AI resmi yang siap membantu Anda menemukan tender proyek migas, konstruksi, dan IT terbaru.<br><br>
                     Silakan klik tombol di atas atau ketik pertanyaan Anda.
                 </div>
@@ -117,6 +125,9 @@
     </div>
 
     <script>
+function showTyping(){const area=document.getElementById('chatArea');const d=document.createElement('div');d.className='msg';d.id='typingMsg';d.innerHTML='<div class="avatar bot"><svg width="16" height="16" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2a3 3 0 00-3 3v2H7a3 3 0 00-3 3v0a3 3 0 003 3h2a3 3 0 003-3V5"/></svg></div><div class="typing-dots"><span></span><span></span><span></span></div>';area.appendChild(d);area.scrollTop=area.scrollHeight}
+function hideTyping(){const t=document.getElementById('typingMsg');if(t)t.remove()}
+
         const API = '/api/chat';
         function quickAsk(q){ document.getElementById('userInput').value=q; sendMessage(); }
         function addMsg(txt, type){
@@ -141,12 +152,11 @@
             const inp = document.getElementById('userInput'), btn = document.getElementById('sendBtn'), text = inp.value.trim();
             if(!text) return;
             inp.value = ''; inp.disabled = true; btn.disabled = true;
-            addMsg(text, 'user');
-            try {
+            addMsg(text,'user');showTyping();try {
                 const r = await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text}) });
-                const data = await r.json();
+                const data = await r.json();hideTyping();
                 addMsg(data.reply || data.message, 'bot');
-            } catch(e) {
+            } catch(e){hideTyping();
                 addMsg('Maaf, terjadi gangguan. Silakan hubungi WhatsApp 0812-8224-8240.', 'bot');
             }
             inp.disabled = false; btn.disabled = false; inp.focus();
