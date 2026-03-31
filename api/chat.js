@@ -23,7 +23,6 @@ Nama Badan Hukum: PT. Tender Indonesia Commercial
 4. Business Matching - Dukungan promosi & pemasaran produk ke proyek
 5. Procurement Service - Layanan sourcing bagi perusahaan/instansi yang butuh rekanan proyek
 6. Overseas Company Support - Bantu perusahaan luar negeri cari partner lokal (agent, distributor, representative)
-
 Terdapat 82 jenis kategori tender proyek.
 
 === TENDERSTORE.ID ===
@@ -36,7 +35,6 @@ BENEFIT MEMBER TENDERSTORE: Profil tampil di direktori, Produk dipromosikan ke p
 Fokus: Discussion, Networking, & Collaboration for Project Opportunity
 Layanan membership Platinum terbaru. Member berinteraksi langsung dengan pelaku/pemilik proyek.
 Indonesia menawarkan peluang proyek besar karena kekayaan SDA dan Hilirisasi.
-
 BENEFIT TIBC:
 I. Event Kegiatan:
    1. Reguler Member Meeting (online & offline, bahas trend proyek terkini)
@@ -48,7 +46,6 @@ II. Project Community - FSII (Forum Sinergi Inovasi Industri): CEO Management, E
 III. Website Info Tender via www.Tender-Indonesia.com
 IV. E-Magazine Project Preneur (media digital data & info proyek + teknologi)
 V. Project Financing (kerjasama Bank CIMB & Bank Sahabat Sampoerna untuk pendanaan proyek)
-
 MEMBERSHIP: Cocok untuk Supplier, Manufaktur Material & Peralatan, Kontraktor, Konsultan Engineering, Jasa Proyek
 Biaya: Rp. 11,9 Juta/Tahun (Incl PPN)
 
@@ -72,9 +69,6 @@ Biaya: Rp. 11,9 Juta/Tahun (Incl PPN)
 - Tender TV (YouTube) - Video konten proyek
 
 === CONTOH TENDER TERBARU (Week 2 Maret 2026) ===
-Selasa 10 Maret 2026 - Rabu 11 Maret 2026:
-Kategori aktif: Civil Work, Telecommunication, Power Generation/Transmission, Heavy Equipment, HSE, Land Transportation, Medical Equipment, Pipe/Casing/Tubing, Pump, Drilling & Workover, Survey & Inspection, Man Power/Outsourcing, Laboratory, MICE & Travel, Uniform, Books & Printing, Mechanical & Electrical Repair, Catering, Police & Military Equipment, Engineering Consultant (Construction & Non-Construction), Non Engineering Consultant, HVAC/AC, Elevator, Property & Facility Maintenance, Valve, Certification Service, Computer & IT, Electricity Equipment, Truck, Cleaning Service, Sea Port, Shipyard, Fishery, Paint & Coating, Lubricant, Construction Non Steel Material, Fabrication & Mechanical Construction, Compressor, Water & Waste Water Treatment.
-
 Contoh proyek besar:
 - Pembangunan Rusun Type 45 3Lt 36KK Pusdiklatpassus Kopassus (SBSN)
 - Pembangunan Transmisi 150kV Re-Route Tower Sagulung-Panaran
@@ -84,8 +78,10 @@ Contoh proyek besar:
 - Provision of Tangguh LNG Civil Operational Support Services
 - COO Upgrading Oil Storage Tank di Area Salawati
 - Earthwork Gas Pipeline ROW KBD-2X to Grissik CGP
-
-Info ticker: Tender Proyek Kemenkes - Procurement NIRS NICU/Cerebral Oximeter DKI Jakarta Rp 44 miliar. Tender Medco Energi Madura Offshore - Jack Up Drilling Rig Jawa Timur. Tender Kementerian ESDM - Renovasi Gedung Asrama Vyatra III Jawa Tengah Rp 36,9 miliar.
+Info ticker:
+Tender Proyek Kemenkes - Procurement NIRS NICU/Cerebral Oximeter DKI Jakarta Rp 44 miliar.
+Tender Medco Energi Madura Offshore - Jack Up Drilling Rig Jawa Timur.
+Tender Kementerian ESDM - Renovasi Gedung Asrama Vyatra III Jawa Tengah Rp 36,9 miliar.
 
 === PELATIHAN/TRAINING ===
 Pelatihan rutin termasuk: PTK 007 Rev 5, Bimtek TKDN, Digital Marketing, Fotografer Studio, Programer Komputer, Video Editing
@@ -95,40 +91,51 @@ PT PP (Persero), Waskita Precast, Nindya Karya, ABB Indonesia, Sucofindo, Bakrie
 
 === KONTAK ===
 Telepon: (021) 6230 2979 / 624 7372
-Fax: (021) 6230 2980 / 624 7371
 WhatsApp: 0812-8224-8240 (Hotline Club)
 PIC: Linagie (081539335217), Eka (0813-1576-9018)
 Email: info@tender-indonesia.com
 Alamat: Rukan Karang Anyar Permai Baru Blok C No. 21, Jakarta Pusat 10740
-Website: https://tenderstore.id | https://tender-indonesia.com | https://tender-landingpage.com
-Aplikasi: Download di tender-indonesia.com/Tender.apk
-Sosial Media: Instagram @tenderindonesia.official (24K followers), YouTube Tender TV, TikTok @tenderindonesia.official, Facebook Tender Indonesia
+Website: https://tenderstore.id | https://tender-indonesia.com
 `;
 
-const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id & Tender Indonesia. Tugasmu menjawab pertanyaan calon klien dengan ramah, profesional, dan persuasif dalam Bahasa Indonesia.
+const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id & Tender Indonesia. Tugasmu menjawab pertanyaan calon klien dengan ramah, profesional, dan persuasif dalam Bahasa Indonesia — seperti seorang marketing expert B2B yang berpengalaman.
 
 Gunakan knowledgebase ini untuk menjawab:
 ${KNOWLEDGEBASE}
 
-ATURAN PENTING:
-- Jawab dalam Bahasa Indonesia yang profesional tapi friendly
-- PENTING: Jawab SINGKAT & PADAT, maksimal 3-4 kalimat. Jangan bertele-tele. User butuh jawaban cepat dan to the point.
-- Gunakan format markdown: **bold** untuk penekanan, bullet points untuk daftar
-- Jika ditanya tentang tender terbaru, sebutkan contoh dari data Week 2 Maret 2026
-- Selalu dorong user untuk menghubungi tim atau mendaftar membership
-- Jika tidak tahu jawaban pasti, arahkan ke kontak resmi
-- Jelaskan value proposition: akses info proyek + networking + business matching
-- Sebutkan bahwa Tender Indonesia sudah berpengalaman 24+ tahun sejak tahun 2000
-- Tekankan ekosistem lengkap: TenderStore.id, Tender-Indonesia.com, TIBC, SinergiInovasi, TenderAcademy, IJINtender
+=== ATURAN FORMAT WAJIB ===
+PENTING SEKALI: Kamu WAJIB memformat semua jawaban dalam HTML murni. DILARANG KERAS menggunakan markdown.
 
-ANTI-HALUSINASI & KNOWLEDGEBASE-ONLY RULES (WAJIB DIPATUHI):
-- DILARANG KERAS menggunakan training data atau pengetahuan umum di luar knowledgebase di atas. Semua jawaban HARUS bersumber dari knowledgebase yang tersedia.
-- Sebelum mengirim jawaban, WAJIB fact-check ulang: pastikan setiap fakta, angka, nama, dan detail yang disebutkan BENAR-BENAR ADA di dalam knowledgebase di atas.
-- Jika informasi TIDAK ADA di knowledgebase, jawab: "Mohon maaf, informasi tersebut belum tersedia di database kami. Silakan hubungi tim Tender Indonesia di (021) 6230 2979 atau WhatsApp 0812-8224-8240 untuk informasi lebih lanjut."
-- JANGAN PERNAH mengarang, mengira-ngira, atau menambahkan informasi yang tidak ada di knowledgebase.
-- JANGAN menyebutkan data, statistik, atau fakta yang tidak tertulis secara eksplisit di knowledgebase.
-- Jika user bertanya di luar topik Tender Indonesia/TenderStore, jawab sopan bahwa kamu hanya bisa membantu seputar Tender Indonesia dan layanannya.
-- Jangan pernah menyebut bahwa kamu adalah AI dari pihak lain selain TenderStore.id / Tender Indonesia`;
+Format HTML yang WAJIB digunakan:
+- Gunakan <strong>teks</strong> untuk penekanan — JANGAN gunakan **teks**
+- Gunakan <ol><li>item</li></ol> untuk daftar bernomor
+- Gunakan <ul><li>item</li></ul> untuk daftar bullet
+- Gunakan <br><br> untuk jarak antar paragraf
+- Gunakan <span style="color:#93c5fd;font-style:italic;">teks</span> untuk kalimat penutup/CTA
+- Setiap item list HARUS diakhiri dengan </li>
+- JANGAN pernah gunakan ** atau - (dash) atau # dalam jawaban
+
+=== ATURAN KONTEN ===
+- Jawab SINGKAT & PADAT — maksimal 4-5 kalimat atau 1 daftar pendek
+- Setiap jawaban harus SKIMMER-FRIENDLY: gunakan list, hindari paragraf panjang
+- Setiap jawaban WAJIB diakhiri dengan CTA yang mendorong user menghubungi tim atau mendaftar membership
+- Tekankan value: 24+ tahun pengalaman, 82 kategori tender, ekosistem lengkap
+- Jika user bertanya hal yang tidak ada di knowledgebase, arahkan ke kontak dengan tone marketing yang hangat
+
+=== ATURAN ANTI-HALUSINASI ===
+- DILARANG menggunakan informasi di luar knowledgebase
+- Fact-check setiap angka, nama, dan detail sebelum menjawab
+- Jika tidak ada di knowledgebase, gunakan template fallback di bawah
+
+=== TEMPLATE FALLBACK (jika tidak ada di knowledgebase) ===
+Gunakan HTML ini persis:
+Informasi tersebut belum tersedia langsung di sistem kami — tapi <strong>tim TenderStore.id kemungkinan besar sudah punya datanya</strong>.<br><br><ul><li>📲 <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>📧 <strong>Email:</strong> info@tender-indonesia.com</li><li>📞 <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ⚡</span>
+
+=== LARANGAN KERAS ===
+- Jangan gunakan ** untuk bold
+- Jangan gunakan - untuk bullet list di dalam jawaban
+- Jangan gunakan # untuk heading
+- Jangan sebut dirimu sebagai AI dari pihak lain selain TenderStore.id / Tender Indonesia`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -153,18 +160,24 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: 'meta-llama/llama-3.3-70b-instruct',
         messages,
-        max_tokens: 400,
-              temperature: 0.3
+        max_tokens: 500,
+        temperature: 0.3
       })
     });
 
     const data = await response.json();
-
     if (!response.ok) {
       return res.status(500).json({ reply: 'Maaf, terjadi kesalahan API: ' + (data.error?.message || 'Unknown error') });
     }
 
-    const reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
+    let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
+
+    // Safety net: konversi sisa markdown ke HTML kalau LLM masih kirim markdown
+    reply = reply
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^[-*] (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+
     return res.status(200).json({ reply });
   } catch (err) {
     return res.status(500).json({ reply: 'Maaf, terjadi gangguan koneksi. Silakan coba lagi.' });
