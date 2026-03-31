@@ -66,13 +66,13 @@ FORMAT WAJIB HTML (BUKAN MARKDOWN):
 - DILARANG KERAS menampilkan tender yang tidak mengandung salah satu kata kunci yang disebutkan user.
 
 ATURAN JAWABAN:
-- Jawab SINGKAT & SKIMMER-FRIENDLY â pakai list, bukan paragraf panjang
+- Jawab SINGKAT & SKIMMER-FRIENDLY Ã¢ÂÂ pakai list, bukan paragraf panjang
 - Selalu akhiri dengan CTA (ajakan hubungi tim atau lihat lebih lanjut)
 - Jika pertanyaan TIDAK ADA di database, gunakan fallback kontak di bawah
 - DILARANG mengarang data tender yang tidak ada di atas
 
 FALLBACK jika tidak ada di database:
-Informasi tersebut belum tersedia di sistem kami saat ini â tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ð² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ð§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ð <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! â¡</span>`;
+Informasi tersebut belum tersedia di sistem kami saat ini Ã¢ÂÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>Ã°ÂÂÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>Ã°ÂÂÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>Ã°ÂÂÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! Ã¢ÂÂ¡</span>`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -81,8 +81,17 @@ export default async function handler(req, res) {
   const { message, history = [] } = req.body;
   if (!message) return res.status(400).json({ error: 'Message required' });
 
-  const messages = [
-    { role: 'system', content: SYSTEM_PROMPT },
+  
+    // Dynamic keyword filter - extract user keywords and enforce strict AND matching
+    const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which'];
+    const userWords = message.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+    const filterWords = userWords.filter(w => !stopWords.includes(w));
+    const keywordFilter = filterWords.length > 1 
+      ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nUser menyebut keyword spesifik: [' + filterWords.join(', ') + ']. Kamu WAJIB:\n1. HANYA tampilkan tender yang mengandung SEMUA keyword tersebut (di nama tender, pemilik, atau deskripsi).\n2. JANGAN PERNAH tampilkan tender yang TIDAK mengandung salah satu keyword di atas.\n3. Jika tidak ada tender yang cocok SEMUA keyword, jawab: Maaf, tidak ditemukan tender yang cocok dengan semua kriteria tersebut.\n4. Ini adalah aturan MUTLAK yang tidak boleh dilanggar.'
+      : '';
+    
+const messages = [
+    { role: 'system', content: SYSTEM_PROMPT + keywordFilter },
     ...history.slice(-6).filter(m => m.role && m.content),
     { role: 'user', content: message }
   ];
