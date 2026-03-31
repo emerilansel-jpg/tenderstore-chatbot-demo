@@ -66,13 +66,13 @@ FORMAT WAJIB HTML (BUKAN MARKDOWN):
 - DILARANG KERAS menampilkan tender yang tidak mengandung salah satu kata kunci yang disebutkan user.
 
 ATURAN JAWABAN:
-- Jawab SINGKAT & SKIMMER-FRIENDLY Ã¢ÂÂ pakai list, bukan paragraf panjang
+- Jawab SINGKAT & SKIMMER-FRIENDLY ÃÂ¢ÃÂÃÂ pakai list, bukan paragraf panjang
 - Selalu akhiri dengan CTA (ajakan hubungi tim atau lihat lebih lanjut)
 - Jika pertanyaan TIDAK ADA di database, gunakan fallback kontak di bawah
 - DILARANG mengarang data tender yang tidak ada di atas
 
 FALLBACK jika tidak ada di database:
-Informasi tersebut belum tersedia di sistem kami saat ini Ã¢ÂÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>Ã°ÂÂÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>Ã°ÂÂÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>Ã°ÂÂÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! Ã¢ÂÂ¡</span>`;
+Informasi tersebut belum tersedia di sistem kami saat ini ÃÂ¢ÃÂÃÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ÃÂ°ÃÂÃÂÃÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ÃÂ°ÃÂÃÂÃÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ÃÂ°ÃÂÃÂÃÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ÃÂ¢ÃÂÃÂ¡</span>`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -122,6 +122,24 @@ const messages = [
     reply = reply
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
+
+    // Post-processing: remove non-matching tender items when multiple keywords
+    if (filterWords.length > 1) {
+      const parts = reply.split(/(?=<li>)/i);
+      if (parts.length > 1) {
+        const filtered = parts.filter(part => {
+          const pl = part.toLowerCase();
+          if (!pl.startsWith("<li>")) return true;
+          return filterWords.every(kw => pl.includes(kw.toLowerCase()));
+        });
+        const itemCount = filtered.filter(p => p.toLowerCase().startsWith("<li>")).length;
+        if (itemCount === 0) {
+          reply = 'Maaf, tidak ditemukan tender yang cocok dengan semua kriteria: <strong>' + filterWords.join(', ') + '</strong>.';
+        } else {
+          reply = filtered.join('');
+        }
+      }
+    }
 
     return res.status(200).json({ reply });
   } catch (err) {
