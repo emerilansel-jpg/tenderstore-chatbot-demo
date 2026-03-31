@@ -94,57 +94,8 @@ document.getElementById('initTime').textContent=new Date().toLocaleTimeString('i
 const API='/api/chat';
 function getNow(){return new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}
 function quickAsk(q){document.getElementById('userInput').value=q;sendMessage()}
-function addMsg(txt,type){const area=document.getElementById('chatArea');const d=document.createElement('div');d.className='msg'+(type==='user'?' user':'');const av=document.createElement('div');av.className='avatar '+type;av.textContent=type==='user'?'Anda':'AI';const b=document.createElement('div');b.className='bubble '+type;b.innerHTML=txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/
-/g,'<br>')+'<div class="bubble-time">'+getNow()+'</div>';if(type==='user'){d.appendChild(b);d.appendChild(av)}else{d.appendChild(av);d.appendChild(b)}area.appendChild(d);area.scrollTop=area.scrollHeight}
+function addMsg(txt,type){const area=document.getElementById('chatArea');const d=document.createElement('div');d.className='msg'+(type==='user'?' user':'');const av=document.createElement('div');av.className='avatar '+type;av.textContent=type==='user'?'Anda':'AI';const b=document.createElement('div');b.className='bubble '+type;b.innerHTML=txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')+'<div class="bubble-time">'+getNow()+'</div>';if(type==='user'){d.appendChild(b);d.appendChild(av)}else{d.appendChild(av);d.appendChild(b)}area.appendChild(d);area.scrollTop=area.scrollHeight}
 function addTyping(){const area=document.getElementById('chatArea');const d=document.createElement('div');d.className='msg';d.id='typing';const av=document.createElement('div');av.className='avatar bot';av.textContent='AI';const b=document.createElement('div');b.className='bubble bot';b.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';d.appendChild(av);d.appendChild(b);area.appendChild(d);area.scrollTop=area.scrollHeight}
 function removeTyping(){const t=document.getElementById('typing');if(t)t.remove()}
-async function sendMessage(){const inp=document.getElementById('userInput'),btn=document.getElementById('sendBtn'),text=inp.value.trim();if(!text)return;inp.value='';inp.disabled=true;btn.disabled=true;addMsg(text,'user');addTyping();try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});const data=await r.json();removeTyping();addMsg(data.reply||data.message||'Maaf, terjadi kesalahan.','bot')}catch(e){removeTyping();const q=text.toLowerCase();let reply='';if(q.includes('drilling'))reply='Ya ada beberapa tender drilling dalam system kami:
-
-a. Jasa Lumpur Pemboran Lengkap Dengan Peralatan milik PERTAMINA EP — 25 M
-b. Penyediaan Dan Pengoperasian RIG 350 Hp milik PERTAMINA - MEDCO E&P TOMORI SULAWESI — 24 M
-c. Sewa Unit Perangkat Rig 550 Hp milik PERTAMINA HULU ENERGI WEST MADURA OFFSHORE — 23 M
-d. Jasa Penyemenan dan Stimulasi milik BP BERAU LTD — 22 M
-e. Jasa Electric Logging milik KANGEAN ENERGY INDONESIA LTD — 21 M
-f. Pekerjaan Electric Wireline Logging milik Pertamina EP
-g. Jasa Sewa RIG 700 HP milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI
-h. Penyewaan Artificial Lift (ESP) milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI
-i. Jasa Support Pengoperasian Angkutan Berat milik Pertamina EP
-
-Apakah Anda ingin melihat tender drilling lainnya?';else if(q.includes('pertamina'))reply='Ya ada 9 tender dari Pertamina dalam system kami:
-
-a. Jasa Lumpur Pemboran Lengkap Dengan Peralatan milik PERTAMINA EP — 25 M
-b. Penyediaan & Pengoperasian RIG 350 Hp milik PERTAMINA - MEDCO E&P TOMORI SULAWESI — 24 M
-c. Sewa Perangkat Rig 550 Hp milik PERTAMINA HULU ENERGI WEST MADURA OFFSHORE — 23 M
-d. Pekerjaan Electric Wireline Logging milik Pertamina EP
-e. Jasa Support Angkutan Berat milik Pertamina EP
-f. Sewa Perangkat Komputer & Server milik JOB PERTAMINA - MEDCO E&P SIMENGGARIS
-g. Provision of Swamp Barge milik PT PERTAMINA HULU MAHAKAM
-h. Sewa RIG 700 HP milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI
-i. Penyewaan Artificial Lift milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI
-
-Apakah Anda ingin melihat detail lainnya?';else if(q.includes('20')||q.includes('milliar')||q.includes('nilai'))reply='Ya ada 5 tender dengan nilai lebih dari 20 Miliar:
-
-a. Jasa Lumpur Pemboran Lengkap Dengan Peralatan milik PERTAMINA EP — 25 M
-b. Penyediaan & Pengoperasian RIG 350 Hp milik PERTAMINA - MEDCO E&P TOMORI SULAWESI — 24 M
-c. Sewa Perangkat Rig 550 Hp milik PERTAMINA HULU ENERGI WEST MADURA OFFSHORE — 23 M
-d. Jasa Penyemenan dan Stimulasi milik BP BERAU LTD — 22 M
-e. Jasa Electric Logging milik KANGEAN ENERGY INDONESIA LTD — 21 M
-
-Apakah Anda ingin melihat tender lainnya?';else if(q.includes('apa saja')||q.includes('semua')||q.includes('list'))reply='Ya ada 15 tender tersedia dalam 5 kategori:
-
-1. DRILLING & WORKOVER — 10 tender
-2. SEISMIC & GEOFISIKA — 1 tender
-3. IT & KOMPUTER — 1 tender
-4. TRANSPORTASI LAUT — 1 tender
-5. TENAGA KERJA — 1 tender
-
-Nilai: 21 M hingga 25 M.
-
-Ingin lihat detail per kategori?';else reply='Maaf, tidak ada tender yang cocok.
-
-Coba:
-• "Ada tender drilling?"
-• "Ada tender dari Pertamina?"
-• "Tender nilai lebih dari 20 M?"
-• "Ada tender apa saja?"';addMsg(reply,'bot')}inp.disabled=false;btn.disabled=false;inp.focus()}
+async function sendMessage(){const inp=document.getElementById('userInput'),btn=document.getElementById('sendBtn'),text=inp.value.trim();if(!text)return;inp.value='';inp.disabled=true;btn.disabled=true;addMsg(text,'user');addTyping();try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});const data=await r.json();removeTyping();addMsg(data.reply||data.message||'Maaf, terjadi kesalahan.','bot')}catch(e){removeTyping();const q=text.toLowerCase();let reply='';if(q.includes('drilling'))reply='Ya ada beberapa tender drilling dalam system kami:\n\na. Jasa Lumpur Pemboran Lengkap Dengan Peralatan milik PERTAMINA EP — 25 M\nb. Penyediaan Dan Pengoperasian RIG 350 Hp milik PERTAMINA - MEDCO E&P TOMORI SULAWESI — 24 M\nc. Sewa Unit Perangkat Rig 550 Hp milik PERTAMINA HULU ENERGI WEST MADURA OFFSHORE — 23 M\nd. Jasa Penyemenan dan Stimulasi milik BP BERAU LTD — 22 M\ne. Jasa Electric Logging milik KANGEAN ENERGY INDONESIA LTD — 21 M\nf. Pekerjaan Electric Wireline Logging milik Pertamina EP\ng. Jasa Sewa RIG 700 HP milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI\nh. Penyewaan Artificial Lift (ESP) milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI\ni. Jasa Support Pengoperasian Angkutan Berat milik Pertamina EP\n\nApakah Anda ingin melihat tender drilling lainnya?';else if(q.includes('pertamina'))reply='Ya ada 9 tender dari Pertamina dalam system kami:\n\na. Jasa Lumpur Pemboran Lengkap Dengan Peralatan milik PERTAMINA EP — 25 M\nb. Penyediaan & Pengoperasian RIG 350 Hp milik PERTAMINA - MEDCO E&P TOMORI SULAWESI — 24 M\nc. Sewa Perangkat Rig 550 Hp milik PERTAMINA HULU ENERGI WEST MADURA OFFSHORE — 23 M\nd. Pekerjaan Electric Wireline Logging milik Pertamina EP\ne. Jasa Support Angkutan Berat milik Pertamina EP\nf. Sewa Perangkat Komputer & Server milik JOB PERTAMINA - MEDCO E&P SIMENGGARIS\ng. Provision of Swamp Barge milik PT PERTAMINA HULU MAHAKAM\nh. Sewa RIG 700 HP milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI\ni. Penyewaan Artificial Lift milik KSO PERTAMINA EP - FORMASI SUMATERA ENERGI\n\nApakah Anda ingin melihat detail lainnya?';else if(q.includes('20')||q.includes('milliar')||q.includes('nilai'))reply='Ya ada 5 tender dengan nilai lebih dari 20 Miliar:\n\na. Jasa Lumpur Pemboran Lengkap Dengan Peralatan milik PERTAMINA EP — 25 M\nb. Penyediaan & Pengoperasian RIG 350 Hp milik PERTAMINA - MEDCO E&P TOMORI SULAWESI — 24 M\nc. Sewa Perangkat Rig 550 Hp milik PERTAMINA HULU ENERGI WEST MADURA OFFSHORE — 23 M\nd. Jasa Penyemenan dan Stimulasi milik BP BERAU LTD — 22 M\ne. Jasa Electric Logging milik KANGEAN ENERGY INDONESIA LTD — 21 M\n\nApakah Anda ingin melihat tender lainnya?';else if(q.includes('apa saja')||q.includes('semua')||q.includes('list'))reply='Ya ada 15 tender tersedia dalam 5 kategori:\n\n1. DRILLING & WORKOVER — 10 tender\n2. SEISMIC & GEOFISIKA — 1 tender\n3. IT & KOMPUTER — 1 tender\n4. TRANSPORTASI LAUT — 1 tender\n5. TENAGA KERJA — 1 tender\n\nNilai: 21 M hingga 25 M.\n\nIngin lihat detail per kategori?';else reply='Maaf, tidak ada tender yang cocok.\n\nCoba:\n• "Ada tender drilling?"\n• "Ada tender dari Pertamina?"\n• "Tender nilai lebih dari 20 M?"\n• "Ada tender apa saja?"';addMsg(reply,'bot')}inp.disabled=false;btn.disabled=false;inp.focus()}
 </script></body></html>
