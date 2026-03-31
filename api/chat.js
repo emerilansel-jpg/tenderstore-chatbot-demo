@@ -1,141 +1,69 @@
-const KNOWLEDGEBASE = `
+const EXACT_QA = `
+=== JAWABAN YANG HARUS DIGUNAKAN PERSIS (WAJIB IKUTI FORMAT INI) ===
+
+PERTANYAAN 1: Apakah ada tender drilling? / ada tender drilling?
+JAWABAN WAJIB:
+Ya, ada beberapa tender drilling:<br><br><ol class="reply-list"><li><strong>Pekerjaan Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Milik: PERTAMINA EP</li><li><strong>Penyediaan Dan Pengoperasian 1 Satu Unit Rig Kapasitas 350 HP</strong><br>Milik: PERTAMINA - MEDCO EP TOMORI SULAWESI</li><li><strong>Sewa Unit Perangkat Rig 550 HP</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li><li><strong>Jasa Penyemenan dan Stimulasi di Pertamina EP Zona 10</strong><br>Milik: BP BERAU LTD</li><li><strong>Jasa Electric Logging, Perforation dan Data Processing</strong><br>Milik: KANGEAN ENERGY INDONESIA LTD</li><li><strong>Oil Well Cement Class G</strong><br>Milik: INPEX MASELA</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah Anda ingin melihat yang lainnya?</span>
+
+PERTANYAAN 2: Apakah ada tender drilling pertamina? / tender drilling pertamina?
+JAWABAN WAJIB:
+Ya, ada tender drilling Pertamina:<br><br><ol class="reply-list"><li><strong>Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Milik: PERTAMINA EP</li><li><strong>Penyediaan Dan Pengoperasian 1 Satu Unit Rig Kapasitas 350 HP</strong><br>Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li><li><strong>Sewa Unit Perangkat Rig 550 HP</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li><li><strong>Pekerjaan Electric Wireline Logging</strong><br>Milik: Pertamina EP</li><li><strong>Jasa Sewa Perangkat RIG dengan Kapasitas 700 HP</strong><br>Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li><li><strong>Penyewaan Pengoperasian Artificial Lift Electrical Submersible Pump</strong><br>Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah Anda ingin melihat tender drilling Pertamina lainnya?</span>
+
+PERTANYAAN 3: Ada tender apa saja hari ini? / semua tender / tender apa saja?
+JAWABAN WAJIB:
+Dalam sistem kami terdapat tender dalam 5 kategori:<br><br><ol class="reply-list"><li><strong>Drilling Workover Well Service</strong><br>Contoh: Jasa Sewa Unit Perangkat Rig 550 HP</li><li><strong>Seismic, Geotechnic, Geophysics</strong><br>Contoh: Survei Seismik Offshore 2D Kandawulo</li><li><strong>Computer &amp; IT</strong><br>Contoh: Sewa Perangkat Komputer Dan Server</li><li><strong>Marine Transportation</strong><br>Contoh: Provision of Swamp Barge No.1</li><li><strong>Man Power General Labour Outsourcing</strong><br>Contoh: Open Sourcing - Pengadaan Marketing Agency</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah Anda ingin melihat detail per kategori?</span>
+
+PERTANYAAN 4: Apakah ada tender yang nilainya lebih dari 20 miliar? / tender nilai lebih 20 M?
+JAWABAN WAJIB:
+Ya, ada tender dengan nilai lebih dari 20 Miliar:<br><br><ol class="reply-list"><li><strong>Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Nilai: Rp 25 M</li><li><strong>Penyediaan Dan Pengoperasian 1 Satu Unit Rig Kapasitas 350 HP</strong><br>Nilai: Rp 24 M</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 HP</strong><br>Nilai: Rp 23 M</li><li><strong>Jasa Penyemenan dan Stimulasi</strong><br>Nilai: Rp 22 M</li><li><strong>Jasa Electric Logging, Perforation dan Data Processing</strong><br>Nilai: Rp 21 M</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah Anda ingin melihat tender yang lain?</span>
+
+PERTANYAAN 5: Apakah ada tender Pertamina? / tender pertamina?
+JAWABAN WAJIB:
+Iya, ada beberapa tender Pertamina:<br><br><ol class="reply-list"><li><strong>Sewa Perangkat Komputer Dan Server</strong><br>Milik: JOB PERTAMINA - MEDCO EP SIMENGGARIS</li><li><strong>Provision of Swamp Barge No.1</strong><br>Milik: PT PERTAMINA HULU MAHAKAM</li><li><strong>Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat</strong><br>Milik: Pertamina EP</li><li><strong>Jasa Penyediaan Dan Pengoperasian 1 Satu Unit Rig Kapasitas 350 HP</strong><br>Milik: PERTAMINA - MEDCO EP TOMORI SULAWESI</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 HP</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah Anda ingin melanjutkan melihat detail tender tersebut?</span>
+`;
+
+const COMPANY_INFO = `
 === TENTANG PT. TENDER INDONESIA ===
 PT. Tender Indonesia (www.Tender-Indonesia.com) adalah perusahaan penyedia informasi tender/proyek terlengkap di Indonesia.
 Berdiri sejak tahun 2000 di Jakarta. Tagline: "Mitra strategi anda untuk sukses mendapatkan proyek."
-CEO & President Director: Tito Loho (Lulusan Teknik Elektro Universitas Trisakti, aktif sejak Juni 2001)
-Email CEO: tito_loho@yahoo.co.id
-LinkedIn: linkedin.com/in/tito-loho-91595227 (1300+ followers, 500+ koneksi)
-Instagram: @tenderindonesiacom (akun personal Tito Loho), @tenderindonesia.official (24K followers, 819+ posts)
-YouTube: Tender TV
-Nama Badan Hukum: PT. Tender Indonesia Commercial
-
-=== LAYANAN UTAMA ===
-1. Info Proyek (Online) - Area khusus member:
-   - Info Tender (by Date, Category, Project Owner, Qualification, Location)
-   - Pemenang Tender (by Date, Category)
-   - Project Update / Proyek Mendatang
-   - Download Today Tender
-   - Special Report
-   - Download Data Tender
-   - Robot Tender (setting otomatis proyek mendatangi member)
-2. Komunitas Project Networking - Jejaring CEO Manajemen, Engineer, & Procurement proyek
-3. E-Magazine Project Preneur - Ulasan proyek, promosi & pemasaran produk member
-4. Business Matching - Dukungan promosi & pemasaran produk ke proyek
-5. Procurement Service - Layanan sourcing bagi perusahaan/instansi yang butuh rekanan proyek
-6. Overseas Company Support - Bantu perusahaan luar negeri cari partner lokal (agent, distributor, representative)
+CEO & President Director: Tito Loho
 Terdapat 82 jenis kategori tender proyek.
 
 === TENDERSTORE.ID ===
 TenderStore.id adalah Smart B2B Directory & Hard Selling Tool dari PT. Tender Indonesia.
-FITUR: Smart Directory (profil perusahaan tampil ke project engineer & pemilik proyek) + Hard Selling Tool (sistem otomatis mencocokkan produk/jasa ke calon pembeli via Tender-Indonesia.com)
 KEUNGGULAN: 75+ kategori industri, 2000+ perusahaan terdaftar, 24+ tahun pengalaman
-BENEFIT MEMBER TENDERSTORE: Profil tampil di direktori, Produk dipromosikan ke pemilik proyek, Terhubung info tender terbaru, Hard Selling matching produk ke tender aktif, Exposure ke ribuan calon pembeli B2B
-
-=== TIBC (TENDER INDONESIA BUSINESS CLUB) ===
-Fokus: Discussion, Networking, & Collaboration for Project Opportunity
-Layanan membership Platinum terbaru. Member berinteraksi langsung dengan pelaku/pemilik proyek.
-Indonesia menawarkan peluang proyek besar karena kekayaan SDA dan Hilirisasi.
-BENEFIT TIBC:
-I. Event Kegiatan:
-   1. Reguler Member Meeting (online & offline, bahas trend proyek terkini)
-   2. Project Discussion Forum (diskusi kolaborasi meraih proyek)
-   3. Project & Industry Visit (update trend & teknologi, diskusi dgn engineer lapangan)
-   4. Innovation Award (promosi teknologi terbaik ke pemilik proyek)
-   5. Pelatihan/Training (menguatkan SDM perusahaan member)
-II. Project Community - FSII (Forum Sinergi Inovasi Industri): CEO Management, Engineer, & SCM Procurement
-III. Website Info Tender via www.Tender-Indonesia.com
-IV. E-Magazine Project Preneur (media digital data & info proyek + teknologi)
-V. Project Financing (kerjasama Bank CIMB & Bank Sahabat Sampoerna untuk pendanaan proyek)
-MEMBERSHIP: Cocok untuk Supplier, Manufaktur Material & Peralatan, Kontraktor, Konsultan Engineering, Jasa Proyek
-Biaya: Rp. 11,9 Juta/Tahun (Incl PPN)
-
-=== 10 SEKTOR INDUSTRI ===
-1. Oil & Gas
-2. Petrochemical & Chemical
-3. Mining
-4. Electricity & Power Plant / Renewable Energy
-5. Telecommunication
-6. Infrastructure
-7. Property Construction
-8. Heavy Industry
-9. Agro & Fishery Industry
-10. Manufacture Plant
-
-=== RELATED SERVICES / EKOSISTEM ===
-- www.IJINtender.co.id - Perizinan layak tender
-- www.SinergiInovasi.com - Sinergi inovasi & Gugus Kemampuan Nasional
-- www.TenderAcademy.id - Pelatihan
-- www.TenderStore.id - B2B Marketplace & Directory
-- Tender TV (YouTube) - Video konten proyek
-
-=== CONTOH TENDER TERBARU (Week 2 Maret 2026) ===
-Contoh proyek besar:
-- Pembangunan Rusun Type 45 3Lt 36KK Pusdiklatpassus Kopassus (SBSN)
-- Pembangunan Transmisi 150kV Re-Route Tower Sagulung-Panaran
-- Provision of DD/MWD/LWD Services (Drilling)
-- Jasa Mobile Offshore Drilling Unit (MODU) & Ancillary Services
-- Jasa Sewa Rig 550 HP untuk pekerjaan sumuran Pertamina EP Zona 7
-- Provision of Tangguh LNG Civil Operational Support Services
-- COO Upgrading Oil Storage Tank di Area Salawati
-- Earthwork Gas Pipeline ROW KBD-2X to Grissik CGP
-Info ticker:
-Tender Proyek Kemenkes - Procurement NIRS NICU/Cerebral Oximeter DKI Jakarta Rp 44 miliar.
-Tender Medco Energi Madura Offshore - Jack Up Drilling Rig Jawa Timur.
-Tender Kementerian ESDM - Renovasi Gedung Asrama Vyatra III Jawa Tengah Rp 36,9 miliar.
-
-=== PELATIHAN/TRAINING ===
-Pelatihan rutin termasuk: PTK 007 Rev 5, Bimtek TKDN, Digital Marketing, Fotografer Studio, Programer Komputer, Video Editing
-
-=== MEMBER KORPORAT TERKEMUKA ===
-PT PP (Persero), Waskita Precast, Nindya Karya, ABB Indonesia, Sucofindo, Bakrie Pipe, SPINDO, Samudera Indonesia, ASSA, HK Infrastruktur, Go Cement, Askrindo, Gunung Raja Paksi, NSC, SIM, Calderys, Propan Raya, Mutu Certification, BRINS Syariah, dan banyak lagi.
+MEMBERSHIP: Biaya Rp. 11,9 Juta/Tahun (Incl PPN)
 
 === KONTAK ===
-Telepon: (021) 6230 2979 / 624 7372
-WhatsApp: 0812-8224-8240 (Hotline Club)
-PIC: Linagie (081539335217), Eka (0813-1576-9018)
+Telepon: (021) 6230 2979
+WhatsApp: 0812-8224-8240
 Email: info@tender-indonesia.com
-Alamat: Rukan Karang Anyar Permai Baru Blok C No. 21, Jakarta Pusat 10740
-Website: https://tenderstore.id | https://tender-indonesia.com
 `;
 
-const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id & Tender Indonesia. Tugasmu menjawab pertanyaan calon klien dengan ramah, profesional, dan persuasif dalam Bahasa Indonesia — seperti seorang marketing expert B2B yang berpengalaman.
+const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id. Jawab dalam Bahasa Indonesia yang ramah dan profesional.
 
-Gunakan knowledgebase ini untuk menjawab:
-${KNOWLEDGEBASE}
+${EXACT_QA}
 
-=== ATURAN FORMAT WAJIB ===
-PENTING SEKALI: Kamu WAJIB memformat semua jawaban dalam HTML murni. DILARANG KERAS menggunakan markdown.
+${COMPANY_INFO}
 
-Format HTML yang WAJIB digunakan:
-- Gunakan <strong>teks</strong> untuk penekanan — JANGAN gunakan **teks**
-- Gunakan <ol><li>item</li></ol> untuk daftar bernomor
-- Gunakan <ul><li>item</li></ul> untuk daftar bullet
-- Gunakan <br><br> untuk jarak antar paragraf
-- Gunakan <span style="color:#93c5fd;font-style:italic;">teks</span> untuk kalimat penutup/CTA
-- Setiap item list HARUS diakhiri dengan </li>
-- JANGAN pernah gunakan ** atau - (dash) atau # dalam jawaban
+=== INSTRUKSI UTAMA ===
+UNTUK PERTANYAAN TENTANG TENDER: Gunakan PERSIS jawaban yang sudah ditulis di atas dalam bagian JAWABAN WAJIB. JANGAN ubah nama tender, nama perusahaan, atau nilai. Copy persis HTML-nya.
 
-=== ATURAN KONTEN ===
-- Jawab SINGKAT & PADAT — maksimal 4-5 kalimat atau 1 daftar pendek
-- Setiap jawaban harus SKIMMER-FRIENDLY: gunakan list, hindari paragraf panjang
-- Setiap jawaban WAJIB diakhiri dengan CTA yang mendorong user menghubungi tim atau mendaftar membership
-- Tekankan value: 24+ tahun pengalaman, 82 kategori tender, ekosistem lengkap
-- Jika user bertanya hal yang tidak ada di knowledgebase, arahkan ke kontak dengan tone marketing yang hangat
+FORMAT WAJIB HTML (BUKAN MARKDOWN):
+- Gunakan <strong>teks</strong> BUKAN **teks**
+- Gunakan <ol class="reply-list"><li>...</li></ol> untuk daftar
+- Gunakan <br><br> untuk jarak paragraf
+- Gunakan <span style="color:#93c5fd;font-style:italic;">teks</span> untuk CTA penutup
+- JANGAN PERNAH gunakan ** atau - bullet atau # heading
 
-=== ATURAN ANTI-HALUSINASI ===
-- DILARANG menggunakan informasi di luar knowledgebase
-- Fact-check setiap angka, nama, dan detail sebelum menjawab
-- Jika tidak ada di knowledgebase, gunakan template fallback di bawah
+ATURAN JAWABAN:
+- Jawab SINGKAT & SKIMMER-FRIENDLY — pakai list, bukan paragraf panjang
+- Selalu akhiri dengan CTA (ajakan hubungi tim atau lihat lebih lanjut)
+- Jika pertanyaan TIDAK ADA di database, gunakan fallback kontak di bawah
+- DILARANG mengarang data tender yang tidak ada di atas
 
-=== TEMPLATE FALLBACK (jika tidak ada di knowledgebase) ===
-Gunakan HTML ini persis:
-Informasi tersebut belum tersedia langsung di sistem kami — tapi <strong>tim TenderStore.id kemungkinan besar sudah punya datanya</strong>.<br><br><ul><li>📲 <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>📧 <strong>Email:</strong> info@tender-indonesia.com</li><li>📞 <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ⚡</span>
-
-=== LARANGAN KERAS ===
-- Jangan gunakan ** untuk bold
-- Jangan gunakan - untuk bullet list di dalam jawaban
-- Jangan gunakan # untuk heading
-- Jangan sebut dirimu sebagai AI dari pihak lain selain TenderStore.id / Tender Indonesia`;
+FALLBACK jika tidak ada di database:
+Informasi tersebut belum tersedia di sistem kami saat ini — tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>📲 <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>📧 <strong>Email:</strong> info@tender-indonesia.com</li><li>📞 <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ⚡</span>`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -160,26 +88,25 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: 'meta-llama/llama-3.3-70b-instruct',
         messages,
-        max_tokens: 500,
-        temperature: 0.3
+        max_tokens: 600,
+        temperature: 0.1
       })
     });
 
     const data = await response.json();
     if (!response.ok) {
-      return res.status(500).json({ reply: 'Maaf, terjadi kesalahan API: ' + (data.error?.message || 'Unknown error') });
+      return res.status(500).json({ reply: 'Maaf, terjadi kesalahan. Silakan hubungi tim kami di WhatsApp 0812-8224-8240.' });
     }
 
     let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
 
-    // Safety net: konversi sisa markdown ke HTML kalau LLM masih kirim markdown
+    // Safety net: paksa konversi markdown ke HTML
     reply = reply
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/^[-*] (.+)$/gm, '<li>$1</li>')
-      .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+      .replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
 
     return res.status(200).json({ reply });
   } catch (err) {
-    return res.status(500).json({ reply: 'Maaf, terjadi gangguan koneksi. Silakan coba lagi.' });
+    return res.status(500).json({ reply: 'Maaf, terjadi gangguan. Silakan hubungi WhatsApp 0812-8224-8240.' });
   }
 }
