@@ -56,14 +56,23 @@ FORMAT WAJIB HTML (BUKAN MARKDOWN):
 - Gunakan <span style="color:#93c5fd;font-style:italic;">teks</span> untuk CTA penutup
 - JANGAN PERNAH gunakan ** atau - bullet atau # heading
 
+
+=== ATURAN FILTER KETAT (WAJIB DIPATUHI) ===
+- Jika user menyebut BEBERAPA kata kunci (misal: drilling medco), HANYA tampilkan tender yang cocok dengan SEMUA kata kunci tersebut (logika AND, BUKAN OR).
+- Contoh: tender drilling medco = harus drilling DAN medco. Jangan tampilkan tender drilling yang bukan milik Medco.
+- Contoh: tender IT pertamina = harus kategori IT DAN milik Pertamina.
+- Cocokkan kata kunci dengan SEMUA field: nama tender, pemilik/milik, kategori, deskripsi.
+- Jika tidak ada tender yang cocok dengan SEMUA kata kunci, jawab bahwa tidak ditemukan tender yang sesuai. JANGAN tampilkan tender yang hanya cocok sebagian.
+- DILARANG KERAS menampilkan tender yang tidak mengandung salah satu kata kunci yang disebutkan user.
+
 ATURAN JAWABAN:
-- Jawab SINGKAT & SKIMMER-FRIENDLY — pakai list, bukan paragraf panjang
+- Jawab SINGKAT & SKIMMER-FRIENDLY â pakai list, bukan paragraf panjang
 - Selalu akhiri dengan CTA (ajakan hubungi tim atau lihat lebih lanjut)
 - Jika pertanyaan TIDAK ADA di database, gunakan fallback kontak di bawah
 - DILARANG mengarang data tender yang tidak ada di atas
 
 FALLBACK jika tidak ada di database:
-Informasi tersebut belum tersedia di sistem kami saat ini — tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>📲 <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>📧 <strong>Email:</strong> info@tender-indonesia.com</li><li>📞 <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ⚡</span>`;
+Informasi tersebut belum tersedia di sistem kami saat ini â tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ð² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ð§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ð <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! â¡</span>`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
