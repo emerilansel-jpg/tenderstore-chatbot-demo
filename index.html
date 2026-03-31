@@ -1,107 +1,156 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TenderStore.id — AI Assistant Tender Indonesia</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0f1117;color:#f0f0f0;min-height:100vh;font-size:18px;line-height:1.6}
-.header{background:#141820;border-bottom:1px solid #1e2533;padding:18px 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
-.header-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:14px}
-.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.logo-icon svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.header-text h1{font-size:22px;font-weight:800;color:#fff}
-.header-text p{font-size:14px;color:#8899bb;font-weight:500;margin-top:1px}
-.status-dot{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:13px;color:#6b7eaa;font-weight:500}
-.dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e}
-.main{max-width:860px;margin:0 auto;padding:0 16px}
-.quick-section{padding:20px 0 4px}
-.quick-label{font-size:14px;color:#6b7eaa;font-weight:600;margin-bottom:12px;letter-spacing:.3px;text-transform:uppercase}
-.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:560px){.quick-grid{grid-template-columns:1fr}}
-.quick-btn{background:#141820;border:1px solid #1e2533;border-radius:12px;padding:14px 18px;text-align:left;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:12px;color:#dde4f5;width:100%}
-.quick-btn:hover{background:#1a2135;border-color:#3b82f6;transform:translateY(-1px)}
-.qicon{width:36px;height:36px;border-radius:8px;background:#1e2a42;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.qicon svg{width:18px;height:18px;fill:none;stroke:#3b82f6;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.qlabel{font-size:18px;font-weight:600;color:#e0e8ff}
-.qdesc{font-size:13px;color:#5e7099;margin-top:2px}
-.chat-area{padding:20px 0;display:flex;flex-direction:column;gap:16px;min-height:300px}
-.msg{display:flex;gap:10px;align-items:flex-start}
-.msg.user{flex-direction:row-reverse}
-.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;font-weight:700}
-.avatar.bot{background:#1e2a42;color:#3b82f6}
-.avatar.user{background:#1e3a5f;color:#60a5fa}
-.bubble{max-width:78%;border-radius:16px;padding:14px 18px;font-size:18px;line-height:1.8;word-break:break-word}
-.bubble.bot{background:#141820;border:1px solid #1e2533;color:#d8e2f5;border-top-left-radius:4px}
-.bubble.user{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;border-top-right-radius:4px}
-.bubble-time{font-size:12px;margin-top:6px;opacity:.5}
-.typing{display:flex;align-items:center;gap:5px;padding:4px 0}
-.typing span{width:8px;height:8px;border-radius:50%;background:#3b82f6;animation:bounce .9s infinite ease-in-out}
-.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
-@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
-.input-section{padding:16px 0 24px;border-top:1px solid #1e2533}
-.input-row{display:flex;gap:10px}
-.input-box{flex:1;background:#141820;border:1px solid #1e2533;border-radius:12px;padding:14px 18px;font-size:18px;font-family:inherit;color:#e8f0ff;outline:none;transition:border-color .18s}
-.input-box::placeholder{color:#4a5878}
-.input-box:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
-.send-btn{background:linear-gradient(135deg,#2563eb,#3b82f6);border:none;border-radius:12px;padding:14px 22px;color:#fff;font-size:18px;font-weight:700;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .18s;white-space:nowrap}
-.send-btn:hover{background:linear-gradient(135deg,#1d4ed8,#2563eb);transform:translateY(-1px)}
-.send-btn:disabled{background:#1e2533;color:#4a5878;cursor:not-allowed;transform:none}
-.send-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.input-hint{font-size:13px;color:#3d4f6e;text-align:center;margin-top:10px}
-.footer-stats{background:#141820;border-top:1px solid #1e2533;padding:20px 24px;margin-top:8px}
-.stats-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center}
-.stat-val{font-size:28px;font-weight:800;letter-spacing:-1px}
-.stat-val.blue{color:#3b82f6}.stat-val.green{color:#22c55e}.stat-val.purple{color:#a78bfa}
-.stat-lbl{font-size:13px;color:#5e7099;margin-top:3px;font-weight:500}
-.footer-copy{max-width:860px;margin:14px auto 0;text-align:center;font-size:12px;color:#2e3d58;border-top:1px solid #1a2130;padding-top:14px}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TenderStore.id — AI Assistant Tender Indonesia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Inter',sans-serif;background:#0f1117;color:#f0f0f0;min-height:100vh;font-size:16px;line-height:1.6;padding-bottom:100px}
+        .header{background:#141820;border-bottom:1px solid #1e2533;padding:16px 20px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+        .header-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:12px}
+        .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .logo-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2}
+        .header-text h1{font-size:20px;font-weight:800;color:#fff}
+        .header-text p{font-size:13px;color:#8899bb}
+        .main{max-width:860px;margin:0 auto;padding:0 16px}
+        .quick-section{padding:20px 0 8px}
+        .quick-label{font-size:13px;color:#6b7eaa;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+        .quick-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px}
+        .quick-btn{background:#141820;border:1px solid #1e2533;border-radius:12px;padding:12px 16px;text-align:left;cursor:pointer;display:flex;align-items:center;gap:12px;color:#dde4f5;transition:all 0.2s}
+        .quick-btn:hover{background:#1a2135;border-color:#3b82f6}
+        .qicon{width:32px;height:32px;border-radius:8px;background:#1e2a42;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+        .qlabel{font-size:15px;font-weight:600}
+        .chat-area{padding:20px 0;display:flex;flex-direction:column;gap:16px;min-height:200px}
+        .msg{display:flex;gap:10px;align-items:flex-start}
+        .msg.user{flex-direction:row-reverse}
+        .avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:700}
+        .avatar.bot{background:#1e2a42;color:#3b82f6}
+        .avatar.user{background:#1e3a5f;color:#60a5fa}
+        .bubble{max-width:85%;border-radius:16px;padding:12px 16px;font-size:16px;line-height:1.7}
+        .bubble.bot{background:#141820;border:1px solid #1e2533;color:#d8e2f5;border-top-left-radius:4px}
+        .bubble.user{background:linear-gradient(135deg,#1d4ed8,#2563eb);color:#fff;border-top-right-radius:4px}
+        .input-section{position:fixed;bottom:0;left:0;right:0;background:#0f1117;border-top:1px solid #1e2533;padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom));z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,0.5)}
+        .input-container{max-width:860px;margin:0 auto}
+        .input-row{display:flex;gap:8px}
+        .input-box{flex:1;background:#141820;border:1px solid #1e2533;border-radius:12px;padding:12px 16px;font-size:16px;color:#fff;outline:none}
+        .send-btn{background:#2563eb;border:none;border-radius:12px;padding:0 20px;color:#fff;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+        .footer-stats{padding:24px 16px;margin-top:20px;background:#141820;border-radius:16px}
+        .stats-inner{display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;text-align:center}
+        .stat-val{font-size:24px;font-weight:800}
+        .stat-lbl{font-size:11px;color:#5e7099;text-transform:uppercase}
+        .reply-list{margin:8px 0;padding-left:20px}
+        .reply-list li{margin-bottom:6px}
+        @media(max-width:600px){
+            .stat-val{font-size:20px}
+            .stat-lbl{font-size:10px}
+            .header-text h1{font-size:18px}
+            .bubble{max-width:90%}
+            .quick-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="header-text">
+                <h1>TenderStore.id</h1>
+                <p>Platform Tender Digital Indonesia</p>
+            </div>
+        </div>
+    </header>
 
-.reply-list{margin:10px 0 10px 0;padding-left:22px;list-style:disc}
-.reply-list li{margin-bottom:8px;line-height:1.7}
-ol.reply-list{list-style:decimal}
-.reply-section{margin-bottom:12px}
-.reply-cta{margin-top:14px;color:#93c5fd;font-style:italic}
-</style></head><body>
-<div class="header"><div class="header-inner">
-  <div class="logo-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="4" rx="1"/><rect x="2" y="10" width="20" height="4" rx="1"/><rect x="2" y="17" width="20" height="4" rx="1"/></svg></div>
-  <div class="header-text"><h1>TenderStore.id</h1><p>Platform Tender Digital Indonesia</p></div>
-  <div class="status-dot"><div class="dot"></div>Online</div>
-</div></div>
-<div class="main">
-<div class="quick-section">
-  <div class="quick-label">💡 Pertanyaan Populer — Klik untuk mulai:</div>
-  <div class="quick-grid">
-    <button class="quick-btn" onclick="quickAsk('Apakah ada tender drilling?')"><div class="qicon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div><div class="qlabel">Tender Drilling</div><div class="qdesc">Lihat semua tender drilling</div></div></button>
-    <button class="quick-btn" onclick="quickAsk('Ada tender dari Pertamina?')"><div class="qicon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="qlabel">Tender Pertamina</div><div class="qdesc">Cari tender dari Pertamina</div></div></button>
-    <button class="quick-btn" onclick="quickAsk('Ada tender dengan nilai lebih dari 20 Milliar?')"><div class="qicon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="qlabel">Nilai &gt; 20 Miliar</div><div class="qdesc">Filter berdasarkan nilai</div></div></button>
-    <button class="quick-btn" onclick="quickAsk('Ada tender apa saja?')"><div class="qicon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div><div class="qlabel">Semua Tender</div><div class="qdesc">Lihat semua 15 tender</div></div></button>
-  </div>
-</div>
-<div class="chat-area" id="chatArea">
-  <div class="msg"><div class="avatar bot">AI</div><div class="bubble bot">Halo Pak/Bu, selamat datang di <strong>TenderStore.id</strong> 👋<br><br>Saya siap membantu Anda menemukan tender yang tepat dari database kami.<br><br>Silakan klik tombol di atas atau ketik pertanyaan Anda.<div class="bubble-time" id="initTime"></div></div></div>
-</div>
-<div class="input-section">
-  <div class="input-row">
-    <input id="userInput" class="input-box" type="text" placeholder="Ketik pertanyaan Anda... (contoh: Ada tender IT?)" onkeypress="if(event.key==='Enter')sendMessage()"/>
-    <button class="send-btn" id="sendBtn" onclick="sendMessage()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Kirim</button>
-  </div>
-  <div class="input-hint">📊 15 tender terdokumentasi · Knowledgebase-only · Zero hallucination</div>
-</div>
-</div>
-<div class="footer-stats"><div class="stats-inner">
-  <div><div class="stat-val blue">15</div><div class="stat-lbl">Tender Tersedia</div></div>
-  <div><div class="stat-val green">5</div><div class="stat-lbl">Kategori</div></div>
-  <div><div class="stat-val purple">9</div><div class="stat-lbl">Dari Pertamina</div></div>
-</div><div class="footer-copy">© 2026 TenderStore.id · Platform Tender Digital untuk Entrepreneur Indonesia</div></div>
-<script>
-document.getElementById('initTime').textContent=new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-const API='/api/chat';let lastTopic='';
-function getNow(){return new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}
-function quickAsk(q){document.getElementById('userInput').value=q;sendMessage()}
-function addMsg(txt,type){const area=document.getElementById('chatArea');const d=document.createElement('div');d.className='msg'+(type==='user'?' user':'');const av=document.createElement('div');av.className='avatar '+type;av.textContent=type==='user'?'Anda':'AI';const b=document.createElement('div');b.className='bubble '+type;if(type==='user'){b.innerHTML=txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'<div class="bubble-time">'+getNow()+'</div>'}else{b.innerHTML=txt+'<div class="bubble-time">'+getNow()+'</div>'}if(type==='user'){d.appendChild(b);d.appendChild(av)}else{d.appendChild(av);d.appendChild(b)}area.appendChild(d);area.scrollTop=area.scrollHeight}
-function addTyping(){const area=document.getElementById('chatArea');const d=document.createElement('div');d.className='msg';d.id='typing';const av=document.createElement('div');av.className='avatar bot';av.textContent='AI';const b=document.createElement('div');b.className='bubble bot';b.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';d.appendChild(av);d.appendChild(b);area.appendChild(d);area.scrollTop=area.scrollHeight}
-function removeTyping(){const t=document.getElementById('typing');if(t)t.remove()}
-async function sendMessage(){const inp=document.getElementById('userInput'),btn=document.getElementById('sendBtn'),text=inp.value.trim();if(!text)return;lastPrompt=text.toLowerCase();inp.value='';inp.disabled=true;btn.disabled=true;addMsg(text,'user');addTyping();try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text})});const data=await r.json();removeTyping();addMsg(data.reply||data.message||'Maaf, terjadi kesalahan.','bot')}catch(e){removeTyping();const q=text.toLowerCase();const isFollowUp=/\b(detail|rincian|lanjut|lanjutkan|mau|iya|ya|boleh|tampilkan|lihat)\b/.test(q);let reply='';if(q.includes('drilling')&&q.includes('pertamina')){lastTopic='pertamina';reply='Iya, ada tender <strong>Drilling Pertamina</strong> dalam sistem kami:<br><br><ol class="reply-list"><li><strong>Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Perusahaan: PERTAMINA EP</li><li><strong>Penyediaan dan Pengoperasian 1 Unit Rig 350 HP</strong><br>Perusahaan: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li><li><strong>Sewa Unit Perangkat Rig 550 HP</strong><br>Perusahaan: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li><li><strong>Pekerjaan Electric Wireline Logging</strong><br>Perusahaan: Pertamina EP</li><li><strong>Jasa Sewa RIG 700 HP</strong><br>Perusahaan: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li><li><strong>Penyewaan Artificial Lift (ESP)</strong><br>Perusahaan: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li></ol><span class="reply-cta">Apakah Anda ingin melihat tender drilling Pertamina lainnya?</span>';}else if(q.includes('drilling')||((isFollowUp||q.includes('detail'))&&lastTopic==='drilling')){lastTopic='drilling';reply='Ya, ada beberapa tender <strong>Drilling</strong> dalam sistem kami:<br><br><ol class="reply-list"><li><strong>Pekerjaan Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Perusahaan: PERTAMINA EP</li><li><strong>Penyediaan dan Pengoperasian 1 Unit Rig Kapasitas 350 HP</strong><br>Perusahaan: PERTAMINA - MEDCO E&amp;P TOMORI SULAWESI</li><li><strong>Sewa Unit Perangkat Rig 550 HP</strong><br>Perusahaan: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li><li><strong>Jasa Penyemenan dan Stimulasi Zona 10</strong><br>Perusahaan: BP BERAU LTD</li><li><strong>Jasa Electric Logging, Perforation dan Data Processing</strong><br>Perusahaan: KANGEAN ENERGY INDONESIA LTD</li><li><strong>Oil Well Cement Class G</strong><br>Perusahaan: INPEX MASELA</li></ol><span class="reply-cta">Apakah Anda ingin melihat yang lainnya?</span>';}else if((isFollowUp||q.includes('detail'))&&lastTopic==='pertamina'){reply='Berikut detail lengkap tender <strong>Pertamina</strong>:<br><br><ol class="reply-list"><li><strong>Sewa Perangkat Komputer dan Server</strong><br>Perusahaan: JOB PERTAMINA - MEDCO E&amp;P SIMENGGARIS</li><li><strong>Provision of Swamp Barge No.1</strong><br>Perusahaan: PT PERTAMINA HULU MAHAKAM</li><li><strong>Jasa Support Pengoperasian Angkutan Berat</strong><br>Perusahaan: Pertamina EP</li><li><strong>Penyediaan dan Pengoperasian 1 Unit Rig 350 HP</strong><br>Perusahaan: PERTAMINA - MEDCO E&amp;P TOMORI SULAWESI</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 HP</strong><br>Perusahaan: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li></ol><span class="reply-cta">Ada yang ingin ditanyakan lebih lanjut?</span>';}else if(q.includes('pertamina')){lastTopic='pertamina';reply='Iya, ada beberapa tender <strong>Pertamina</strong> dalam sistem kami:<br><br><ol class="reply-list"><li><strong>Sewa Perangkat Komputer dan Server</strong><br>Perusahaan: JOB PERTAMINA - MEDCO E&amp;P SIMENGGARIS</li><li><strong>Provision of Swamp Barge No.1</strong><br>Perusahaan: PT PERTAMINA HULU MAHAKAM</li><li><strong>Jasa Support Pengoperasian Angkutan Berat</strong><br>Perusahaan: Pertamina EP</li><li><strong>Penyediaan dan Pengoperasian 1 Unit Rig 350 HP</strong><br>Perusahaan: PERTAMINA - MEDCO E&amp;P TOMORI SULAWESI</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 HP</strong><br>Perusahaan: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li></ol><span class="reply-cta">Apakah Anda ingin melihat detail tender tersebut?</span>';}else if(q.includes('20')||q.includes('miliar')||q.includes('nilai')){lastTopic='nilai';reply='Ya, ada tender dengan nilai lebih dari <strong>20 Miliar</strong>:<br><br><ol class="reply-list"><li><strong>Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Nilai: 25 M</li><li><strong>Penyediaan dan Pengoperasian 1 Unit Rig 350 HP</strong><br>Nilai: 24 M</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 HP</strong><br>Nilai: 23 M</li><li><strong>Jasa Penyemenan dan Stimulasi</strong><br>Nilai: 22 M</li><li><strong>Jasa Electric Logging, Perforation dan Data Processing</strong><br>Nilai: 21 M</li></ol><span class="reply-cta">Apakah Anda ingin melihat tender yang lain?</span>';}else if(q.includes('apa saja')||q.includes('semua')||q.includes('list')||q.includes('kategori')){lastTopic='kategori';reply='Dalam sistem kami terdapat tender dalam 5 kategori:<br><br><ol class="reply-list"><li><strong>Drilling &amp; Workover Well Service</strong><br>Contoh: Jasa Sewa Unit Perangkat Rig 550 HP</li><li><strong>Seismic, Geotechnic &amp; Geophysics</strong><br>Contoh: Survei Seismik Offshore 2D Kandawulo</li><li><strong>Computer &amp; IT</strong><br>Contoh: Sewa Perangkat Komputer dan Server</li><li><strong>Marine Transportation</strong><br>Contoh: Provision of Swamp Barge No.1</li><li><strong>Man Power General Labour Outsourcing</strong><br>Contoh: Open Sourcing - Pengadaan Marketing Agency</li></ol><span class="reply-cta">Apakah Anda ingin melihat detail per kategori?</span>';}else{reply='Wah, pertanyaan bagus! 🙌<br><br>Saat ini informasi tersebut belum tersedia langsung di sistem kami — tapi bisa jadi <strong>tim TenderStore.id sudah punya datanya</strong> dan belum ter-update di sini.<br><br><strong>Langkah terbaik:</strong><br><ul class="reply-list"><li>📲 <strong>Hubungi tim kami via WhatsApp <span style="color:#6b7a99;font-size:15px;">(0812-8224-8240)</span></strong><br><a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;font-weight:700;text-decoration:none;">Klik di sini untuk chat WhatsApp →</a></li><li>📧 Email: <strong>info@tender-indonesia.com</strong></li><li>📞 Telepon: <strong>(021) 6230 2979</strong></li></ul><br><span class="reply-cta">Tim kami siap bantu Anda menemukan tender yang tepat dalam waktu singkat! ⚡</span>';}addMsg(reply,'bot')}inp.disabled=false;btn.disabled=false;inp.focus()}
-</script></body></html>
+    <main class="main">
+        <section class="quick-section">
+            <p class="quick-label">💡 Pertanyaan Populer</p>
+            <div class="quick-grid">
+                <button class="quick-btn" onclick="quickAsk('Apakah ada tender drilling?')">
+                    <div class="qicon">⚡</div>
+                    <span class="qlabel">Tender Drilling</span>
+                </button>
+                <button class="quick-btn" onclick="quickAsk('Apakah ada tender Pertamina?')">
+                    <div class="qicon">⛽</div>
+                    <span class="qlabel">Tender Pertamina</span>
+                </button>
+                <button class="quick-btn" onclick="quickAsk('Ada tender nilainya > 20 miliar?')">
+                    <div class="qicon">💰</div>
+                    <span class="qlabel">Nilai > 20 Miliar</span>
+                </button>
+                <button class="quick-btn" onclick="quickAsk('Ada tender apa saja hari ini?')">
+                    <div class="qicon">📋</div>
+                    <span class="qlabel">Semua Tender</span>
+                </button>
+            </div>
+        </section>
+
+        <div id="chatArea" class="chat-area">
+            <div class="msg">
+                <div class="avatar bot">AI</div>
+                <div class="bubble bot">
+                    Halo Pak/Bu, selamat datang di <strong>TenderStore.id</strong> 👋<br><br>
+                    Saya asisten AI resmi yang siap membantu Anda menemukan tender proyek migas, konstruksi, dan IT terbaru.<br><br>
+                    Silakan klik tombol di atas atau ketik pertanyaan Anda.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-stats">
+            <div class="stats-inner">
+                <div><div class="stat-val" style="color:#3b82f6">15</div><div class="stat-lbl">Tender</div></div>
+                <div><div class="stat-val" style="color:#22c55e">5</div><div class="stat-lbl">Kategori</div></div>
+                <div><div class="stat-val" style="color:#a78bfa">9</div><div class="stat-lbl">Pertamina</div></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="input-section">
+        <div class="input-container">
+            <div class="input-row">
+                <input id="userInput" class="input-box" type="text" placeholder="Ketik pertanyaan Anda..." onkeypress="if(event.key==='Enter')sendMessage()">
+                <button id="sendBtn" class="send-btn" onclick="sendMessage()">Kirim</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API = '/api/chat';
+        function quickAsk(q){ document.getElementById('userInput').value=q; sendMessage(); }
+        function addMsg(txt, type){
+            const area = document.getElementById('chatArea');
+            const d = document.createElement('div');
+            d.className = 'msg ' + type;
+            const b = document.createElement('div');
+            b.className = 'bubble ' + type;
+            b.innerHTML = txt;
+            if(type==='user') d.appendChild(b);
+            else {
+                const av = document.createElement('div');
+                av.className = 'avatar bot';
+                av.textContent = 'AI';
+                d.appendChild(av);
+                d.appendChild(b);
+            }
+            area.appendChild(d);
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+        async function sendMessage(){
+            const inp = document.getElementById('userInput'), btn = document.getElementById('sendBtn'), text = inp.value.trim();
+            if(!text) return;
+            inp.value = ''; inp.disabled = true; btn.disabled = true;
+            addMsg(text, 'user');
+            try {
+                const r = await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:text}) });
+                const data = await r.json();
+                addMsg(data.reply || data.message, 'bot');
+            } catch(e) {
+                addMsg('Maaf, terjadi gangguan. Silakan hubungi WhatsApp 0812-8224-8240.', 'bot');
+            }
+            inp.disabled = false; btn.disabled = false; inp.focus();
+        }
+    </script>
+</body>
+</html>
