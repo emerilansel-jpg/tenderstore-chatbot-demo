@@ -209,10 +209,25 @@ export default async function handler(req, res) {
   
     // Dynamic keyword filter - extract user keywords and enforce strict AND matching
     const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about','punya','berikan','kasih',
-      'iya','yep','oke','okay','nah','tapi','koq','kok','cuma','doang','hanya','satu','dua','tiga','empat','lima','bilang','bilangnya','katanya','kata','emang','memang','padahal','soalnya','karena','kenapa','gimana','bagaimana','wah','waduh','lho','loh','toh','masa','mosok','harusnya','seharusnya','ingin','want','more','lagi','banyak','sedikit','dikit','berapa','mana','siapa','kapan','dimana','kemana','ngapa','coba','perlu','harus','jangan','boleh','gapapa','ngga','nggak','baik','bagus','jelek','benar','bener','salah','wrong','right','nyatanya','ternyata','rupanya','ulang','ulangi','cek','check','liat','tampil','tunjukkan','tunjukin','muncul','keluar','ngaco','benaran','beneran','betul','mengapa','tunjuk','kenapa'];
+      'iya','yep','oke','okay','nah','tapi','koq','kok','cuma','doang','hanya','satu','dua','tiga','empat','lima','bilang','bilangnya','katanya','kata','emang','memang','padahal','soalnya','karena','kenapa','gimana','bagaimana','wah','waduh','lho','loh','toh','masa','mosok','harusnya','seharusnya','ingin','want','more','lagi','banyak','sedikit','dikit','berapa','mana','siapa','kapan','dimana','kemana','ngapa','coba','perlu','harus','jangan','boleh','gapapa','ngga','nggak','baik','bagus','jelek','benar','bener','salah','wrong','right','nyatanya','ternyata','rupanya','ulang','ulangi','cek','check','liat','tampil','tunjukkan','tunjukin','muncul','keluar','ngaco','benaran','beneran','betul','mengapa','tunjuk','kenapa',
+      'bukannya','jadi','khan','nya','tuh','gitu','gini','kayak','kayaknya','sepertinya','maksudnya','memangnya','makanya','jadinya','terus','trus','lalu','kemudian','setelah','sebelum','eh','hmm','ok','yoi','yap','ayo','ayok','serius','cuman','kok','oh','ah','harusnya','katanya','udah','udahan','namanya'];
         const preserveShort = ['it', 'ip'];
     const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
-    const filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
+    let filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
+    // CONTEXT RECOVERY: if filterWords empty (conversational), recover last search from history
+    if (filterWords.length === 0) {
+      const _msgHist = req.body.history || [];
+      for (let _hi = _msgHist.length - 1; _hi >= 0; _hi--) {
+        if (_msgHist[_hi].role === 'user') {
+          const _hw = _msgHist[_hi].content.toLowerCase().split(/\s+/).map(w=>w.replace(/[^a-z0-9]/g,'')).filter(w=>w.length>2||preserveShort.includes(w));
+          const _hf = _hw.filter(w=>!stopWords.includes(w));
+          if (_hf.length > 0) { filterWords = _hf; break; }
+        }
+      }
+      if (filterWords.length === 0) {
+        return res.json({ reply: 'Untuk membantu pencarian tender, silakan sebutkan kategori (contoh: drilling, marine, IT) atau nama perusahaan (contoh: Pertamina, PLN, BP).' });
+      }
+    }
     const _tdU = TENDER_DATABASE.toUpperCase();
     const _mR = /MILIK:\s*([^\n|<]+)/g; let _mM; const _aM = [];
     while ((_mM = _mR.exec(_tdU)) !== null) _aM.push(_mM[1].trim());
