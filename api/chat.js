@@ -100,41 +100,63 @@ const TENDER_DATABASE = `
     Milik: PT TIMAH LOGISTIK | Nilai: Rp 1 M | Closing: 26-Mar-2026 | Lokasi: Pangkal Pinang - Kepulauan Babel
 `;
 
-// V2 ARCHITECTURE: AI-NLU + Programmatic DB Search
-// Model: meta-llama/llama-3.3-70b-instruct (same as V1)
-// Change: AI extracts JSON intent, then deterministic DB search. No stopWords.
+// V2: AI-NLU intent extraction + programmatic DB search
 
 function parseDB(text) {
   var entries = [];
-  var ls = text.split("\n");
-  var cur = {};
-  for (var i = 0; i < ls.length; i++) {
-    var ln = ls[i].trim();
-    if (ln.startsWith("KATEGORI:")) { if (cur.nama) entries.push(cur); cur = { kategori: ln.replace("KATEGORI:", "").trim() }; }
-    else if (ln.startsWith("NAMA TENDER:")) { cur.nama = ln.replace("NAMA TENDER:", "").trim(); }
-    else if (ln.startsWith("MILIK:")) { cur.milik = ln.replace("MILIK:", "").trim(); }
-    else if (ln.startsWith("NILAI:")) { cur.nilai = ln.replace("NILAI:", "").trim(); }
-    else if (ln.startsWith("CLOSING:")) { cur.closing = ln.replace("CLOSING:", "").trim(); }
-    else if (ln.startsWith("LOKASI:")) { cur.lokasi = ln.replace("LOKASI:", "").trim(); }
+  var lines = text.split("\n").filter(function(l){ return l.trim().length > 0; });
+  var curCat = "";
+  for (var i = 0; i < lines.length; i++) {
+    var t = lines[i].trim();
+    // Category header: "--- KATEGORI: X ---"
+    if (t.startsWith("---") && t.toUpperCase().includes("KATEGORI")) {
+      var cm = t.match(/---\s*KATEGORI\s*:\s*(.+?)(?:\s*---)?$/i);
+      curCat = cm ? cm[1].trim() : "";
+    }
+    // Numbered entry: "1. Nama: ..."
+    else if (/^\d+\.\s+Nama\s*:/.test(t)) {
+      var nama = t.replace(/^\d+\.\s+Nama\s*:\s*/, "").trim();
+      var milik = "", nilai = "", closing = "", lokasi = "";
+      // Next line is Milik (sometimes indented)
+      var next = (lines[i+1] || "").trim();
+      if (next.startsWith("Milik")) {
+        var milikFull = next.replace(/^Milik\s*:\s*/, "").trim();
+        // Pipe-separated: "COMPANY | Nilai: X | Closing: Y | Lokasi: Z"
+        var parts = milikFull.split(" | ");
+        milik = parts[0].trim();
+        for (var j = 1; j < parts.length; j++) {
+          var p = parts[j].trim();
+          if (p.startsWith("Nilai:")) nilai = p.replace("Nilai:", "").trim();
+          else if (p.startsWith("Closing:") || p.startsWith("Deadline:")) closing = p.replace(/Closing:|Deadline:/, "").trim();
+          else if (p.startsWith("Lokasi:")) lokasi = p.replace("Lokasi:", "").trim();
+        }
+        i++; // skip Milik line
+      }
+      entries.push({ kategori: curCat, nama: nama, milik: milik, nilai: nilai, closing: closing, lokasi: lokasi });
+    }
   }
-  if (cur.nama) entries.push(cur);
   return entries;
 }
 
+// Actual DB categories:
+// "Drilling & Workover Well Service ---"
+// "Seismic, Geotechnic, & Geophysics ---"
+// "Computer & IT ---"
+// "Marine Transportation ---"
+// "Man Power General Labour Outsourcing ---"
 function matchesCategory(dbCat, userCat) {
   if (!userCat) return true;
-  var dc = dbCat.toLowerCase(); var uc = userCat.toLowerCase();
+  var dc = dbCat.toLowerCase();
+  var uc = userCat.toLowerCase();
   var catMap = {
-    "it": ["computer","it ","sistem","software","hardware","network"],
-    "marine": ["marine","kapal","vessel","offshore","laut"],
-    "drilling": ["drilling","drill","pengeboran","bor"],
-    "manpower": ["man power","manpower","sdm","tenaga kerja","jasa"],
-    "tndk": ["man power","manpower","jasa","tenaga","sdm"],
-    "seismik": ["seismic","seismik"], "seismic": ["seismic","seismik"],
-    "civil": ["civil","sipil","konstruksi"],
-    "catering": ["catering","katering","food"],
-    "logistik": ["logistik","logistics","transport"],
-    "fabrikasi": ["fabrikasi","fabrication"]
+    "drilling": ["drilling", "workover", "well service"],
+    "seismik": ["seismic", "geotechnic", "geophysics"],
+    "seismic": ["seismic", "geotechnic", "geophysics"],
+    "it": ["computer", "it"],
+    "computer": ["computer", "it"],
+    "marine": ["marine", "transportation"],
+    "manpower": ["man power", "labour", "outsourcing"],
+    "tndk": ["man power", "labour", "outsourcing"]
   };
   var targets = catMap[uc] || [uc];
   return targets.some(function(t) { return dc.includes(t); });
@@ -144,89 +166,102 @@ function searchTenders(entries, company, category) {
   return entries.filter(function(e) {
     var cok = !company;
     if (company) {
+      // Match only against company part (before first pipe)
+      var compPart = (e.milik || "").split(" | ")[0];
       var esc = company.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      cok = new RegExp("\\b" + esc + "\\b","i").test(e.milik||"");
+      cok = new RegExp("\\b" + esc + "\\b", "i").test(compPart);
     }
-    return cok && (!category || matchesCategory(e.kategori||"", category));
+    return cok && (!category || matchesCategory(e.kategori || "", category));
   });
 }
 
 function formatResults(results, company, category) {
-  var cl = company ? " dari <strong>"+company.toUpperCase()+"</strong>" : "";
-  var kl = category ? " "+category.toUpperCase() : "";
+  var cl = company ? " dari <strong>" + company.toUpperCase() + "</strong>" : "";
+  var kl = category ? " " + category.toUpperCase() : "";
   var n = results.length;
-  if (n === 0) return "Maaf, tidak ada tender"+kl+cl+" yang ditemukan. Coba kata kunci lain atau ketik <em>semua tender</em>.";
-  var intro = n===1 ? "Ya, ada 1 tender"+kl+cl+":<br><br>" : "Ya, ada "+n+" tender"+kl+cl+":<br><br>";
+  if (n === 0) return "Maaf, tidak ditemukan tender" + kl + cl + " saat ini. Coba kata kunci lain atau ketik <em>semua tender</em> untuk melihat semua.";
+  var intro = n === 1 ? "Ya, ada 1 tender" + kl + cl + ":<br><br>" : "Ya, ada " + n + " tender" + kl + cl + ":<br><br>";
   var items = results.map(function(e) {
-    return "<li><strong>"+(e.nama||"N/A")+"</strong><br>Perusahaan: "+(e.milik||"N/A")+" | Kategori: "+(e.kategori||"N/A")+"<br>Nilai: "+(e.nilai||"N/A")+" | Closing: "+(e.closing||"N/A")+"</li>";
+    var detail = e.nilai ? " | Nilai: " + e.nilai : "";
+    var closing = e.closing ? " | Closing: " + e.closing : "";
+    return "<li><strong>" + (e.nama || "N/A") + "</strong><br>" +
+      "Perusahaan: " + (e.milik || "N/A") + "<br>" +
+      "Kategori: " + (e.kategori || "N/A").replace(" ---","") + detail + closing + "</li>";
   }).join("");
-  return intro+'<ol class="reply-list">'+items+"</ol><br><br>Apakah Anda ingin informasi lebih detail atau melihat tender lainnya?";
+  return intro + '<ol class="reply-list">' + items + "</ol><br><br>Apakah Anda ingin informasi lebih detail atau melihat tender lainnya?";
 }
 
 async function callOR(sys, msgs, key) {
   var r = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method:"POST",
-    headers:{"Content-Type":"application/json","Authorization":"Bearer "+key,"HTTP-Referer":"https://tenderstore-chatbot-demo.vercel.app","X-Title":"TenderStore AI V2"},
-    body:JSON.stringify({ model:"meta-llama/llama-3.3-70b-instruct", temperature:0.1, messages:[{role:"system",content:sys}].concat(msgs) })
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key, "HTTP-Referer": "https://tenderstore-chatbot-demo.vercel.app", "X-Title": "TenderStore V2" },
+    body: JSON.stringify({ model: "meta-llama/llama-3.3-70b-instruct", temperature: 0.1, messages: [{ role: "system", content: sys }].concat(msgs) })
   });
-  if (!r.ok) throw new Error("OR err "+r.status);
+  if (!r.ok) throw new Error("OR " + r.status);
   var d = await r.json();
-  return (d.choices&&d.choices[0]&&d.choices[0].message&&d.choices[0].message.content)||"";
+  return (d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content) || "";
 }
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin","*");
-  res.setHeader("Access-Control-Allow-Methods","POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers","Content-Type");
-  if (req.method==="OPTIONS") return res.status(200).end();
-  if (req.method!=="POST") return res.status(405).json({error:"Method not allowed"});
-  var body = req.body||{};
-  var message = body.message; var history = body.history||[];
-  if (!message) return res.status(400).json({error:"Message required"});
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
+  var body = req.body || {};
+  var message = body.message; var history = body.history || [];
+  if (!message) return res.status(400).json({ error: "Message required" });
   var apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) return res.status(500).json({reply:"API key not configured."});
+  if (!apiKey) return res.status(500).json({ reply: "API key not configured." });
   try {
-    var intentSys = [
-      "You are an intent extractor for an Indonesian tender chatbot.",
-      "Output ONLY valid JSON on one line: {\"is_search\":bool,\"company\":str|null,\"category\":str|null}",
+    // Phase 1: AI extracts intent as JSON
+    var iSys = [
+      "You are an intent extractor for a tender search chatbot. Respond with ONLY JSON, nothing else.",
+      "Format: {\"is_search\":bool, \"company\":string|null, \"category\":string|null}",
       "",
-      "is_search=true if user wants to find/see tenders. False for greetings/chitchat.",
-      "company: Pertamina|PLN|BP|Medco|Kalrez|CNOOC|Chevron or null",
-      "category: drilling|marine|IT|manpower|TNDK|seismik|civil|catering|logistik or null",
-      "semua tender -> is_search:true company:null category:null",
+      "is_search: true if user wants to find/see tenders, false for greetings/thanks/chitchat",
+      "company: exact company name from message (PERTAMINA, PLN, BP, MEDCO, KALREZ, CNOOC, CHEVRON), or null",
+      "category: drilling | seismik | IT | marine | manpower | TNDK, or null if not mentioned",
       "",
       "Examples:",
-      "tender drilling pertamina -> {\"is_search\":true,\"company\":\"Pertamina\",\"category\":\"drilling\"}",
-      "ada tender PLN? -> {\"is_search\":true,\"company\":\"PLN\",\"category\":null}",
-      "tender IT -> {\"is_search\":true,\"company\":null,\"category\":\"IT\"}",
-      "semua tender -> {\"is_search\":true,\"company\":null,\"category\":null}",
-      "terima kasih -> {\"is_search\":false,\"company\":null,\"category\":null}"
+      "tender drilling pertamina => {\"is_search\":true,\"company\":\"PERTAMINA\",\"category\":\"drilling\"}",
+      "ada tender PLN? => {\"is_search\":true,\"company\":\"PLN\",\"category\":null}",
+      "tender IT => {\"is_search\":true,\"company\":null,\"category\":\"IT\"}",
+      "semua tender => {\"is_search\":true,\"company\":null,\"category\":null}",
+      "halo / terima kasih / iya / ok => {\"is_search\":false,\"company\":null,\"category\":null}"
     ].join("\n");
-    var msgs = history.map(function(h){return{role:h.role,content:h.content};});
-    msgs.push({role:"user",content:message});
-    var intent;
+    var msgs = history.map(function(h) { return { role: h.role, content: h.content }; });
+    msgs.push({ role: "user", content: message });
+    var intent = { is_search: false, company: null, category: null };
     try {
-      var raw = await callOR(intentSys, msgs, apiKey);
-      var c = raw.trim().replace(/```[\s\S]*?```/g,"").trim();
-      var m = c.match(/\{[^{}]+\}/); if(m) c=m[0];
+      var raw = await callOR(iSys, msgs, apiKey);
+      var c = raw.trim().replace(/```[\s\S]*?```/g, "").trim();
+      var m = c.match(/\{[^{}]+\}/); if (m) c = m[0];
       intent = JSON.parse(c);
-    } catch(e) { intent={is_search:true,company:null,category:null}; }
-    if (!intent.is_search) {
-      var convSys = [
-        "Kamu adalah asisten AI untuk TenderStore.id — platform tender Indonesia.",
-        "Database berisi tender dari: Pertamina, PLN, BP, Medco, Kalrez, CNOOC, Chevron, dll.",
-        "Kategori: drilling, marine, IT, manpower, TNDK, seismik, civil, catering, logistik.",
-        "Jawab ramah dan singkat dalam Bahasa Indonesia.",
-        "Jika tanya tender spesifik, minta sebutkan perusahaan atau kategori."
-      ].join("\n");
-      var cr = await callOR(convSys, msgs, apiKey);
-      return res.json({reply:cr.trim()});
+    } catch(e) {
+      // If parsing fails, try to determine intent from message keywords
+      var low = message.toLowerCase();
+      var searchKws = ["tender","cari","ada","lihat","tampil","show","list","drilling","marine","seismik","manpower","tndk","pertamina","pln","bp","medco"];
+      intent.is_search = searchKws.some(function(k) { return low.includes(k); });
     }
+    // Phase 2a: Conversational
+    if (!intent.is_search) {
+      var cSys = [
+        "Kamu adalah asisten AI untuk TenderStore.id — platform tender proyek Indonesia.",
+        "Perusahaan: PERTAMINA, PLN, BP, MEDCO, KALREZ, CNOOC, CHEVRON.",
+        "Kategori: drilling, marine, IT/computer, manpower/TNDK, seismik.",
+        "Jawab ramah dan singkat dalam Bahasa Indonesia.",
+        "Untuk cari tender, minta pengguna sebutkan perusahaan atau kategori."
+      ].join("\n");
+      var cr = await callOR(cSys, msgs, apiKey);
+      return res.json({ reply: cr.trim() });
+    }
+    // Phase 2b: Programmatic DB search
     var entries = parseDB(TENDER_DATABASE);
     var results = searchTenders(entries, intent.company, intent.category);
-    return res.json({reply: formatResults(results, intent.company, intent.category)});
+    return res.json({ reply: formatResults(results, intent.company, intent.category) });
   } catch(err) {
     console.error("V2 err:", err);
-    return res.status(500).json({reply:"Maaf, terjadi kesalahan. Silakan coba lagi."});
+    return res.status(500).json({ reply: "Maaf, terjadi kesalahan. Silakan coba lagi." });
   }
 }
