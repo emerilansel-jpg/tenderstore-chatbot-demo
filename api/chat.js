@@ -340,7 +340,8 @@ const messages = [
               reply = 'Maaf, tidak ditemukan tender' + kD + cD + ' dalam database kami.';
             } else { reply = intro + filtered.join('') + ctaText; }
           }
-return res.status(200).json({ reply });
+    }
+    return res.status(200).json({ reply });
   } catch (err) {
     return res.status(500).json({ reply: 'Maaf, terjadi gangguan. Silakan hubungi WhatsApp 0812-8224-8240.' });
   }
