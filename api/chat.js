@@ -194,7 +194,7 @@ function expandCategory(kw){
     'it':['computer','komputer','software','server','network','aplikasi','managed','license','co-location','drc','development','disaster recovery'],
     'komputer':['komputer','computer','server','software'],'server':['server','komputer','network','drc'],
     'drc':['drc','disaster recovery','co-location'],
-    'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya'],'outsourcing':['outsourcing','manpower','alih daya']
+    'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya','tndk','administrasi','kearsipan','naskah','marketing agency','jasa tenaga','agency'],'outsourcing':['outsourcing','manpower','alih daya']
   };
   return m[kw]||[kw];
 }
@@ -240,7 +240,8 @@ export default async function handler(req, res) {
         '\n2. marine PLN = Marine Transportation DAN milik PLN. Tidak ada? jawab tidak ditemukan.' +
         '\n3. JANGAN tampilkan tender kategori lain meskipun perusahaan cocok.' +
         '\n4. JANGAN tampilkan tender perusahaan lain meskipun kategori cocok.' +
-        '\n5. Tidak cocok semua? Jawab: Maaf tidak ditemukan tender [kriteria] dalam database kami.'
+        '\n5. Tidak cocok semua? Jawab: Maaf tidak ditemukan tender [kriteria] dalam database kami.' +
+            '\n6. Jika HANYA Perusahaan disebutkan (tanpa kategori), tampilkan SEMUA tender dari perusahaan tsb apapun kategorinya.'
       : '';
 const messages = [
     { role: 'system', content: SYSTEM_PROMPT + keywordFilter },
