@@ -84,7 +84,7 @@ export default async function handler(req, res) {
   
     // Dynamic keyword filter - extract user keywords and enforce strict AND matching
     const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about'];
-      const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 1);
+        const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2);
     const filterWords = userWords.filter(w => !stopWords.includes(w));
     const keywordFilter = filterWords.length >= 1 
       ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nUser menyebut keyword spesifik: [' + filterWords.join(', ') + ']. Kamu WAJIB:\n1. HANYA tampilkan tender yang mengandung SEMUA keyword tersebut (di nama tender, pemilik, atau deskripsi).\n2. JANGAN PERNAH tampilkan tender yang TIDAK mengandung salah satu keyword di atas.\n3. Jika tidak ada tender yang cocok SEMUA keyword, jawab: Maaf, tidak ditemukan tender yang cocok dengan semua kriteria tersebut.\n4. Ini adalah aturan MUTLAK yang tidak boleh dilanggar.'
@@ -146,35 +146,49 @@ const messages = [
         intro = parts[0];
         items = parts.slice(1);
       }
-      if (items.length > 0) {
-        // Detect which keywords are company names (appear in Milik fields)
-        const companyKws = filterWords.filter(kw => {
-          const kwl = kw.toLowerCase();
-          return items.some(it => {
-            const lower = it.toLowerCase();
-            const milikIdx = lower.indexOf("milik");
-            return milikIdx >= 0 && lower.substring(milikIdx).includes(kwl);
-          });
-        });
-        // Determine what to filter by
-        let mustMatch = null;
-        if (companyKws.length > 0) {
-          // Always enforce company keyword matching per item
-          mustMatch = companyKws;
-        }
-        // Only filter if we have keywords to enforce
-        if (mustMatch) {
-          const filtered = items.filter(item => {
-            const il = item.toLowerCase();
-            return mustMatch.every(kw => il.includes(kw.toLowerCase()));
-          });
-          if (filtered.length === 0) {
-            reply = 'Maaf, tidak ditemukan tender yang cocok dengan semua kriteria: <strong>' + filterWords.join(', ') + '</strong>.';
-          } else {
-            reply = intro + filtered.join('') + ctaText;
+          if (items.length > 0) {
+                      // Detect which keywords are company names (appear in Milik fields)
+                      const companyKws = filterWords.filter(kw => {
+                                    const kwl = kw.toLowerCase();
+                                    return items.some(it => {
+                                                    const lower = it.toLowerCase();
+                                                    const milikIdx = lower.indexOf("milik");
+                                                    return milikIdx >= 0 && lower.substring(milikIdx).includes(kwl);
+                                    });
+                      });
+                      // Determine filter mode: company (strict) or category (word-boundary)
+                      let mustMatch = null;
+                      let isCompanyFilter = false;
+                      if (companyKws.length > 0) {
+                                    mustMatch = companyKws;
+                                    isCompanyFilter = true;
+                      } else {
+                                    // Category filter: apply word-boundary matching
+                                    mustMatch = filterWords;
+                                    isCompanyFilter = false;
+                      }
+                      // Apply filter
+                      const filtered = items.filter(item => {
+                                    const il = item.toLowerCase();
+                                    if (il.includes('apakah anda ingin')) return false;
+                                    if (isCompanyFilter) {
+                                                    return mustMatch.every(kw => il.includes(kw.toLowerCase()));
+                                    } else {
+                                                    return mustMatch.every(kw => {
+                                                                      const esc = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                                                                      return new RegExp('\\b' + esc + '\\b', 'i').test(il);
+                                                    });
+                                    }
+                      });
+                      if (filtered.length === 0) {
+                                    if (isCompanyFilter) {
+                                                    reply = 'Maaf, tidak ditemukan tender yang cocok dengan kriteria: <strong>' + filterWords.join(', ') + '</strong>.';
+                                    }
+                                    // Category filter → 0 results: pass through original LLM response (don't filter)
+                      } else {
+                                    reply = intro + filtered.join('') + ctaText;
+                      }
           }
-        }
-      }
     }
 
     return res.status(200).json({ reply });
