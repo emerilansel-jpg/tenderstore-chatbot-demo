@@ -194,7 +194,7 @@ function expandCategory(kw){
     'it':['computer','komputer','software','server','network','aplikasi','managed','license','co-location','drc','development','disaster recovery'],
     'komputer':['komputer','computer','server','software'],'server':['server','komputer','network','drc'],
     'drc':['drc','disaster recovery','co-location'],
-    'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya','tndk','administrasi','kearsipan','naskah','marketing agency','jasa tenaga','agency'],'outsourcing':['outsourcing','manpower','alih daya']
+    'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya','tndk','administrasi','kearsipan','naskah','marketing agency','jasa tenaga','agency'],'outsourcing':['outsourcing','manpower','alih daya'],'tndk':['tndk','administrasi','kearsipan','naskah dinas','tata naskah','man power','outsourcing']
   };
   return m[kw]||[kw];
 }
@@ -229,7 +229,7 @@ export default async function handler(req, res) {
       'geoteknik':'Seismic Geotechnic Geophysics','geotechnic':'Seismic Geotechnic Geophysics',
       'it':'Computer dan IT','komputer':'Computer dan IT','server':'Computer dan IT',
       'software':'Computer dan IT','network':'Computer dan IT','drc':'Computer dan IT',
-      'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power'
+      'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power','tndk':'Man Power','administrasi':'Man Power','kearsipan':'Man Power'
     };
     const _catNames = [...new Set(categoryKwsG.map(k => _catNameMap[k.toLowerCase()]).filter(Boolean))];
     const _cd = companyKwsG.length > 0 ? ' Perusahaan:[' + companyKwsG.join(',') + '].' : '';
@@ -351,9 +351,43 @@ const messages = [
               return compOk && catOk;
             });
             if (filtered.length === 0) {
-              const cD = companyKws.length > 0 ? ' dari <strong>' + companyKws.map(k => k.toUpperCase()).join('/') + '</strong>' : '';
-              const kD = categoryKws.length > 0 ? ' kategori <strong>' + categoryKws.join(', ') + '</strong>' : '';
-              reply = 'Maaf, tidak ditemukan tender' + kD + cD + ' dalam database kami.';
+              // DB direct scan fallback when AI returns wrong/missing items
+              const _ln2 = TENDER_DATABASE.split('\n');
+              let _dc = ''; const _db2 = []; let _ce = null;
+              for (const _l of _ln2) {
+                const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
+                if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
+                const _nm = _l.match(/^\d+\.\s+Nama:\s*(.+)/i);
+                if (_nm) { _ce = {nama:_nm[1].trim(),cat:_dc,milik:'',nilai:'',closing:'',lokasi:''}; continue; }
+                if (_ce && _l.includes('Milik:')) {
+                  const _ps = _l.split('|').map(s=>s.trim());
+                  _ce.milik = (_ps[0].match(/Milik:\s*(.+)/i)||[])[1]||'';
+                  for (const _p of _ps) {
+                    if (_p.match(/^Nilai:/i)) _ce.nilai=_p.replace(/^Nilai:\s*/i,'');
+                    if (_p.match(/^Closing:/i)) _ce.closing=_p.replace(/^Closing:\s*/i,'');
+                    if (_p.match(/^Lokasi:/i)) _ce.lokasi=_p.replace(/^Lokasi:\s*/i,'');
+                  }
+                  const _el2=(_ce.cat+' '+_ce.nama+' '+_ce.milik).toLowerCase();
+                  const _ml2=_ce.milik.toLowerCase();
+                  if (companyKws.length===0||companyKws.every(kw=>_ml2.includes(kw.toLowerCase()))) {
+                    if (categoryKws.length===0||categoryKws.every(kw=>{
+                      const ts=expandCategory(kw);
+                      return ts.some(t=>{try{return new RegExp(t,'i').test(_el2);}catch(e){return _el2.includes(t);}});
+                    })) _db2.push({..._ce});
+                  }
+                  _ce = null;
+                }
+              }
+              if (_db2.length > 0) {
+                const _cl2 = companyKws.length>0?' dari <strong>'+companyKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
+                reply='Ya, ada tender'+_cl2+':<br><br><ol class="reply-list">'+
+                  _db2.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+
+                  '</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>';
+              } else {
+                const cD=companyKws.length>0?' dari <strong>'+companyKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
+                const kD=categoryKws.length>0?' kategori <strong>'+categoryKws.join(', ')+'</strong>':'';
+                reply='Maaf, tidak ditemukan tender'+kD+cD+' dalam database kami.';
+              }
             } else { reply = intro + filtered.join('') + ctaText; }
           }
     }
