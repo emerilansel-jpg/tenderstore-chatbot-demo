@@ -188,7 +188,7 @@ function expandCategory(kw){
     'kapal':['kapal','barge','boat','tug','lct','vessel','marine','harbour'],
     'barge':['barge','swamp'],'boat':['boat','crew','utility'],'tug':['tug','harbour'],'lct':['lct','landing craft'],
     'drilling':['drilling','workover','rig','bor','pemboran','sumuran','wireline','logging','penyemenan','cementing'],
-    'bor':['bor','pemboran','drilling','rig'],'rig':['rig','drilling','workover'],'workover':['workover','drilling','rig'],
+    'bor':['bor','pemboran','drilling','rig'],'pemboran':['pemboran','bor','drilling','rig','wireline','logging','cementing'],'vessel':['vessel','marine','kapal','barge','lct','swamp','tug'],'rig':['rig','drilling','workover'],'workover':['workover','drilling','rig'],
     'seismik':['seismik','seismic','survei'],'seismic':['seismic','seismik','survei'],
     'geoteknik':['geoteknik','geotechnic'],'geotechnic':['geotechnic','geoteknik'],
     'it':['computer','komputer','software','server','network','aplikasi','managed','license','co-location','drc','development','disaster recovery'],
