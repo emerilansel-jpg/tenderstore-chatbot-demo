@@ -66,13 +66,13 @@ FORMAT WAJIB HTML (BUKAN MARKDOWN):
 - DILARANG KERAS menampilkan tender yang tidak mengandung salah satu kata kunci yang disebutkan user.
 
 ATURAN JAWABAN:
-- Jawab SINGKAT & SKIMMER-FRIENDLY ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ pakai list, bukan paragraf panjang
+- Jawab SINGKAT & SKIMMER-FRIENDLY ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ pakai list, bukan paragraf panjang
 - Selalu akhiri dengan CTA (ajakan hubungi tim atau lihat lebih lanjut)
 - Jika pertanyaan TIDAK ADA di database, gunakan fallback kontak di bawah
 - DILARANG mengarang data tender yang tidak ada di atas
 
 FALLBACK jika tidak ada di database:
-Informasi tersebut belum tersedia di sistem kami saat ini ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡</span>`;
+Informasi tersebut belum tersedia di sistem kami saat ini ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡</span>`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -83,7 +83,7 @@ export default async function handler(req, res) {
 
   
     // Dynamic keyword filter - extract user keywords and enforce strict AND matching
-    const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which'];
+    const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about'];
     const userWords = message.toLowerCase().split(/\s+/).filter(w => w.length > 2);
     const filterWords = userWords.filter(w => !stopWords.includes(w));
     const keywordFilter = filterWords.length >= 1 
@@ -161,9 +161,7 @@ const messages = [
         if (companyKws.length > 0) {
           // Always enforce company keyword matching per item
           mustMatch = companyKws;
-        } else if (filterWords.length > 1) {
-          // Multiple non-company keywords: require ALL in each item
-          mustMatch = filterWords;
+        }
         }
         // Only filter if we have keywords to enforce
         if (mustMatch) {
