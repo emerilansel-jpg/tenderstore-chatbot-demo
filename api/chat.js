@@ -208,14 +208,14 @@ export default async function handler(req, res) {
 
   
     // Dynamic keyword filter - extract user keywords and enforce strict AND matching
-    const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about'];
+    const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about','punya','berikan','kasih'];
         const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2);
     const preserveShort = ['it', 'ip'];
     const filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
     const _tdU = TENDER_DATABASE.toUpperCase();
     const _mR = /MILIK:\s*([^\n|<]+)/g; let _mM; const _aM = [];
     while ((_mM = _mR.exec(_tdU)) !== null) _aM.push(_mM[1].trim());
-    const companyKwsG = filterWords.filter(kw => _aM.some(ml => ml.includes(kw.toUpperCase())));
+    const companyKwsG = filterWords.filter(kw => _aM.some(ml => { try { return new RegExp('\\b'+kw+'\\b','i').test(ml); } catch(e) { return ml.includes(kw.toUpperCase()); } }));
     const categoryKwsG = filterWords.filter(kw => !companyKwsG.includes(kw));
     const _catNameMap = {
       'marine':'Marine Transportation','kapal':'Marine Transportation','barge':'Marine Transportation',
@@ -333,63 +333,55 @@ const messages = [
         intro = parts[0];
         items = parts.slice(1);
       }
-          if (items.length > 0) {
-            const _cL = filterWords.filter(kw => {
-              const kl = kw.toLowerCase();
-              return items.some(it => { const li = it.toLowerCase(); const mi = li.indexOf('milik'); return mi >= 0 && li.substring(mi).includes(kl); });
-            });
-            const companyKws = companyKwsG.length > 0 ? companyKwsG : _cL;
-            const categoryKws = filterWords.filter(kw => !companyKws.includes(kw));
-            const filtered = items.filter(item => {
-              const il = item.toLowerCase();
-              if (il.includes('apakah anda ingin')) return false;
-              const compOk = companyKws.length === 0 || companyKws.every(kw => il.includes(kw.toLowerCase()));
-              const catOk = categoryKws.length === 0 || categoryKws.every(kw => {
-                const terms = expandCategory(kw);
-                return terms.some(t => { try { return new RegExp(t, 'i').test(il); } catch(e) { return il.includes(t); } });
+          let _dbNeeded = false;
+            let _cKws = companyKwsG, _kKws = filterWords.filter(kw => !companyKwsG.includes(kw));
+            if (items.length > 0) {
+              const _cL = filterWords.filter(kw => { const kl=kw.toLowerCase(); return items.some(it=>{const li=it.toLowerCase();const mi=li.indexOf('milik');return mi>=0&&li.substring(mi).includes(kl);});});
+              _cKws = companyKwsG.length > 0 ? companyKwsG : _cL;
+              _kKws = filterWords.filter(kw => !_cKws.includes(kw));
+              const filtered = items.filter(item => {
+                const il = item.toLowerCase();
+                if (il.includes('apakah anda ingin')) return false;
+                const compOk = _cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kw+'\\b','i').test(il);}catch(e){return il.includes(kw.toLowerCase());}});
+                const catOk = _kKws.length===0||_kKws.every(kw=>{const terms=expandCategory(kw);return terms.some(t=>{try{return new RegExp(t,'i').test(il);}catch(e){return il.includes(t);}});});
+                return compOk && catOk;
               });
-              return compOk && catOk;
-            });
-            if (filtered.length === 0) {
-              // DB direct scan fallback when AI returns wrong/missing items
-              const _ln2 = TENDER_DATABASE.split('\n');
-              let _dc = ''; const _db2 = []; let _ce = null;
+              if (filtered.length > 0) { reply = intro + filtered.join('') + ctaText; }
+              else { _dbNeeded = true; }
+            } else { _dbNeeded = true; }
+            if (_dbNeeded && (_cKws.length > 0 || _kKws.length > 0)) {
+              const _ln2=TENDER_DATABASE.split('\n');
+              let _dc='';const _db2=[];let _ce=null;
               for (const _l of _ln2) {
-                const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
-                if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
-                const _nm = _l.match(/^\d+\.\s+Nama:\s*(.+)/i);
-                if (_nm) { _ce = {nama:_nm[1].trim(),cat:_dc,milik:'',nilai:'',closing:'',lokasi:''}; continue; }
-                if (_ce && _l.includes('Milik:')) {
-                  const _ps = _l.split('|').map(s=>s.trim());
-                  _ce.milik = (_ps[0].match(/Milik:\s*(.+)/i)||[])[1]||'';
-                  for (const _p of _ps) {
-                    if (_p.match(/^Nilai:/i)) _ce.nilai=_p.replace(/^Nilai:\s*/i,'');
-                    if (_p.match(/^Closing:/i)) _ce.closing=_p.replace(/^Closing:\s*/i,'');
-                    if (_p.match(/^Lokasi:/i)) _ce.lokasi=_p.replace(/^Lokasi:\s*/i,'');
+                const _ch=_l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
+                if (_ch){_dc=_ch[1].trim().toLowerCase();_ce=null;continue;}
+                const _nm=_l.match(/^\d+\.\s+Nama:\s*(.+)/i);
+                if (_nm){_ce={nama:_nm[1].trim(),cat:_dc,milik:'',nilai:'',closing:'',lokasi:''};continue;}
+                if (_ce&&_l.includes('Milik:')){
+                  const _ps=_l.split('|').map(s=>s.trim());
+                  _ce.milik=(_ps[0].match(/Milik:\s*(.+)/i)||[])[1]||'';
+                  for(const _p of _ps){
+                    if(_p.match(/^Nilai:/i))_ce.nilai=_p.replace(/^Nilai:\s*/i,'');
+                    if(_p.match(/^Closing:/i))_ce.closing=_p.replace(/^Closing:\s*/i,'');
+                    if(_p.match(/^Lokasi:/i))_ce.lokasi=_p.replace(/^Lokasi:\s*/i,'');
                   }
                   const _el2=(_ce.cat+' '+_ce.nama+' '+_ce.milik).toLowerCase();
                   const _ml2=_ce.milik.toLowerCase();
-                  if (companyKws.length===0||companyKws.every(kw=>_ml2.includes(kw.toLowerCase()))) {
-                    if (categoryKws.length===0||categoryKws.every(kw=>{
-                      const ts=expandCategory(kw);
-                      return ts.some(t=>{try{return new RegExp(t,'i').test(_el2);}catch(e){return _el2.includes(t);}});
-                    })) _db2.push({..._ce});
+                  if(_cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kw+'\\b','i').test(_ml2);}catch(e){return _ml2.includes(kw.toLowerCase());}})){
+                    if(_kKws.length===0||_kKws.every(kw=>{const ts=expandCategory(kw);return ts.some(t=>{try{return new RegExp(t,'i').test(_el2);}catch(e){return _el2.includes(t);}});}))_db2.push({..._ce});
                   }
-                  _ce = null;
+                  _ce=null;
                 }
               }
               if (_db2.length > 0) {
-                const _cl2 = companyKws.length>0?' dari <strong>'+companyKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
-                reply='Ya, ada tender'+_cl2+':<br><br><ol class="reply-list">'+
-                  _db2.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+
-                  '</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>';
+                const _cl2=_cKws.length>0?' dari <strong>'+_cKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
+                reply='Ya, ada tender'+_cl2+':<br><br><ol class="reply-list">'+_db2.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+'</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>';
               } else {
-                const cD=companyKws.length>0?' dari <strong>'+companyKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
-                const kD=categoryKws.length>0?' kategori <strong>'+categoryKws.join(', ')+'</strong>':'';
+                const cD=_cKws.length>0?' dari <strong>'+_cKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
+                const kD=_kKws.length>0?' kategori <strong>'+_kKws.join(', ')+'</strong>':'';
                 reply='Maaf, tidak ditemukan tender'+kD+cD+' dalam database kami.';
               }
-            } else { reply = intro + filtered.join('') + ctaText; }
-          }
+            }
     }
     return res.status(200).json({ reply });
   } catch (err) {
