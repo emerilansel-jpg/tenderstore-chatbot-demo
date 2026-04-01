@@ -66,13 +66,13 @@ FORMAT WAJIB HTML (BUKAN MARKDOWN):
 - DILARANG KERAS menampilkan tender yang tidak mengandung salah satu kata kunci yang disebutkan user.
 
 ATURAN JAWABAN:
-- Jawab SINGKAT & SKIMMER-FRIENDLY ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ pakai list, bukan paragraf panjang
+- Jawab SINGKAT & SKIMMER-FRIENDLY ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ pakai list, bukan paragraf panjang
 - Selalu akhiri dengan CTA (ajakan hubungi tim atau lihat lebih lanjut)
 - Jika pertanyaan TIDAK ADA di database, gunakan fallback kontak di bawah
 - DILARANG mengarang data tender yang tidak ada di atas
 
 FALLBACK jika tidak ada di database:
-Informasi tersebut belum tersedia di sistem kami saat ini ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡</span>`;
+Informasi tersebut belum tersedia di sistem kami saat ini ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ tapi <strong>tim TenderStore.id siap membantu Anda</strong>.<br><br><ul class="reply-list"><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ² <strong>WhatsApp:</strong> <a href="https://wa.me/6281282248240" target="_blank" style="color:#34d399;">0812-8224-8240</a></li><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ§ <strong>Email:</strong> info@tender-indonesia.com</li><li>ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ <strong>Telepon:</strong> (021) 6230 2979</li></ul><br><span style="color:#93c5fd;font-style:italic;">Tim kami siap bantu dalam waktu singkat! ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡</span>`;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -86,7 +86,7 @@ export default async function handler(req, res) {
     const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which'];
     const userWords = message.toLowerCase().split(/\s+/).filter(w => w.length > 2);
     const filterWords = userWords.filter(w => !stopWords.includes(w));
-    const keywordFilter = filterWords.length > 1 
+    const keywordFilter = filterWords.length >= 1 
       ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nUser menyebut keyword spesifik: [' + filterWords.join(', ') + ']. Kamu WAJIB:\n1. HANYA tampilkan tender yang mengandung SEMUA keyword tersebut (di nama tender, pemilik, atau deskripsi).\n2. JANGAN PERNAH tampilkan tender yang TIDAK mengandung salah satu keyword di atas.\n3. Jika tidak ada tender yang cocok SEMUA keyword, jawab: Maaf, tidak ditemukan tender yang cocok dengan semua kriteria tersebut.\n4. Ini adalah aturan MUTLAK yang tidak boleh dilanggar.'
       : '';
     
@@ -123,12 +123,11 @@ const messages = [
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/^[\*\-] (.+)$/gm, '<li>$1</li>');
 
-    // Post-processing: remove tender items not matching ALL user keywords
-    if (filterWords.length > 1) {
-      // First, separate CTA/question text from the main content
+    // Post-processing: remove tender items not matching user keywords
+    if (filterWords.length >= 1) {
+      // Separate CTA/question text from main content
       let mainReply = reply;
       let ctaText = "";
-      // Remove trailing CTA like "Apakah Anda ingin..." or <em>...</em>
       const ctaMatch = reply.match(/(<br>\s*)*(<em>.*<\/em>|Apakah\s+Anda\s+ingin.*$)/is);
       if (ctaMatch) {
         const ctaIdx = reply.indexOf(ctaMatch[0]);
@@ -148,7 +147,7 @@ const messages = [
         items = parts.slice(1);
       }
       if (items.length > 0) {
-        // Detect company keywords (appear in Milik fields)
+        // Detect which keywords are company names (appear in Milik fields)
         const companyKws = filterWords.filter(kw => {
           const kwl = kw.toLowerCase();
           return items.some(it => {
@@ -157,15 +156,26 @@ const messages = [
             return milikIdx >= 0 && lower.substring(milikIdx).includes(kwl);
           });
         });
-        const mustMatch = companyKws.length > 0 ? companyKws : filterWords;
-        const filtered = items.filter(item => {
-          const il = item.toLowerCase();
-          return mustMatch.every(kw => il.includes(kw.toLowerCase()));
-        });
-        if (filtered.length === 0) {
-          reply = 'Maaf, tidak ditemukan tender yang cocok dengan semua kriteria: <strong>' + filterWords.join(', ') + '</strong>.';
-        } else {
-          reply = intro + filtered.join('') + ctaText;
+        // Determine what to filter by
+        let mustMatch = null;
+        if (companyKws.length > 0) {
+          // Always enforce company keyword matching per item
+          mustMatch = companyKws;
+        } else if (filterWords.length > 1) {
+          // Multiple non-company keywords: require ALL in each item
+          mustMatch = filterWords;
+        }
+        // Only filter if we have keywords to enforce
+        if (mustMatch) {
+          const filtered = items.filter(item => {
+            const il = item.toLowerCase();
+            return mustMatch.every(kw => il.includes(kw.toLowerCase()));
+          });
+          if (filtered.length === 0) {
+            reply = 'Maaf, tidak ditemukan tender yang cocok dengan semua kriteria: <strong>' + filterWords.join(', ') + '</strong>.';
+          } else {
+            reply = intro + filtered.join('') + ctaText;
+          }
         }
       }
     }
