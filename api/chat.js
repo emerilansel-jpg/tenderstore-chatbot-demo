@@ -217,8 +217,23 @@ export default async function handler(req, res) {
     while ((_mM = _mR.exec(_tdU)) !== null) _aM.push(_mM[1].trim());
     const companyKwsG = filterWords.filter(kw => _aM.some(ml => ml.includes(kw.toUpperCase())));
     const categoryKwsG = filterWords.filter(kw => !companyKwsG.includes(kw));
+    const _catNameMap = {
+      'marine':'Marine Transportation','kapal':'Marine Transportation','barge':'Marine Transportation',
+      'boat':'Marine Transportation','tug':'Marine Transportation','vessel':'Marine Transportation',
+      'lct':'Marine Transportation','crew':'Marine Transportation','harbour':'Marine Transportation',
+      'drilling':'Drilling Workover Well Service','bor':'Drilling Workover Well Service',
+      'rig':'Drilling Workover Well Service','workover':'Drilling Workover Well Service',
+      'pemboran':'Drilling Workover Well Service','wireline':'Drilling Workover Well Service',
+      'logging':'Drilling Workover Well Service','cementing':'Drilling Workover Well Service',
+      'seismik':'Seismic Geotechnic Geophysics','seismic':'Seismic Geotechnic Geophysics',
+      'geoteknik':'Seismic Geotechnic Geophysics','geotechnic':'Seismic Geotechnic Geophysics',
+      'it':'Computer dan IT','komputer':'Computer dan IT','server':'Computer dan IT',
+      'software':'Computer dan IT','network':'Computer dan IT','drc':'Computer dan IT',
+      'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power'
+    };
+    const _catNames = [...new Set(categoryKwsG.map(k => _catNameMap[k.toLowerCase()]).filter(Boolean))];
     const _cd = companyKwsG.length > 0 ? ' Perusahaan:[' + companyKwsG.join(',') + '].' : '';
-    const _kd = categoryKwsG.length > 0 ? ' Kategori:[' + categoryKwsG.join(',') + '].' : '';
+    const _kd = categoryKwsG.length > 0 ? ' Kategori:[' + categoryKwsG.join(',') + ']' + (_catNames.length > 0 ? ' (=' + _catNames.join('/') + ')' : '') + '.' : ''
     const keywordFilter = filterWords.length >= 1
       ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nKeyword:[' + filterWords.join(',') + '].' + _cd + _kd +
         '\n1. HANYA tampilkan tender cocok SEMUA kriteria (perusahaan DAN kategori sekaligus).' +
