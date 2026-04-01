@@ -232,22 +232,28 @@ export default async function handler(req, res) {
     ].join("\n");
     var msgs = history.map(function(h) { return { role: h.role, content: h.content }; });
     msgs.push({ role: "user", content: message });
+    // Pre-filter: skip intent AI for pure conversational messages
+    var _convFilter = ["iya","ya","yep","oke","ok","halo","hai","hi","he","terima","makasih","sip","siap","ngerti","paham","baik","bagus","jelas","betul","benar","mantap","wah","oh","ah","eh","hmm","yuk","dong","keren","top","wow"];
+    var _msgWords = message.toLowerCase().trim().split(/\s+/);
+    var _isConvOnly = _msgWords.every(function(w){return _convFilter.indexOf(w) !== -1;});
     var intent = { is_search: false, company: null, category: null };
-    try {
-      var raw = await callOR(iSys, msgs, apiKey);
-      var c = raw.trim().replace(/```[\s\S]*?```/g, "").trim();
-      var m = c.match(/\{[^{}]+\}/); if (m) c = m[0];
-      intent = JSON.parse(c);
-    } catch(e) {
-      // If parsing fails, try to determine intent from message keywords
-      var low = message.toLowerCase();
-      var searchKws = ["tender","cari","ada","lihat","tampil","show","list","drilling","marine","seismik","manpower","tndk","pertamina","pln","bp","medco"];
-      intent.is_search = searchKws.some(function(k) { return low.includes(k); });
+    if (!_isConvOnly) {
+      try {
+        var raw = await callOR(iSys, msgs, apiKey);
+        var c = raw.trim().replace(/```[\s\S]*?```/g, "").trim();
+        var m = c.match(/\{[^{}]+\}/); if (m) c = m[0];
+        intent = JSON.parse(c);
+      } catch(e) {
+        // If parsing fails, try to determine intent from message keywords
+        var low = message.toLowerCase();
+        var searchKws = ["tender","cari","ada","lihat","tampil","show","list","drilling","marine","seismik","manpower","tndk","pertamina","pln","bp","medco"];
+        intent.is_search = searchKws.some(function(k) { return low.includes(k); });
+      }
     }
     // Phase 2a: Conversational
     if (!intent.is_search) {
       var cSys = [
-        "Kamu adalah asisten AI untuk TenderStore.id — platform tender proyek Indonesia.",
+        "Kamu adalah asisten AI untuk TenderStore.id â platform tender proyek Indonesia.",
         "Perusahaan: PERTAMINA, PLN, BP, MEDCO, KALREZ, CNOOC, CHEVRON.",
         "Kategori: drilling, marine, IT/computer, manpower/TNDK, seismik.",
         "Jawab ramah dan singkat dalam Bahasa Indonesia.",
