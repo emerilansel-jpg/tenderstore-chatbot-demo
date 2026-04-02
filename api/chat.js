@@ -267,7 +267,7 @@ export default async function handler(req, res) {
       : _wantsContinuation
       ? '\n\n=== INSTRUKSI ===\nUser bertanya tentang tender lainnya. Tampilkan ULANG SEMUA tender untuk kategori ' + (_contCategory || 'yang sebelumnya dicari') + ' dalam NUMBERED LIST (1. 2. 3. dst). Mulai dari nomor 1. Abaikan history—tampilkan semua dari database. Jangan batasi jumlah. Jangan tambahkan kalimat tawaran seperti "apakah ingin melihat lainnya".'
       : filterWords.length >= 1
-      ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nFormat: NUMBERED LIST (1. 2. 3. dst), bukan bullet.\nKeyword:[' + filterWords.join(',') + '].' + _cd + _kd +
+      ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nKeyword:[' + filterWords.join(',') + '].' + _cd + _kd +
         '\n0. PENTING: ABAIKAN jumlah/daftar tender di bagian contoh jawaban atas. Selalu hitung ulang langsung dari TENDER_DATABASE dan tampilkan SEMUA tender yang cocok, jangan batasi.' +
         '\n1. HANYA tampilkan tender cocok SEMUA kriteria (perusahaan DAN kategori sekaligus).' +
         '\n2. marine PLN = Marine Transportation DAN milik PLN. Tidak ada? jawab tidak ditemukan.' +
