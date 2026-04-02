@@ -223,8 +223,8 @@ export default async function handler(req, res) {
     }
   }
     // CONTEXT RECOVERY: if filterWords empty (conversational), recover last search from history
-    if (filterWords.length === 0 && !_wantsAll && !_wantsCategories) {
-      const _msgHist = req.body.history || [];
+    if (filterWords.length === 0 && !_wantsAll && !_wantsCategories && !_wantsContinuation) {
+      const _msgHist = history || [];
       for (let _hi = _msgHist.length - 1; _hi >= 0; _hi--) {
         if (_msgHist[_hi].role === 'user') {
           const _hw = _msgHist[_hi].content.toLowerCase().split(/\s+/).map(w=>w.replace(/[^a-z0-9]/g,'')).filter(w=>w.length>2||preserveShort.includes(w));
