@@ -195,7 +195,8 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { message, history = [] } = req.body;
+  const { message } = req.body;
+    const history = req.body.history || req.body.conversationHistory || [];
   if (!message) return res.status(400).json({ error: 'Message required' });
 
   
@@ -208,10 +209,10 @@ export default async function handler(req, res) {
     let filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
     const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
-  const _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && (conversationHistory||[]).length > 0 && filterWords.length === 0;
+  const _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
   let _contCategory = '';
   if (_wantsContinuation) {
-    const lastAsst = [...(conversationHistory||[])].reverse().find(m => m.role === 'assistant');
+    const lastAsst = [...history].reverse().find(m => m.role === 'assistant');
     if (lastAsst) {
       const h = lastAsst.content.toLowerCase();
       if (h.includes('drilling') || h.includes('pemboran') || h.includes('rig')) _contCategory = 'drilling';
