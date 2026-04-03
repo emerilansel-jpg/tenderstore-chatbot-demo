@@ -207,8 +207,6 @@ export default async function handler(req, res) {
         const preserveShort = ['it', 'ip'];
     const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
     let filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
-  const _synMap = {'geofisika':'seismic','geofisik':'seismic','seismik':'seismic','geoteknik':'geotechnic','barge':'marine','crewboat':'marine'};
-  filterWords.forEach(w => { const s = _synMap[w.toLowerCase()]; if (s && !filterWords.includes(s)) filterWords.push(s); });
     const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
@@ -265,7 +263,7 @@ export default async function handler(req, res) {
       : _wantsAll
       ? '\n\n=== INSTRUKSI ===\nUser ingin melihat SEMUA tender. Tampilkan seluruh tender dalam database diurutkan per kategori. Jangan filter perusahaan atau kategori apapun.'
       : _wantsContinuation
-      ? '\n\n=== INSTRUKSI ===\nUser bertanya tentang tender lainnya. Tampilkan ULANG SEMUA tender untuk kategori ' + (_contCategory || 'yang sebelumnya dicari') + ' dalam NUMBERED LIST (1. 2. 3. dst). Mulai dari nomor 1. Abaikan history—tampilkan semua dari database. Jangan batasi jumlah. Jangan tambahkan kalimat tawaran seperti "apakah ingin melihat lainnya".'
+      ? '\n\n=== INSTRUKSI ===\nUser bertanya tentang tender lainnya. Tampilkan SEMUA tender untuk kategori ' + (_contCategory || 'yang sebelumnya dicari') + '. Jangan batasi jumlah tender. Jangan tambahkan kalimat tawaran seperti "apakah ingin melihat lainnya".'
       : filterWords.length >= 1
       ? '\n\n=== INSTRUKSI FILTER WAJIB ===\nKeyword:[' + filterWords.join(',') + '].' + _cd + _kd +
         '\n0. PENTING: ABAIKAN jumlah/daftar tender di bagian contoh jawaban atas. Selalu hitung ulang langsung dari TENDER_DATABASE dan tampilkan SEMUA tender yang cocok, jangan batasi.' +
