@@ -11,7 +11,7 @@ Ya, ada tender dengan nilai lebih dari 20 Miliar:<br><br><ol class="reply-list">
 
 PERTANYAAN 5: Apakah ada tender Pertamina? / tender pertamina?
 JAWABAN WAJIB:
-Iya, ada beberapa tender Pertamina:<br><br><ol class="reply-list"><li><strong>Sewa Perangkat Komputer Dan Server</strong><br>Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS<br>Kategori: Computer & IT</li><li><strong>Provision of Swamp Barge No.1</strong><br>Milik: PT PERTAMINA HULU MAHAKAM<br>Kategori: Marine Transportation</li><li><strong>Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat</strong><br>Milik: PERTAMINA EP<br>Kategori: Man Power</li><li><strong>Jasa Penyediaan Dan Pengoperasian 1 Unit Rig Kapasitas 350 Hp</strong><br>Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI<br>Kategori: Drilling</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 Hp</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE<br>Kategori: Drilling</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah anda ingin melanjutkan melihat detail tender tersebut?</span>
+Iya, ada beberapa tender Pertamina:<br><br><ol class="reply-list"><li><strong>Sewa Perhangkat Komputer Dan Server</strong><br>Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS<br>Kategori: Computer & IT</li><li><strong>Provision of Swamp Barge No.1</strong><br>Milik: PT PERTAMINA HULU MAHAKAM<br>Kategori: Marine Transportation</li><li><strong>Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat</strong><br>Milik: PERTAMINA EP<br>Kategori: Man Power</li><li><strong>Jasa Penyediaan Dan Pengoperasian 1 Unit Rig Kapasitas 350 Hp</strong><br>Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI<br>Kategori: Drilling</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 Hp</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE<br>Kategori: Drilling</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah anda ingin melanjutkan melihat detail tender tersebut?</span>
 `;
 
 const TENDER_DATABASE = `
@@ -286,7 +286,7 @@ const messages = [
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer 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`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
