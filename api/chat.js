@@ -283,14 +283,14 @@ const messages = [
   ];
 
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-70b-instruct',
+        model: 'llama-3.1-70b-versatile',
         messages,
         max_tokens: 1500,
         temperature: 0.1
