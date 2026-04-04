@@ -300,7 +300,9 @@ const messages = [
 
     const data = await response.json();
     if (!response.ok) {
-      return res.status(500).json({ reply: 'Maaf, terjadi kesalahan. Silakan hubungi tim kami di WhatsApp 0812-8224-8240.' });
+      const errBody = await response.text();
+      console.error('Groq API error:', response.status, errBody);
+      return res.status(500).json({ reply: 'Groq error ' + response.status + ': ' + errBody.substring(0, 200) });
     }
 
     let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
@@ -428,6 +430,7 @@ const messages = [
     }
     return res.status(200).json({ reply });
   } catch (err) {
-    return res.status(500).json({ reply: 'Maaf, terjadi gangguan. Silakan hubungi WhatsApp 0812-8224-8240.' });
+    console.error('Handler error:', err.message, err.stack);
+    return res.status(500).json({ reply: 'Handler error: ' + err.message });
   }
 }
