@@ -1,4 +1,4 @@
-const EXACT_QA = `
+hopenrouter.io/api/v1/chat/completions   const EXACT_QA = `
 === JAWABAN WAJIB YANG HARUS DIGUNAKAN PERSIS (IKUTI FORMAT INI) ===
 
 PERTANYAAN 3: Ada tender apa saja hari ini? / semua tender / tender apa saja?
