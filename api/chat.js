@@ -300,9 +300,8 @@ const messages = [
 
     const data = await response.json();
     if (!response.ok) {
-      const errBody = await response.text();
-      console.error('Groq API error:', response.status, errBody);
-      return res.status(500).json({ reply: 'Groq error ' + response.status + ': ' + errBody.substring(0, 200) });
+      console.error('Groq API error:', response.status, JSON.stringify(data));
+      return res.status(500).json({ reply: 'Groq error ' + response.status + ': ' + JSON.stringify(data).substring(0, 200) });
     }
 
     let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
