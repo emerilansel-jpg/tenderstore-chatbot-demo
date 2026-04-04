@@ -291,9 +291,9 @@ const messages = [
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'llama-3.1-8b-instant',
         messages,
-        max_tokens: 800,
+        max_tokens: 500,
         temperature: 0.1
       })
     });
