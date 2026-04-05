@@ -284,26 +284,64 @@ const messages = [
   ];
 
   try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer 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`,
-        'Content-Type': 'application/json'
+    // === MULTI-PROVIDER: Gemini (primary) -> Groq (fallback) ===
+    const PROVIDERS = [
+      {
+        name: 'Gemini',
+        url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
+        key: process.env.GEMINI_API_KEY || '',
+        model: 'gemini-2.0-flash',
+        max_tokens: 800,
+        temperature: 0.1
       },
-      body: JSON.stringify({
+      {
+        name: 'Groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        key: process.env.GROQ_API_KEY || '',
         model: 'llama-3.1-8b-instant',
-        messages,
         max_tokens: 500,
         temperature: 0.1
-      })
-    });
+      }
+    ];
 
-    const data = await response.json();
-    if (!response.ok) {
-      console.error('Groq API error:', response.status, JSON.stringify(data));
-      return res.status(500).json({ reply: 'Groq error ' + response.status + ': ' + JSON.stringify(data).substring(0, 200) });
+    let lastError = null;
+    let data = null;
+
+    for (const provider of PROVIDERS) {
+      if (!provider.key) { lastError = provider.name + ': no API key'; continue; }
+      try {
+        const response = await fetch(provider.url, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer ' + provider.key,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            model: provider.model,
+            messages,
+            max_tokens: provider.max_tokens,
+            temperature: provider.temperature
+          })
+        });
+        const d = await response.json();
+        if (!response.ok) {
+          console.error(provider.name + ' error:', response.status);
+          lastError = provider.name + ' error ' + response.status;
+          continue;
+        }
+        if (d.choices && d.choices[0] && d.choices[0].message) {
+          data = d;
+          break;
+        }
+      } catch (providerErr) {
+        lastError = provider.name + ': ' + providerErr.message;
+        continue;
+      }
     }
 
+    if (!data) {
+      return res.status(500).json({ reply: 'Semua provider sedang bermasalah. ' + (lastError || '') });
+    }
     let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
 
     // Safety net: paksa konversi markdown ke HTML
@@ -411,7 +449,7 @@ const messages = [
                   }
                   const _el2=(_ce.cat+' '+_ce.nama+' '+_ce.milik).toLowerCase();
                   const _ml2=_ce.milik.toLowerCase();
-                  if(_cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kw+'\\b','i').test(_ml2);}catch(e){return _ml2.includes(kw.toLowerCase());}})){
+                  if(_cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kwh+'\\b','i').test(_ml2);}catch(e){return _ml2.includes(kw.toLowerCase());}})){
                     if(_kKws.length===0||_kKws.every(kw=>{const ts=expandCategory(kw);return ts.some(t=>{try{return new RegExp(t,'i').test(_el2);}catch(e){return _el2.includes(t);}});}))_db2.push({..._ce});
                   }
                   _ce=null;
