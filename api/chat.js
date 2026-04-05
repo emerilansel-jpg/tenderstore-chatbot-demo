@@ -290,7 +290,7 @@ const messages = [
         name: 'Gemini',
         url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
         key: process.env.GEMINI_API_KEY || '',
-        model: 'gemini-2.0-flash',
+        model: 'gemini-2.5-flash',
         max_tokens: 800,
         temperature: 0.1
       },
