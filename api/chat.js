@@ -180,7 +180,7 @@ function expandCategory(kw){
     'marine':['marine','kapal','barge','boat','tug','lct','crew','utility','harbour','swamp','vessel'],
     'kapal':['kapal','barge','boat','tug','lct','vessel','marine','harbour'],
     'barge':['barge','swamp'],'boat':['boat','crew','utility'],'tug':['tug','harbour'],'lct':['lct','landing craft'],
-    'drilling':['drilling','workover','rig','bor','pemboran','sumuran','wireline','logging','penyemenan','cementing'],
+    'drilling':['drilling','workover','rig','bor','pemboran','sumuran','wireline','logging','penyemenan','cementing','cement','artificial','submersible','pump','esp','stimulasi','well service','perforation'],
     'bor':['bor','pemboran','drilling','rig'],'pemboran':['pemboran','bor','drilling','rig','wireline','logging','cementing'],'vessel':['vessel','marine','kapal','barge','lct','swamp','tug'],'rig':['rig','drilling','workover'],'workover':['workover','drilling','rig'],
     'seismik':['seismik','seismic','survei'],'seismic':['seismic','seismik','survei'],
     'geoteknik':['geoteknik','geotechnic'],'geotechnic':['geotechnic','geoteknik'],
