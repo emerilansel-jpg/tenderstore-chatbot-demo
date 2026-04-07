@@ -531,7 +531,11 @@ const messages = [
               }
               if (_db2.length > 0) {
                 const _cl2=_cKws.length>0?' dari <strong>'+_cKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
-                reply='Ya, ada tender'+_cl2+':<br><br><ol class="reply-list">'+_db2.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+'</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>';
+        if (_wantsCount && _db2.length > 3) {
+          reply = 'Total ada <strong>' + _db2.length + ' tender</strong>' + _cl2 + '. Berikut 3 contoh:<br><br><ol class="reply-list">' + _db2.slice(0,3).join('') + '</ol><br>Ketik <strong>"lihat semua"</strong> untuk melihat daftar lengkap.' + ctaText;
+        } else {
+          reply='Ya, ada tender'+_cl2+':<br><br><ol class="reply-list">'+_db2.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+'</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>';
+        }
               } else {
                 const cD=_cKws.length>0?' dari <strong>'+_cKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
                 const kD=_kKws.length>0?' kategori <strong>'+_kKws.join(', ')+'</strong>':'';
