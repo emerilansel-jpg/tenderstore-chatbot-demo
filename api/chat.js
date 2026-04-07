@@ -486,6 +486,23 @@ const messages = [
                 const cD=_cKws.length>0?' dari <strong>'+_cKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
                 const kD=_kKws.length>0?' kategori <strong>'+_kKws.join(', ')+'</strong>':'';
                 reply='Maaf, tidak ditemukan tender'+kD+cD+' dalam database kami.';
+
+        // === SUGGESTION BUTTONS (when no results found) ===
+        const _suggestBtns = [
+          ['Drilling & Workover','tender drilling'],
+          ['Seismik & Geofisika','tender seismik'],
+          ['Komputer & IT','tender komputer IT'],
+          ['Marine Transportation','tender marine transportation'],
+          ['ManPower & Outsourcing','tender manpower'],
+          ['Nilai > 20 Miliar','Ada tender nilainya > 20 miliar?'],
+          ['Semua Tender','Ada tender apa saja hari ini?']
+        ];
+        let _sgHtml = '<br><br><b>Mungkin yang Anda cari?</b><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;">';
+        _suggestBtns.forEach(([label, query]) => {
+          _sgHtml += '<button onclick="quickAsk(\'' + query.replace(/'/g,"\\'") + '\')" style="background:#2563eb;color:#fff;border:none;border-radius:20px;padding:8px 16px;cursor:pointer;font-size:13px;">' + label + '</button>';
+        });
+        _sgHtml += '</div>';
+        reply += _sgHtml;
               }
             }
     }
