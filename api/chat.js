@@ -222,12 +222,22 @@ export default async function handler(req, res) {
     }
     if (_valTenders.length > 0) {
       _valTenders.sort((a,b) => b.val - a.val);
-      let _vReply = 'Ya, ada ' + _valTenders.length + ' tender dengan nilai lebih dari ' + _threshold + ' Miliar:<br><br><ol class="reply-list">';
-      _valTenders.forEach(t => {
-        _vReply += '<li><strong>' + t.name + '</strong><br>Milik: ' + t.milik + ' | Nilai: Rp ' + t.val + ' M | Closing: ' + t.close + ' | Lokasi: ' + t.lok + '</li>';
-      });
-      _vReply += '</ol>';
-      return res.status(200).json({ reply: _vReply });
+      if (_wantsCount && _valTenders.length > 3) {
+        const _sample = _valTenders.slice(0,3);
+        let _vReply = 'Total ada <strong>' + _valTenders.length + ' tender</strong> dengan nilai lebih dari ' + _threshold + ' Miliar. Berikut 3 contoh:<br><br><ol class="reply-list">';
+        _sample.forEach(t => {
+          _vReply += '<li><strong>' + t.name + '</strong><br>Milik: ' + t.milik + ' | Nilai: Rp ' + t.val + ' M | Closing: ' + t.close + ' | Lokasi: ' + t.lok + '</li>';
+        });
+        _vReply += '</ol><br>Ketik <strong>"lihat semua tender nilai > ' + _threshold + ' miliar"</strong> untuk daftar lengkap.';
+        return res.status(200).json({ reply: _vReply });
+      } else {
+        let _vReply = 'Ya, ada ' + _valTenders.length + ' tender dengan nilai lebih dari ' + _threshold + ' Miliar:<br><br><ol class="reply-list">';
+        _valTenders.forEach(t => {
+          _vReply += '<li><strong>' + t.name + '</strong><br>Milik: ' + t.milik + ' | Nilai: Rp ' + t.val + ' M | Closing: ' + t.close + ' | Lokasi: ' + t.lok + '</li>';
+        });
+        _vReply += '</ol>';
+        return res.status(200).json({ reply: _vReply });
+      }
     }
   }
 
@@ -242,6 +252,7 @@ export default async function handler(req, res) {
     const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
+  const _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
   let _contCategory = '';
   if (_wantsContinuation) {
     const lastAsst = [...history].reverse().find(m => m.role === 'assistant');
@@ -386,6 +397,7 @@ const messages = [
         }
         if (d.choices && d.choices[0] && d.choices[0].message) {
           data = d;
+          var _finishReason = (d.choices[0] && d.choices[0].finish_reason) || 'stop';
           break;
         }
       } catch (providerErr) {
@@ -398,6 +410,9 @@ const messages = [
       return res.status(500).json({ reply: 'Semua provider sedang bermasalah. ' + (lastError || '') });
     }
     let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
+    if (typeof _finishReason !== 'undefined' && _finishReason === 'length') {
+      reply += '<br><br><em>\u26A0\uFE0F Jawaban terpotong karena terlalu panjang. Ketik <strong>"lanjutkan"</strong> untuk melihat sisanya.</em>';
+    }
 
     // Safety net: paksa konversi markdown ke HTML
     reply = reply
@@ -482,7 +497,11 @@ const messages = [
         const _stdIntro = _count === 1
           ? 'Ya, ada 1 tender' + _kLabel + _cLabel + ':<br><br>'
           : 'Ya, ada ' + _count + ' tender' + _kLabel + _cLabel + ':<br><br>';
-        reply = _stdIntro + '<ol class="reply-list">' + filtered.join('') + '</ol>' + ctaText;
+              if (_wantsCount && _count > 3) {
+                reply = 'Total ada <strong>' + _count + ' tender</strong>' + _kLabel + _cLabel + '. Berikut 3 contoh:<br><br><ol class="reply-list">' + filtered.slice(0,3).join('') + '</ol><br>Ketik <strong>"lihat semua"</strong> untuk melihat daftar lengkap.' + ctaText;
+              } else {
+                reply = _stdIntro + '<ol class="reply-list">' + filtered.join('') + '</ol>' + ctaText;
+              }
       }
               else { _dbNeeded = true; }
             } else { _dbNeeded = true; }
