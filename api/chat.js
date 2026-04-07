@@ -497,8 +497,8 @@ const messages = [
         const _stdIntro = _count === 1
           ? 'Ya, ada 1 tender' + _kLabel + _cLabel + ':<br><br>'
           : 'Ya, ada ' + _count + ' tender' + _kLabel + _cLabel + ':<br><br>';
-              if (_wantsCount && _count > 3) {
-                reply = 'Total ada <strong>' + _count + ' tender</strong>' + _kLabel + _cLabel + '. Berikut 3 contoh:<br><br><ol class="reply-list">' + filtered.slice(0,3).join('') + '</ol><br>Ketik <strong>"lihat semua"</strong> untuk melihat daftar lengkap.' + ctaText;
+              if (_wantsCount) {
+                        _dbNeeded = true;
               } else {
                 reply = _stdIntro + '<ol class="reply-list">' + filtered.join('') + '</ol>' + ctaText;
               }
