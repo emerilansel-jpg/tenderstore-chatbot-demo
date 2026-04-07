@@ -284,7 +284,7 @@ const messages = [
   ];
 
   try {
-    // === MULTI-PROVIDER: Gemini (primary) -> Groq (fallback) ===
+    // === MULTI-PROVIDER: Gemini (primary) -> OpenRouter fallbacks ===
     const PROVIDERS = [
       {
         name: 'Gemini',
@@ -295,11 +295,35 @@ const messages = [
         temperature: 0.1
       },
       {
-        name: 'Groq',
-        url: 'https://api.groq.com/openai/v1/chat/completions',
-        key: process.env.GROQ_API_KEY || '',
-        model: 'llama-3.1-8b-instant',
-        max_tokens: 800,
+        name: 'Qwen 3.6 Plus',
+        url: 'https://openrouter.ai/api/v1/chat/completions',
+        key: process.env.OPENROUTER_API_KEY || '',
+        model: 'qwen/qwen3.6-plus-preview:free',
+        max_tokens: 3000,
+        temperature: 0.1
+      },
+      {
+        name: 'Nemotron 3 Super',
+        url: 'https://openrouter.ai/api/v1/chat/completions',
+        key: process.env.OPENROUTER_API_KEY || '',
+        model: 'nvidia/nemotron-3-super-120b-a12b:free',
+        max_tokens: 3000,
+        temperature: 0.1
+      },
+      {
+        name: 'Step 3.5 Flash',
+        url: 'https://openrouter.ai/api/v1/chat/completions',
+        key: process.env.OPENROUTER_API_KEY || '',
+        model: 'stepfun/step-3.5-flash:free',
+        max_tokens: 3000,
+        temperature: 0.1
+      },
+      {
+        name: 'Trinity Large',
+        url: 'https://openrouter.ai/api/v1/chat/completions',
+        key: process.env.OPENROUTER_API_KEY || '',
+        model: 'arcee-ai/trinity-large-preview:free',
+        max_tokens: 3000,
         temperature: 0.1
       }
     ];
