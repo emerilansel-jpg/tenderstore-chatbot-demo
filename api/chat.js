@@ -200,6 +200,37 @@ export default async function handler(req, res) {
     const history = req.body.history || req.body.conversationHistory || [];
   if (!message) return res.status(400).json({ error: 'Message required' });
 
+  // === DIRECT VALUE FILTER (bypass LLM for nilai/miliar queries) ===
+  const _vqMatch = message.match(/(\d+)\s*(miliar|milyar)/i);
+  if (_vqMatch || /miliar|milyar/i.test(message)) {
+    const _threshold = _vqMatch ? parseInt(_vqMatch[1]) : 20;
+    const _dbLines = TENDER_DATABASE.split('\n');
+    const _valTenders = [];
+    for (let _vi = 0; _vi < _dbLines.length; _vi++) {
+      const _vm = _dbLines[_vi].match(/Nilai: Rp (\d+\.?\d*) M/);
+      if (_vm && parseFloat(_vm[1]) > _threshold) {
+        const _nm = _dbLines[_vi-1] ? _dbLines[_vi-1].match(/Nama: (.+)/) : null;
+        const _tName = _nm ? _nm[1].trim() : '';
+        const _mkM = _dbLines[_vi].match(/Milik: ([^|]+)/);
+        const _milik = _mkM ? _mkM[1].trim() : '';
+        const _clM = _dbLines[_vi].match(/Closing: ([^|]+)/);
+        const _close = _clM ? _clM[1].trim() : '';
+        const _lkM = _dbLines[_vi].match(/Lokasi: (.+)/);
+        const _lok = _lkM ? _lkM[1].trim() : '';
+        _valTenders.push({name:_tName, val:parseFloat(_vm[1]), milik:_milik, close:_close, lok:_lok});
+      }
+    }
+    if (_valTenders.length > 0) {
+      _valTenders.sort((a,b) => b.val - a.val);
+      let _vReply = 'Ya, ada ' + _valTenders.length + ' tender dengan nilai lebih dari ' + _threshold + ' Miliar:<br><br><ol class="reply-list">';
+      _valTenders.forEach(t => {
+        _vReply += '<li><strong>' + t.name + '</strong><br>Milik: ' + t.milik + ' | Nilai: Rp ' + t.val + ' M | Closing: ' + t.close + ' | Lokasi: ' + t.lok + '</li>';
+      });
+      _vReply += '</ol>';
+      return res.status(200).json({ reply: _vReply });
+    }
+  }
+
   
     // Dynamic keyword filter - extract user keywords and enforce strict AND matching
     const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about','punya','berikan','kasih',
