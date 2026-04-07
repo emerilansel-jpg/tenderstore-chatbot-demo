@@ -523,7 +523,7 @@ const messages = [
                   }
                   const _el2=(_ce.cat+' '+_ce.nama+' '+_ce.milik).toLowerCase();
                   const _ml2=_ce.milik.toLowerCase();
-                  if(_cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kwh+'\\b','i').test(_ml2);}catch(e){return _ml2.includes(kw.toLowerCase());}})){
+                  if(_cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kwh+'\\b','i').test(_el2);}catch(e){return _ml2.includes(kw.toLowerCase());}})){
                     if(_kKws.length===0||_kKws.every(kw=>{const ts=expandCategory(kw);return ts.some(t=>{try{return new RegExp(t,'i').test(_el2);}catch(e){return _el2.includes(t);}});}))_db2.push({..._ce});
                   }
                   _ce=null;
