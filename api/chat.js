@@ -291,7 +291,7 @@ const messages = [
         url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
         key: process.env.GEMINI_API_KEY || '',
         model: 'gemini-2.5-flash',
-        max_tokens: 800,
+        max_tokens: 3000,
         temperature: 0.1
       },
       {
@@ -299,7 +299,7 @@ const messages = [
         url: 'https://api.groq.com/openai/v1/chat/completions',
         key: process.env.GROQ_API_KEY || '',
         model: 'llama-3.1-8b-instant',
-        max_tokens: 500,
+        max_tokens: 1500,
         temperature: 0.1
       }
     ];
