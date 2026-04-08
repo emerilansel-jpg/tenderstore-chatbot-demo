@@ -352,7 +352,7 @@ export default async function handler(req, res) {
           }
           const _el = (_ce.cat+' '+_ce.nama+' '+_ce.milik).toLowerCase();
           const compOk = companyKwsG.length===0 || companyKwsG.every(kw => { try { return new RegExp('\\b'+kw+'\\b','i').test(_el); } catch(e) { return _el.includes(kw.toLowerCase()); }});
-          const catOk = categoryKwsG.length===0 || categoryKwsG.every(kw => { const ts=expandCategory(kw); return ts.some(t => { try { return new RegExp(t,'i').test(_el); } catch(e) { return _el.includes(t); }});});
+          const catOk = categoryKwsG.length===0 || categoryKwsG.every(kw => { const mc=(_catNameMap[kw]||'').toLowerCase(); if(mc) return _ce.cat===mc; return expandCategory(kw).some(t => { try { return new RegExp(t,'i').test(_ce.cat); } catch(e) { return _ce.cat.includes(t); } }); });
           if (compOk && catOk) _dbItems.push({..._ce});
           _ce = null;
         }
