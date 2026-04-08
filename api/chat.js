@@ -333,7 +333,47 @@ export default async function handler(req, res) {
         '\n7. PENTING: Tampilkan SEMUA tender yang cocok tanpa membatasi jumlah.' +
         '\n8. JANGAN tambahkan kalimat tawaran seperti \'apakah ingin melihat lainnya\' atau \'mau saya tampilkan lebih banyak\'. Tampilkan semuanya langsung.'
       : '';
-const messages = [
+// === DB-DIRECT: Bypass LLM for category/company queries ===
+    if (companyKwsG.length > 0 || categoryKwsG.length > 0) {
+      const _ln = TENDER_DATABASE.split('\n');
+      let _dc = ''; const _dbItems = []; let _ce = null;
+      for (const _l of _ln) {
+        const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
+        if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
+        const _nm = _l.match(/^\d+\.\s+Nama:\s*(.+)/i);
+        if (_nm) { _ce = {nama:_nm[1].trim(), cat:_dc, milik:'', nilai:'', closing:'', lokasi:''}; continue; }
+        if (_ce && _l.includes('Milik:')) {
+          const _ps = _l.split('|').map(s=>s.trim());
+          _ce.milik = (_ps[0].match(/Milik:\s*(.+)/i)||[])[1]||'';
+          for(const _p of _ps){
+            if(_p.match(/^Nilai:/i)) _ce.nilai=_p.replace(/^Nilai:\s*/i,'');
+            if(_p.match(/^Closing:/i)) _ce.closing=_p.replace(/^Closing:\s*/i,'');
+            if(_p.match(/^Lokasi:/i)) _ce.lokasi=_p.replace(/^Lokasi:\s*/i,'');
+          }
+          const _el = (_ce.cat+' '+_ce.nama+' '+_ce.milik).toLowerCase();
+          const compOk = companyKwsG.length===0 || companyKwsG.every(kw => { try { return new RegExp('\\b'+kw+'\\b','i').test(_el); } catch(e) { return _el.includes(kw.toLowerCase()); }});
+          const catOk = categoryKwsG.length===0 || categoryKwsG.every(kw => { const ts=expandCategory(kw); return ts.some(t => { try { return new RegExp(t,'i').test(_el); } catch(e) { return _el.includes(t); }});});
+          if (compOk && catOk) _dbItems.push({..._ce});
+          _ce = null;
+        }
+      }
+      if (_dbItems.length > 0) {
+        const _cL = companyKwsG.length>0 ? ' dari <strong>'+companyKwsG.map(k=>k.toUpperCase()).join('/')+'</strong>' : '';
+        const _kL = categoryKwsG.length>0 ? ' kategori <strong>'+categoryKwsG.map(k=>k.charAt(0).toUpperCase()+k.slice(1)).join('/')+'</strong>' : '';
+        if (_wantsCount && _dbItems.length > 3) {
+          return res.json({ reply: 'Total ada <strong>' + _dbItems.length + ' tender</strong>'+_cL+_kL+'. Berikut 3 contoh:<br><br><ol class="reply-list">' + _dbItems.slice(0,3).map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('') + '</ol><br>Ketik <strong>"'+( categoryKwsG.length > 0 ? 'tender '+categoryKwsG[0] : companyKwsG.length > 0 ? 'tender '+companyKwsG[0] : 'lihat semua')+'"</strong> untuk melihat daftar lengkap.' });
+        } else {
+          return res.json({ reply: 'Ya, ada '+_dbItems.length+' tender'+_cL+_kL+':<br><br><ol class="reply-list">'+_dbItems.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+'</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>' });
+        }
+      } else {
+        const cD=companyKwsG.length>0?' dari <strong>'+companyKwsG.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
+        const kD=categoryKwsG.length>0?' kategori <strong>'+categoryKwsG.join(', ')+'</strong>':'';
+        return res.json({ reply: 'Maaf, tidak ditemukan tender'+kD+cD+' dalam database kami.<br><br><span style="color:#93c5fd;font-style:italic;">Coba ketik kategori lain: drilling, marine, IT, seismic, atau man power.</span>' });
+      }
+    }
+    // === END DB-DIRECT ===
+
+    const messages = [
     { role: 'system', content: SYSTEM_PROMPT + keywordFilter },
     ...history.slice(-6).filter(m => m.role && m.content),
     { role: 'user', content: message }
