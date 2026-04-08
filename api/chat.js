@@ -505,7 +505,7 @@ const messages = [
         const _stdIntro = _count === 1
           ? 'Ya, ada 1 tender' + _kLabel + _cLabel + ':<br><br>'
           : 'Ya, ada ' + _count + ' tender' + _kLabel + _cLabel + ':<br><br>';
-              if (_wantsCount || _cKws.length > 0) {
+              if (_wantsCount || _cKws.length > 0 || _kKws.length > 0) {
                         _dbNeeded = true;
               } else {
                 reply = _stdIntro + '<ol class="reply-list">' + filtered.join('') + '</ol>' + ctaText;
@@ -540,7 +540,7 @@ const messages = [
               if (_db2.length > 0) {
                 const _cl2=_cKws.length>0?' dari <strong>'+_cKws.map(k=>k.toUpperCase()).join('/')+'</strong>':'';
         if (_wantsCount && _db2.length > 3) {
-          reply = 'Total ada <strong>' + _db2.length + ' tender</strong>' + _cl2 + '. Berikut 3 contoh:<br><br><ol class="reply-list">' + _db2.slice(0,3).map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('') + '</ol><br>Ketik <strong>"lihat semua"</strong> untuk melihat daftar lengkap.' + ctaText;
+          reply = 'Total ada <strong>' + _db2.length + ' tender</strong>' + _cl2 + '. Berikut 3 contoh:<br><br><ol class="reply-list">' + _db2.slice(0,3).map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('') + '</ol><br>Ketik <strong>"' + (_kKws.length > 0 ? 'tender ' + _kKws[0] : _cKws.length > 0 ? 'tender ' + _cKws[0] : 'lihat semua') + '"</strong> untuk melihat daftar lengkap.' + ctaText;
         } else {
           reply='Ya, ada tender'+_cl2+':<br><br><ol class="reply-list">'+_db2.map(f=>'<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>').join('')+'</ol><br><span style="color:#93c5fd;font-style:italic;">Apakah ada yang ingin Anda tanyakan lebih lanjut?</span>';
         }
