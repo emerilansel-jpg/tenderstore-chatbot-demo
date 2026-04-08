@@ -373,6 +373,7 @@ const messages = [
     let lastError = null;
     let data = null;
 
+    const PROVIDER_TIMEOUT = 8000;
     for (const provider of PROVIDERS) {
       if (!provider.key) { lastError = provider.name + ': no API key'; continue; }
       try {
