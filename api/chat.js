@@ -376,6 +376,8 @@ const messages = [
     for (const provider of PROVIDERS) {
       if (!provider.key) { lastError = provider.name + ': no API key'; continue; }
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), PROVIDER_TIMEOUT);
         const response = await fetch(provider.url, {
           method: 'POST',
           headers: {
@@ -387,8 +389,10 @@ const messages = [
             messages,
             max_tokens: provider.max_tokens,
             temperature: provider.temperature
-          })
+          }),
+          signal: controller.signal
         });
+        clearTimeout(timeoutId);
         const d = await response.json();
         if (!response.ok) {
           console.error(provider.name + ' error:', response.status);
@@ -398,10 +402,13 @@ const messages = [
         if (d.choices && d.choices[0] && d.choices[0].message) {
           data = d;
           var _finishReason = (d.choices[0] && d.choices[0].finish_reason) || 'stop';
+          console.log('Success with ' + provider.name);
           break;
         }
       } catch (providerErr) {
-        lastError = provider.name + ': ' + providerErr.message;
+        const isTimeout = providerErr.name === 'AbortError';
+        lastError = provider.name + (isTimeout ? ': timeout ' + PROVIDER_TIMEOUT + 'ms' : ': ' + providerErr.message);
+        console.log(lastError + ' \u2014 trying next provider...');
         continue;
       }
     }
@@ -497,7 +504,7 @@ const messages = [
         const _stdIntro = _count === 1
           ? 'Ya, ada 1 tender' + _kLabel + _cLabel + ':<br><br>'
           : 'Ya, ada ' + _count + ' tender' + _kLabel + _cLabel + ':<br><br>';
-              if (_wantsCount) {
+              if (_wantsCount || _cKws.length > 0) {
                         _dbNeeded = true;
               } else {
                 reply = _stdIntro + '<ol class="reply-list">' + filtered.join('') + '</ol>' + ctaText;
