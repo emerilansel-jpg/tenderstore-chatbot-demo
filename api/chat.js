@@ -96,23 +96,26 @@ const TENDER_DATABASE = `
 25. Nama: Rental Of Utility Boat to Support PHE OSES
     Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: Rp 19 M | Closing: 10-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
 
+26. Nama: Invitation to Bid & Term of Reference (TOR) Time Charter Vessel Procurement 1 (one) Unit MR-WO/Intermedia Laycan 10-11 Februari 2026
+    Milik: PERTAMINA (PERSERO) PUSAT | Nilai: Rp 10 M | Closing: 19-Jan-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
+
 --- KATEGORI: Man Power General Labour Outsourcing ---
-26. Nama: Penyediaan Jasa Tenaga Kerja Penunjang Untuk Membantu Pekerjaan Administrasi Wilayah Kerja PT Pertamina EP Pangkalan Susu Field
+27. Nama: Penyediaan Jasa Tenaga Kerja Penunjang Untuk Membantu Pekerjaan Administrasi Wilayah Kerja PT Pertamina EP Pangkalan Susu Field
     Milik: PERTAMINA EP | Nilai: Rp 10 M | Closing: 01-Apr-2026 | Lokasi: Kotabaru - Kalimantan Selatan
 
-27. Nama: Pekerjaan Pelaksanaan Kegiatan Penunjang Administrasi Tata Naskah Dinas Dan Kearsipan (TNDK) PT PLN (Persero) Unit Induk Distribusi Bali
+28. Nama: Pekerjaan Pelaksanaan Kegiatan Penunjang Administrasi Tata Naskah Dinas Dan Kearsipan (TNDK) PT PLN (Persero) Unit Induk Distribusi Bali
     Milik: PLN (PERSERO) DISTRIBUSI BALI | Nilai: Rp 5 M | Closing: 30-Mar-2026 | Lokasi: Denpasar - Bali
 
-28. Nama: Open Sourcing - Pengadaan Marketing Agency Pt Garuda Indonesia (Persero) Tbk
+29. Nama: Open Sourcing - Pengadaan Marketing Agency Pt Garuda Indonesia (Persero) Tbk
     Milik: PT GARUDA INDONESIA | Nilai: Rp 15 M | Closing: 27-Mar-2026 | Lokasi: Tangerang - Banten
 
-29. Nama: Tangguh Total Resources Management (TRM) - Business Support Services
+30. Nama: Tangguh Total Resources Management (TRM) - Business Support Services
     Milik: BP BERAU LTD | Nilai: Rp 18 M | Closing: 02-Apr-2026 | Lokasi: Teluk Bintuni - Papua Barat
 
-30. Nama: Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat Dan Angkutan Ringan Selama 24 Bulan Di PT Pertamina EP Zona 1 Field Rantau
+31. Nama: Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat Dan Angkutan Ringan Selama 24 Bulan Di PT Pertamina EP Zona 1 Field Rantau
     Milik: PERTAMINA EP | Nilai: Rp 8 M | Closing: 27-Mar-2026 | Lokasi: Kotabaru - Kalimantan Selatan
 
-31. Nama: Pengadaan Jasa Tenaga Alih Daya (TAD) Pekerjaan Re Handling Material Stockpile Dan SHP
+32. Nama: Pengadaan Jasa Tenaga Alih Daya (TAD) Pekerjaan Re Handling Material Stockpile Dan SHP
     Milik: PT TIMAH LOGISTIK | Nilai: Rp 1 M | Closing: 26-Mar-2026 | Lokasi: Pangkal Pinang - Kepulauan Babel
 `;
 const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id. Jawab dalam Bahasa Indonesia yang ramah dan profesional.
