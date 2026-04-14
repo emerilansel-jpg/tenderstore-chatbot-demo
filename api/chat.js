@@ -120,14 +120,14 @@ export default async function handler(req, res) {
   // === EARLY DATE/VALUE FAST PATH (date/value queries bypass LLM) ===
   {
     var _fpQl = message.toLowerCase();
-    if (/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah/.test(_fpQl)) {
+    if (/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah|dibawah|diatas/.test(_fpQl)) {
       try {
         var _fpDF = null, _fpVF = null;
         var _fpMon = {jan:1,januari:1,feb:2,februari:2,mar:3,maret:3,apr:4,april:4,mei:5,jun:6,juni:6,jul:7,juli:7,agu:8,agustus:8,sep:9,september:9,okt:10,oktober:10,nov:11,november:11,des:12,desember:12};
         var _fpDm = _fpQl.match(/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?)\b/);
         if (_fpDm) { _fpDF = {month:_fpDm[1]}; var _fpYr = _fpQl.match(/\b(20\d{2})\b/); if (_fpYr) _fpDF.year = +_fpYr[1]; }
-        var _fpVOp = /lebih\s+dari|melebihi|di\s+atas|ke\s+atas/.test(_fpQl) ? 'gt' : /kurang\s+dari|di\s+bawah|ke\s+bawah/.test(_fpQl) ? 'lt' : /\blebih\b/.test(_fpQl) ? 'gt' : /\bkurang\b/.test(_fpQl) ? 'lt' : null;
-        var _fpVN = _fpQl.match(/\b(\d+(?:[.,]\d+)?)\s*(?:miliar|milyar)\b/);
+        var _fpVOp = /lebih\s+dari|melebihi|di\s+atas|ke\s+atas|diatas/.test(_fpQl) ? 'gt' : /kurang\s+dari|di\s+bawah|ke\s+bawah|dibawah|dibwah/.test(_fpQl) ? 'lt' : /\blebih\b/.test(_fpQl) ? 'gt' : /\bkurang\b/.test(_fpQl) ? 'lt' : null;
+        var _fpVN = _fpQl.match(/\b(\d+(?:[.,]\d+)?)\s*(?:miliar|milyar|m)\b/);
         if (_fpVOp && _fpVN) _fpVF = {op:_fpVOp, amount:parseFloat(_fpVN[1].replace(',','.'))};
         if (_fpDF || _fpVF) {
           var _fpLines = TENDER_DATABASE.split('\n'), _fpCat = '', _fpRes = [], _fpEnt = null;
@@ -252,7 +252,7 @@ export default async function handler(req, res) {
   const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
   let filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
   // Strip date/month/year/value terms to prevent false category matches
-  const _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp)$|^\d+$/i;
+  const _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|dibawah|diatas|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp)$|^\d+$/i;
   filterWords = filterWords.filter(function(w){ return !_dateFwExclude.test(w); });
 
   const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
@@ -297,7 +297,7 @@ export default async function handler(req, res) {
       return res.json({ reply: 'Saat ini tersedia total <strong>' + _totalCount + ' tender</strong> dalam 5 kategori di database kami:<br><br><ol class="reply-list"><li><strong>Drilling & Workover Well Service</strong> (10 tender)</li><li><strong>Seismic, Geotechnic & Geophysics</strong> (4 tender)</li><li><strong>Computer & IT</strong> (6 tender)</li><li><strong>Marine Transportation</strong> (6 tender)</li><li><strong>Man Power / General Labour</strong> (6 tender)</li></ol><br><span style="color:#93c5fd;font-style:italic;">Ketik nama kategori atau perusahaan untuk melihat detail tender.</span>' });
     }
 
-    const _hasDV = /\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah/i.test(userWords.join(' '));
+    const _hasDV = /\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah|dibawah|diatas/i.test(userWords.join(' '));
     if (filterWords.length === 0 && !_hasDV) {
       return res.json({ reply: 'Untuk membantu pencarian tender, silakan sebutkan kategori (contoh: drilling, marine, IT) atau nama perusahaan (contoh: Pertamina, PLN, BP).' });
     }
