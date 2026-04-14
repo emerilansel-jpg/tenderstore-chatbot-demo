@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Admin â TenderStore.id</title>
+<title>Admin â Tender-Indonesia</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
@@ -66,84 +66,84 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
 
 <!-- Password Gate -->
 <div id="pwOverlay">
-  <h2>Admin TenderStore.id</h2>
-  <p>Masukkan password admin</p>
-  <input type="password" id="pwInput" placeholder="Password..." onkeydown="if(event.key==='Enter')checkPw()">
-  <button onclick="checkPw()">Masuk</button>
-  <div id="pwError">Password salah.</div>
+ <h2>Admin Tender-Indonesia</h2>
+ <p>Masukkan password admin</p>
+ <input type="password" id="pwInput" placeholder="Password..." onkeydown="if(event.key==='Enter')checkPw()">
+ <button onclick="checkPw()">Masuk</button>
+ <div id="pwError">Password salah.</div>
 </div>
 
 <!-- Header -->
 <div class="header">
-  <div><h1>Admin Panel â TenderStore.id</h1></div>
-  <div><a href="/">â Kembali ke Chatbot</a> &nbsp; <span id="countInfo"></span></div>
+ <div><h1>Admin Panel â Tender-Indonesia</h1></div>
+ <div><a href="/">â Kembali ke Chatbot</a> &nbsp; <span id="countInfo"></span></div>
 </div>
 
 <!-- Main -->
 <div class="container">
-  <div class="tabs">
-    <div class="tab active" onclick="switchTab('input')">ð¥ Input Data Baru</div>
-    <div class="tab" onclick="switchTab('data')">ð Data Saat Ini <span id="dataBadge" class="count-badge">0</span></div>
-  </div>
+ <div class="tabs">
+ <div class="tab active" onclick="switchTab('input')">ð¥ Input Data Baru</div>
+ <div class="tab" onclick="switchTab('data')">ð Data Saat Ini <span id="dataBadge" class="count-badge">0</span></div>
+ </div>
 
-  <!-- Tab 1: Input baru -->
-  <div id="panel-input" class="panel active">
-    <div class="hint">
-      Paste text tender dari sumber manapun (website, email, PDF, Word, dsb).<br>
-      Format bebas â AI akan otomatis merapikan jadi format yang benar.<br>
-      Contoh: <em>"Jasa Sewa Rig 550 HP milik Pertamina EP, nilai 23 miliar, closing 12 Maret 2026, lokasi Cirebon, kategori drilling"</em>
-    </div>
-    <textarea id="rawInput" placeholder="Paste data tender mentah di sini..."></textarea>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="parseBtn" onclick="parseData()">ð¤ Proses dengan AI</button>
-      <label style="color:#94a3b8;font-size:13px"><input type="checkbox" id="appendMode" checked> Tambahkan ke data yang sudah ada (jangan replace)</label>
-    </div>
-    <div id="parseStatus" class="status"></div>
+ <!-- Tab 1: Input baru -->
+ <div id="panel-input" class="panel active">
+ <div class="hint">
+ Paste text tender dari sumber manapun (website, email, PDF, Word, dsb).<br>
+ Format bebas â AI akan otomatis merapikan jadi format yang benar.<br>
+ Contoh: <em>"Jasa Sewa Rig 550 HP milik Pertamina EP, nilai 23 miliar, closing 12 Maret 2026, lokasi Cirebon, kategori drilling"</em>
+ </div>
+ <textarea id="rawInput" placeholder="Paste data tender mentah di sini..."></textarea>
+ <div class="btn-row">
+ <button class="btn btn-primary" id="parseBtn" onclick="parseData()">ð¤ Proses dengan AI</button>
+ <label style="color:#94a3b8;font-size:13px"><input type="checkbox" id="appendMode" checked> Tambahkan ke data yang sudah ada (jangan replace)</label>
+ </div>
+ <div id="parseStatus" class="status"></div>
 
-    <!-- Preview -->
-    <div id="previewSection" style="display:none;margin-top:20px">
-      <h3 style="color:#60a5fa;margin-bottom:8px">Preview Hasil AI:</h3>
-      <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="previewBody"></tbody></table></div>
-      <div class="btn-row">
-        <button class="btn btn-success" onclick="saveData('preview')">ð¾ Simpan ke Database</button>
-        <button class="btn btn-secondary" onclick="document.getElementById('previewSection').style.display='none'">Batal</button>
-      </div>
-      <div id="saveStatus" class="status"></div>
-    </div>
-  </div>
+ <!-- Preview -->
+ <div id="previewSection" style="display:none;margin-top:20px">
+ <h3 style="color:#60a5fa;margin-bottom:8px">Preview Hasil AI:</h3>
+ <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="previewBody"></tbody></table></div>
+ <div class="btn-row">
+ <button class="btn btn-success" onclick="saveData('preview')">ð¾ Simpan ke Database</button>
+ <button class="btn btn-secondary" onclick="document.getElementById('previewSection').style.display='none'">Batal</button>
+ </div>
+ <div id="saveStatus" class="status"></div>
+ </div>
+ </div>
 
-  <!-- Tab 2: Data saat ini -->
-  <div id="panel-data" class="panel">
-    <div class="btn-row" style="margin-bottom:16px">
-      <button class="btn btn-primary" onclick="loadData()">ð Refresh Data</button>
-      <button class="btn btn-success" onclick="saveData('current')">ð¾ Simpan Perubahan</button>
-      <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}">ðï¸ Hapus Semua</button>
-    </div>
-    <div id="saveStatus2" class="status"></div>
-    <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
-    <div id="emptyMsg" style="display:none;text-align:center;padding:40px;color:#64748b">Belum ada data. Gunakan tab "Input Data Baru" untuk menambahkan.</div>
-  </div>
+ <!-- Tab 2: Data saat ini -->
+ <div id="panel-data" class="panel">
+ <div class="btn-row" style="margin-bottom:16px">
+ <button class="btn btn-primary" onclick="loadData()">ð Refresh Data</button>
+ <button class="btn btn-success" onclick="saveData('current')">ð¾ Simpan Perubahan</button>
+ <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}">ðï¸ Hapus Semua</button>
+ </div>
+ <div id="saveStatus2" class="status"></div>
+ <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
+ <div id="emptyMsg" style="display:none;text-align:center;padding:40px;color:#64748b">Belum ada data. Gunakan tab "Input Data Baru" untuk menambahkan.</div>
+ </div>
 </div>
 
 <script>
 /* === Password === */
 function checkPw(){
-  var v=document.getElementById('pwInput').value;
-  var n=v.toLowerCase().replace(/[\s\-_]/g,'');
-  if(n==='admintender'){
-    document.getElementById('pwOverlay').style.display='none';
-    loadData();
-  } else {
-    document.getElementById('pwError').style.display='block';
-  }
+ var v=document.getElementById('pwInput').value;
+ var n=v.toLowerCase().replace(/[\s\-_]/g,'');
+ if(n==='admintender'){
+ document.getElementById('pwOverlay').style.display='none';
+ loadData();
+ } else {
+ document.getElementById('pwError').style.display='block';
+ }
 }
 
 /* === Tabs === */
 function switchTab(t){
-  document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===(t==='input'?0:1))});
-  document.getElementById('panel-input').classList.toggle('active',t==='input');
-  document.getElementById('panel-data').classList.toggle('active',t==='data');
-  if(t==='data') loadData();
+ document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===(t==='input'?0:1))});
+ document.getElementById('panel-input').classList.toggle('active',t==='input');
+ document.getElementById('panel-data').classList.toggle('active',t==='data');
+ if(t==='data') loadData();
 }
 
 /* === State === */
@@ -152,103 +152,103 @@ var previewData=[];
 
 /* === Load current data === */
 function loadData(){
-  fetch('/api/load-tenders').then(function(r){return r.json()}).then(function(d){
-    currentData=d.data||[];
-    renderTable(currentData,'currentBody');
-    document.getElementById('dataBadge').textContent=currentData.length;
-    document.getElementById('countInfo').textContent='Total: '+currentData.length+' tender';
-    document.getElementById('emptyMsg').style.display=currentData.length?'none':'block';
-  }).catch(function(e){
-    showStatus('saveStatus2','Gagal memuat data: '+e.message,'err');
-  });
+ fetch('/api/load-tenders').then(function(r){return r.json()}).then(function(d){
+ currentData=d.data||[];
+ renderTable(currentData,'currentBody');
+ document.getElementById('dataBadge').textContent=currentData.length;
+ document.getElementById('countInfo').textContent='Total: '+currentData.length+' tender';
+ document.getElementById('emptyMsg').style.display=currentData.length?'none':'block';
+ }).catch(function(e){
+ showStatus('saveStatus2','Gagal memuat data: '+e.message,'err');
+ });
 }
 
 /* === Parse with AI === */
 function parseData(){
-  var raw=document.getElementById('rawInput').value.trim();
-  if(!raw){showStatus('parseStatus','Paste data dulu!','err');return}
-  var btn=document.getElementById('parseBtn');
-  btn.disabled=true;btn.innerHTML='<span class="loader"></span> AI sedang memproses...';
-  showStatus('parseStatus','Mengirim ke AI untuk diproses...','info');
+ var raw=document.getElementById('rawInput').value.trim();
+ if(!raw){showStatus('parseStatus','Paste data dulu!','err');return}
+ var btn=document.getElementById('parseBtn');
+ btn.disabled=true;btn.innerHTML='<span class="loader"></span> AI sedang memproses...';
+ showStatus('parseStatus','Mengirim ke AI untuk diproses...','info');
 
-  fetch('/api/parse-tenders',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({text:raw})
-  }).then(function(r){return r.json()}).then(function(d){
-    btn.disabled=false;btn.innerHTML='ð¤ Proses dengan AI';
-    if(d.error){showStatus('parseStatus','Error: '+d.error,'err');return}
-    previewData=d.data||[];
-    if(!previewData.length){showStatus('parseStatus','AI tidak menemukan data tender di text ini.','err');return}
-    showStatus('parseStatus','Berhasil! Ditemukan '+previewData.length+' tender. Cek preview di bawah.','ok');
-    renderTable(previewData,'previewBody');
-    document.getElementById('previewSection').style.display='block';
-  }).catch(function(e){
-    btn.disabled=false;btn.innerHTML='ð¤ Proses dengan AI';
-    showStatus('parseStatus','Gagal: '+e.message,'err');
-  });
+ fetch('/api/parse-tenders',{
+ method:'POST',
+ headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({text:raw})
+ }).then(function(r){return r.json()}).then(function(d){
+ btn.disabled=false;btn.innerHTML='ð¤ Proses dengan AI';
+ if(d.error){showStatus('parseStatus','Error: '+d.error,'err');return}
+ previewData=d.data||[];
+ if(!previewData.length){showStatus('parseStatus','AI tidak menemukan data tender di text ini.','err');return}
+ showStatus('parseStatus','Berhasil! Ditemukan '+previewData.length+' tender. Cek preview di bawah.','ok');
+ renderTable(previewData,'previewBody');
+ document.getElementById('previewSection').style.display='block';
+ }).catch(function(e){
+ btn.disabled=false;btn.innerHTML='ð¤ Proses dengan AI';
+ showStatus('parseStatus','Gagal: '+e.message,'err');
+ });
 }
 
 /* === Render table === */
 function renderTable(data,tbodyId){
-  var tb=document.getElementById(tbodyId);
-  var isPreview=tbodyId==='previewBody';
-  var src=isPreview?'previewData':'currentData';
-  tb.innerHTML='';
-  data.forEach(function(item,i){
-    var tr=document.createElement('tr');
-    tr.innerHTML='<td>'+(i+1)+'</td>'+
-      '<td><input value="'+esc(item.nama)+'" onchange="'+src+'['+i+'].nama=this.value"></td>'+
-      '<td><input value="'+esc(item.milik)+'" onchange="'+src+'['+i+'].milik=this.value"></td>'+
-      '<td><input value="'+esc(item.nilai)+'" onchange="'+src+'['+i+'].nilai=this.value" style="width:80px"></td>'+
-      '<td><input value="'+esc(item.closing)+'" onchange="'+src+'['+i+'].closing=this.value" style="width:100px"></td>'+
-      '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
-      '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
-      '<td><button class="del-btn" onclick="'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')">â</button></td>';
-    tb.appendChild(tr);
-  });
+ var tb=document.getElementById(tbodyId);
+ var isPreview=tbodyId==='previewBody';
+ var src=isPreview?'previewData':'currentData';
+ tb.innerHTML='';
+ data.forEach(function(item,i){
+ var tr=document.createElement('tr');
+ tr.innerHTML='<td>'+(i+1)+'</td>'+
+ '<td><input value="'+esc(item.nama)+'" onchange="'+src+'['+i+'].nama=this.value"></td>'+
+ '<td><input value="'+esc(item.milik)+'" onchange="'+src+'['+i+'].milik=this.value"></td>'+
+ '<td><input value="'+esc(item.nilai)+'" onchange="'+src+'['+i+'].nilai=this.value" style="width:80px"></td>'+
+ '<td><input value="'+esc(item.closing)+'" onchange="'+src+'['+i+'].closing=this.value" style="width:100px"></td>'+
+ '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
+ '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
+ '<td><button class="del-btn" onclick="'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')">â</button></td>';
+ tb.appendChild(tr);
+ });
 }
 function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
 
 /* === Save data === */
 function saveData(mode){
-  var data;
-  var statusEl=mode==='preview'?'saveStatus':'saveStatus2';
-  if(mode==='preview'){
-    var append=document.getElementById('appendMode').checked;
-    data=append?currentData.concat(previewData):previewData;
-  } else {
-    data=currentData;
-  }
+ var data;
+ var statusEl=mode==='preview'?'saveStatus':'saveStatus2';
+ if(mode==='preview'){
+ var append=document.getElementById('appendMode').checked;
+ data=append?currentData.concat(previewData):previewData;
+ } else {
+ data=currentData;
+ }
 
-  showStatus(statusEl,'<span class="loader"></span> Menyimpan ke GitHub...','info');
+ showStatus(statusEl,'<span class="loader"></span> Menyimpan ke GitHub...','info');
 
-  fetch('/api/save-tenders',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({data:data})
-  }).then(function(r){return r.json()}).then(function(d){
-    if(d.error){showStatus(statusEl,'Error: '+d.error,'err');return}
-    showStatus(statusEl,'Berhasil disimpan! '+data.length+' tender. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.','ok');
-    currentData=data;
-    document.getElementById('dataBadge').textContent=currentData.length;
-    document.getElementById('countInfo').textContent='Total: '+currentData.length+' tender';
-    if(mode==='preview'){
-      document.getElementById('previewSection').style.display='none';
-      document.getElementById('rawInput').value='';
-      previewData=[];
-    }
-    renderTable(currentData,'currentBody');
-  }).catch(function(e){
-    showStatus(statusEl,'Gagal: '+e.message,'err');
-  });
+ fetch('/api/save-tenders',{
+ method:'POST',
+ headers:{'Content-Type':'application/json'},
+ body:JSON.stringify({data:data})
+ }).then(function(r){return r.json()}).then(function(d){
+ if(d.error){showStatus(statusEl,'Error: '+d.error,'err');return}
+ showStatus(statusEl,'Berhasil disimpan! '+data.length+' tender. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.','ok');
+ currentData=data;
+ document.getElementById('dataBadge').textContent=currentData.length;
+ document.getElementById('countInfo').textContent='Total: '+currentData.length+' tender';
+ if(mode==='preview'){
+ document.getElementById('previewSection').style.display='none';
+ document.getElementById('rawInput').value='';
+ previewData=[];
+ }
+ renderTable(currentData,'currentBody');
+ }).catch(function(e){
+ showStatus(statusEl,'Gagal: '+e.message,'err');
+ });
 }
 
 function showStatus(id,msg,type){
-  var el=document.getElementById(id);
-  el.className='status '+type;
-  el.innerHTML=msg;
-  el.style.display='block';
+ var el=document.getElementById(id);
+ el.className='status '+type;
+ el.innerHTML=msg;
+ el.style.display='block';
 }
 </script>
 </body>
