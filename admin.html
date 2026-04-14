@@ -61,8 +61,43 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
 
 .count-badge{background:#3b82f6;color:#fff;padding:2px 8px;border-radius:12px;font-size:12px;margin-left:8px}
 </style>
+
+<style id="auth-style">
+#auth-overlay {
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(15,23,42,0.97);z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+}
+#auth-box {
+  background:#1e293b;border:1px solid #334155;border-radius:12px;
+  padding:40px 48px;width:340px;text-align:center;
+}
+#auth-box h2{color:#f1f5f9;font-size:1.4rem;margin-bottom:8px;}
+#auth-box p{color:#94a3b8;font-size:0.9rem;margin-bottom:24px;}
+#auth-pass{
+  width:100%;padding:10px 14px;border-radius:8px;
+  border:1px solid #475569;background:#0f172a;color:#f1f5f9;
+  font-size:1rem;margin-bottom:12px;box-sizing:border-box;
+}
+#auth-btn{
+  width:100%;padding:10px;border-radius:8px;border:none;
+  background:#3b82f6;color:#fff;font-size:1rem;cursor:pointer;font-weight:600;
+}
+#auth-btn:hover{background:#2563eb;}
+#auth-err{color:#f87171;font-size:0.85rem;margin-top:10px;display:none;}
+</style>
 </head>
 <body>
+<div id="auth-overlay">
+  <div id="auth-box">
+    <h2>🔐 Admin Panel</h2>
+    <p>Masukkan password untuk melanjutkan</p>
+    <input type="password" id="auth-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doAuth()">
+    <button id="auth-btn" onclick="doAuth()">Masuk</button>
+    <div id="auth-err">❌ Password salah. Coba lagi.</div>
+  </div>
+</div>
+
 
 <!-- Password Gate -->
 <div id="pwOverlay">
@@ -250,6 +285,28 @@ function showStatus(id,msg,type){
  el.innerHTML=msg;
  el.style.display='block';
 }
+
+
+function doAuth() {
+  var pw = document.getElementById('auth-pass').value;
+  if (pw === 'admintender') {
+    sessionStorage.setItem('adminAuth','1');
+    document.getElementById('auth-overlay').style.display='none';
+    document.getElementById('auth-pass').value='';
+  } else {
+    document.getElementById('auth-err').style.display='block';
+    document.getElementById('auth-pass').value='';
+    document.getElementById('auth-pass').focus();
+  }
+}
+(function(){
+  if (sessionStorage.getItem('adminAuth') !== '1') {
+    // overlay already in DOM, just ensure it's visible
+  } else {
+    var ov = document.getElementById('auth-overlay');
+    if (ov) ov.style.display='none';
+  }
+})();
 </script>
 </body>
 </html>
