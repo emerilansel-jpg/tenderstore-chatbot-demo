@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Admin â Tender-Indonesia</title>
+<title>Admin Tender-Indonesia</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
@@ -75,27 +75,27 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
 
 <!-- Header -->
 <div class="header">
- <div><h1>Admin Panel â Tender-Indonesia</h1></div>
- <div><a href="/">â Kembali ke Chatbot</a> &nbsp; <span id="countInfo"></span></div>
+ <div><h1>Admin Panel Tender-Indonesia</h1></div>
+ <div><a href="/"> Kembali ke Chatbot</a> &nbsp; <span id="countInfo"></span></div>
 </div>
 
 <!-- Main -->
 <div class="container">
  <div class="tabs">
- <div class="tab active" onclick="switchTab('input')">ð¥ Input Data Baru</div>
- <div class="tab" onclick="switchTab('data')">ð Data Saat Ini <span id="dataBadge" class="count-badge">0</span></div>
+ <div class="tab active" onclick="switchTab('input')"> Input Data Baru</div>
+ <div class="tab" onclick="switchTab('data')"> Data Saat Ini <span id="dataBadge" class="count-badge">0</span></div>
  </div>
 
  <!-- Tab 1: Input baru -->
  <div id="panel-input" class="panel active">
  <div class="hint">
  Paste text tender dari sumber manapun (website, email, PDF, Word, dsb).<br>
- Format bebas â AI akan otomatis merapikan jadi format yang benar.<br>
+ Format bebas AI akan otomatis merapikan jadi format yang benar.<br>
  Contoh: <em>"Jasa Sewa Rig 550 HP milik Pertamina EP, nilai 23 miliar, closing 12 Maret 2026, lokasi Cirebon, kategori drilling"</em>
  </div>
  <textarea id="rawInput" placeholder="Paste data tender mentah di sini..."></textarea>
  <div class="btn-row">
- <button class="btn btn-primary" id="parseBtn" onclick="parseData()">ð¤ Proses dengan AI</button>
+ <button class="btn btn-primary" id="parseBtn" onclick="parseData()"> Proses dengan AI</button>
  <label style="color:#94a3b8;font-size:13px"><input type="checkbox" id="appendMode" checked> Tambahkan ke data yang sudah ada (jangan replace)</label>
  </div>
  <div id="parseStatus" class="status"></div>
@@ -105,7 +105,7 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
  <h3 style="color:#60a5fa;margin-bottom:8px">Preview Hasil AI:</h3>
  <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="previewBody"></tbody></table></div>
  <div class="btn-row">
- <button class="btn btn-success" onclick="saveData('preview')">ð¾ Simpan ke Database</button>
+ <button class="btn btn-success" onclick="saveData('preview')"> Simpan ke Database</button>
  <button class="btn btn-secondary" onclick="document.getElementById('previewSection').style.display='none'">Batal</button>
  </div>
  <div id="saveStatus" class="status"></div>
@@ -115,9 +115,9 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
  <!-- Tab 2: Data saat ini -->
  <div id="panel-data" class="panel">
  <div class="btn-row" style="margin-bottom:16px">
- <button class="btn btn-primary" onclick="loadData()">ð Refresh Data</button>
- <button class="btn btn-success" onclick="saveData('current')">ð¾ Simpan Perubahan</button>
- <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}">ðï¸ Hapus Semua</button>
+ <button class="btn btn-primary" onclick="loadData()"> Refresh Data</button>
+ <button class="btn btn-success" onclick="saveData('current')"> Simpan Perubahan</button>
+ <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}"> Hapus Semua</button>
  </div>
  <div id="saveStatus2" class="status"></div>
  <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
@@ -176,7 +176,7 @@ function parseData(){
  headers:{'Content-Type':'application/json'},
  body:JSON.stringify({text:raw})
  }).then(function(r){return r.json()}).then(function(d){
- btn.disabled=false;btn.innerHTML='ð¤ Proses dengan AI';
+ btn.disabled=false;btn.innerHTML=' Proses dengan AI';
  if(d.error){showStatus('parseStatus','Error: '+d.error,'err');return}
  previewData=d.data||[];
  if(!previewData.length){showStatus('parseStatus','AI tidak menemukan data tender di text ini.','err');return}
@@ -184,7 +184,7 @@ function parseData(){
  renderTable(previewData,'previewBody');
  document.getElementById('previewSection').style.display='block';
  }).catch(function(e){
- btn.disabled=false;btn.innerHTML='ð¤ Proses dengan AI';
+ btn.disabled=false;btn.innerHTML=' Proses dengan AI';
  showStatus('parseStatus','Gagal: '+e.message,'err');
  });
 }
@@ -204,7 +204,7 @@ function renderTable(data,tbodyId){
  '<td><input value="'+esc(item.closing)+'" onchange="'+src+'['+i+'].closing=this.value" style="width:100px"></td>'+
  '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
  '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
- '<td><button class="del-btn" onclick="'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')">â</button></td>';
+ '<td><button class="del-btn" onclick="'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')"></button></td>';
  tb.appendChild(tr);
  });
 }
