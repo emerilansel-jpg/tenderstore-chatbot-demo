@@ -90,11 +90,11 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
 <body>
 <div id="auth-overlay">
   <div id="auth-box">
-    <h2>🔐 Admin Panel</h2>
+    <h2>ð Admin Panel</h2>
     <p>Masukkan password untuk melanjutkan</p>
     <input type="password" id="auth-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doAuth()">
     <button id="auth-btn" onclick="doAuth()">Masuk</button>
-    <div id="auth-err">❌ Password salah. Coba lagi.</div>
+    <div id="auth-err">â Password salah. Coba lagi.</div>
   </div>
 </div>
 
@@ -239,7 +239,7 @@ function renderTable(data,tbodyId){
  '<td><input value="'+esc(item.closing)+'" onchange="'+src+'['+i+'].closing=this.value" style="width:100px"></td>'+
  '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
  '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
- '<td><button class="del-btn" onclick="if(confirm('Hapus tender ini?')){'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')}"></button></td>';
+ '<td><button class="del-btn" onclick="if(confirm(\'Hapus tender ini?\')){'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')}"></button></td>';
  tb.appendChild(tr);
  });
 }
@@ -286,7 +286,8 @@ function showStatus(id,msg,type){
  el.style.display='block';
 }
 
-
+</script>
+<script>
 function doAuth() {
   var pw = document.getElementById('auth-pass').value;
   if (pw === 'admintender') {
@@ -300,11 +301,9 @@ function doAuth() {
   }
 }
 (function(){
-  if (sessionStorage.getItem('adminAuth') !== '1') {
-    // overlay already in DOM, just ensure it's visible
-  } else {
-    var ov = document.getElementById('auth-overlay');
-    if (ov) ov.style.display='none';
+  if (sessionStorage.getItem('adminAuth')==='1') {
+    var ov=document.getElementById('auth-overlay');
+    if(ov) ov.style.display='none';
   }
 })();
 </script>
