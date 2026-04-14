@@ -427,12 +427,56 @@ export default async function handler(req, res) {
         _cKws = companyKwsG.length > 0 ? companyKwsG : _cL;
         _kKws = filterWords.filter(kw => !_cKws.includes(kw));
 
-        const filtered = items.filter(item => {
+        
+function parseDateFilter(q) {
+  var ql = q.toLowerCase();
+  var monthMap = {'januari':'Jan','jan':'Jan','februari':'Feb','feb':'Feb','maret':'Mar','mar':'Mar','april':'Apr','apr':'Apr','mei':'May','may':'May','juni':'Jun','jun':'Jun','juli':'Jul','jul':'Jul','agustus':'Aug','agus':'Aug','agt':'Aug','september':'Sep','sept':'Sep','sep':'Sep','oktober':'Oct','okt':'Oct','november':'Nov','nov':'Nov','desember':'Dec','des':'Dec'};
+  var day=null, month=null, year=null;
+  var ym = ql.match(/\b(202\d|203\d)\b/); if(ym) year=ym[1];
+  for(var n in monthMap){ if(ql.indexOf(n)!==-1){month=monthMap[n];break;} }
+  var dm = ql.match(/\b(\d{1,2})\s*(?:januari|februari|maret|april|mei|juni|juli|agustus|agus|agt|september|sept|oktober|okt|november|desember|des|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec)\b/i);
+  if(dm) day=parseInt(dm[1],10);
+  if(!month && !year) return null;
+  return {day:day,month:month,year:year};
+}
+function parseValueFilter(q) {
+  var ql = q.toLowerCase();
+  var nm = ql.match(/(\d+(?:[.,]\d+)?)\s*(?:miliar|milyar)/);
+  if(!nm){ nm = ql.match(/(?:nilai|harga)?\s*[><]=?\s*(?:rp\.?\s*)?(\d+(?:[.,]\d+)?)/); }
+  if(!nm) return null;
+  var amount = parseFloat(nm[1].replace(',','.'));
+  var op=null;
+  if(/lebih dari|diatas|di atas|lebih besar|minimal|minimum/.test(ql)||ql.indexOf('>')!==-1) op='gt';
+  else if(/kurang dari|di bawah|dibawah|lebih kecil|maksimal|maximum/.test(ql)||ql.indexOf('<')!==-1) op='lt';
+  if(!op) return null;
+  return {amount:amount,op:op};
+}
+function _dateOk(entry,df) {
+  if(!df) return true;
+  var cl=(entry.closing||'').toLowerCase();
+  if(df.month){ var ms='-'+df.month.toLowerCase()+'-'; if(cl.indexOf(ms)===-1) return false; }
+  if(df.year){ if(cl.indexOf(df.year)===-1) return false; }
+  if(df.day!==null){ var pts=(entry.closing||'').split('-'); if(parseInt(pts[0],10)!==df.day) return false; }
+  return true;
+}
+function _valueOk(entry,vf) {
+  if(!vf) return true;
+  var m=(entry.nilai||'').match(/(\d+(?:[.,]\d+)?)/); if(!m) return false;
+  var val=parseFloat(m[1].replace(',','.'));
+  if(vf.op==='gt') return val>vf.amount;
+  if(vf.op==='lt') return val<vf.amount;
+  return false;
+}
+var _dateFilter = parseDateFilter(userWords.join(' '));
+var _valueFilter = parseValueFilter(userWords.join(' '));
+const filtered = items.filter(item => {
           const il = item.toLowerCase();
           if (il.includes('apakah anda ingin')) return false;
           const compOk = _cKws.length===0||_cKws.every(kw=>{try{return new RegExp('\\b'+kw+'\\b','i').test(il);}catch(e){return il.includes(kw.toLowerCase());}});
           const catOk = _kKws.length===0||_kKws.every(kw=>{const terms=expandCategory(kw);return terms.some(t=>{try{return new RegExp(t,'i').test(il);}catch(e){return il.includes(t);}});});
-          return compOk && catOk;
+            if (_dateFilter && !_dateOk(item,_dateFilter)) return false;
+  if (_valueFilter && !_valueOk(item,_valueFilter)) return false;
+  return compOk && catOk;
         });
 
         if (filtered.length > 0) {
