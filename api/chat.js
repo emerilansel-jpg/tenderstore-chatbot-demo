@@ -296,41 +296,7 @@ export default async function handler(req, res) {
       }
     }
 
-     // Inline date+value filter for DB-DIRECT results
-    (function(){
-      var _ql = userWords.join(' ');
-      // Parse month filter
-      var _mRx = _ql.match(/(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agt|september|sep|oktober|okt|november|nov|desember|des)\s*(\d{4})?/i);
-      var _dayRx = _ql.match(/(\d{1,2})\s+(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agt|september|sep|oktober|okt|november|nov|desember|des)/i);
-      var _mMap = {'januari':'Jan','jan':'Jan','februari':'Feb','feb':'Feb','maret':'Mar','mar':'Mar','april':'Apr','apr':'Apr','mei':'May','juni':'Jun','jun':'Jun','juli':'Jul','jul':'Jul','agustus':'Aug','agus':'Aug','agt':'Aug','september':'Sep','sep':'Sep','oktober':'Oct','okt':'Oct','november':'Nov','nov':'Nov','desember':'Dec','des':'Dec'};
-      var _dbDf = _mRx ? {day:_dayRx?parseInt(_dayRx[1]):null, month:_mMap[(_mRx[1]||'').toLowerCase()], year:_mRx[2]?parseInt(_mRx[2]):null} : null;
-      var _vlRx = _ql.match(/(\d+(?:[.,]\d+)?)\s*(miliar|milyar|juta)/i);
-      var _opGt = /lebih dari|di atas|lebih besar|melebihi/.test(_ql) || /lebih/.test(_ql);
-      var _opLt = /kurang dari|di bawah/.test(_ql);
-      var _dbVf = (_vlRx && (_opGt||_opLt)) ? {op:_opGt?'gt':'lt', amount:parseFloat(_vlRx[1].replace(',','.'))*(/juta/i.test(_vlRx[2])?0.001:1)} : null;
-      if (!_dbDf && !_dbVf) return;
-      var _mMapN = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
-      var _filt = _dbItems.filter(function(item){
-        if (_dbDf) {
-          var _cls = (item.closing||item.deadline||'');
-          var _cp = _cls.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/);
-          if (_cp) {
-            var _id=parseInt(_cp[1]),_im=_mMapN[_cp[2].substring(0,3)]||0,_iy=parseInt(_cp[3]);
-            if (_dbDf.day && _dbDf.day!==_id) return false;
-            if (_dbDf.month) { var _fm=_mMapN[_dbDf.month]||0; if (_fm && _im!==_fm) return false; }
-            if (_dbDf.year && _dbDf.year!==_iy) return false;
-          }
-        }
-        if (_dbVf) {
-          var _nv=parseFloat((item.nilai||'0').replace(/[^0-9.]/g,''))||0;
-          if (_dbVf.op==='gt' && !(_nv>_dbVf.amount)) return false;
-          if (_dbVf.op==='lt' && !(_nv<_dbVf.amount)) return false;
-        }
-        return true;
-      });
-      _dbItems.length=0; _filt.forEach(function(x){_dbItems.push(x);});
-    })();
-   if (_dbItems.length > 0) {
+    if (_dbItems.length > 0) {
       const _cL = companyKwsG.length>0 ? ' dari <strong>'+companyKwsG.map(k=>k.toUpperCase()).join('/')+'</strong>' : '';
       const _kL = categoryKwsG.length>0 ? ' kategori <strong>'+categoryKwsG.map(k=>k.charAt(0).toUpperCase()+k.slice(1)).join('/')+'</strong>' : '';
 
