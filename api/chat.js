@@ -117,6 +117,87 @@ export default async function handler(req, res) {
   const history = req.body.history || req.body.conversationHistory || [];
   if (!message) return res.status(400).json({ error: 'Message required' });
 
+  // === EARLY DATE/VALUE FAST PATH (date/value queries bypass LLM) ===
+  {
+    var _fpQl = message.toLowerCase();
+    if (/\b(januari|februari|maret|april|mei|juni|juli|agustus|september|oktober|november|desember|closing|lebih|kurang|miliar|juta)\b/.test(_fpQl)) {
+      try {
+        var _fpDF = null, _fpVF = null;
+        var _fpMon = {jan:1,januari:1,feb:2,februari:2,mar:3,maret:3,apr:4,april:4,mei:5,jun:6,juni:6,jul:7,juli:7,agu:8,agustus:8,sep:9,september:9,okt:10,oktober:10,nov:11,november:11,des:12,desember:12};
+        var _fpDm = _fpQl.match(/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?)\b/);
+        if (_fpDm) { _fpDF = {month:_fpDm[1]}; var _fpYr = _fpQl.match(/\b(20\d{2})\b/); if (_fpYr) _fpDF.year = +_fpYr[1]; }
+        var _fpVOp = /lebih\s+dari|melebihi|di\s+atas/.test(_fpQl) ? 'gt' : /kurang\s+dari|di\s+bawah/.test(_fpQl) ? 'lt' : /\blebih\b/.test(_fpQl) ? 'gt' : null;
+        var _fpVN = _fpQl.match(/\b(\d+(?:[.,]\d+)?)\s*(?:miliar|milyar)\b/);
+        if (_fpVOp && _fpVN) _fpVF = {op:_fpVOp, amount:parseFloat(_fpVN[1].replace(',','.'))};
+        if (_fpDF || _fpVF) {
+          var _fpLines = TENDER_DATABASE.split('\n'), _fpCat = '', _fpRes = [], _fpEnt = null;
+          for (var _fpi = 0; _fpi < _fpLines.length; _fpi++) {
+            var _fpLn = _fpLines[_fpi];
+            var _fpKh = _fpLn.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
+            if (_fpKh) { _fpCat = _fpKh[1].trim(); _fpEnt = null; continue; }
+            var _fpNm = _fpLn.match(/^\s*\d+\.\s+Nama:\s*(.+)/i);
+            if (_fpNm) { _fpEnt = {nama:_fpNm[1].trim(), cat:_fpCat, nilai:null, closing:null}; continue; }
+            if (_fpEnt && _fpLn.indexOf('|') >= 0) {
+              var _fpPts = _fpLn.split('|');
+              for (var _fpj = 0; _fpj < _fpPts.length; _fpj++) {
+                var _fpP = _fpPts[_fpj];
+                var _fpCv = _fpP.match(/Closing:\s*(\d{1,2})[-\/](\w+)[-\/](\d{4})/i);
+                if (_fpCv) _fpEnt.closing = {d:+_fpCv[1], m:_fpCv[2].toLowerCase().substr(0,3), y:+_fpCv[3]};
+                var _fpVv = _fpP.match(/Nilai:\s*Rp\s*([\d.,]+)\s*M/i);
+                if (_fpVv) _fpEnt.nilai = parseFloat(_fpVv[1].replace(',','.'));
+              }
+            }
+            if (_fpLn.trim() === '' && _fpEnt && _fpEnt.nama) {
+              var _fpOk = true;
+              if (_fpDF) {
+                if (!_fpEnt.closing) { _fpOk = false; }
+                else {
+                  var _fpEm = _fpMon[_fpEnt.closing.m]||0, _fpFm = _fpMon[_fpDF.month]||0;
+                  if (_fpFm && _fpEm && _fpEm !== _fpFm) _fpOk = false;
+                  if (_fpOk && _fpDF.year && _fpEnt.closing.y !== _fpDF.year) _fpOk = false;
+                }
+              }
+              if (_fpOk && _fpVF) {
+                if (_fpEnt.nilai === null) { _fpOk = false; }
+                else {
+                  if (_fpVF.op === 'gt' && !(_fpEnt.nilai > _fpVF.amount)) _fpOk = false;
+                  if (_fpVF.op === 'lt' && !(_fpEnt.nilai < _fpVF.amount)) _fpOk = false;
+                }
+              }
+              if (_fpOk) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, closing:_fpEnt.closing});
+              _fpEnt = null;
+            }
+          }
+          if (_fpEnt && _fpEnt.nama) {
+            var _fpOk2 = true;
+            if (_fpDF) {
+              if (!_fpEnt.closing) { _fpOk2 = false; }
+              else {
+                var _fpEm2 = _fpMon[_fpEnt.closing.m]||0, _fpFm2 = _fpMon[_fpDF.month]||0;
+                if (_fpFm2 && _fpEm2 && _fpEm2 !== _fpFm2) _fpOk2 = false;
+                if (_fpOk2 && _fpDF.year && _fpEnt.closing.y !== _fpDF.year) _fpOk2 = false;
+              }
+            }
+            if (_fpOk2 && _fpVF) {
+              if (_fpEnt.nilai === null) { _fpOk2 = false; }
+              else {
+                if (_fpVF.op === 'gt' && !(_fpEnt.nilai > _fpVF.amount)) _fpOk2 = false;
+                if (_fpVF.op === 'lt' && !(_fpEnt.nilai < _fpVF.amount)) _fpOk2 = false;
+              }
+            }
+            if (_fpOk2) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, closing:_fpEnt.closing});
+          }
+          if (_fpRes.length > 0) {
+            var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilai!==null?' | Nilai: Rp '+it.nilai+' M':'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('\n');
+            return res.json({reply:'Ditemukan <strong>'+_fpRes.length+' tender</strong> sesuai filter:\n'+_fpBody});
+          } else {
+            return res.json({reply:'Tidak ditemukan tender sesuai filter tanggal/nilai Anda.'});
+          }
+        }
+      } catch(_fpE) { /* fallthrough to normal processing */ }
+    }
+  }
+
   // === DIRECT VALUE FILTER (bypass LLM for nilai/miliar queries) ===
   const _vqMatch = message.match(/(\d+)\s*(miliar|milyar)/i);
   try {
