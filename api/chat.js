@@ -119,6 +119,7 @@ export default async function handler(req, res) {
 
   // === DIRECT VALUE FILTER (bypass LLM for nilai/miliar queries) ===
   const _vqMatch = message.match(/(\d+)\s*(miliar|milyar)/i);
+  try {
   if (_vqMatch || /miliar|milyar/i.test(message)) {
     const _threshold = _vqMatch ? parseInt(_vqMatch[1]) : 20;
     const _dbLines = TENDER_DATABASE.split('\n');
@@ -162,6 +163,7 @@ export default async function handler(req, res) {
       }
     }
   }
+  } catch(_dvfErr) { /* DVF fallback */ }
 
   // Dynamic keyword filter
   const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about','punya','berikan','kasih', 'iya','yep','oke','okay','nah','tapi','koq','kok','cuma','doang','hanya','satu','dua','tiga','empat','lima','bilang','bilangnya','katanya','kata','emang','memang','padahal','soalnya','karena','kenapa','gimana','bagaimana','wah','waduh','lho','loh','toh','masa','mosok','harusnya','seharusnya','ingin','want','more','lagi','banyak','sedikit','dikit','berapa','mana','siapa','kapan','dimana','kemana','ngapa','coba','perlu','harus','jangan','boleh','gapapa','ngga','nggak','baik','bagus','jelek','benar','bener','salah','wrong','right','nyatanya','ternyata','rupanya','ulang','ulangi','cek','check','liat','tampil','tunjukkan','tunjukin','muncul','keluar','ngaco','benaran','beneran','betul','mengapa','tunjuk','kenapa', 'bukannya','jadi','khan','nya','tuh','gitu','gini','kayak','kayaknya','sepertinya','maksudnya','memangnya','makanya','jadinya','terus','trus','berapa','total','jumlah','hitung','banyak','banyaknya','lalu','kemudian','setelah','sebelum','eh','hmm','ok','yoi','yap','ayo','ayok','serius','cuman','kok','oh','ah','harusnya','katanya','udah','udahan','namanya','halo','hai','hello','hey','terima','closing','date','deadline','tanggal','tendernya','perusahaannya','nilainya','harganya','totalnya','jumlahnya','informasi','infonya','detail','detil','selamat','pagi','siang','sore','malam','datanya','tersedia','masih','sisa','sisanya','berikutnya','selanjutnya','dong','ga','pak','jenis','kategori','hari','saat','list','carikan','tunjukkan','lagi','lainnya','lain','tau','info','miliar','milyar','juta','ribu','billion','million','rupiah','rp','idr'];
@@ -430,42 +432,57 @@ export default async function handler(req, res) {
         
 function parseDateFilter(q) {
   var ql = q.toLowerCase();
-  var monthMap = {'januari':'Jan','jan':'Jan','februari':'Feb','feb':'Feb','maret':'Mar','mar':'Mar','april':'Apr','apr':'Apr','mei':'May','may':'May','juni':'Jun','jun':'Jun','juli':'Jul','jul':'Jul','agustus':'Aug','agus':'Aug','agt':'Aug','september':'Sep','sept':'Sep','sep':'Sep','oktober':'Oct','okt':'Oct','november':'Nov','nov':'Nov','desember':'Dec','des':'Dec'};
-  var day=null, month=null, year=null;
-  var ym = ql.match(/\b(202\d|203\d)\b/); if(ym) year=ym[1];
-  for(var n in monthMap){ if(ql.indexOf(n)!==-1){month=monthMap[n];break;} }
-  var dm = ql.match(/\b(\d{1,2})\s*(?:januari|februari|maret|april|mei|juni|juli|agustus|agus|agt|september|sept|oktober|okt|november|desember|des|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec)\b/i);
-  if(dm) day=parseInt(dm[1],10);
-  if(!month && !year) return null;
-  return {day:day,month:month,year:year};
+  var mm = {'januari':'Jan','jan':'Jan','februari':'Feb','feb':'Feb','maret':'Mar','mar':'Mar','april':'Apr','apr':'Apr','mei':'May','may':'May','juni':'Jun','jun':'Jun','juli':'Jul','jul':'Jul','agustus':'Aug','agus':'Aug','agt':'Aug','aug':'Aug','september':'Sep','sep':'Sep','oktober':'Oct','okt':'Oct','oct':'Oct','november':'Nov','nov':'Nov','desember':'Dec','des':'Dec','dec':'Dec'};
+  var r = {day:null,month:null,year:null};
+  var m1 = ql.match(/(\d{1,2})\s+(januari|februari|maret|april|mei|juni|juli|agustus|agus|agt|september|oktober|november|desember|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|okt|des)\s*(\d{4})?/i);
+  if (m1) { r.day=parseInt(m1[1]); r.month=mm[m1[2].toLowerCase()]||m1[2]; if(m1[3])r.year=parseInt(m1[3]); return r; }
+  var m2 = ql.match(/(januari|februari|maret|april|mei|juni|juli|agustus|agus|agt|september|oktober|november|desember|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|okt|des)\s+(\d{4})/i);
+  if (m2) { r.month=mm[m2[1].toLowerCase()]||m2[1]; r.year=parseInt(m2[2]); return r; }
+  return null;
 }
 function parseValueFilter(q) {
   var ql = q.toLowerCase();
-  var nm = ql.match(/(\d+(?:[.,]\d+)?)\s*(?:miliar|milyar)/);
-  if(!nm){ nm = ql.match(/(?:nilai|harga)?\s*[><]=?\s*(?:rp\.?\s*)?(\d+(?:[.,]\d+)?)/); }
-  if(!nm) return null;
+  var op = null;
+  if (/lebih dari|di atas|lebih besar|melebihi/.test(ql)) op = 'gt';
+  else if (/lebih/.test(ql)) op = 'gt';
+  else if (/kurang dari|di bawah/.test(ql)) op = 'lt';
+  var nm = ql.match(/(\d+(?:[.,]\d+)?)\s*(miliar|milyar|juta)/);
+  if (!nm || !op) return null;
   var amount = parseFloat(nm[1].replace(',','.'));
-  var op=null;
-  if(/lebih dari|diatas|di atas|lebih besar|minimal|minimum/.test(ql)||ql.indexOf('>')!==-1) op='gt';
-  else if(/kurang dari|di bawah|dibawah|lebih kecil|maksimal|maximum/.test(ql)||ql.indexOf('<')!==-1) op='lt';
-  if(!op) return null;
-  return {amount:amount,op:op};
+  if (/juta/.test(nm[2])) amount = amount / 1000;
+  return {op:op, amount:amount};
 }
-function _dateOk(entry,df) {
-  if(!df) return true;
-  var cl=(entry.closing||'').toLowerCase();
-  if(df.month){ var ms='-'+df.month.toLowerCase()+'-'; if(cl.indexOf(ms)===-1) return false; }
-  if(df.year){ if(cl.indexOf(df.year)===-1) return false; }
-  if(df.day!==null){ var pts=(entry.closing||'').split('-'); if(parseInt(pts[0],10)!==df.day) return false; }
+function _dateOk(entry, df) {
+  var monMap = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+  var day, mon, year;
+  if (typeof entry === 'string') {
+    var m = entry.match(/(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})/i);
+    if (!m) return true;
+    day=parseInt(m[1]); mon=m[2].substring(0,3); year=parseInt(m[3]);
+  } else {
+    var cls = (entry.closing||entry.deadline||'');
+    if (!cls) return true;
+    var p = cls.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/);
+    if (!p) return true;
+    day=parseInt(p[1]); mon=p[2].substring(0,3); year=parseInt(p[3]);
+  }
+  if (df.day && df.day !== day) return false;
+  if (df.month) { var em=monMap[mon]||0, fm=monMap[df.month]||0; if(fm && em!==fm) return false; }
+  if (df.year && df.year !== year) return false;
   return true;
 }
-function _valueOk(entry,vf) {
-  if(!vf) return true;
-  var m=(entry.nilai||'').match(/(\d+(?:[.,]\d+)?)/); if(!m) return false;
-  var val=parseFloat(m[1].replace(',','.'));
-  if(vf.op==='gt') return val>vf.amount;
-  if(vf.op==='lt') return val<vf.amount;
-  return false;
+function _valueOk(entry, vf) {
+  var val;
+  if (typeof entry === 'string') {
+    var m = entry.match(/Nilai[^:]*:\s*Rp\s*([\d.,]+)\s*M/i) || entry.match(/Rp\s*([\d.,]+)\s*M/i);
+    if (!m) return true;
+    val = parseFloat(m[1].replace(',','.'));
+  } else {
+    val = parseFloat((entry.nilai||'0').replace(/[^0-9.]/g,''))||0;
+  }
+  if (vf.op==='gt') return val > vf.amount;
+  if (vf.op==='lt') return val < vf.amount;
+  return true;
 }
 var _dateFilter = parseDateFilter(userWords.join(' '));
 var _valueFilter = parseValueFilter(userWords.join(' '));
