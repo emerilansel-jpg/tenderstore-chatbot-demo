@@ -127,8 +127,8 @@ export default async function handler(req, res) {
         var _fpDm = _fpQl.match(/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?)\b/);
         if (_fpDm) { _fpDF = {month:_fpDm[1]}; var _fpYr = _fpQl.match(/\b(20\d{2})\b/); if (_fpYr) _fpDF.year = +_fpYr[1]; }
         var _fpVOp = /lebih\s+dari|melebihi|di\s+atas|ke\s+atas|diatas/.test(_fpQl) ? 'gt' : /kurang\s+dari|di\s+bawah|ke\s+bawah|dibawah|dibwah/.test(_fpQl) ? 'lt' : /\blebih\b/.test(_fpQl) ? 'gt' : /\bkurang\b/.test(_fpQl) ? 'lt' : null;
-        var _fpVN = _fpQl.match(/\b(\d+(?:[.,]\d+)?)\s*(?:miliar|milyar|m)\b/);
-        if (_fpVOp && _fpVN) _fpVF = {op:_fpVOp, amount:parseFloat(_fpVN[1].replace(',','.'))};
+        var _fpVN = _fpQl.match(/\b(\d+(?:[.,]\d+)?)\s*(miliar|milyar|juta|m)\b/);
+        if (_fpVOp && _fpVN) { var _fpAmt=parseFloat(_fpVN[1].replace(',','.')); if(/juta/.test(_fpVN[2])) _fpAmt/=1000; _fpVF={op:_fpVOp,amount:_fpAmt}; }
         if (_fpDF || _fpVF) {
           var _fpLines = TENDER_DATABASE.split('\n'), _fpCat = '', _fpRes = [], _fpEnt = null;
           for (var _fpi = 0; _fpi < _fpLines.length; _fpi++) {
