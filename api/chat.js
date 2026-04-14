@@ -268,9 +268,8 @@ export default async function handler(req, res) {
     : '';
 
   // === DB-DIRECT: Bypass LLM for category/company queries ===
-  var _dvDF = parseDateFilter(userWords.join(' ')); var _dvVF = parseValueFilter(userWords.join(' '));
-  if (companyKwsG.length > 0 || categoryKwsG.length > 0 || _dvDF || _dvVF) {
-    const _ln = TENDER_DATABASE.split('\n'); let _dc = ''; let _dbItems = []; let _ce = null;
+  if (companyKwsG.length > 0 || categoryKwsG.length > 0) {
+    const _ln = TENDER_DATABASE.split('\n'); let _dc = ''; const _dbItems = []; let _ce = null;
     for (const _l of _ln) {
       const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
       if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
@@ -292,12 +291,11 @@ export default async function handler(req, res) {
           const mc=(_catNameMap[kw]||'').toLowerCase(); if(!mc) return false;
           const fw=mc.split(/[\s&,]+/)[0]; return fw.length>2 && _ce.cat.includes(fw);
         });
-        if ((compOk && catOk) || (!companyKwsG.length && !categoryKwsG.length)) _dbItems.push({..._ce});
+        if (compOk && catOk) _dbItems.push({..._ce});
         _ce = null;
       }
     }
 
-    if (_dvDF || _dvVF) { _dbItems = _dbItems.filter(function(it){ return (!_dvDF || _dateOk(it,_dvDF)) && (!_dvVF || _valueOk(it,_dvVF)); }); }
     if (_dbItems.length > 0) {
       const _cL = companyKwsG.length>0 ? ' dari <strong>'+companyKwsG.map(k=>k.toUpperCase()).join('/')+'</strong>' : '';
       const _kL = categoryKwsG.length>0 ? ' kategori <strong>'+categoryKwsG.map(k=>k.charAt(0).toUpperCase()+k.slice(1)).join('/')+'</strong>' : '';
@@ -327,6 +325,41 @@ export default async function handler(req, res) {
       const kD=categoryKwsG.length>0?' kategori <strong>'+categoryKwsG.join(', ')+'</strong>':'';
       return res.json({ reply: 'Maaf, tidak ditemukan tender'+kD+cD+' dalam database kami.<br><br><span style="color:#93c5fd;font-style:italic;">Coba ketik kategori lain: drilling, marine, IT, seismic, atau man power.</span>' });
     }
+  }
+
+  // === DATE/VALUE DIRECT HANDLER ===
+  if (!companyKwsG.length && !categoryKwsG.length) {
+    try {
+      var _dvDFn = parseDateFilter(userWords.join(' '));
+      var _dvVFn = parseValueFilter(userWords.join(' '));
+      if (_dvDFn || _dvVFn) {
+        var _dvLn = TENDER_DATABASE.split('\n');
+        var _dvDc = ''; var _dvIts = []; var _dvCe = null;
+        for (var _dvi = 0; _dvi < _dvLn.length; _dvi++) {
+          var _dvL = _dvLn[_dvi];
+          var _dvCh = _dvL.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
+          if (_dvCh) { _dvDc = _dvCh[1].trim().toLowerCase(); _dvCe = null; continue; }
+          var _dvNm = _dvL.match(/^\d+\.\s+Nama:\s*(.+)/i);
+          if (_dvNm) { _dvCe = {nama:_dvNm[1].trim(),cat:_dvDc,milik:'',nilai:'',closing:'',lokasi:''}; continue; }
+          if (_dvCe) {
+            var _dvCl = _dvL.match(/Closing[^:]*:\s*(.+)/i); if (_dvCl) _dvCe.closing = _dvCl[1].trim();
+            var _dvVl = _dvL.match(/Nilai[^:]*:\s*(.+)/i); if (_dvVl) _dvCe.nilai = _dvVl[1].trim();
+            var _dvMl = _dvL.match(/Milik[^:]*:\s*(.+)/i); if (_dvMl) _dvCe.milik = _dvMl[1].trim();
+            if (_dvL.trim() === '' && _dvCe.nama) {
+              if ((!_dvDFn || _dateOk(_dvCe,_dvDFn)) && (!_dvVFn || _valueOk(_dvCe,_dvVFn))) _dvIts.push({..._dvCe});
+              _dvCe = null;
+            }
+          }
+        }
+        if (_dvCe && _dvCe.nama && (!_dvDFn || _dateOk(_dvCe,_dvDFn)) && (!_dvVFn || _valueOk(_dvCe,_dvVFn))) _dvIts.push({..._dvCe});
+        if (_dvIts.length > 0) {
+          const _dvBody = _dvIts.slice(0,10).map((it,i) => '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilai?' | Nilai: '+it.nilai:'')+(it.closing?' | Closing: '+it.closing:'')).join('\n');
+          return res.json({ reply: 'Ditemukan <strong>'+_dvIts.length+' tender</strong>:\n'+_dvBody });
+        } else {
+          return res.json({ reply: 'Tidak ditemukan tender sesuai filter tanggal/nilai Anda.' });
+        }
+      }
+    } catch(_dvErr) { /* fallback to LLM */ }
   }
   // === END DB-DIRECT ===
 
