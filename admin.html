@@ -204,7 +204,7 @@ function renderTable(data,tbodyId){
  '<td><input value="'+esc(item.closing)+'" onchange="'+src+'['+i+'].closing=this.value" style="width:100px"></td>'+
  '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
  '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
- '<td><button class="del-btn" onclick="'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')"></button></td>';
+ '<td><button class="del-btn" onclick="if(confirm('Hapus tender ini?')){'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')}"></button></td>';
  tb.appendChild(tr);
  });
 }
@@ -221,7 +221,7 @@ function saveData(mode){
  data=currentData;
  }
 
- showStatus(statusEl,'<span class="loader"></span> Menyimpan ke GitHub...','info');
+ showStatus(statusEl,'<span class="loader"></span> Menyimpan ke Database...','info');
 
  fetch('/api/save-tenders',{
  method:'POST',
