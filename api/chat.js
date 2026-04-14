@@ -14,110 +14,14 @@ JAWABAN WAJIB:
 Iya, ada beberapa tender Pertamina:<br><br><ol class="reply-list"><li><strong>Sewa Perangkat Komputer Dan Server</strong><br>Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS<br>Kategori: Computer & IT</li><li><strong>Provision of Swamp Barge No.1</strong><br>Milik: PT PERTAMINA HULU MAHAKAM<br>Kategori: Marine Transportation</li><li><strong>Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat</strong><br>Milik: PERTAMINA EP<br>Kategori: Man Power</li><li><strong>Jasa Penyediaan Dan Pengoperasian 1 Unit Rig Kapasitas 350 Hp</strong><br>Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI<br>Kategori: Drilling</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 Hp</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE<br>Kategori: Drilling</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah anda ingin melanjutkan melihat detail tender tersebut?</span>
 `;
 
-const TENDER_DATABASE = `
-=== DATABASE TENDER LENGKAP (HANYA REFERENSI INI YANG BOLEH DIGUNAKAN) ===
-
---- KATEGORI: Drilling & Workover Well Service ---
-1. Nama: Pekerjaan Jasa Lumpur Pemboran Lengkap Dengan Peralatan, Material Dan Personel Untuk Wilayah Jatibarang Zona 7
-   Milik: PERTAMINA EP | Nilai: Rp 25 M | Closing: 13-Mar-2026 | Lokasi: Cirebon - Jawa Barat
-
-2. Nama: Jasa Penyediaan Dan Pengoperasian 1 (Satu) Unit Rig Kapasitas 350 Hp Beserta Tenaga Kerja Dan Peralatan Untuk Workover Dan Well Services
-   Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI | Nilai: Rp 24 M | Closing: 12-Mar-2026 | Lokasi: Prabumulih - Sumatera Selatan
-
-3. Nama: Jasa Sewa Unit Perangkat Rig 550 Hp Tambahan Untuk Pekerjaan Sumuran Di Pt Pertamina Ep Zona 7
-   Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE | Nilai: Rp 23 M | Closing: 12-Mar-2026 | Lokasi: Cirebon - Jawa Barat
-
-4. Nama: Jasa Penyemenan dan Stimulasi di Pertamina EP Zona 10
-   Milik: BP BERAU LTD | Nilai: Rp 22 M | Closing: 09-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-5. Nama: Jasa Electric Logging, Perforation dan Data Processing (EWLPP) untuk Pekerjaan Well Intervention PT Pertamina EP Zona 7
-   Milik: KANGEAN ENERGY INDONESIA LTD | Nilai: Rp 21 M | Closing: 06-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-6. Nama: Call of Order (COO) Oil Well Cement Class G di Wilayah Kerja PEP Regional 3
-   Milik: INPEX MASELA | Nilai: Rp 20 M | Closing: 06-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-7. Nama: Pekerjaan Electric Wireline Logging, Data Processing dan Interpretation (EWLDPI) Sumur Eksplorasi PT Pertamina EP Regional 2 Tahun 2026-2028
-   Milik: PERTAMINA EP | Nilai: Rp 19 M | Closing: 06-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-8. Nama: Jasa Sewa Perangkat RIG dengan Kapasitas 700 HP sampai 750 HP
-   Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI | Nilai: Rp 18 M | Closing: 13-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-9. Nama: Penyewaan & Pengoperasian Artificial Lift (Electrical Submersible Pump) Lengkap Dengan Fasilitas Dan Sarana Pendukungnya
-   Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI | Nilai: Rp 28 M | Closing: 22-Jan-2025 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-10. Nama: Jasa Sewa Perangkat RIG dengan Kapasitas 250 HP
-    Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI | Nilai: Rp 17 M | Closing: 30-Oct-2025 | Lokasi: Jakarta Selatan - DKI Jakarta
-
---- KATEGORI: Seismic, Geotechnic, & Geophysics ---
-11. Nama: Survei Seismik Offshore 2D Kandawulo
-    Milik: PERTAMINA HULU ENERGI | Nilai: Rp 15 M | Closing: 30-Oct-2025 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-12. Nama: Survei Seismik Offshore 3D Kandawulo
-    Milik: PERTAMINA HULU ENERGI | Nilai: Rp 16 M | Closing: 13-Mar-2025 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-13. Nama: Survei Seismik Offshore 2D SE Java
-    Milik: PERTAMINA HULU ENERGI | Nilai: Rp 14 M | Closing: 27-Mar-2025 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-14. Nama: Study Local Geoid Modeling Jabung Block
-    Milik: PETROCHINA INTERNATIONAL JABUNG LTD | Nilai: Rp 5 M | Closing: 25-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
---- KATEGORI: Computer & IT ---
-15. Nama: Sewa Perangkat Komputer Dan Server Untuk Job P-Meps
-    Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 10 M | Closing: 27-Nov-2025 | Lokasi: Nunukan - Kalimantan Timur
-
-16. Nama: Jasa Pembuatan Application Development Services
-    Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 6 M | Closing: 04-Jul-2025 | Lokasi: Nunukan - Kalimantan Timur
-
-17. Nama: License Software Utility Untuk Kebutuhan Operasional Perusahaan Job Pmeps
-    Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 3 M | Closing: 20-Jun-2025 | Lokasi: Nunukan - Kalimantan Timur
-
-18. Nama: Jasa Managed Network Device dan IT Support
-    Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 7 M | Closing: 27-May-2025 | Lokasi: Nunukan - Kalimantan Timur
-
-19. Nama: Pengadaan Penyediaan Layanan Co-Location Disaster Recovery Center (DRC) Tahun 2026
-    Milik: PLNE (PRIMA LAYANAN NASIONAL ENJINIRING) | Nilai: Rp 6.5 M | Closing: 04-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-20. Nama: Jasa Managed Network Device dan IT Support (2025)
-    Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 4 M | Closing: 16-Apr-2025 | Lokasi: Nunukan - Kalimantan Timur
-
---- KATEGORI: Marine Transportation ---
-21. Nama: Provision of Swamp Barge No.1
-    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: Rp 17 M | Closing: 31-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-22. Nama: Penyediaan dan Pengoperasian Landing Craft Tank (LCT) Untuk Mendukung Kegiatan Operasi Produksi di Pertamina Field Pangkalan Susu
-    Milik: PERTAMINA EP | Nilai: Rp 8 M | Closing: 16-Mar-2026 | Lokasi: Kotabaru - Kalimantan Selatan
-
-23. Nama: Jasa Sewa 1 (Satu) Unit Crew Boat - Unit B
-    Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE | Nilai: Rp 16 M | Closing: 23-Jun-2025 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-24. Nama: Penyediaan Jasa Sewa Kapal Harbour Tug
-    Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE | Nilai: Rp 14 M | Closing: 03-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-25. Nama: Rental Of Utility Boat to Support PHE OSES
-    Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: Rp 19 M | Closing: 10-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
-26. Nama: Invitation to Bid & Term of Reference (TOR) Time Charter Vessel Procurement 1 (one) Unit MR-WO/Intermedia Laycan 10-11 Februari 2026
-    Milik: PERTAMINA (PERSERO) PUSAT | Nilai: Rp 10 M | Closing: 19-Jan-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
-
---- KATEGORI: Man Power General Labour Outsourcing ---
-27. Nama: Penyediaan Jasa Tenaga Kerja Penunjang Untuk Membantu Pekerjaan Administrasi Wilayah Kerja PT Pertamina EP Pangkalan Susu Field
-    Milik: PERTAMINA EP | Nilai: Rp 10 M | Closing: 01-Apr-2026 | Lokasi: Kotabaru - Kalimantan Selatan
-
-28. Nama: Pekerjaan Pelaksanaan Kegiatan Penunjang Administrasi Tata Naskah Dinas Dan Kearsipan (TNDK) PT PLN (Persero) Unit Induk Distribusi Bali
-    Milik: PLN (PERSERO) DISTRIBUSI BALI | Nilai: Rp 5 M | Closing: 30-Mar-2026 | Lokasi: Denpasar - Bali
-
-29. Nama: Open Sourcing - Pengadaan Marketing Agency Pt Garuda Indonesia (Persero) Tbk
-    Milik: PT GARUDA INDONESIA | Nilai: Rp 15 M | Closing: 27-Mar-2026 | Lokasi: Tangerang - Banten
-
-30. Nama: Tangguh Total Resources Management (TRM) - Business Support Services
-    Milik: BP BERAU LTD | Nilai: Rp 18 M | Closing: 02-Apr-2026 | Lokasi: Teluk Bintuni - Papua Barat
-
-31. Nama: Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat Dan Angkutan Ringan Selama 24 Bulan Di PT Pertamina EP Zona 1 Field Rantau
-    Milik: PERTAMINA EP | Nilai: Rp 8 M | Closing: 27-Mar-2026 | Lokasi: Kotabaru - Kalimantan Selatan
-
-32. Nama: Pengadaan Jasa Tenaga Alih Daya (TAD) Pekerjaan Re Handling Material Stockpile Dan SHP
-    Milik: PT TIMAH LOGISTIK | Nilai: Rp 1 M | Closing: 26-Mar-2026 | Lokasi: Pangkal Pinang - Kepulauan Babel
-`;
+const _fs = require('fs');
+const _path = require('path');
+let TENDER_DATABASE;
+try {
+  TENDER_DATABASE = _fs.readFileSync(_path.join(__dirname, '..', 'data', 'tenders_text.txt'), 'utf8');
+} catch(e) {
+  TENDER_DATABASE = '=== DATABASE TENDER LENGKAP ===\nTidak ada data tender.';
+}
 
 const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id. Jawab dalam Bahasa Indonesia yang ramah dan profesional.
 
@@ -243,7 +147,7 @@ export default async function handler(req, res) {
         return res.status(200).json({ reply: _vReply });
       } else {
         /* Paginate value filter results */
-           const _vTotal = _valTenders.length;
+        const _vTotal = _valTenders.length;
         const _vStart = (page - 1) * PAGE_SIZE;
         const _vEnd = Math.min(_vStart + PAGE_SIZE, _vTotal);
         const _vPage = _valTenders.slice(_vStart, _vEnd);
@@ -328,7 +232,7 @@ export default async function handler(req, res) {
     'rig':'Drilling Workover Well Service','workover':'Drilling Workover Well Service',
     'pemboran':'Drilling Workover Well Service','wireline':'Drilling Workover Well Service',
     'logging':'Drilling Workover Well Service','cementing':'Drilling Workover Well Service',
-    'seismik':'Seismic Geotechnic Geophysics','seismic':'Seismic Geotechnic Geophysics',
+    'seismak':'Seismic Geotechnic Geophysics','seismic':'Seismic Geotechnic Geophysics',
     'geoteknik':'Seismic Geotechnic Geophysics','geotechnic':'Seismic Geotechnic Geophysics',
     'it':'Computer dan IT','komputer':'Computer dan IT','server':'Computer dan IT',
     'software':'Computer dan IT','network':'Computer dan IT','drc':'Computer dan IT',
@@ -365,7 +269,7 @@ export default async function handler(req, res) {
       const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
       if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
       const _nm = _l.match(/^\d+\.\s+Nama:\s*(.+)/i);
-      if (_nm) { _ce = {nama:_nm[1].trim(), cat:_dc, milik:'', nilai:'', closing:'', lokasi:''}; continue; }
+      if (_nm) { _ce = {nama:_nm[1].trim(), cat:_dc, milik:'', nilai='', closing:'', lokasi:''}; continue; }
       if (_ce && _l.includes('Milik:')) {
         const _ps = _l.split('|').map(s=>s.trim());
         _ce.milik = (_ps[0].match(/Milik:\s*(.+)/i)||[])[1]||'';
@@ -593,7 +497,7 @@ export default async function handler(req, res) {
           const kD=_kKws.length>0?' kategori <strong>'+_kKws.join(', ')+'</strong>':'';
           reply='Maaf, tidak ditemukan tender'+kD+cD+' dalam database kami.';
           const _suggestBtns = [
-            ['Drilling & Workover','tender drilling'],['Seismik & Geofisika','tender seismik'],
+            ['Drilling & Workover','tender drilling'],['Seismak & Geofisika','tender seismik'],
             ['Komputer & IT','tender komputer IT'],['Marine Transportation','tender marine transportation'],
             ['ManPower & Outsourcing','tender manpower'],['Nilai > 20 Miliar','Ada tender nilainya > 20 miliar?'],
             ['Semua Tender','Ada tender apa saja hari ini?']
