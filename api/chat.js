@@ -296,7 +296,19 @@ export default async function handler(req, res) {
       }
     }
 
-    if (_dbItems.length > 0) {
+     // Apply date+value filters to DB-DIRECT results (hoisted fns available)
+    var _dbDf = parseDateFilter(userWords.join(' '));
+    var _dbVf = parseValueFilter(userWords.join(' '));
+    if (_dbDf || _dbVf) {
+      var _dbFiltered = _dbItems.filter(function(item){
+        if (_dbDf && !_dateOk(item, _dbDf)) return false;
+        if (_dbVf && !_valueOk(item, _dbVf)) return false;
+        return true;
+      });
+      _dbItems.length = 0;
+      _dbFiltered.forEach(function(x){ _dbItems.push(x); });
+    }
+   if (_dbItems.length > 0) {
       const _cL = companyKwsG.length>0 ? ' dari <strong>'+companyKwsG.map(k=>k.toUpperCase()).join('/')+'</strong>' : '';
       const _kL = categoryKwsG.length>0 ? ' kategori <strong>'+categoryKwsG.map(k=>k.charAt(0).toUpperCase()+k.slice(1)).join('/')+'</strong>' : '';
 
