@@ -171,7 +171,7 @@ export default async function handler(req, res) {
   const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
   let filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
   // Strip date/month/year/value terms to prevent false category matches
-  const _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai)$|^\d{4}$/;
+  const _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|melebihi|closing)$|^\d{4}$/;
   filterWords = filterWords.filter(function(w){ return !_dateFwExclude.test(w); });
 
   const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
@@ -268,8 +268,9 @@ export default async function handler(req, res) {
     : '';
 
   // === DB-DIRECT: Bypass LLM for category/company queries ===
-  if (companyKwsG.length > 0 || categoryKwsG.length > 0) {
-    const _ln = TENDER_DATABASE.split('\n'); let _dc = ''; const _dbItems = []; let _ce = null;
+  var _dvDF = parseDateFilter(userWords.join(' ')); var _dvVF = parseValueFilter(userWords.join(' '));
+  if (companyKwsG.length > 0 || categoryKwsG.length > 0 || _dvDF || _dvVF) {
+    const _ln = TENDER_DATABASE.split('\n'); let _dc = ''; let _dbItems = []; let _ce = null;
     for (const _l of _ln) {
       const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
       if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
@@ -291,11 +292,12 @@ export default async function handler(req, res) {
           const mc=(_catNameMap[kw]||'').toLowerCase(); if(!mc) return false;
           const fw=mc.split(/[\s&,]+/)[0]; return fw.length>2 && _ce.cat.includes(fw);
         });
-        if (compOk && catOk) _dbItems.push({..._ce});
+        if ((compOk && catOk) || (!companyKwsG.length && !categoryKwsG.length)) _dbItems.push({..._ce});
         _ce = null;
       }
     }
 
+    if (_dvDF || _dvVF) { _dbItems = _dbItems.filter(function(it){ return (!_dvDF || _dateOk(it,_dvDF)) && (!_dvVF || _valueOk(it,_dvVF)); }); }
     if (_dbItems.length > 0) {
       const _cL = companyKwsG.length>0 ? ' dari <strong>'+companyKwsG.map(k=>k.toUpperCase()).join('/')+'</strong>' : '';
       const _kL = categoryKwsG.length>0 ? ' kategori <strong>'+categoryKwsG.map(k=>k.charAt(0).toUpperCase()+k.slice(1)).join('/')+'</strong>' : '';
