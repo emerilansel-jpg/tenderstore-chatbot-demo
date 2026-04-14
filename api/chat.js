@@ -269,7 +269,7 @@ export default async function handler(req, res) {
       const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
       if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
       const _nm = _l.match(/^\d+\.\s+Nama:\s*(.+)/i);
-      if (_nm) { _ce = {nama:_nm[1].trim(), cat:_dc, milik:'', nilai='', closing:'', lokasi:''}; continue; }
+      if (_nm) { _ce = {nama:_nm[1].trim(), cat:_dc, milik:'', nilai:'', closing:'', lokasi:''}; continue; }
       if (_ce && _l.includes('Milik:')) {
         const _ps = _l.split('|').map(s=>s.trim());
         _ce.milik = (_ps[0].match(/Milik:\s*(.+)/i)||[])[1]||'';
