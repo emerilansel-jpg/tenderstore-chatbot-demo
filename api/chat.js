@@ -216,7 +216,8 @@ export default async function handler(req, res) {
       return res.json({ reply: 'Saat ini tersedia total <strong>' + _totalCount + ' tender</strong> dalam 5 kategori di database kami:<br><br><ol class="reply-list"><li><strong>Drilling & Workover Well Service</strong> (10 tender)</li><li><strong>Seismic, Geotechnic & Geophysics</strong> (4 tender)</li><li><strong>Computer & IT</strong> (6 tender)</li><li><strong>Marine Transportation</strong> (6 tender)</li><li><strong>Man Power / General Labour</strong> (6 tender)</li></ol><br><span style="color:#93c5fd;font-style:italic;">Ketik nama kategori atau perusahaan untuk melihat detail tender.</span>' });
     }
 
-    if (filterWords.length === 0) {
+    const _hasDV = /\b(januari|februari|maret|april|mei|juni|juli|agustus|september|oktober|november|desember|closing|lebih|kurang|miliar|juta)\b/i.test(userWords.join(' '));
+    if (filterWords.length === 0 && !_hasDV) {
       return res.json({ reply: 'Untuk membantu pencarian tender, silakan sebutkan kategori (contoh: drilling, marine, IT) atau nama perusahaan (contoh: Pertamina, PLN, BP).' });
     }
   }
