@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tender-Indonesia.AI â Asisten Tender Berbasis AI #1 di Indonesia</title>
+<title>Tender-Indonesia.AI &#8212; Asisten Tender Berbasis AI #1 di Indonesia</title>
 <meta name="description" content="Temukan tender yang tepat dalam hitungan detik. AI canggih yang memahami kebutuhan bisnis Anda di industri Oil & Gas, Mining, Konstruksi, dan lainnya.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,7 @@
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; font-size:16px; }
 body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; background:#070B14; overflow-x:hidden; line-height:1.7; -webkit-font-smoothing:antialiased; }
+
 /* ===== COLOR SYSTEM (matched to tender-indonesia.com blue palette) ===== */
 :root {
   --navy-900:#070B14;   --navy-800:#0A1628;   --navy-700:#0F1D32;
@@ -22,6 +23,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   --slate-200:#E2E8F0;  --slate-400:#94A3B8;  --slate-500:#64748B;
   --white:#FFFFFF;      --emerald:#10B981;    --red:#EF4444;
 }
+
 /* ===== UTILITY ===== */
 .container { max-width:1200px; margin:0 auto; padding:0 24px; }
 .text-gold { color:var(--gold-400); }
@@ -29,6 +31,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 .text-slate { color:var(--slate-400); }
 .text-white { color:var(--white); }
 .text-emerald { color:var(--emerald); }
+
 /* ===== ANIMATED BACKGROUND ===== */
 .hero-bg {
   position:relative;
@@ -54,6 +57,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   pointer-events:none;
 }
 @keyframes pulse { 0%,100%{opacity:0.4;transform:translateX(-50%) scale(1)} 50%{opacity:0.7;transform:translateX(-50%) scale(1.1)} }
+
 /* ===== NAVBAR ===== */
 .navbar {
   position:fixed; top:0; left:0; right:0; z-index:100;
@@ -87,6 +91,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   transition:all 0.2s; box-shadow:0 0 20px rgba(37,99,235,0.3);
 }
 .nav-cta:hover { transform:translateY(-1px); box-shadow:0 0 30px rgba(37,99,235,0.5); }
+
 /* ===== HERO ===== */
 .hero { position:relative; z-index:1; padding:160px 0 80px; text-align:center; }
 .hero-badge {
@@ -99,6 +104,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 .hero-badge-dot { width:8px; height:8px; border-radius:50%; background:var(--emerald); animation:blink 2s infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
 .hero h1 {
   font-family:'Plus Jakarta Sans','Inter',sans-serif;
   font-size:clamp(36px, 5vw, 64px); font-weight:800;
@@ -139,6 +145,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   text-decoration:none; cursor:pointer; transition:all 0.25s;
 }
 .btn-secondary:hover { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2); }
+
 /* ===== STATS BAR ===== */
 .stats-bar {
   position:relative; z-index:1;
@@ -161,6 +168,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   line-height:1.2;
 }
 .stat-label { font-size:14px; color:var(--slate-500); margin-top:4px; font-weight:500; }
+
 /* ===== PROBLEM SECTION ===== */
 .section { padding:100px 0; position:relative; }
 .section-dark { background:var(--navy-800); }
@@ -176,6 +184,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   color:var(--white); max-width:720px; margin-bottom:20px;
 }
 .section-sub { font-size:18px; color:var(--slate-400); max-width:600px; line-height:1.7; margin-bottom:48px; }
+
 /* Pain points grid */
 .pain-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px; }
 .pain-card {
@@ -188,6 +197,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 .pain-icon { font-size:32px; margin-bottom:16px; }
 .pain-title { font-size:18px; font-weight:700; color:var(--white); margin-bottom:8px; }
 .pain-text { font-size:15px; color:var(--slate-400); line-height:1.6; }
+
 /* ===== SOLUTION SECTION ===== */
 .solution-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
 .solution-features { display:flex; flex-direction:column; gap:24px; }
@@ -206,6 +216,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 }
 .feature-content h4 { font-size:16px; font-weight:700; color:var(--white); margin-bottom:4px; }
 .feature-content p { font-size:14px; color:var(--slate-400); line-height:1.6; }
+
 /* Demo mockup */
 .demo-mockup {
   background:var(--navy-700); border-radius:20px; border:1px solid rgba(255,255,255,0.08);
@@ -243,6 +254,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 .typing-dot:nth-child(2) { animation-delay:0.2s; }
 .typing-dot:nth-child(3) { animation-delay:0.4s; }
 @keyframes typeBounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
 /* ===== HOW IT WORKS ===== */
 .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; counter-reset:steps; }
 .step-card {
@@ -263,6 +275,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 }
 .step-card h3 { font-size:20px; font-weight:700; color:var(--white); margin-bottom:8px; }
 .step-card p { font-size:15px; color:var(--slate-400); line-height:1.6; }
+
 /* ===== SOCIAL PROOF ===== */
 .logos-strip {
   display:flex; align-items:center; justify-content:center; gap:48px; flex-wrap:wrap;
@@ -271,6 +284,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 }
 .logos-strip:hover { opacity:0.8; }
 .logo-item { font-size:15px; font-weight:700; color:var(--slate-400); letter-spacing:0.5px; white-space:nowrap; }
+
 /* ===== TESTIMONIAL ===== */
 .testimonial-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:24px; }
 .testimonial-card {
@@ -290,7 +304,8 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 }
 .testimonial-info h5 { font-size:14px; font-weight:700; color:var(--white); }
 .testimonial-info p { font-size:12px; color:var(--slate-500); }
-/* ===== PRICIOG ===== */
+
+/* ===== PRICING ===== */
 .pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:24px; max-width:900px; margin:0 auto; }
 .pricing-card {
   padding:40px 32px; border-radius:20px;
@@ -319,8 +334,9 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
 .pricing-desc { font-size:14px; color:var(--slate-400); margin:12px 0 24px; }
 .pricing-features { list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
 .pricing-features li { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--slate-200); }
-.pricing-features li::before { content:'â'; color:var(--emerald); font-weight:700; flex-shrink:0; }
+.pricing-features li::before { content:'&#10003;'; color:var(--emerald); font-weight:700; flex-shrink:0; }
 .btn-full { width:100%; justify-content:center; }
+
 /* ===== CTA SECTION ===== */
 .cta-section {
   padding:100px 0; text-align:center;
@@ -340,6 +356,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   font-size:13px; color:var(--red); font-weight:600;
   margin-bottom:24px;
 }
+
 /* ===== FOOTER ===== */
 footer {
   padding:48px 0 24px; border-top:1px solid rgba(255,255,255,0.05);
@@ -359,6 +376,7 @@ footer {
 .footer-bottom { text-align:center; margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.03); }
 .footer-bottom p { font-size:12px; color:var(--slate-500); }
 .footer-partner { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; font-size:12px; color:var(--slate-500); }
+
 /* ===== FLOATING WhatsApp ===== */
 .wa-float {
   position:fixed; bottom:28px; right:28px; z-index:99;
@@ -377,6 +395,7 @@ footer {
   animation:waPulse 2s infinite;
 }
 @keyframes waPulse { 0%{transform:scale(1);opacity:0.6} 100%{transform:scale(1.8);opacity:0} }
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:968px) {
   .solution-grid { grid-template-columns:1fr; }
@@ -411,7 +430,7 @@ footer {
     <a href="#testimoni">Testimoni</a>
   </div>
   <a href="https://web.whatsapp.com/send?phone=6281282248240&text=Halo,%20saya%20tertarik%20dengan%20Tender-Indonesia%20AI" class="nav-cta" target="_blank">
-    Hubungi Kami â
+    Hubungi Kami &#8594;
   </a>
 </div>
 </nav>
@@ -434,7 +453,7 @@ footer {
 
   <p class="hero-sub">
     Asisten AI pertama di Indonesia yang memahami kebutuhan tender perusahaan Anda.
-    Cukup ketik pertanyaan â langsung dapat jawaban akurat dari database
+    Cukup ketik pertanyaan &#8212; langsung dapat jawaban akurat dari database
     ratusan tender aktif di sektor Oil & Gas, Mining, Konstruksi, dan lainnya.
   </p>
 
@@ -480,23 +499,23 @@ footer {
 <!-- ===== PROBLEM SECTION ===== -->
 <section class="section section-dark">
 <div class="container">
-  <div class="section-label">â ï¸ MASALAH</div>
+  <div class="section-label">&#9888;&#65039; MASALAH</div>
   <h2 class="section-title">Berapa Banyak Tender yang Terlewat Minggu Ini?</h2>
   <p class="section-sub">Setiap hari, puluhan tender baru dipublikasikan. Tim procurement Anda tidak mungkin memantau semuanya secara manual.</p>
 
   <div class="pain-grid">
     <div class="pain-card">
-      <div class="pain-icon">â°</div>
+      <div class="pain-icon">&#9200;</div>
       <h3 class="pain-title">Terlalu Lambat</h3>
       <p class="pain-text">Butuh berjam-jam untuk menyaring ratusan dokumen tender. Saat ditemukan, deadline sudah lewat.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">ð</div>
+      <div class="pain-icon">&#128269;</div>
       <h3 class="pain-title">Sulit Memfilter</h3>
       <p class="pain-text">Mencari tender berdasarkan nilai, lokasi, atau kategori tertentu? Harus buka satu per satu. Tidak efisien.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">ð¸</div>
+      <div class="pain-icon">&#128184;</div>
       <h3 class="pain-title">Kehilangan Peluang</h3>
       <p class="pain-text">Kompetitor Anda sudah mendaftar duluan karena punya informasi lebih cepat. Anda kehilangan kontrak miliaran rupiah.</p>
     </div>
@@ -509,37 +528,37 @@ footer {
 <div class="container">
   <div class="solution-grid">
     <div>
-      <div class="section-label">ð SOLUSI</div>
+      <div class="section-label">&#128640; SOLUSI</div>
       <h2 class="section-title">Tanya AI, Dapat Jawaban Instan</h2>
       <p class="section-sub">Seperti punya asisten procurement pribadi yang bekerja 24 jam, memahami bahasa Indonesia, dan tidak pernah melewatkan satu tender pun.</p>
 
       <div class="solution-features">
         <div class="feature-item">
-          <div class="feature-icon">ð¯</div>
+          <div class="feature-icon">&#127919;</div>
           <div class="feature-content">
             <h4>Filter Cerdas</h4>
-            <p>Tanya "Tender Pertamina di atas 20 miliar" â langsung dapat daftar lengkap dengan nilai dan deadline.</p>
+            <p>Tanya "Tender Pertamina di atas 20 miliar" &#8212; langsung dapat daftar lengkap dengan nilai dan deadline.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">ð</div>
+          <div class="feature-icon">&#128197;</div>
           <div class="feature-content">
             <h4>Filter Tanggal & Nilai</h4>
-            <p>"Tender closing bulan April" atau "Nilai di bawah  50M" â AI memahami dan langsung menyaring.</p>
+            <p>"Tender closing bulan April" atau "Nilai di bawah 50M" &#8212; AI memahami dan langsung menyaring.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">ð¢</div>
+          <div class="feature-icon">&#127970;</div>
           <div class="feature-content">
             <h4>Pencarian per Perusahaan</h4>
             <p>Cari tender berdasarkan pemilik proyek: Pertamina, Medco, BP, Kangean Energy, dan lainnya.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">â¡</div>
+          <div class="feature-icon">&#9889;</div>
           <div class="feature-content">
             <h4>Multi-Kategori</h4>
-            <p>Drilling, Marine, Seismic, IT, Manpower â semua sektor dalam satu platform cerdas.</p>
+            <p>Drilling, Marine, Seismic, IT, Manpower &#8212; semua sektor dalam satu platform cerdas.</p>
           </div>
         </div>
       </div>
@@ -559,11 +578,11 @@ footer {
         </div>
         <div class="chat-bubble chat-ai" style="animation-delay:1s">
           Ditemukan <strong>22 tender</strong> drilling bulan Maret:<br><br>
-          1. <strong>Jasa Lumpur Pemboran</strong> â Rp 25 M<br>
+          1. <strong>Jasa Lumpur Pemboran</strong> &#8212; Rp 25 M<br>
           &nbsp;&nbsp;&nbsp;Milik: Pertamina EP<br>
-          2. <strong>Sewa Rig 550 HP</strong> â Rp 23 M<br>
+          2. <strong>Sewa Rig 550 HP</strong> &#8212; Rp 23 M<br>
           &nbsp;&nbsp;&nbsp;Milik: Pertamina Hulu Energi<br>
-          3. <strong>Electric Wireline Logging</strong> â Rp 21 M<br>
+          3. <strong>Electric Wireline Logging</strong> &#8212; Rp 21 M<br>
           &nbsp;&nbsp;&nbsp;Milik: Kangean Energy<br><br>
           <em style="color:var(--blue-300)">Mau lihat yang lain?</em>
         </div>
@@ -584,7 +603,7 @@ footer {
 <!-- ===== HOW IT WORKS ===== -->
 <section class="section section-dark" id="cara-kerja">
 <div class="container" style="text-align:center">
-  <div class="section-label" style="justify-content:center">âï¸ CARA KERJA</div>
+  <div class="section-label" style="justify-content:center">&#9881;&#65039; CARA KERJA</div>
   <h2 class="section-title" style="margin:0 auto 16px; text-align:center">Semudah Mengirim Chat</h2>
   <p class="section-sub" style="margin:0 auto 56px; text-align:center">Tidak perlu pelatihan. Tidak perlu download aplikasi. Cukup ketik pertanyaan seperti biasa.</p>
 
@@ -597,7 +616,7 @@ footer {
     <div class="step-card">
       <div class="step-num">02</div>
       <h3>Ketik Pertanyaan Anda</h3>
-      <p>"Ada tender marine?", "Tender Pertamina closing April", "Nilai di bawah 50 miliar" â pakai bahasa sehari-hari.</p>
+      <p>"Ada tender marine?", "Tender Pertamina closing April", "Nilai di bawah 50 miliar" &#8212; pakai bahasa sehari-hari.</p>
     </div>
     <div class="step-card">
       <div class="step-num">03</div>
@@ -629,41 +648,41 @@ footer {
 <section class="section section-dark" id="testimoni">
 <div class="container">
   <div style="text-align:center">
-    <div class="section-label" style="justify-content:center">ð¬ TESTIMONI</div>
+    <div class="section-label" style="justify-content:center">&#128172; TESTIMONI</div>
     <h2 class="section-title" style="margin:0 auto 48px; text-align:center">Apa Kata Pengguna Kami</h2>
   </div>
 
   <div class="testimonial-grid">
     <div class="testimonial-card">
-      <div class="testimonial-stars">âââââ</div>
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <p class="testimonial-text">"Sebelumnya tim kami butuh 2-3 jam untuk screening tender. Sekarang dengan Tender-Indonesia AI, cukup 5 menit. Efisiensi luar biasa."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">BH</div>
         <div class="testimonial-info">
           <h5>Budi Hartono</h5>
-          <p>Direktur Operasional â PT Drilling Services Indonesia</p>
+          <p>Direktur Operasional &#8212; PT Drilling Services Indonesia</p>
         </div>
       </div>
     </div>
     <div class="testimonial-card">
-      <div class="testimonial-stars">âââââ</div>
-      <p class="testimonial-text">"Saya sudah berumur, tidak paham teknologi AI. Tapi ini sangat mudah â tinggal ketik pertanyaan seperti WhatsApp. Langsung dapat jawaban."</p>
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">"Saya sudah berumur, tidak paham teknologi AI. Tapi ini sangat mudah &#8212; tinggal ketik pertanyaan seperti WhatsApp. Langsung dapat jawaban."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">SW</div>
         <div class="testimonial-info">
           <h5>Surya Wirawan</h5>
-          <p>CEO â PT Konstruksi Mandiri Perkasa</p>
+          <p>CEO &#8212; PT Konstruksi Mandiri Perkasa</p>
         </div>
       </div>
     </div>
     <div class="testimonial-card">
-      <div class="testimonial-stars">âââââ</div>
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       <p class="testimonial-text">"Kami berhasil memenangkan 3 tender baru di Q1 berkat informasi yang lebih cepat dari Tender-Indonesia AI. ROI-nya sudah terbukti."</p>
       <div class="testimonial-author">
         <div class="testimonial-avatar">AR</div>
         <div class="testimonial-info">
           <h5>Andi Rahmawan</h5>
-          <p>VP Business Development â PT Marine Logistic Nusantara</p>
+          <p>VP Business Development &#8212; PT Marine Logistic Nusantara</p>
         </div>
       </div>
     </div>
@@ -674,7 +693,7 @@ footer {
 <!-- ===== PRICING ===== -->
 <section class="section" id="harga">
 <div class="container" style="text-align:center">
-  <div class="section-label" style="justify-content:center">ð INVESTASI</div>
+  <div class="section-label" style="justify-content:center">&#128142; INVESTASI</div>
   <h2 class="section-title" style="margin:0 auto 16px; text-align:center">Pilih Paket Sesuai Kebutuhan</h2>
   <p class="section-sub" style="margin:0 auto 56px; text-align:center">Satu tender yang Anda menangkan sudah mengembalikan investasi ini berkali-kali lipat.</p>
 
@@ -713,7 +732,7 @@ footer {
         <li>Dedicated account manager</li>
         <li>Akses info pemenang tender</li>
       </ul>
-      <a href="https://web.whatsapp.com/send?phone=6281282248240&text=Saya%20tertarik%20paket%20Enterprise%20Tender-Indonesia%20AI" class="btn-primary btn-full" target="_blank">Pilih Enterprise â</a>
+      <a href="https://web.whatsapp.com/send?phone=6281282248240&text=Saya%20tertarik%20paket%20Enterprise%20Tender-Indonesia%20AI" class="btn-primary btn-full" target="_blank">Pilih Enterprise &#8594;</a>
     </div>
   </div>
 </div>
@@ -723,7 +742,7 @@ footer {
 <section class="cta-section">
 <div class="container" style="position:relative; z-index:1">
   <div class="cta-badge">
-    ð¥ Kuota Terbatas â Tersisa 15 Slot Bulan Ini
+    &#128293; Kuota Terbatas &#8212; Tersisa 15 Slot Bulan Ini
   </div>
   <h2 class="section-title" style="text-align:center; margin:0 auto 16px; max-width:700px;">
     Pesaing Anda Sudah Selangkah Lebih Maju.
@@ -735,7 +754,7 @@ footer {
   </p>
   <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
     <a href="https://tenderstore-chatbot-demo.vercel.app" class="btn-primary" target="_blank" style="font-size:19px; padding:18px 44px;">
-      Coba Demo Gratis Sekarang â
+      Coba Demo Gratis Sekarang &#8594;
     </a>
   </div>
   <p style="text-align:center; margin-top:16px; font-size:13px; color:var(--slate-500);">
@@ -763,7 +782,7 @@ footer {
     <div class="footer-partner">
       Powered by <strong style="color:var(--blue-400)">Tender Indonesia</strong> &bull; PT. Tender Indonesia
     </div>
-    <p style="margin-top:4px;">&copy; 2026 Tender-Indonesia.AI â Hak Cipta Dilindungi</p>
+    <p style="margin-top:4px;">&copy; 2026 Tender-Indonesia.AI &#8212; Hak Cipta Dilindungi</p>
   </div>
 </div>
 </footer>
