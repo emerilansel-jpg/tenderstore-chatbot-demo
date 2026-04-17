@@ -60,6 +60,29 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .count-badge{background:#3b82f6;color:#fff;padding:2px 8px;border-radius:12px;font-size:12px;margin-left:8px}
+
+/* === ADMIN UI/UX IMPROVEMENTS === */
+table tbody tr{transition:background .2s ease!important}
+table tbody tr:hover{background:rgba(37,99,235,.12)!important}
+table tbody tr:nth-child(even){background:rgba(30,37,51,.3)}
+table tbody tr:nth-child(even):hover{background:rgba(37,99,235,.12)!important}
+table{table-layout:auto!important;width:100%!important}
+table th,table td{padding:12px 14px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:220px!important}
+table td:nth-child(2){max-width:280px!important;white-space:normal!important;word-break:break-word!important}
+table th{position:sticky!important;top:0!important;z-index:2!important;background:rgb(20,24,32)!important;border-bottom:2px solid rgba(96,165,250,.3)!important;font-weight:600!important;text-transform:uppercase!important;font-size:12px!important;letter-spacing:.5px!important;color:rgba(96,165,250,.9)!important}
+.search-bar{display:flex;gap:10px;margin-bottom:16px;align-items:center}
+.search-bar input{flex:1;padding:10px 16px;border-radius:10px;border:1px solid rgba(96,165,250,.2);background:rgba(30,37,51,.8);color:#f0f0f0;font-size:14px;transition:all .3s ease}
+.search-bar input:focus{border-color:rgba(96,165,250,.5);box-shadow:0 0 0 3px rgba(59,130,246,.1);outline:none}
+.search-bar input::placeholder{color:rgba(136,153,187,.6)}
+.btn-danger{background:transparent!important;color:#ef4444!important;border:2px solid #ef4444!important;font-weight:600!important;transition:all .3s ease!important}
+.btn-danger:hover{background:rgba(239,68,68,.15)!important;box-shadow:0 0 15px rgba(239,68,68,.2)!important}
+table td:last-child button{transition:all .2s ease!important;opacity:.7}
+table td:last-child button:hover{opacity:1!important;transform:scale(1.2)!important}
+table tr:hover td:last-child button{opacity:1}
+textarea{border-radius:10px!important;border:1px solid rgba(96,165,250,.2)!important;padding:14px 16px!important;font-size:14px!important;transition:border-color .3s ease!important;background:rgba(15,17,23,.8)!important}
+textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px rgba(59,130,246,.1)!important;outline:none!important}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+[id*="panel"]{animation:fadeInUp .3s ease-out}
 </style>
 
 <style id="auth-style">
@@ -148,7 +171,10 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
 
  <!-- Tab 2: Data saat ini -->
  <div id="panel-data" class="panel">
- <div class="btn-row" style="margin-bottom:16px">
+<div class="search-bar">
+      <input type="text" id="searchFilter" placeholder="&#128269; Cari tender... (nama, perusahaan, kategori, lokasi)" oninput="filterTable(this.value)">
+    </div>
+     <div class="btn-row" style="margin-bottom:16px">
  <button class="btn btn-primary" onclick="loadData()"> Refresh Data</button>
  <button class="btn btn-success" onclick="saveData('current')"> Simpan Perubahan</button>
  <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}"> Hapus Semua</button>
@@ -304,6 +330,8 @@ function doAuth() {
     if(ov) ov.style.display='none';
   }
 })();
+
+function filterTable(q){q=q.toLowerCase().trim();var rows=document.querySelectorAll('#currentBody tr');var c=0;rows.forEach(function(r){var t=r.textContent.toLowerCase();if(!q||t.includes(q)){r.style.display='';c++}else{r.style.display='none'}});var info=document.getElementById('countInfo');if(info&&q){info.textContent='Menampilkan '+c+' dari '+rows.length+' tender'}else if(info){info.textContent='Total: '+rows.length+' tender'}}
 </script>
 </body>
 </html>
