@@ -331,7 +331,7 @@ function doAuth() {
   }
 })();
 
-function filterTable(q){q=q.toLowerCase().trim();var rows=document.querySelectorAll('#currentBody tr');var c=0;rows.forEach(function(r){var t=r.textContent.toLowerCase();if(!q||t.includes(q)){r.style.display='';c++}else{r.style.display='none'}});var info=document.getElementById('countInfo');if(info&&q){info.textContent='Menampilkan '+c+' dari '+rows.length+' tender'}else if(info){info.textContent='Total: '+rows.length+' tender'}}
+function filterTable(q){q=q.toLowerCase().trim();var rows=document.querySelectorAll('#currentBody tr');var c=0;rows.forEach(function(r){var inputs=r.querySelectorAll('input');var t=r.textContent.toLowerCase();inputs.forEach(function(inp){t+=' '+(inp.value||'').toLowerCase()});if(!q||t.includes(q)){r.style.display='';c++}else{r.style.display='none'}});var info=document.getElementById('countInfo');if(info&&q){info.textContent='Menampilkan '+c+' dari '+rows.length+' tender'}else if(info){info.textContent='Total: '+rows.length+' tender'}}
 </script>
 </body>
 </html>
