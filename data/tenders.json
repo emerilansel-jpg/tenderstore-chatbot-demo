@@ -280,43 +280,51 @@
     "kategori": "KOMPUTER IT"
   },
   {
-    "nama": "Pengadaan Pipa HFW/ERW 3 In Sch 40 Untuk Zona 1&4 Selama 2 Tahun Secara Call Of Order Di Regional 1",
-    "milik": "PERTAMINA EP",
+    "nama": "Pengadaan Pneumatic Shut Down Valve Size 3IN-10IN untuk Proyek Pengembangan Lapangan Risma",
+    "milik": "PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES)",
     "nilai": "N/A",
     "closing": "20-Apr-2026",
     "lokasi": "Jakarta Selatan - DKI Jakarta",
-    "kategori": "PIPE CASING TUBING & HOSE"
+    "kategori": "VALVE"
   },
   {
-    "nama": "Call Off Order of 13-3/8” OCTG API Connection for MDK Development Wells",
-    "milik": "HUSKY - CNOOC MADURA LIMITED",
+    "nama": "Auto Drain Valve",
+    "milik": "N/A",
     "nilai": "N/A",
-    "closing": "17-Apr-2026",
-    "lokasi": "Jakarta Selatan - DKI Jakarta",
-    "kategori": "PIPE CASING TUBING & HOSE"
+    "closing": "N/A",
+    "lokasi": "N/A",
+    "kategori": "VALVE"
   },
   {
-    "nama": "Pengadaan Material Led Streetlight & Floodlight Hazardous Applications Revitalization Corrosion Conduit For Cc 3, Tt2, Tt 3 & Jetty Road Pltu",
-    "milik": "PLN (PERSERO) PUSHARLIS UP2W I, II, III, IV, V, VI",
-    "nilai": "N/A",
-    "closing": "20-Apr-2026",
-    "lokasi": "Semarang - Jawa Tengah",
-    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE"
+    "nama": "Pengadaan Sistem Monitoring Kegiatan Unit Alkal",
+    "milik": "PROVINSI DKI JAKARTA",
+    "nilai": "Rp 193.5 JT",
+    "closing": "19-Apr-2026",
+    "lokasi": "Jakarta Pusat - DKI Jakarta",
+    "kategori": "KOMPUTER IT"
   },
   {
-    "nama": "Spare Parts for Sulfur Loading Pump",
-    "milik": "MEDCO E&P MALAKA",
+    "nama": "Pengadaan Tenaga Ahli Programmer Sistem Rekomendasi Teknis Dinas SDA",
+    "milik": "PROVINSI DKI JAKARTA",
+    "nilai": "Rp 70.95 JT",
+    "closing": "19-Apr-2026",
+    "lokasi": "Jakarta Pusat - DKI Jakarta",
+    "kategori": "KOMPUTER IT"
+  },
+  {
+    "nama": "Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura",
+    "milik": "JOB PERTAMINA - MEDCO E&P TOMORI SULAWESI",
     "nilai": "N/A",
     "closing": "22-Apr-2026",
-    "lokasi": "Aceh Timur - Nanggroe Aceh",
-    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE"
+    "lokasi": "Banggai - Sulawesi Tengah",
+    "kategori": "PIPE CASING TUBING & HOSE"
   },
   {
-    "nama": "Operator Keg. Pembangunan Tanggul Sungai 3",
-    "milik": "KOTA BANJARMASIN",
-    "nilai": "Rp 51.1 JT",
-    "closing": "20-Apr-2026",
-    "lokasi": "Banjarmasin - Kalimantan Selatan",
-    "kategori": "MAN POWER GENERAL LABOUR OUTSOURCING"
+    "nama": "Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1",
+    "milik": "PERTAMINA EP",
+    "nilai": "N/A",
+    "closing": "21-Apr-2026",
+    "lokasi": "Jakarta Selatan - DKI Jakarta",
+    "kategori": "PIPE CASING TUBING & HOSE"
   }
 ]
