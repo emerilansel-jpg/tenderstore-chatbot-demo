@@ -243,6 +243,7 @@ function parseData(){
  if(!previewData.length){showStatus('parseStatus','AI tidak menemukan data tender di text ini.','err');return}
  showStatus('parseStatus','Berhasil! Ditemukan '+previewData.length+' tender. Cek preview di bawah.','ok');
  renderTable(previewData,'previewBody');
+ checkCategorySimilarity();
  document.getElementById('previewSection').style.display='block';
  }).catch(function(e){
  btn.disabled=false;btn.innerHTML=' Proses dengan AI';
@@ -335,6 +336,36 @@ function doAuth() {
   }
 })();
 
+function checkCategorySimilarity(){
+ var knownCats=['CHEMICAL & INDUSTRIAL GAS','DRILLING & WORKOVER WELL SERVICE','EPC (Engineering Procurement Construction)','FABRICATION & MECHANICAL CONSTRUCTION','INDUSTRIAL MACHINE PART & CONSUMABLE','KOMPUTER IT','MAN POWER GENERAL LABOUR OUTSOURCING','MARINE CONTRACTOR & UNDERWATER WORK','MARINE TRANSPORTATION','PIPE, CASING, TUBING, & HOSE','SURVEY & INSPECTION','VALVE'];
+ var existCats={};
+ currentData.forEach(function(c){if(c.kategori)existCats[c.kategori.toUpperCase().trim()]=c.kategori});
+ var allCats=knownCats.slice();
+ Object.keys(existCats).forEach(function(k){if(allCats.indexOf(k)<0)allCats.push(k)});
+ var warnings=[];
+ previewData.forEach(function(p,idx){
+  if(!p.kategori)return;
+  var cat=p.kategori.toUpperCase().trim();
+  var exactMatch=false;
+  allCats.forEach(function(k){if(k.toUpperCase()===cat)exactMatch=true});
+  if(exactMatch)return;
+  var similar=[];
+  allCats.forEach(function(k){
+   var kUp=k.toUpperCase();
+   var words=cat.replace(/[&(),]/g,' ').split(/\s+/).filter(function(w){return w.length>2});
+   var matchCount=0;
+   words.forEach(function(w){if(kUp.indexOf(w)>=0)matchCount++});
+   if(words.length>0&&matchCount>=Math.ceil(words.length*0.4)){similar.push(k)}
+  });
+  if(similar.length>0){warnings.push({idx:idx+1,nama:p.nama,cat:p.kategori,similar:similar})}
+ });
+ if(warnings.length>0){
+  var msg='\u26A0\uFE0F PERINGATAN KATEGORI:\n\n';
+  warnings.forEach(function(w){msg+='Tender #'+w.idx+' ('+w.nama+'):\nKategori: '+w.cat+'\nMirip dengan: '+w.similar.join(', ')+'\n\n'});
+  msg+='Silakan edit kategori di tabel preview jika perlu sebelum simpan.';
+  alert(msg);
+ }
+}
 function filterTable(q){q=q.toLowerCase().trim();var rows=document.querySelectorAll('#currentBody tr');var c=0;rows.forEach(function(r){var inputs=r.querySelectorAll('input');var t=r.textContent.toLowerCase();inputs.forEach(function(inp){t+=' '+(inp.value||'').toLowerCase()});if(!q||t.includes(q)){r.style.display='';c++}else{r.style.display='none'}});var info=document.getElementById('countInfo');if(info&&q){info.textContent='Menampilkan '+c+' dari '+rows.length+' tender'}else if(info){info.textContent='Total: '+rows.length+' tender'}}
 </script>
 </body>
