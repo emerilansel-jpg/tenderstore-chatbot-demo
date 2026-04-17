@@ -102,6 +102,18 @@
 32. Nama: Kontrak Payung Pengadaan Chemical Cooling Tower Pt Pln Nusantara Power Up Tenayan
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Lampung Selatan - Lampung
 
---- KATEGORI: FABRICATION & MECHANICAL CONSTRUCTION ---
-33. Nama: Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
-   Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Balikpapan - Kalimantan Timur
+--- KATEGORI: Industrial Machine Part & Consumable ---
+33. Nama: Jasa Kontrak Payung Hot Splicing Belt Conveyor Dan Relaging
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Pulang Pisau - Kalimantan Tengah
+
+34. Nama: Jasa Hot Splicing Belt Conveyor Relagging Pulley UP Tarahan
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Lampung Selatan - Lampung
+
+35. Nama: Pengadaan Strategic Part Major Insp Gt.21 Dan Gt.22
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 22-Apr-2026 | Lokasi: Wajo - Sulawesi Selatan
+
+36. Nama: Kontrak Payung Jasa Hot Splicing Belt Conveyor Pltu Kaltim Teluk 2026-2028 (Ro0023-Ms2)
+   Milik: PJB UNIT BISNIS JASA O&M KALTIM TELUK | Nilai: N/A | Closing: 22-Apr-2026 | Lokasi: Balikpapan - Kalimantan Timur
+
+37. Nama: Pengadaan Spare Part dan Material Consumable Fire & Gas Donggi Matindok Field
+   Milik: PERTAMINA EP | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
