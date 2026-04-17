@@ -24,7 +24,7 @@ Format output WAJIB (JSON array):
     "nilai": "Rp XX M",
     "closing": "DD-MMM-YYYY",
     "lokasi": "Kota - Provinsi",
-    "kategori": "Salah satu dari: Drilling & Workover Well Service, Seismic Geotechnic & Geophysics, Computer & IT, Marine Transportation, Man Power General Labour Outsourcing, Chemical & Industrial, Power & Energy, Construction & Infrastructure, Other"
+    "kategori": "Pilih dari daftar resmi: CHEMICAL & INDUSTRIAL GAS, DRILLING & WORKOVER WELL SERVICE, EPC (Engineering Procurement Construction), FABRICATION & MECHANICAL CONSTRUCTION, INDUSTRIAL MACHINE PART & CONSUMABLE, KOMPUTER IT, MAN POWER GENERAL LABOUR OUTSOURCING, MARINE CONTRACTOR & UNDERWATER WORK, MARINE TRANSPORTATION, PIPE CASING TUBING & HOSE, SURVEY & INSPECTION, VALVE. Jika tidak cocok dengan daftar, buat nama kategori baru yang deskriptif (JANGAN gunakan Other)"
   }
 ]
 
@@ -32,7 +32,7 @@ ATURAN:
 - Nilai dalam format "Rp XX M" (Miliar) atau "Rp XX JT" (Juta)
 - Closing date dalam format DD-MMM-YYYY (contoh: 13-Mar-2026)
 - Nama perusahaan HURUF BESAR
-- Kategori pilih yang paling cocok dari daftar di atas
+- Kategori WAJIB pilih dari daftar resmi 12 kategori. Jika benar-benar tidak cocok, buat kategori baru yang spesifik (JANGAN PERNAH gunakan Other)
 - Jika ada info yang tidak jelas, isi dengan "N/A"
 - HANYA output JSON array, jangan ada text tambahan sebelum atau sesudah JSON`;
 
