@@ -1,9 +1,8 @@
 const EXACT_QA = `
 === JAWABAN WAJIB YANG HARUS DIGUNAKAN PERSIS (IKUTI FORMAT INI) ===
 
-PERTANYAAN 3: Ada tender apa saja hari ini? / semua tender / tender apa saja?
-JAWABAN WAJIB:
-Dalam sistem kami terdapat tender dalam 5 kategori:<br><br><ol class="reply-list"><li><strong>Drilling & Workover Well Service</strong><br>Contoh: Jasa Sewa Unit Perangkat Rig 550 Hp</li><li><strong>Seismic, Geotechnic, & Geophysics</strong><br>Contoh: Survei Seismik Offshore 2D Kandawulo</li><li><strong>Computer & IT</strong><br>Contoh: Sewa Perangkat Komputer Dan Server</li><li><strong>Marine Transportation</strong><br>Contoh: Provision of Swamp Barge No.1</li><li><strong>Man Power General Labour Outsourcing</strong><br>Contoh: Open Sourcing - Pengadaan Marketing Agency</li></ol>
+PERTANYAAN 3: Ada tender apa saja hari ini? / semua tender / tender apa saja? / kategori apa saja?
+JAWABAN: JANGAN gunakan jawaban hardcoded. Hitung SEMUA kategori unik dari DATABASE TENDER di bawah (lihat semua baris "--- KATEGORI: xxx ---"). Tampilkan SEMUA kategori yang ada beserta contoh tender dan jumlah per kategori. Format HTML dengan <strong> untuk nama kategori.
 
 PERTANYAAN 4: Apakah ada tender yang nilainya lebih dari 20 miliar? / tender nilai lebih 20 M?
 JAWABAN WAJIB:
@@ -37,6 +36,15 @@ ${EXACT_QA}
 ${TENDER_DATABASE}
 
 === INSTRUKSI UTAMA ===
+
+=== ATURAN TANGGAL & KATEGORI (WAJIB) ===
+1. Setiap tender memiliki field "Diumumkan:" = tanggal pengumuman (tanggal masuk ke sistem).
+2. Ketika user bertanya "tender 15 April" atau "tender tanggal X", cari berdasarkan TANGGAL PENGUMUMAN (Diumumkan:), BUKAN Closing.
+3. SELALU perhatikan TAHUN. "Tender April" berarti April TAHUN INI (2026), bukan April tahun lalu.
+4. Jika user tanya "tender April" tanpa tahun, default ke tahun berjalan (2026).
+5. Untuk pertanyaan kategori: hitung SEMUA kategori dari DATABASE, jangan hardcode jumlahnya.
+6. Jangan tampilkan tender yang closing-nya sudah lewat KECUALI user secara spesifik menanyakan tahun lalu.
+
 UNTUK PERTANYAAN TENTANG TENDER:
 Gunakan PERSIS jawaban yang sudah ditulis di atas dalam bagian JAWABAN WAJIB.
 JANGAN ubah nama tender, nama perusahaan, atau nilai.
