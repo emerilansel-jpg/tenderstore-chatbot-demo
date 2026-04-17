@@ -101,3 +101,7 @@
 --- KATEGORI: Chemical & Industrial Gas ---
 32. Nama: Kontrak Payung Pengadaan Chemical Cooling Tower Pt Pln Nusantara Power Up Tenayan
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Lampung Selatan - Lampung
+
+--- KATEGORI: FABRICATION & MECHANICAL CONSTRUCTION ---
+33. Nama: Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
+   Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Balikpapan - Kalimantan Timur
