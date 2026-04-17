@@ -104,7 +104,7 @@ function buildTextDatabase(data) {
     lines.push('--- KATEGORI: ' + cat + ' ---');
     cats[cat].forEach(function(t) {
       lines.push(num + '. Nama: ' + t.nama);
-      lines.push('   Milik: ' + t.milik + ' | Nilai: ' + t.nilai + ' | Closing: ' + t.closing + ' | Lokasi: ' + t.lokasi);
+      lines.push('   Milik: ' + t.milik + ' | Nilai: ' + t.nilai + ' | Closing: ' + t.closing + ' | Lokasi: ' + t.lokasi + ' | Diumumkan: ' + (t.tanggal_pengumuman || 'N/A'));
       lines.push('');
       num++;
     });
