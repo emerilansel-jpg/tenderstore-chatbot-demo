@@ -131,7 +131,6 @@ td input:focus{border-color:#3b82f6;outline:none;background:#0f172a}
  <textarea id="rawInput" placeholder="Paste data tender mentah di sini..."></textarea>
  <div class="btn-row">
  <button class="btn btn-primary" id="parseBtn" onclick="parseData()"> Proses dengan AI</button>
- <label style="color:#94a3b8;font-size:13px"><input type="checkbox" id="appendMode" checked> Tambahkan ke data yang sudah ada (jangan replace)</label>
  </div>
  <div id="parseStatus" class="status"></div>
 
@@ -250,8 +249,7 @@ function saveData(mode){
  var data;
  var statusEl=mode==='preview'?'saveStatus':'saveStatus2';
  if(mode==='preview'){
- var append=document.getElementById('appendMode').checked;
- data=append?currentData.concat(previewData):previewData;
+ data=currentData.concat(previewData);
  } else {
  data=currentData;
  }
