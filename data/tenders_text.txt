@@ -108,3 +108,10 @@
 --- KATEGORI: Construction & Infrastructure ---
 34. Nama: Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Balikpapan - Kalimantan Timur
+
+--- KATEGORI: Other ---
+35. Nama: Jasa Kontrak Payung Hot Splicing Belt Conveyor Dan Relaging
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Pulang Pisau - Kalimantan Tengah
+
+36. Nama: Jasa Hot Splicing Belt Conveyor Relagging Pulley UP Tarahan
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Lampung Selatan - Lampung
