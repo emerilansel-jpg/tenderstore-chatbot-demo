@@ -132,3 +132,7 @@
 
 41. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
+
+--- KATEGORI: Survey & Inspection ---
+42. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
+   Milik: PT PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
