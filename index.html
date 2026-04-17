@@ -81,6 +81,32 @@ body{font-family:'Inter',sans-serif;background:#0f1117;color:#f0f0f0;min-height:
 .pagi-ya:hover{background:#1d4ed8}
 .pagi-tidak{background:#374151;color:#d1d5db}
 .pagi-tidak:hover{background:#4b5563}
+
+/* === UI/UX IMPROVEMENTS === */
+.quick-btn{border-radius:50px!important;padding:12px 24px!important;font-size:14px!important;font-weight:500!important;transition:all .3s cubic-bezier(.4,0,.2,1)!important;border:1px solid rgba(96,165,250,.3)!important;background:rgba(30,42,66,.6)!important;backdrop-filter:blur(10px)!important;cursor:pointer!important;display:inline-flex!important;align-items:center!important;gap:8px!important;white-space:nowrap!important}
+.quick-btn:hover{background:rgba(37,99,235,.4)!important;border-color:rgba(96,165,250,.6)!important;box-shadow:0 0 20px rgba(59,130,246,.3),0 4px 12px rgba(0,0,0,.2)!important;transform:translateY(-2px)!important}
+.quick-btn:active{transform:translateY(0)!important}
+.quick-buttons{display:flex!important;flex-wrap:nowrap!important;gap:10px!important;overflow-x:auto!important;padding:8px 4px!important;scrollbar-width:none!important}
+.quick-buttons::-webkit-scrollbar{display:none!important}
+.input-container{background:rgba(20,24,32,.85)!important;backdrop-filter:blur(20px)!important;border-top:1px solid rgba(96,165,250,.15)!important;box-shadow:0 -4px 30px rgba(0,0,0,.4)!important;padding:12px 16px!important}
+.input-container input[type="text"]{border-radius:24px!important;padding:14px 20px!important;background:rgba(30,37,51,.8)!important;border:1px solid rgba(96,165,250,.2)!important;transition:all .3s ease!important;font-size:15px!important}
+.input-container input[type="text"]:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px rgba(59,130,246,.1)!important;outline:none!important}
+.send-btn{border-radius:50%!important;width:48px!important;height:48px!important;min-width:48px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:20px!important;background:linear-gradient(135deg,#3b82f6,#2563eb)!important;border:none!important;transition:all .3s ease!important;box-shadow:0 2px 10px rgba(59,130,246,.4)!important}
+.send-btn:hover{transform:scale(1.08)!important;box-shadow:0 4px 20px rgba(59,130,246,.5)!important}
+.message-bot{background:linear-gradient(135deg,rgba(30,42,66,.9),rgba(25,35,55,.95))!important;border:1px solid rgba(96,165,250,.1)!important;border-radius:4px 18px 18px 18px!important;padding:16px 20px!important;max-width:85%!important;box-shadow:0 2px 12px rgba(0,0,0,.15)!important}
+.message-user{background:linear-gradient(135deg,#2563eb,#1d4ed8)!important;border-radius:18px 4px 18px 18px!important;padding:14px 20px!important;max-width:75%!important;box-shadow:0 2px 12px rgba(37,99,235,.3)!important}
+.stat-card:hover,[class*="stat-item"]:hover{transform:translateY(-3px)!important;box-shadow:0 8px 25px rgba(0,0,0,.3)!important}
+[class*="stat-item"],[class*="stat-card"]{transition:all .3s ease!important}
+header button,header a{min-height:44px!important;min-width:44px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:8px 16px!important}
+header a[href*="admin"]{font-size:14px!important;color:rgba(96,165,250,.7)!important;transition:color .3s ease!important;text-decoration:none!important}
+header a[href*="admin"]:hover{color:rgba(96,165,250,1)!important}
+[id*="pwOverlay"]{backdrop-filter:blur(12px)!important}
+[id*="pwOverlay"] input{border-radius:12px!important;padding:14px 18px!important;font-size:16px!important;border:1px solid rgba(96,165,250,.3)!important;transition:border-color .3s ease!important}
+[id*="pwOverlay"] input:focus{border-color:rgba(96,165,250,.6)!important;box-shadow:0 0 0 3px rgba(59,130,246,.15)!important}
+html{scroll-behavior:smooth}
+@keyframes msgFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.message-bot,.message-user{animation:msgFadeIn .3s ease-out!important}
+@media(max-width:768px){.quick-buttons{padding:6px 0!important}.quick-btn{padding:10px 18px!important;font-size:13px!important}header{padding:12px 16px!important}}
 </style>
 </head>
 <body>
@@ -199,7 +225,7 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 <div class="input-container">
 <div class="input-row">
 <input id="userInput" class="input-box" type="text" placeholder="Ketik pertanyaan Anda..." onkeypress="if(event.key==='Enter')sendMessage()">
-<button id="sendBtn" class="send-btn" onclick="sendMessage()">Kirim</button>
+<button id="sendBtn" class="send-btn send-btn" onclick="sendMessage()" aria-label="Kirim">&#10148;</button>
 </div>
 </div>
 </div>
