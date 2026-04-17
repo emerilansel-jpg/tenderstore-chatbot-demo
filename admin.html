@@ -161,7 +161,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
  <!-- Preview -->
  <div id="previewSection" style="display:none;margin-top:20px">
  <h3 style="color:#60a5fa;margin-bottom:8px">Preview Hasil AI:</h3>
- <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="previewBody"></tbody></table></div>
+ <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th>Diumumkan</th><th></th></tr></thead><tbody id="previewBody"></tbody></table></div>
  <div class="btn-row">
  <button class="btn btn-success" onclick="saveData('preview')"> Simpan ke Database</button>
  <button class="btn btn-secondary" onclick="document.getElementById('previewSection').style.display='none'">Batal</button>
@@ -181,7 +181,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
  <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}"> Hapus Semua</button>
  </div>
  <div id="saveStatus2" class="status"></div>
- <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
+ <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th>Diumumkan</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
  <div id="emptyMsg" style="display:none;text-align:center;padding:40px;color:#64748b">Belum ada data. Gunakan tab "Input Data Baru" untuk menambahkan.</div>
  </div>
 </div>
@@ -266,6 +266,7 @@ function renderTable(data,tbodyId){
  '<td><input value="'+esc(item.closing)+'" onchange="'+src+'['+i+'].closing=this.value" style="width:100px"></td>'+
  '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
  '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
+ '<td><input value="'+esc(item.tanggal_pengumuman||'')+'" onchange="'+src+'['+i+'].tanggal_pengumuman=this.value"></td>'+
  '<td><button onclick="if(confirm(\'Hapus tender ini?\')){'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')}" style="background:none;border:none;cursor:pointer;font-size:18px;padding:4px" title="Hapus tender">&#10060;</button></td>';
  tb.appendChild(tr);
  });
