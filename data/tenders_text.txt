@@ -1,5 +1,5 @@
 === DATABASE TENDER LENGKAP (HANYA REFERENSI INI YANG BOLEH DIGUNAKAN) ===
 
 --- KATEGORI: Other ---
-1. Nama: PT DUMMY TESTING CORP - Pengadaan Jasa Cleaning Service Gedung Kantor Pusat Jakarta
-   Milik: PT DUMMY TESTING CORP | Nilai: Rp 2.5 M | Closing: 30-May-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
+1. Nama: PT DUMMY TESTING CORP - Pengadaan Jasa Cleaning Service Gedung Kantor Pusat Jakarta [EDITED]
+   Milik: PT DUMMY TESTING CORP | Nilai: Rp 5 M | Closing: 30-May-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
