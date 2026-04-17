@@ -124,14 +124,11 @@
    Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
 
 39. Nama: Auto Drain Valve
-   Milik: N/A | Nilai: N/A | Closing: N/A | Lokasi: N/A
-
-40. Nama: Auto Drain Valve
    Milik: MEDCO E&P LEMATANG | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Muara Enim - Sumatera Selatan
 
 --- KATEGORI: PIPE CASING TUBING & HOSE ---
-41. Nama: Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
+40. Nama: Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
    Milik: JOB PERTAMINA - MEDCO E&P TOMORI SULAWESI | Nilai: N/A | Closing: 22-Apr-2026 | Lokasi: Banggai - Sulawesi Tengah
 
-42. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
+41. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta
