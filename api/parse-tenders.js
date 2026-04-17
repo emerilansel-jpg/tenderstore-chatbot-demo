@@ -83,6 +83,10 @@ ATURAN:
       if (jsonMatch) jsonStr = jsonMatch[0];
 
       const data = JSON.parse(jsonStr);
+      const _today = new Date();
+      const _months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const _tglPengumuman = _today.getDate().toString().padStart(2,'0') + '-' + _months[_today.getMonth()] + '-' + _today.getFullYear();
+      data.forEach(function(item) { if(!item.tanggal_pengumuman) item.tanggal_pengumuman = _tglPengumuman; });
       if (Array.isArray(data) && data.length > 0) {
         return res.status(200).json({ data: data });
       }
