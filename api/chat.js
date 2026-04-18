@@ -227,31 +227,31 @@ module.exports = async function handler(req, res) {
         const _nm = _dbLines[_vi-1] ? _dbLines[_vi-1].match(/Nama: (.+)/) : null;
         const _tName = _nm ? _nm[1].trim() : '';
         const _mkM = _dbLines[_vi].match(/Milik: ([^|]+)/);
-        const _milik = _mkM ? _mkM[1].trim() : '';
-        const _clM = _dbLines[_vi].match(/Closing: ([^|]+)/);
-        const _close = _clM ? _clM[1].trim() : '';
-        const _lkM = _dbLines[_vi].match(/Lokasi: (.+)/);
-        const _lok = _lkM ? _lkM[1].trim() : '';
+        var _milik = _mkM ? _mkM[1].trim() : '';
+        var _clM = _dbLines[_vi].match(/Closing: ([^|]+)/);
+        var _close = _clM ? _clM[1].trim() : '';
+        var _lkM = _dbLines[_vi].match(/Lokasi: (.+)/);
+        var _lok = _lkM ? _lkM[1].trim() : '';
         _valTenders.push({name:_tName, val:parseFloat(_vm[1]), milik:_milik, close:_close, lok:_lok});
       }
     }
     if (_valTenders.length > 0) {
       _valTenders.sort((a,b) => b.val - a.val);
-  const _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
+  var _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
       if (_wantsCount && _valTenders.length > 3) {
-        const _sample = _valTenders.slice(0,3);
-        let _vReply = 'Total ada <strong>' + _valTenders.length + ' tender</strong> dengan nilai lebih dari ' + _threshold + ' Miliar. Berikut 3 contoh:<br><br><ol class="reply-list">';
+        var _sample = _valTenders.slice(0,3);
+        var _vReply = 'Total ada <strong>' + _valTenders.length + ' tender</strong> dengan nilai lebih dari ' + _threshold + ' Miliar. Berikut 3 contoh:<br><br><ol class="reply-list">';
         _sample.forEach(t => { _vReply += '<li><strong>' + t.name + '</strong><br>Milik: ' + t.milik + ' | Nilai: Rp ' + t.val + ' M | Tanggal Closing: ' + t.close + ' | Lokasi: ' + t.lok + '</li>'; });
         _vReply += '</ol><br>Ketik <strong>"lihat semua tender nilai > ' + _threshold + ' miliar"</strong> untuk daftar lengkap.';
         return res.status(200).json({ reply: _vReply });
       } else {
         /* Paginate value filter results */
-        const _vTotal = _valTenders.length;
-        const _vStart = (page - 1) * PAGE_SIZE;
-        const _vEnd = Math.min(_vStart + PAGE_SIZE, _vTotal);
-        const _vPage = _valTenders.slice(_vStart, _vEnd);
-        const _vHasMore = _vEnd < _vTotal;
-        let _vReply = 'Ya, ada ' + _vTotal + ' tender dengan nilai lebih dari ' + _threshold + ' Miliar:<br><br><ol class="reply-list" start="' + (_vStart+1) + '">';
+        var _vTotal = _valTenders.length;
+        var _vStart = (page - 1) * PAGE_SIZE;
+        var _vEnd = Math.min(_vStart + PAGE_SIZE, _vTotal);
+        var _vPage = _valTenders.slice(_vStart, _vEnd);
+        var _vHasMore = _vEnd < _vTotal;
+        var _vReply = 'Ya, ada ' + _vTotal + ' tender dengan nilai lebih dari ' + _threshold + ' Miliar:<br><br><ol class="reply-list" start="' + (_vStart+1) + '">';
         _vPage.forEach(t => { _vReply += '<li><strong>' + t.name + '</strong><br>Milik: ' + t.milik + ' | Nilai: Rp ' + t.val + ' M | Tanggal Closing: ' + t.close + ' | Lokasi: ' + t.lok + '</li>'; });
         _vReply += '</ol>';
         if (_vHasMore) {
@@ -264,23 +264,23 @@ module.exports = async function handler(req, res) {
   } catch(_dvfErr) { /* DVF fallback */ }
 
   // Dynamic keyword filter
-  const stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about','punya','berikan','kasih', 'iya','yep','oke','okay','nah','tapi','koq','kok','cuma','doang','hanya','satu','dua','tiga','empat','lima','bilang','bilangnya','katanya','kata','emang','memang','padahal','soalnya','karena','kenapa','gimana','bagaimana','wah','waduh','lho','loh','toh','masa','mosok','harusnya','seharusnya','ingin','want','more','lagi','banyak','sedikit','dikit','berapa','mana','siapa','kapan','dimana','kemana','ngapa','coba','perlu','harus','jangan','boleh','gapapa','ngga','nggak','baik','bagus','jelek','benar','bener','salah','wrong','right','nyatanya','ternyata','rupanya','ulang','ulangi','cek','check','liat','tampil','tunjukkan','tunjukin','muncul','keluar','ngaco','benaran','beneran','betul','mengapa','tunjuk','kenapa', 'bukannya','jadi','khan','nya','tuh','gitu','gini','kayak','kayaknya','sepertinya','maksudnya','memangnya','makanya','jadinya','terus','trus','berapa','total','jumlah','hitung','banyak','banyaknya','lalu','kemudian','setelah','sebelum','eh','hmm','ok','yoi','yap','ayo','ayok','serius','cuman','kok','oh','ah','harusnya','katanya','udah','udahan','namanya','halo','hai','hello','hey','terima','closing','date','deadline','tanggal','tendernya','perusahaannya','nilainya','harganya','totalnya','jumlahnya','informasi','infonya','detail','detil','selamat','pagi','siang','sore','malam','datanya','tersedia','masih','sisa','sisanya','berikutnya','selanjutnya','dong','ga','pak','jenis','kategori','hari','saat','list','carikan','tunjukkan','lagi','lainnya','lain','tau','info','miliar','milyar','juta','ribu','billion','million','rupiah','rp','idr'];
-  const preserveShort = ['it', 'ip', 'bp', 'ep'];
-  const userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
-  let filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
+  var stopWords = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','the','is','are','have','has','do','does','can','please','show','me','all','any','what','which','kalo','kalau','gak','ga','gaa','dong','sih','nih','yah','lah','deh','aja','saja','juga','lebih','kurang','besar','kecil','nilai','harga','biaya','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','dalam','pada','akan','sudah','belum','punya','paling','sangat','sekali','only','just','find','list','get','tell','about','punya','berikan','kasih', 'iya','yep','oke','okay','nah','tapi','koq','kok','cuma','doang','hanya','satu','dua','tiga','empat','lima','bilang','bilangnya','katanya','kata','emang','memang','padahal','soalnya','karena','kenapa','gimana','bagaimana','wah','waduh','lho','loh','toh','masa','mosok','harusnya','seharusnya','ingin','want','more','lagi','banyak','sedikit','dikit','berapa','mana','siapa','kapan','dimana','kemana','ngapa','coba','perlu','harus','jangan','boleh','gapapa','ngga','nggak','baik','bagus','jelek','benar','bener','salah','wrong','right','nyatanya','ternyata','rupanya','ulang','ulangi','cek','check','liat','tampil','tunjukkan','tunjukin','muncul','keluar','ngaco','benaran','beneran','betul','mengapa','tunjuk','kenapa', 'bukannya','jadi','khan','nya','tuh','gitu','gini','kayak','kayaknya','sepertinya','maksudnya','memangnya','makanya','jadinya','terus','trus','berapa','total','jumlah','hitung','banyak','banyaknya','lalu','kemudian','setelah','sebelum','eh','hmm','ok','yoi','yap','ayo','ayok','serius','cuman','kok','oh','ah','harusnya','katanya','udah','udahan','namanya','halo','hai','hello','hey','terima','closing','date','deadline','tanggal','tendernya','perusahaannya','nilainya','harganya','totalnya','jumlahnya','informasi','infonya','detail','detil','selamat','pagi','siang','sore','malam','datanya','tersedia','masih','sisa','sisanya','berikutnya','selanjutnya','dong','ga','pak','jenis','kategori','hari','saat','list','carikan','tunjukkan','lagi','lainnya','lain','tau','info','miliar','milyar','juta','ribu','billion','million','rupiah','rp','idr'];
+  var preserveShort = ['it', 'ip', 'bp', 'ep'];
+  var userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
+  var filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
   // Strip date/month/year/value terms to prevent false category matches
-  const _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp)$|^\d/i;
+  var _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp)$|^\d/i;
   filterWords = filterWords.filter(function(w){ return !_dateFwExclude.test(w); });
 
-  const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
-  const _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
-  const _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
+  var _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
+  var _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
+  var _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
   
-  let _contCategory = '';
+  var _contCategory = '';
   if (_wantsContinuation) {
-    const lastAsst = [...history].reverse().find(m => m.role === 'assistant');
+    var lastAsst = [...history].reverse().find(m => m.role === 'assistant');
     if (lastAsst) {
-      const h = lastAsst.content.toLowerCase();
+      var h = lastAsst.content.toLowerCase();
       if (h.includes('drilling') || h.includes('pemboran') || h.includes('rig')) _contCategory = 'drilling';
       else if (h.includes('marine') || h.includes('kapal') || h.includes('transportation')) _contCategory = 'marine';
       else if (h.includes('seismic') || h.includes('seismik')) _contCategory = 'seismic';
@@ -291,17 +291,17 @@ module.exports = async function handler(req, res) {
 
   // CONTEXT RECOVERY: if filterWords empty, recover last search from history
   if (filterWords.length === 0 && !_wantsAll && !_wantsCategories && !_wantsContinuation) {
-    const _msgHist = history || [];
-    for (let _hi = _msgHist.length - 1; _hi >= 0; _hi--) {
+    var _msgHist = history || [];
+    for (var _hi = _msgHist.length - 1; _hi >= 0; _hi--) {
       if (_msgHist[_hi].role === 'user') {
-        const _hw = _msgHist[_hi].content.toLowerCase().split(/\s+/).map(w=>w.replace(/[^a-z0-9]/g,'')).filter(w=>w.length>2||preserveShort.includes(w));
-        const _hf = _hw.filter(w=>!stopWords.includes(w));
+        var _hw = _msgHist[_hi].content.toLowerCase().split(/\s+/).map(w=>w.replace(/[^a-z0-9]/g,'')).filter(w=>w.length>2||preserveShort.includes(w));
+        var _hf = _hw.filter(w=>!stopWords.includes(w));
         if (_hf.length > 0) { filterWords = _hf; break; }
       }
     }
 
     // Greeting handler
-    const _isGreeting = /^(halo|hai|hello|hey|hi|selamat\s+(pagi|siang|sore|malam))[!?.\s]*$/i.test(message.trim());
+    var _isGreeting = /^(halo|hai|hello|hey|hi|selamat\s+(pagi|siang|sore|malam))[!?.\s]*$/i.test(message.trim());
     if (_isGreeting) {
       return res.json({ reply: 'Halo! Selamat datang di TenderStore.id. Saya siap membantu Anda mencari tender.<br><br>Silakan sebutkan kategori (contoh: <strong>drilling</strong>, <strong>marine</strong>, <strong>IT</strong>) atau nama perusahaan (contoh: <strong>Pertamina</strong>, <strong>PLN</strong>, <strong>BP</strong>) untuk memulai pencarian.' });
     }
