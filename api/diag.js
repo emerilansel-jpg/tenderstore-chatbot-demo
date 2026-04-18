@@ -1,36 +1,38 @@
-// Diagnostic endpoint
+// Diagnostic v2 - returns ONLY line numbers, no code content
 const fs = require('fs');
 const path = require('path');
 module.exports = function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   try {
-    const chatPath = path.join(__dirname, 'chat.js');
-    const src = fs.readFileSync(chatPath, 'utf8');
+    const src = fs.readFileSync(path.join(__dirname, 'chat.js'), 'utf8');
     const lines = src.split('\n');
-    const report = { totalLines: lines.length, fixes: {} };
-    for (let i = 300; i < 350 && i < lines.length; i++) {
-      const l = lines[i].trim();
-      if (l.includes('try')) report.fixes['try_' + (i+1)] = l.substring(0,60);
-      if (l.includes('catch')) report.fixes['catch_' + (i+1)] = l.substring(0,60);
-      if (l.includes('!message')) report.fixes['edge_' + (i+1)] = l.substring(0,80);
-    }
-    for (let i = 590; i < 650 && i < lines.length; i++) {
-      const l = lines[i].trim();
-      if (l.includes('m3')) report.fixes['m3_' + (i+1)] = l.substring(0,80);
-      if (l.includes('entry.match')) report.fixes['ematch_' + (i+1)] = l.substring(0,80);
-      if (l.includes('cls.match')) report.fixes['cmatch_' + (i+1)] = l.substring(0,80);
+    const r2 = { total: lines.length, patterns: {} };
+    for (let i = 0; i < lines.length; i++) {
+      const l = lines[i];
+      if (l.includes('try {') || l.includes('try{')) r2.patterns['try_L'+(i+1)] = 1;
+      if (l.includes('catch(') || l.includes('catch (')) r2.patterns['catch_L'+(i+1)] = 1;
+      if (l.includes('_countErr')) r2.patterns['countErr_L'+(i+1)] = 1;
+      if (l.includes('!message')) r2.patterns['noMsg_L'+(i+1)] = 1;
+      if (l.includes('Edge case')) r2.patterns['edgeComment_L'+(i+1)] = 1;
+      if (l.includes('entry.match')) r2.patterns['eMatch_L'+(i+1)] = l.includes('[\\s\\-]') ? 'FIXED' : 'OLD';
+      if (l.includes('cls.match')) r2.patterns['cMatch_L'+(i+1)] = l.includes('[\\s\\-]') ? 'FIXED' : 'OLD';
+      if (l.includes('m3') && l.includes('match')) r2.patterns['m3_L'+(i+1)] = 1;
+      if (l.includes('_wantsCount')) r2.patterns['wantsCount_L'+(i+1)] = 1;
+      if (l.includes('filterWords')) r2.patterns['filterW_L'+(i+1)] = 1;
     }
     try {
-      const chatModule = require('./chat');
-      report.moduleLoads = true;
+      delete require.cache[require.resolve('./chat')];
+      require('./chat');
+      r2.moduleOK = true;
     } catch(e) {
-      report.moduleLoads = false;
-      report.moduleError = e.message;
-      report.moduleStack = (e.stack||'').split('\n').slice(0,5).join(' | ');
+      r2.moduleOK = false;
+      r2.errType = e.constructor.name;
+      r2.errLine = (e.stack||'').match(/chat\.js:(\d+)/);
+      r2.errLine = r2.errLine ? r2.errLine[1] : 'unknown';
     }
-    res.status(200).json(report);
+    res.status(200).json(r2);
   } catch(e) {
-    res.status(500).json({ error: e.message });
+    res.status(500).json({ err: e.constructor.name });
   }
 };
