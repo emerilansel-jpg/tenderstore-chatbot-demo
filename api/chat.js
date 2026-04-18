@@ -106,32 +106,32 @@ const m={
 'komputer':['komputer','computer','server','software'],'server':['server','komputer','network','drc'],
 'drc':['drc','disaster recovery','co-location'],
 'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya','tndk','administrasi','kearsipan','naskah','marketing agency','jasa tenaga','agency','support','business','trm','resources','angkutan','issuing','receiving','handling','material','stockpile'],'outsourcing':['outsourcing','manpower','alih daya','support','business','trm','resources','angkutan','issuing','receiving','handling'],'tndk':['tndk','administrasi','kearsipan','naskah dinas','tata naskah','man power','outsourcing']
-};
-'valve':['valve','pneumatic','shut down','drain'],'pipe':['pipe','casing','tubing','hose','octg','tubular'],'casing':['casing','pipe','tubing','octg'],'hose':['hose','pipe','tubing'],
-'fabrication':['fabrication','mechanical','scaffolding','construction'],'scaffolding':['scaffolding','fabrication','mechanical'],
-'chemical':['chemical','industrial gas','cooling tower','industrial'],'survey':['survey','inspection','heliport','evaluasi'],'inspection':['inspection','survey','heliport','annual'],
+
+    'valve':['valve','pneumatic','shut down','drain'],
+    'pipe':['pipe','casing','tubing','hose','octg','tubular'],
+    'fabrication':['fabrication','mechanical','scaffolding','construction'],
+    'chemical':['chemical','industrial gas','cooling tower','industrial'],
+    'survey':['survey','inspection','heliport','evaluasi'],
+    'komputer':['komputer','laptop','programmer','monitoring','it'],
+  };
 return m[kw]||[kw];
 }
 
 /* Helper: format a single tender item as HTML list item with date */
 function fmtItem(f){
-return '<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Tanggal Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+'</li>';
+  return '<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Tanggal Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+(f.tanggal_pengumuman ? '<br>Diumumkan: '+f.tanggal_pengumuman : '')+'</li>';
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { message } = req.body;
+  if (message && message.length > 2000) { return res.status(400).json({ error: "Message too long (max 2000 chars)" }); }
   const page = parseInt(req.body.page) || 1;
   const PAGE_SIZE = 10;
   const history = req.body.history || req.body.conversationHistory || [];
   if (!message) return res.status(400).json({ error: 'Message required' });
-
-  // Security: limit message length
-  if (message.length > 2000) return res.status(400).json({ error: 'Pesan terlalu panjang (maks 2000 karakter)' });
-
-  const _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
 
   // === EARLY DATE/VALUE FAST PATH (date/value queries bypass LLM) ===
   {
@@ -237,6 +237,7 @@ module.exports = async function handler(req, res) {
     }
     if (_valTenders.length > 0) {
       _valTenders.sort((a,b) => b.val - a.val);
+  const _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
       if (_wantsCount && _valTenders.length > 3) {
         const _sample = _valTenders.slice(0,3);
         let _vReply = 'Total ada <strong>' + _valTenders.length + ' tender</strong> dengan nilai lebih dari ' + _threshold + ' Miliar. Berikut 3 contoh:<br><br><ol class="reply-list">';
@@ -274,7 +275,7 @@ module.exports = async function handler(req, res) {
   const _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   const _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
-
+  
   let _contCategory = '';
   if (_wantsContinuation) {
     const lastAsst = [...history].reverse().find(m => m.role === 'assistant');
@@ -307,17 +308,20 @@ module.exports = async function handler(req, res) {
 
     // Pure count handler
     if (_wantsCount && filterWords.length === 0) {
-      const _allEntries = TENDER_DATABASE.match(/\d+\.\s+Nama:/g) || [];
-      const _totalCount = _allEntries.length;
-      {
-      const _ch2=TENDER_DATABASE.match(/--- KATEGORI: (.+?) ---/g)||[];const _cl2=_ch2.map(h=>h.replace(/--- KATEGORI: /,'').replace(/ ---/,''));
-      const _te2=(TENDER_DATABASE.match(/\d+\./g)||[]).length;let _cc2={};let _cu2='';
-      TENDER_DATABASE.split('\n').forEach(l=>{const m=l.match(/--- KATEGORI: (.+?) ---/);if(m)_cu2=m[1];if(/\d+\./.test(l)&&_cu2)_cc2[_cu2]=(_cc2[_cu2]||0)+1;});
-      let _rh='Saat ini tersedia total <strong>'+_te2+' tender</strong> dalam '+_cl2.length+' kategori:<br><br><ol class="reply-list">';
-      _cl2.forEach(c=>{_rh+='<li><strong>'+c+'</strong> ('+(_cc2[c]||0)+' tender)</li>';});
-      _rh+='</ol><br><span style="color:#93c5fd;font-style:italic;">Ketik nama kategori atau perusahaan untuk melihat detail tender.</span>';
-      return res.json({reply:_rh});
-    }
+      const _ch = TENDER_DATABASE.match(/--- KATEGORI: (.+?) ---/g) || [];
+      const _cl = _ch.map(function(h){ return h.replace(/--- KATEGORI: /, '').replace(/ ---/, ''); });
+      const _te = (TENDER_DATABASE.match(/\d+\.\s+Nama:/g) || []).length;
+      var _cc = {};
+      var _curC = '';
+      TENDER_DATABASE.split('\n').forEach(function(l){
+        var cm = l.match(/--- KATEGORI: (.+?) ---/);
+        if (cm) _curC = cm[1];
+        if (/\d+\.\s+Nama:/.test(l)) _cc[_curC] = (_cc[_curC] || 0) + 1;
+      });
+      var _chtml = 'Saat ini tersedia total <strong>' + _te + ' tender</strong> dalam ' + _cl.length + ' kategori di database kami:<br><br><ol class="reply-list">';
+      _cl.forEach(function(cat){ _chtml += '<li><strong>' + cat + '</strong> (' + (_cc[cat] || 0) + ' tender)</li>'; });
+      _chtml += '</ol><br><span style="color:#93c5fd;font-style:italic;">Ketik nama kategori atau perusahaan untuk melihat detail tender.</span>';
+      return res.json({ reply: _chtml });
     }
 
     const _hasDV = /\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah|di\s+atas|di\s+bawah|dibawah|dibwah|diatas|\d+\s*m\b/i.test(userWords.join(' '));
@@ -347,11 +351,13 @@ module.exports = async function handler(req, res) {
     'it':'Computer dan IT','komputer':'Computer dan IT','server':'Computer dan IT',
     'software':'Computer dan IT','network':'Computer dan IT','drc':'Computer dan IT',
     'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power','tndk':'Man Power','administrasi':'Man Power','kearsipan':'Man Power'
-'valve':'VALVE','pneumatic':'VALVE',
-'pipe':'PIPE CASING TUBING & HOSE','casing':'PIPE CASING TUBING & HOSE','tubing':'PIPE CASING TUBING & HOSE','hose':'PIPE CASING TUBING & HOSE','octg':'PIPE CASING TUBING & HOSE',
-'fabrication':'FABRICATION & MECHANICAL CONSTRUCTION','scaffolding':'FABRICATION & MECHANICAL CONSTRUCTION','mechanical':'FABRICATION & MECHANICAL CONSTRUCTION',
-'chemical':'Chemical & Industrial Gas','cooling':'Chemical & Industrial Gas',
-'survey':'Survey & Inspection','heliport':'Survey & Inspection',
+  
+    'valve':'VALVE','pneumatic':'VALVE',
+    'pipe':'PIPE CASING TUBING & HOSE','casing':'PIPE CASING TUBING & HOSE','tubing':'PIPE CASING TUBING & HOSE','hose':'PIPE CASING TUBING & HOSE','octg':'PIPE CASING TUBING & HOSE',
+    'fabrication':'FABRICATION & MECHANICAL CONSTRUCTION','scaffolding':'FABRICATION & MECHANICAL CONSTRUCTION','mechanical':'FABRICATION & MECHANICAL CONSTRUCTION',
+    'chemical':'Chemical & Industrial Gas','cooling':'Chemical & Industrial Gas',
+    'survey':'Survey & Inspection','heliport':'Survey & Inspection','inspection':'Survey & Inspection',
+    'komputer':'KOMPUTER IT','laptop':'KOMPUTER IT','programmer':'KOMPUTER IT',
   };
 
   const _catNames = [...new Set(categoryKwsG.map(k => _catNameMap[k.toLowerCase()]).filter(Boolean))];
@@ -359,7 +365,7 @@ module.exports = async function handler(req, res) {
   const _kd = _catNames.length > 0 ? ' Kategori: ' + _catNames.join(' / ') + '. Tampilkan SEMUA tender dalam kategori ini tanpa terkecuali.' : (categoryKwsG.length > 0 ? ' Kategori:[' + categoryKwsG.join(',') + '].' : '')
 
   const keywordFilter = _wantsCategories
-    ? '\n\n=== INSTRUKSI ===\nUser bertanya ada tender/kategori apa saja. Tampilkan ringkasan semua kategori yang tersedia berikut 1 contoh tender per kategori. Format: Kategori X (N tender): [nama tender contoh]. Sebutkan semua kategori.'
+    ? '\n\n=== INSTRUKSI ===\nUser bertanya ada tender/kategori apa saja. Tampilkan ringkasan semua kategori yang tersedia berikut 1 contoh tender per kategori. Format: Kategori X (N tender): [nama tender contoh]. Sebutkan semua kategori yang ada.'
     : _wantsAll
     ? '\n\n=== INSTRUKSI ===\nUser ingin melihat SEMUA tender. Tampilkan seluruh tender dalam database diurutkan per kategori. Jangan filter perusahaan atau kategori apapun.'
     : _wantsContinuation
