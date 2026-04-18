@@ -122,7 +122,7 @@ function fmtItem(f){
   return '<li><strong>'+f.nama+'</strong><br>Milik: '+f.milik+'<br>Nilai: '+f.nilai+'<br>Tanggal Closing: '+f.closing+'<br>Lokasi: '+f.lokasi+(f.tanggal_pengumuman ? '<br>Diumumkan: '+f.tanggal_pengumuman : '')+'</li>';
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
