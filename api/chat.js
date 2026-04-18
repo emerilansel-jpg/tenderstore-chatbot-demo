@@ -364,10 +364,10 @@ module.exports = async function handler(req, res) {
     'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power','tndk':'Man Power','administrasi':'Man Power','kearsipan':'Man Power',
   
     'valve':'VALVE','pneumatic':'VALVE',
-    'pipe':'PIPE CASING TUBING & HOSE','casing':'PIPE CASING TUBING & HOSE','tubing':'PIPE CASING TUBING & HOSE','hose':'PIPE CASING TUBING & HOSE','octg':'PIPE CASING TUBING & HOSE',
+    'pipe':'PIPE CASING TUBING & HOSE','casing':'PIPE CASING TUBING & HOSE','tubing':'PIPE CASING TUBING & HOSE','hose':'PIPE CASING TUBING & HOSE','octg':'PIPE CASING TUBING & HOSE','piping':'PIPE CASING TUBING & HOSE',
     'fabrication':'FABRICATION & MECHANICAL CONSTRUCTION','scaffolding':'FABRICATION & MECHANICAL CONSTRUCTION','mechanical':'FABRICATION & MECHANICAL CONSTRUCTION',
-    'chemical':'Chemical & Industrial Gas','cooling':'Chemical & Industrial Gas',
-    'survey':'Survey & Inspection','heliport':'Survey & Inspection','inspection':'Survey & Inspection',
+    'chemical':'Chemical & Industrial Gas','cooling':'Chemical & Industrial Gas','solvent':'Chemical & Industrial Gas',
+    'survey':'Survey & Inspection','heliport':'Survey & Inspection','inspection':'Survey & Inspection','topografi':'Survey & Inspection',
     'komputer':'KOMPUTER IT','laptop':'KOMPUTER IT','programmer':'KOMPUTER IT',
   };
 
