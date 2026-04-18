@@ -7,7 +7,7 @@ JAWABAN: JANGAN gunakan jawaban hardcoded. Hitung SEMUA kategori unik dari DATAB
 PERTANYAAN 4: Apakah ada tender yang nilainya lebih dari 20 miliar? / tender nilai lebih 20 M?
 JAWABAN WAJIB:
 Ya, ada tender dengan nilai lebih dari 20 Miliar:<br><br><ol class="reply-list"><li><strong>Penyewaan & Pengoperasian Artificial Lift (Electrical Submersible Pump)</strong><br>Nilai: Rp 28 M<br>Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI</li><li><strong>Pekerjaan Jasa Lumpur Pemboran Lengkap Dengan Peralatan</strong><br>Nilai: Rp 25 M<br>Milik: PERTAMINA EP</li><li><strong>Jasa Penyediaan Dan Pengoperasian 1 Unit Rig Kapasitas 350 Hp</strong><br>Nilai: Rp 24 M<br>Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 Hp</strong><br>Nilai: Rp 23 M<br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE</li><li><strong>Jasa Penyemenan dan Stimulasi</strong><br>Nilai: Rp 22 M<br>Milik: BP BERAU LTD</li><li><strong>Jasa Electric Logging, Perforation dan Data Processing</strong><br>Nilai: Rp 21 M<br>Milik: KANGEAN ENERGY INDONESIA LTD</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah anda ingin melihat tender yang lain?</span>
-
+h
 PERTANYAAN 5: Apakah ada tender Pertamina? / tender pertamina?
 JAWABAN WAJIB:
 Iya, ada beberapa tender Pertamina:<br><br><ol class="reply-list"><li><strong>Sewa Perangkat Komputer Dan Server</strong><br>Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS<br>Kategori: Computer & IT</li><li><strong>Provision of Swamp Barge No.1</strong><br>Milik: PT PERTAMINA HULU MAHAKAM<br>Kategori: Marine Transportation</li><li><strong>Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat</strong><br>Milik: PERTAMINA EP<br>Kategori: Man Power</li><li><strong>Jasa Penyediaan Dan Pengoperasian 1 Unit Rig Kapasitas 350 Hp</strong><br>Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI<br>Kategori: Drilling</li><li><strong>Jasa Sewa Unit Perangkat Rig 550 Hp</strong><br>Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE<br>Kategori: Drilling</li></ol><br><span style="color:#93c5fd;font-style:italic;">Apakah anda ingin melanjutkan melihat detail tender tersebut?</span>
@@ -269,6 +269,7 @@ module.exports = async function handler(req, res) {
   var preserveShort = ['it', 'ip', 'bp', 'ep'];
   var userWords = message.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z0-9]/g, '')).filter(w => w.length > 2 || preserveShort.includes(w));
   var filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
+    var _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
   // Strip date/month/year/value terms to prevent false category matches
   var _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp)$|^\d/i;
   filterWords = filterWords.filter(function(w){ return !_dateFwExclude.test(w); });
