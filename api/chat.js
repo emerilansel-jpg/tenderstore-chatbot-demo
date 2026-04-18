@@ -308,6 +308,7 @@ module.exports = async function handler(req, res) {
 
     // Pure count handler
     if (_wantsCount && filterWords.length === 0) {
+    try {
       const _ch = TENDER_DATABASE.match(/--- KATEGORI: (.+?) ---/g) || [];
       const _cl = _ch.map(function(h){ return h.replace(/--- KATEGORI: /, '').replace(/ ---/, ''); });
       const _te = (TENDER_DATABASE.match(/\d+\.\s+Nama:/g) || []).length;
@@ -322,9 +323,17 @@ module.exports = async function handler(req, res) {
       _cl.forEach(function(cat){ _chtml += '<li><strong>' + cat + '</strong> (' + (_cc[cat] || 0) + ' tender)</li>'; });
       _chtml += '</ol><br><span style="color:#93c5fd;font-style:italic;">Ketik nama kategori atau perusahaan untuk melihat detail tender.</span>';
       return res.json({ reply: _chtml });
+    } catch(_countErr) {
+      console.error("Count handler error:", _countErr);
+      return res.json({ reply: "Saat ini tersedia beberapa kategori tender. Silahkan tanyakan kategori spesifik seperti: Drilling, Marine, IT, Valve, Pipe, Chemical, Survey, Fabrication, Electrical, Mechanical, Civil, atau Komputer IT." });
+    }
     }
 
     const _hasDV = /\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah|di\s+atas|di\s+bawah|dibawah|dibwah|diatas|\d+\s*m\b/i.test(userWords.join(' '));
+    // Edge case guard: minimal/empty inputs
+    if (!message || message.trim().length === 0 || /^[\s\?\!\d\.]+$/.test(message.trim())) {
+      return res.json({ reply: "Silahkan bertanya tentang tender yang tersedia. Contoh: tender drilling, tender marine, tender IT, atau sebutkan nama perusahaan seperti Pertamina, PLN, BP." });
+    }
     if (filterWords.length === 0 && !_hasDV) {
       return res.json({ reply: 'Untuk membantu pencarian tender, silakan sebutkan kategori (contoh: drilling, marine, IT) atau nama perusahaan (contoh: Pertamina, PLN, BP).' });
     }
@@ -592,6 +601,8 @@ function parseDateFilter(q) {
   if (m1) { r.day=parseInt(m1[1]); r.month=mm[m1[2].toLowerCase()]||m1[2]; if(m1[3])r.year=parseInt(m1[3]); return r; }
   var m2 = ql.match(/(januari|februari|maret|april|mei|juni|juli|agustus|agus|agu|agt|september|oktober|november|desember|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|okt|des)\s+(\d{4})/i);
   if (m2) { r.month=mm[m2[1].toLowerCase()]||m2[1]; r.year=parseInt(m2[2]); return r; }
+  var m3 = ql.match(/(januari|februari|maret|april|mei|juni|juli|agustus|agus|agu|agt|september|oktober|november|desember|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|okt|des)/i);
+  if (m3) { r.month=mm[m3[1].toLowerCase()]||m3[1]; return r; }
   return null;
 }
 function parseValueFilter(q) {
@@ -610,13 +621,13 @@ function _dateOk(entry, df) {
   var monMap = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
   var day, mon, year;
   if (typeof entry === 'string') {
-    var m = entry.match(/(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})/i);
+    var m = entry.match(/(\d{1,2})[\s\-]+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*[\s\-]+(\d{4})/i);
     if (!m) return true;
     day=parseInt(m[1]); mon=m[2].substring(0,3); year=parseInt(m[3]);
   } else {
     var cls = (entry.closing||entry.deadline||'');
     if (!cls) return true;
-    var p = cls.match(/(\d{1,2})\s+(\w+)\s+(\d{4})/);
+    var p = cls.match(/(\d{1,2})[\s\-]+(\w+)[\s\-]+(\d{4})/);
     if (!p) return true;
     day=parseInt(p[1]); mon=p[2].substring(0,3); year=parseInt(p[3]);
   }
