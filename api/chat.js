@@ -151,7 +151,7 @@ module.exports = async function handler(req, res) {
             var _fpLn = _fpLines[_fpi];
             var _fpKh = _fpLn.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
             if (_fpKh) { _fpCat = _fpKh[1].trim(); _fpEnt = null; continue; }
-            var _fpNm = _fpLn.match(/^\s*\d+\.\s+Nama:\s*(.+)/i);
+            var _fpNm = _fpLn.match(/^\s*\d+\.\s+(.+)/);
             if (_fpNm) { _fpEnt = {nama:_fpNm[1].trim(), cat:_fpCat, nilai:null, closing:null}; continue; }
             if (_fpEnt && _fpLn.indexOf('|') >= 0) {
               var _fpPts = _fpLn.split('|');
@@ -224,7 +224,7 @@ module.exports = async function handler(req, res) {
     for (let _vi = 0; _vi < _dbLines.length; _vi++) {
       const _vm = _dbLines[_vi].match(/Nilai: Rp (\d+\.?\d*) M/);
       if (_vm && parseFloat(_vm[1]) > _threshold) {
-        const _nm = _dbLines[_vi-1] ? _dbLines[_vi-1].match(/Nama: (.+)/) : null;
+        const _nm = _dbLines[_vi-1] ? _dbLines[_vi-1].match(/^\s*\d+\.\s+(.+)/) : null;
         const _tName = _nm ? _nm[1].trim() : '';
         const _mkM = _dbLines[_vi].match(/Milik: ([^|]+)/);
         var _milik = _mkM ? _mkM[1].trim() : '';
@@ -313,13 +313,13 @@ module.exports = async function handler(req, res) {
     try {
       const _ch = TENDER_DATABASE.match(/--- KATEGORI: (.+?) ---/g) || [];
       const _cl = _ch.map(function(h){ return h.replace(/--- KATEGORI: /, '').replace(/ ---/, ''); });
-      const _te = (TENDER_DATABASE.match(/\d+\.\s+Nama:/g) || []).length;
+      const _te = (TENDER_DATABASE.match(/^\d+\.\s+\S/gm) || []).length;
       var _cc = {};
       var _curC = '';
       TENDER_DATABASE.split('\n').forEach(function(l){
         var cm = l.match(/--- KATEGORI: (.+?) ---/);
         if (cm) _curC = cm[1];
-        if (/\d+\.\s+Nama:/.test(l)) _cc[_curC] = (_cc[_curC] || 0) + 1;
+        if (/^\d+\.\s+\S/.test(l)) _cc[_curC] = (_cc[_curC] || 0) + 1;
       });
       var _chtml = 'Saat ini tersedia total <strong>' + _te + ' tender</strong> dalam ' + _cl.length + ' kategori di database kami:<br><br><ol class="reply-list">';
       _cl.forEach(function(cat){ _chtml += '<li><strong>' + cat + '</strong> (' + (_cc[cat] || 0) + ' tender)</li>'; });
@@ -400,7 +400,7 @@ module.exports = async function handler(req, res) {
     for (const _l of _ln) {
       const _ch = _l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
       if (_ch) { _dc = _ch[1].trim().toLowerCase(); _ce = null; continue; }
-      const _nm = _l.match(/^\d+\.\s+Nama:\s*(.+)/i);
+      const _nm = _l.match(/^\d+\.\s+(.+)/);
       if (_nm) { _ce = {nama:_nm[1].trim(), cat:_dc, milik:'', nilai:'', closing:'', lokasi:''}; continue; }
       if (_ce && _l.includes('Milik:')) {
         const _ps = _l.split('|').map(s=>s.trim());
@@ -466,7 +466,7 @@ module.exports = async function handler(req, res) {
           var _dvL = _dvLn[_dvi];
           var _dvCh = _dvL.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
           if (_dvCh) { _dvDc = _dvCh[1].trim().toLowerCase(); _dvCe = null; continue; }
-          var _dvNm = _dvL.match(/^\d+\.\s+Nama:\s*(.+)/i);
+          var _dvNm = _dvL.match(/^\d+\.\s+(.+)/);
           if (_dvNm) { _dvCe = {nama:_dvNm[1].trim(),cat:_dvDc,milik:'',nilai:'',closing:'',lokasi:''}; continue; }
           if (_dvCe) {
             var _dvCl = _dvL.match(/Closing[^:]*:\s*(.+)/i); if (_dvCl) _dvCe.closing = _dvCl[1].trim();
@@ -678,7 +678,7 @@ const filtered = items.filter(item => {
         for (const _l of _ln2) {
           const _ch=_l.match(/---\s*KATEGORI:\s*(.+?)\s*---/i);
           if (_ch){_dc=_ch[1].trim().toLowerCase();_ce=null;continue;}
-          const _nm=_l.match(/^\d+\.\s+Nama:\s*(.+)/i);
+          const _nm=_l.match(/^\d+\.\s+(.+)/);
           if (_nm){_ce={nama:_nm[1].trim(),cat:_dc,milik:'',nilai:'',closing:'',lokasi:''};continue;}
           if (_ce&&_l.includes('Milik:')){
             const _ps=_l.split('|').map(s=>s.trim());
