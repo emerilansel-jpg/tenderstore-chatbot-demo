@@ -105,7 +105,7 @@ const m={
 'it':['computer','komputer','software','server','network','aplikasi','managed','license','co-location','drc','development','disaster recovery'],
 'komputer':['komputer','computer','server','software'],'server':['server','komputer','network','drc'],
 'drc':['drc','disaster recovery','co-location'],
-'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya','tndk','administrasi','kearsipan','naskah','marketing agency','jasa tenaga','agency','support','business','trm','resources','angkutan','issuing','receiving','handling','material','stockpile'],'outsourcing':['outsourcing','manpower','alih daya','support','business','trm','resources','angkutan','issuing','receiving','handling'],'tndk':['tndk','administrasi','kearsipan','naskah dinas','tata naskah','man power','outsourcing']
+'manpower':['manpower','tenaga kerja','outsourcing','sdm','alih daya','tndk','administrasi','kearsipan','naskah','marketing agency','jasa tenaga','agency','support','business','trm','resources','angkutan','issuing','receiving','handling','material','stockpile'],'outsourcing':['outsourcing','manpower','alih daya','support','business','trm','resources','angkutan','issuing','receiving','handling'],'tndk':['tndk','administrasi','kearsipan','naskah dinas','tata naskah','man power','outsourcing'],
 
     'valve':['valve','pneumatic','shut down','drain'],
     'pipe':['pipe','casing','tubing','hose','octg','tubular'],
@@ -350,7 +350,7 @@ module.exports = async function handler(req, res) {
     'geoteknik':'Seismic Geotechnic Geophysics','geotechnic':'Seismic Geotechnic Geophysics',
     'it':'Computer dan IT','komputer':'Computer dan IT','server':'Computer dan IT',
     'software':'Computer dan IT','network':'Computer dan IT','drc':'Computer dan IT',
-    'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power','tndk':'Man Power','administrasi':'Man Power','kearsipan':'Man Power'
+    'manpower':'Man Power','outsourcing':'Man Power','tenaga':'Man Power','sdm':'Man Power','tndk':'Man Power','administrasi':'Man Power','kearsipan':'Man Power',
   
     'valve':'VALVE','pneumatic':'VALVE',
     'pipe':'PIPE CASING TUBING & HOSE','casing':'PIPE CASING TUBING & HOSE','tubing':'PIPE CASING TUBING & HOSE','hose':'PIPE CASING TUBING & HOSE','octg':'PIPE CASING TUBING & HOSE',
