@@ -235,6 +235,7 @@ module.exports = async function handler(req, res) {
         _valTenders.push({name:_tName, val:parseFloat(_vm[1]), milik:_milik, close:_close, lok:_lok});
       }
     }
+    var _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
     if (_valTenders.length > 0) {
       _valTenders.sort((a,b) => b.val - a.val);
   var _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
@@ -529,7 +530,7 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    if (!data) { return res.status(500).json({ reply: 'Semua provider sedang bermasalah. ' + (lastError || '') }); }
+    if (!data) { return res.status(200).json({ reply: 'Mohon maaf, sistem sedang sibuk saat ini. Silakan coba lagi dalam beberapa saat, atau ketik kategori tender yang Anda cari (contoh: <strong>drilling</strong>, <strong>marine</strong>, <strong>IT</strong>).' }); }
 
     let reply = data.choices?.[0]?.message?.content || 'Maaf, tidak ada respons.';
     if (typeof _finishReason !== 'undefined' && _finishReason === 'length') {
