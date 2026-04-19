@@ -88,6 +88,14 @@ module.exports = async function handler(req, res) {
   }
 };
 
+function normalizeMonth(dateStr) {
+  if (!dateStr) return dateStr;
+  var map = {'-may-':'-mei-','-aug-':'-agu-','-oct-':'-okt-','-dec-':'-des-'};
+  var s = dateStr.toLowerCase();
+  Object.keys(map).forEach(function(k){ s = s.replace(k, map[k]); });
+  return dateStr.substring(0, dateStr.indexOf('-')) + s.substring(s.indexOf('-'));
+}
+
 function buildTextDatabase(data) {
   const cats = {};
   data.forEach(function(item) {
@@ -104,7 +112,7 @@ function buildTextDatabase(data) {
     lines.push('--- KATEGORI: ' + cat + ' ---');
     cats[cat].forEach(function(t) {
       lines.push(num + '. Nama: ' + t.nama);
-      lines.push('   Milik: ' + t.milik + ' | Nilai: ' + t.nilai + ' | Closing: ' + t.closing + ' | Lokasi: ' + t.lokasi + ' | Diumumkan: ' + (t.tanggal_pengumuman || 'N/A'));
+      lines.push('   Milik: ' + t.milik + ' | Nilai: ' + t.nilai + ' | Closing: ' + normalizeMonth(t.closing) + ' | Lokasi: ' + t.lokasi + ' | Diumumkan: ' + (t.tanggal_pengumuman || 'N/A'));
       lines.push('');
       num++;
     });
