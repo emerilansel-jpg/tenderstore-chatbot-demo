@@ -139,7 +139,7 @@ module.exports = async function handler(req, res) {
     if (/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|miliar|juta)\b|ke\s+atas|ke\s+bawah|di\s+atas|di\s+bawah|dibawah|dibwah|diatas|\d+\s*m\b/.test(_fpQl)) {
       try {
         var _fpDF = null, _fpVF = null;
-        var _fpMon = {jan:1,januari:1,feb:2,februari:2,mar:3,maret:3,apr:4,april:4,mei:5,jun:6,juni:6,jul:7,juli:7,agu:8,agustus:8,sep:9,september:9,okt:10,oktober:10,nov:11,november:11,des:12,desember:12};
+        var _fpMon = {jan:1,januari:1,feb:2,februari:2,mar:3,maret:3,apr:4,april:4,mei:5,may:5,jun:6,juni:6,jul:7,juli:7,agu:8,agustus:8,aug:8,sep:9,september:9,okt:10,oktober:10,oct:10,nov:11,november:11,des:12,desember:12,dec:12};
         var _fpDm = _fpQl.match(/\b(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?)\b/);
         if (_fpDm) { _fpDF = {month:_fpDm[1]}; var _fpYr = _fpQl.match(/\b(20\d{2})\b/); if (_fpYr) _fpDF.year = +_fpYr[1]; }
         var _fpVOp = /lebih\s+dari|melebihi|di\s+atas|ke\s+atas|diatas/.test(_fpQl) ? 'gt' : /kurang\s+dari|di\s+bawah|ke\s+bawah|dibawah|dibwah/.test(_fpQl) ? 'lt' : /\blebih\b/.test(_fpQl) ? 'gt' : /\bkurang\b/.test(_fpQl) ? 'lt' : null;
