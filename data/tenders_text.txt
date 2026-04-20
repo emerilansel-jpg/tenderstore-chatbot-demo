@@ -44,19 +44,25 @@
 13. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
 
+14. Nama: Pengadaan Casing High Grade Untuk Memenuhi Kebutuhan Regional 1
+   Milik: PERTAMINA EP | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 20-Apr-2026
+
+15. Nama: Pengadaan Threadolet
+   Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 23-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 20-Apr-2026
+
 --- KATEGORI: Survey & Inspection ---
-14. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
+16. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
    Milik: PT PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
 
 --- KATEGORI: Man Power General Labour Outsourcing ---
-15. Nama: Provision of Technical HSEQ Assurance Services
+17. Nama: Provision of Technical HSEQ Assurance Services
    Milik: ENI MUARA BAKAU B.V. | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Kutai Kartanegara - Kalimantan Timur | Diumumkan: 20-Apr-2026
 
-16. Nama: Pengadaan Tenaga Pendukung Kegiatan Akses Reforma Agraria Kategori Jawa - Bali 1
+18. Nama: Pengadaan Tenaga Pendukung Kegiatan Akses Reforma Agraria Kategori Jawa - Bali 1
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 42 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-17. Nama: Pengadaan tenaga pendukung kegiatan Akses Reforma Agraria Kategori Jawa - Bali
+19. Nama: Pengadaan tenaga pendukung kegiatan Akses Reforma Agraria Kategori Jawa - Bali
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 42 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-18. Nama: Pengadaan tenaga pendukung dalam rangka fasilitas pendampingan usaha Akses Reforma Agraria
+20. Nama: Pengadaan tenaga pendukung dalam rangka fasilitas pendampingan usaha Akses Reforma Agraria
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 21 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
