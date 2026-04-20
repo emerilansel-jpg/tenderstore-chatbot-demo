@@ -110,6 +110,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 #auth-btn:hover{background:#2563eb;}
 #auth-err{color:#f87171;font-size:0.85rem;margin-top:10px;display:none;}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
 <body>
 <div id="auth-overlay">
@@ -152,7 +153,13 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
  Format bebas AI akan otomatis merapikan jadi format yang benar.<br>
  Contoh: <em>"Jasa Sewa Rig 550 HP milik Pertamina EP, nilai 23 miliar, closing 12 Maret 2026, lokasi Cirebon, kategori drilling"</em>
  </div>
- <textarea id="rawInput" placeholder="Paste data tender mentah di sini..."></textarea>
+ <div style="margin-bottom:16px;padding:16px;border:1px dashed #475569;border-radius:8px;text-align:center">
+      <p style="color:#93c5fd;margin-bottom:8px;font-size:14px">&#128194; Upload File Tender (docx/txt)</p>
+      <input type="file" id="fileUpload" accept=".docx,.txt,.csv" onchange="handleFileUpload(this)" style="display:none">
+      <button class="btn btn-secondary" onclick="document.getElementById('fileUpload').click()">Pilih File</button>
+      <span id="fileName" style="margin-left:10px;color:#94a3b8;font-size:13px"></span>
+    </div>
+    <textarea id="rawInput" placeholder="Paste data tender mentah di sini..."></textarea>
  <div class="btn-row">
  <button class="btn btn-primary" id="parseBtn" onclick="parseData()"> Proses dengan AI</button>
  </div>
@@ -177,8 +184,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
     </div>
      <div class="btn-row" style="margin-bottom:16px">
  <button class="btn btn-primary" onclick="loadData()"> Refresh Data</button>
- <button class="btn btn-success" onclick="saveData('current')"> Simpan Perubahan</button>
- <button class="btn btn-danger" onclick="if(confirm('Hapus SEMUA data tender?')){currentData=[];renderTable(currentData,'currentBody');showStatus('saveStatus2','Data dikosongkan. Klik Simpan untuk konfirmasi.','info')}"> Hapus Semua</button>
+ <button class="btn btn-success" onclick="saveData('current')"> Simpan Perubahan</button><span style="color:#94a3b8;font-size:12px">&#128274; Database dilindungi dari penghapusan</span>
  </div>
  <div id="saveStatus2" class="status"></div>
  <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th>Diumumkan</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
@@ -292,7 +298,15 @@ function saveData(mode){
  headers:{'Content-Type':'application/json'},
  body:JSON.stringify({data:data})
  }).then(function(r){return r.json()}).then(function(d){
- if(d.error){showStatus(statusEl,'Error: '+d.error,'err');return}
+ if(d.error){
+      if(d.protection && d.loss){
+        if(confirm('\u26A0\uFE0F ' + d.error + '\n\nLanjutkan?')){
+          fetch('/api/save-tenders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:data,forceOverwrite:true})}).then(function(r2){return r2.json()}).then(function(d2){if(d2.error){showStatus(statusEl,'DIBLOKIR: '+d2.error,'err')}else{showStatus(statusEl,'Berhasil disimpan! '+data.length+' tender.','ok');currentData=data;loadData()}});
+          return;
+        } else { showStatus(statusEl,'Dibatalkan.','info'); return; }
+      }
+      showStatus(statusEl,'Error: '+d.error,'err');return;
+    }
  showStatus(statusEl,'Berhasil disimpan! '+data.length+' tender. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.','ok');
  currentData=data;
  loadData();
@@ -368,6 +382,32 @@ function checkCategorySimilarity(){
  }
 }
 function filterTable(q){q=q.toLowerCase().trim();var rows=document.querySelectorAll('#currentBody tr');var c=0;rows.forEach(function(r){var inputs=r.querySelectorAll('input');var t=r.textContent.toLowerCase();inputs.forEach(function(inp){t+=' '+(inp.value||'').toLowerCase()});if(!q||t.includes(q)){r.style.display='';c++}else{r.style.display='none'}});var info=document.getElementById('countInfo');if(info&&q){info.textContent='Menampilkan '+c+' dari '+rows.length+' tender'}else if(info){info.textContent='Total: '+rows.length+' tender'}}
+
+function handleFileUpload(input) {
+  var file = input.files[0];
+  if (!file) return;
+  document.getElementById('fileName').textContent = file.name;
+  var ext = file.name.split('.').pop().toLowerCase();
+  if (ext === 'txt' || ext === 'csv') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('rawInput').value = e.target.result;
+      showStatus('parseStatus', 'File dimuat: ' + file.name + '. Klik Proses dengan AI.', 'ok');
+    };
+    reader.readAsText(file);
+  } else if (ext === 'docx') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      mammoth.extractRawText({arrayBuffer: e.target.result}).then(function(result) {
+        document.getElementById('rawInput').value = result.value;
+        showStatus('parseStatus', 'File DOCX dimuat: ' + file.name + '. Klik Proses dengan AI.', 'ok');
+      });
+    };
+    reader.readAsArrayBuffer(file);
+  } else {
+    showStatus('parseStatus', 'Format tidak didukung. Gunakan .docx, .txt, atau .csv', 'err');
+  }
+}
 </script>
 </body>
 </html>
