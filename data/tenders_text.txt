@@ -1,107 +1,40 @@
-=== DATABASE TENDER TENDERSTORE.ID ===
-
---- KATEGORI: Drilling & Workover Well Service ---
-1. Pekerjaan Jasa Lumpur Pemboran Lengkap Dengan Peralatan, Material Dan Personel Untuk Wilayah Jatibarang Zona 7
-   Milik: PERTAMINA EP | Nilai: Rp 25 M | Closing: 13-Mar-2026 | Lokasi: Cirebon - Jawa Barat | Diumumkan: 14-Apr-2026
-2. Jasa Penyediaan Dan Pengoperasian 1 (Satu) Unit Rig Kapasitas 350 Hp Beserta Tenaga Kerja Dan Peralatan Untuk Workover Dan Well Services
-   Milik: PERTAMINA - MEDCO E&P TOMORI SULAWESI | Nilai: Rp 24 M | Closing: 12-Mar-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 14-Apr-2026
-3. Jasa Sewa Unit Perangkat Rig 550 Hp Tambahan Untuk Pekerjaan Sumuran Di Pt Pertamina Ep Zona 7
-   Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE | Nilai: Rp 23 M | Closing: 12-Mar-2026 | Lokasi: Cirebon - Jawa Barat | Diumumkan: 14-Apr-2026
-4. Jasa Penyemenan dan Stimulasi di Pertamina EP Zona 10
-   Milik: BP BERAU LTD | Nilai: Rp 22 M | Closing: 09-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-5. Jasa Electric Logging, Perforation dan Data Processing (EWLPP) untuk Pekerjaan Well Intervention PT Pertamina EP Zona 7
-   Milik: KANGEAN ENERGY INDONESIA LTD | Nilai: Rp 21 M | Closing: 06-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-6. Call of Order (COO) Oil Well Cement Class G di Wilayah Kerja PEP Regional 3
-   Milik: INPEX MASELA | Nilai: Rp 20 M | Closing: 06-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-7. Pekerjaan Electric Wireline Logging, Data Processing dan Interpretation (EWLDPI) Sumur Eksplorasi PT Pertamina EP Regional 2 Tahun 2026-2028
-   Milik: PERTAMINA EP | Nilai: Rp 19 M | Closing: 06-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-8. Jasa Sewa Perangkat RIG dengan Kapasitas 700 HP sampai 750 HP
-   Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI | Nilai: Rp 18 M | Closing: 13-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-9. Penyewaan & Pengoperasian Artificial Lift (Electrical Submersible Pump) Lengkap Dengan Fasilitas Dan Sarana Pendukungnya
-   Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI | Nilai: Rp 28 M | Closing: 22-Jan-2025 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-10. Jasa Sewa Perangkat RIG dengan Kapasitas 250 HP
-   Milik: KSO PERTAMINA EP - FORMASI SUMATERA ENERGI | Nilai: Rp 17 M | Closing: 30-Oct-2025 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-
---- KATEGORI: Seismic, Geotechnic, & Geophysics ---
-1. Survei Seismik Offshore 2D Kandawulo
-   Milik: PERTAMINA HULU ENERGI | Nilai: Rp 15 M | Closing: 30-Oct-2025 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-2. Survei Seismik Offshore 3D Kandawulo
-   Milik: PERTAMINA HULU ENERGI | Nilai: Rp 16 M | Closing: 13-Mar-2025 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-3. Survei Seismik Offshore 2D SE Java
-   Milik: PERTAMINA HULU ENERGI | Nilai: Rp 14 M | Closing: 27-Mar-2025 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-4. Study Local Geoid Modeling Jabung Block
-   Milik: PETROCHINA INTERNATIONAL JABUNG LTD | Nilai: Rp 5 M | Closing: 25-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-
---- KATEGORI: Computer & IT ---
-1. Sewa Perangkat Komputer Dan Server Untuk Job P-Meps
-   Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 10 M | Closing: 27-Nov-2025 | Lokasi: Nunukan - Kalimantan Timur | Diumumkan: 14-Apr-2026
-2. License Software Utility Untuk Kebutuhan Operasional Perusahaan Job Pmeps
-   Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 3 M | Closing: 20-Jun-2025 | Lokasi: Nunukan - Kalimantan Timur | Diumumkan: 14-Apr-2026
-3. Jasa Managed Network Device dan IT Support
-   Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 7 M | Closing: 27-May-2025 | Lokasi: Nunukan - Kalimantan Timur | Diumumkan: 14-Apr-2026
-4. Pengadaan Penyediaan Layanan Co-Location Disaster Recovery Center (DRC) Tahun 2026
-   Milik: PLNE (PRIMA LAYANAN NASIONAL ENJINIRING) | Nilai: Rp 6.5 M | Closing: 04-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-5. Jasa Managed Network Device dan IT Support (2025)
-   Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: Rp 4 M | Closing: 16-Apr-2025 | Lokasi: Nunukan - Kalimantan Timur | Diumumkan: 14-Apr-2026
-
---- KATEGORI: Marine Transportation ---
-1. Provision of Swamp Barge No.1
-   Milik: PT PERTAMINA HULU MAHAKAM | Nilai: Rp 17 M | Closing: 31-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-2. Penyediaan dan Pengoperasian Landing Craft Tank (LCT) Untuk Mendukung Kegiatan Operasi Produksi di Pertamina Field Pangkalan Susu
-   Milik: PERTAMINA EP | Nilai: Rp 8 M | Closing: 16-Mar-2026 | Lokasi: Kotabaru - Kalimantan Selatan | Diumumkan: 14-Apr-2026
-3. Jasa Sewa 1 (Satu) Unit Crew Boat - Unit B
-   Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE | Nilai: Rp 16 M | Closing: 23-Jun-2025 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-4. Penyediaan Jasa Sewa Kapal Harbour Tug
-   Milik: PERTAMINA HULU ENERGI WEST MADURA OFFSHORE | Nilai: Rp 14 M | Closing: 03-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-5. Rental Of Utility Boat to Support PHE OSES
-   Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: Rp 19 M | Closing: 10-Mar-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-6. Invitation to Bid & Term of Reference (TOR) Time Charter Vessel Procurement 1 (one) Unit MR-WO/Intermedia Laycan 10-11 Februari 2026
-   Milik: PERTAMINA (PERSERO) PUSAT | Nilai: Rp 10 M | Closing: 19-Jan-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 14-Apr-2026
-
---- KATEGORI: Man Power General Labour Outsourcing ---
-1. Penyediaan Jasa Tenaga Kerja Penunjang Untuk Membantu Pekerjaan Administrasi Wilayah Kerja PT Pertamina EP Pangkalan Susu Field
-   Milik: PERTAMINA EP | Nilai: Rp 10 M | Closing: 01-Apr-2026 | Lokasi: Kotabaru - Kalimantan Selatan | Diumumkan: 14-Apr-2026
-2. Pekerjaan Pelaksanaan Kegiatan Penunjang Administrasi Tata Naskah Dinas Dan Kearsipan (TNDK) PT PLN (Persero) Unit Induk Distribusi Bali
-   Milik: PLN (PERSERO) DISTRIBUSI BALI | Nilai: Rp 5 M | Closing: 30-Mar-2026 | Lokasi: Denpasar - Bali | Diumumkan: 14-Apr-2026
-3. Open Sourcing - Pengadaan Marketing Agency Pt Garuda Indonesia (Persero) Tbk
-   Milik: PT GARUDA INDONESIA | Nilai: Rp 15 M | Closing: 27-Mar-2026 | Lokasi: Tangerang - Banten | Diumumkan: 14-Apr-2026
-4. Tangguh Total Resources Management (TRM) - Business Support Services
-   Milik: BP BERAU LTD | Nilai: Rp 18 M | Closing: 02-Apr-2026 | Lokasi: Teluk Bintuni - Papua Barat | Diumumkan: 14-Apr-2026
-5. Jasa Support Pekerjaan Issuing, Receiving, Serta Pengoperasian Angkutan Berat Dan Angkutan Ringan Selama 24 Bulan Di PT Pertamina EP Zona 1 Field Rantau
-   Milik: PERTAMINA EP | Nilai: Rp 8 M | Closing: 27-Mar-2026 | Lokasi: Kotabaru - Kalimantan Selatan | Diumumkan: 14-Apr-2026
-6. Pengadaan Jasa Tenaga Alih Daya (TAD) Pekerjaan Re Handling Material Stockpile Dan SHP
-   Milik: PT TIMAH LOGISTIK | Nilai: Rp 1 M | Closing: 26-Mar-2026 | Lokasi: Pangkal Pinang - Kepulauan Babel | Diumumkan: 14-Apr-2026
+=== DATABASE TENDER LENGKAP (HANYA REFERENSI INI YANG BOLEH DIGUNAKAN) ===
 
 --- KATEGORI: Chemical & Industrial Gas ---
-1. Kontrak Payung Pengadaan Chemical Cooling Tower Pt Pln Nusantara Power Up Tenayan
-   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Lampung Selatan - Lampung | Diumumkan: 15-Apr-2026
+1. Nama: Kontrak Payung Pengadaan Chemical Cooling Tower Pt Pln Nusantara Power Up Tenayan
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Lampung Selatan - Lampung | Diumumkan: 15-Apr-2026
 
 --- KATEGORI: FABRICATION & MECHANICAL CONSTRUCTION ---
-1. Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
-   Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 15-Apr-2026
+2. Nama: Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
+   Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 15-Apr-2026
 
 --- KATEGORI: KOMPUTER IT ---
-1. Pengadaan Bahan Pelatihan Berbasis Kompetensi BBPVP Bandung di UPTD BLK Kab. Kuningan, UPTD KLK Ciamis dan UPTD BLK Kota Banjar
-   Milik: KEMENTERIANA TENAGA KERJA DAN TRANSMIGRASI | Nilai: Rp 159 JT | Closing: 16-Apr-2026 | Lokasi: Bandung - Jawa Barat | Diumumkan: 15-Apr-2026
-2. Pekerjaan Jasa Sewa Laptop UP Kaltimra Periode 2026-2028
-   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 27-Apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 15-Apr-2026
-3. Pengadaan Sistem Monitoring Kegiatan Unit Alkal
-   Milik: PROVINSI DKI JAKARTA | Nilai: Rp 193.5 JT | Closing: 19-Apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 15-Apr-2026
-4. Pengadaan Tenaga Ahli Programmer Sistem Rekomendasi Teknis Dinas SDA
-   Milik: PROVINSI DKI JAKARTA | Nilai: Rp 70.95 JT | Closing: 19-Apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 16-Apr-2026
+3. Nama: Pengadaan Bahan Pelatihan Berbasis Kompetensi BBPVP Bandung di UPTD BLK Kab. Kuningan, UPTD KLK Ciamis dan UPTD BLK Kota Banjar
+   Milik: KEMENTERIANA TENAGA KERJA DAN TRANSMIGRASI | Nilai: Rp 159 JT | Closing: 16-apr-2026 | Lokasi: Bandung - Jawa Barat | Diumumkan: 15-Apr-2026
+
+4. Nama: Pekerjaan Jasa Sewa Laptop UP Kaltimra Periode 2026-2028
+   Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 15-Apr-2026
+
+5. Nama: Pengadaan Sistem Monitoring Kegiatan Unit Alkal
+   Milik: PROVINSI DKI JAKARTA | Nilai: Rp 193.5 JT | Closing: 19-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 15-Apr-2026
+
+6. Nama: Pengadaan Tenaga Ahli Programmer Sistem Rekomendasi Teknis Dinas SDA
+   Milik: PROVINSI DKI JAKARTA | Nilai: Rp 70.95 JT | Closing: 19-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 16-Apr-2026
 
 --- KATEGORI: VALVE ---
-1. Pengadaan Pneumatic Shut Down Valve Size 3IN-10IN untuk Proyek Pengembangan Lapangan Risma
-   Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: N/A | Closing: 20-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 15-Apr-2026
-2. Auto Drain Valve
-   Milik: MEDCO E&P LEMATANG | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Muara Enim - Sumatera Selatan | Diumumkan: 16-Apr-2026
+7. Nama: Pengadaan Pneumatic Shut Down Valve Size 3IN-10IN untuk Proyek Pengembangan Lapangan Risma
+   Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 15-Apr-2026
+
+8. Nama: Auto Drain Valve
+   Milik: MEDCO E&P LEMATANG | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Muara Enim - Sumatera Selatan | Diumumkan: 16-Apr-2026
 
 --- KATEGORI: PIPE CASING TUBING & HOSE ---
-1. Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
-   Milik: JOB PERTAMINA - MEDCO E&P TOMORI SULAWESI | Nilai: N/A | Closing: 22-Apr-2026 | Lokasi: Banggai - Sulawesi Tengah | Diumumkan: 16-Apr-2026
-2. Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
-   Milik: PERTAMINA EP | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
+9. Nama: Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
+   Milik: JOB PERTAMINA - MEDCO E&P TOMORI SULAWESI | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Banggai - Sulawesi Tengah | Diumumkan: 16-Apr-2026
+
+10. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
+   Milik: PERTAMINA EP | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
 
 --- KATEGORI: Survey & Inspection ---
-1. Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
-   Milik: PT PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 21-Apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
+11. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
+   Milik: PT PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
