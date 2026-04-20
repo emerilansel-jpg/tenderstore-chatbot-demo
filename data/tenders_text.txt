@@ -54,15 +54,21 @@
 16. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
    Milik: PT PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
 
+17. Nama: Pemutakhiran Peta Daerah Irigasi Kewenangan Pusat
+   Milik: KEMENTRIAN PEKERJAAN UMUM | Nilai: Rp 653.903 JT | Closing: 24-apr-2026 | Lokasi: Lombok Barat - Nusa Tenggara Barat | Diumumkan: 20-Apr-2026
+
+18. Nama: Jasa Pelaksanaan lnspeksi Peralatan dan Simulasi Drill KedaruratanPT Pertamina EP Donggi Matindok Field
+   Milik: PERTAMINA EP | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 20-Apr-2026
+
 --- KATEGORI: Man Power General Labour Outsourcing ---
-17. Nama: Provision of Technical HSEQ Assurance Services
+19. Nama: Provision of Technical HSEQ Assurance Services
    Milik: ENI MUARA BAKAU B.V. | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Kutai Kartanegara - Kalimantan Timur | Diumumkan: 20-Apr-2026
 
-18. Nama: Pengadaan Tenaga Pendukung Kegiatan Akses Reforma Agraria Kategori Jawa - Bali 1
+20. Nama: Pengadaan Tenaga Pendukung Kegiatan Akses Reforma Agraria Kategori Jawa - Bali 1
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 42 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-19. Nama: Pengadaan tenaga pendukung kegiatan Akses Reforma Agraria Kategori Jawa - Bali
+21. Nama: Pengadaan tenaga pendukung kegiatan Akses Reforma Agraria Kategori Jawa - Bali
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 42 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-20. Nama: Pengadaan tenaga pendukung dalam rangka fasilitas pendampingan usaha Akses Reforma Agraria
+22. Nama: Pengadaan tenaga pendukung dalam rangka fasilitas pendampingan usaha Akses Reforma Agraria
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 21 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
