@@ -180,7 +180,7 @@ module.exports = async function handler(req, res) {
                   if (_fpVF.op === 'lt' && !(_fpEnt.nilai < _fpVF.amount)) _fpOk = false;
                 }
               }
-              if (_fpOk) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, closing:_fpEnt.closing});
+              if (_fpOk) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, nilaiStr:(_fpEnt.nilai!==null?(_fpEnt.nilai>=1?_fpEnt.nilai+' M':Math.round(_fpEnt.nilai*1000)+' JT'):'N/A'), closing:_fpEnt.closing});
               _fpEnt = null;
             }
           }
@@ -201,10 +201,14 @@ module.exports = async function handler(req, res) {
                 if (_fpVF.op === 'lt' && !(_fpEnt.nilai < _fpVF.amount)) _fpOk2 = false;
               }
             }
-            if (_fpOk2) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, closing:_fpEnt.closing});
+            if (_fpOk2) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, nilaiStr:(_fpEnt.nilai!==null?(_fpEnt.nilai>=1?_fpEnt.nilai+' M':Math.round(_fpEnt.nilai*1000)+' JT'):'N/A'), closing:_fpEnt.closing});
           }
-          if (_fpRes.length > 0) {
-            var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilai!==null?' | Nilai: Rp '+it.nilai+' M':'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('<br>\n');
+          var _fpStopW = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','kalo','kalau','gak','ga','dong','sih','nih','yah','lah','deh','aja','saja','juga','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','berapa','total','jumlah','hitung','banyak'];
+var _fpDateW = /^(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|tender|dari|miliar|milyar|juta|triliun|rupiah|rp)$|^\d/i;
+var _fpKw = _fpQl.split(/\s+/).map(function(w){return w.replace(/[^a-z0-9\/]/g,'');}).filter(function(w){return w.length>1 && _fpStopW.indexOf(w)<0 && !_fpDateW.test(w);});
+if (_fpKw.length > 0) { _fpRes = _fpRes.filter(function(t){ var _nm = t.nama.toLowerCase() + ' ' + t.cat.toLowerCase(); return _fpKw.every(function(kw){ return _nm.indexOf(kw) >= 0; }); }); }
+if (_fpRes.length > 0) {
+            var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilaiStr&&it.nilaiStr!=='N/A'?' | Nilai: Rp '+it.nilaiStr:'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('<br>\n');
             return res.json({reply:'Ditemukan <strong>'+_fpRes.length+' tender</strong> sesuai filter:\n'+_fpBody});
           } else {
             return res.json({reply:'Tidak ditemukan tender sesuai filter tanggal/nilai Anda.'});
