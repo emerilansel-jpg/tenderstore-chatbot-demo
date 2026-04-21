@@ -13,6 +13,9 @@ module.exports = async function handler(req, res) {
     });
   }
 
+  // Normalize all categories to UPPERCASE
+  data.forEach(function(item) { if (item.kategori) item.kategori = item.kategori.toUpperCase(); });
+
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   if (!GITHUB_TOKEN) return res.status(500).json({ error: 'GITHUB_TOKEN belum di-set di Vercel environment variables. Hubungi admin.' });
 
@@ -172,7 +175,7 @@ function normalizeMonth(dateStr) {
 function buildTextDatabase(data) {
   const cats = {};
   data.forEach(function(item) {
-    var cat = item.kategori || 'Lainnya';
+    var cat = (item.kategori || 'Lainnya').toUpperCase();
     if (!cats[cat]) cats[cat] = [];
     cats[cat].push(item);
   });
