@@ -107,6 +107,8 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 .pass-wrap #auth-pass{margin-bottom:0;padding-right:40px;}
 .eye-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.2rem;padding:4px;}
 .eye-toggle:hover{color:#f1f5f9;}
+#pwOverlay .pass-wrap{width:280px;margin:0 auto 12px;}
+#pwOverlay .pass-wrap input{width:100%;box-sizing:border-box;}
 #auth-btn{
   width:100%;padding:10px;border-radius:8px;border:none;
   background:#3b82f6;color:#fff;font-size:1rem;cursor:pointer;font-weight:600;
@@ -132,7 +134,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 <div id="pwOverlay">
  <h2>Admin Tender-Indonesia</h2>
  <p>Masukkan password admin</p>
- <input type="password" id="pwInput" placeholder="Password..." onkeydown="if(event.key==='Enter')checkPw()">
+ <div class="pass-wrap" style="margin-bottom:0"><input type="password" id="pwInput" placeholder="Password..." onkeydown="if(event.key==='Enter')checkPw()" style="margin-bottom:0;padding-right:40px"><button type="button" class="eye-toggle" onclick="togglePw('pwInput',this)" title="Tampilkan password">&#128065;</button></div>
  <button onclick="checkPw()">Masuk</button>
  <div id="pwError">Password salah.</div>
 </div>
@@ -336,7 +338,8 @@ function showStatus(id,msg,type){
 
 </script>
 <script>
-function togglePass(){var p=document.getElementById('auth-pass');var b=p.nextElementSibling;if(p.type==='password'){p.type='text';b.innerHTML='\u{1F441}\uFE0F';b.title='Sembunyikan password';}else{p.type='password';b.innerHTML='\u{1F441}';b.title='Tampilkan password';}}
+function togglePw(id,btn){var p=document.getElementById(id);if(p.type==='password'){p.type='text';btn.title='Sembunyikan password';}else{p.type='password';btn.title='Tampilkan password';}}
+function togglePass(){togglePw('auth-pass',document.querySelector('#auth-box .eye-toggle'));}
 function doAuth() {
   var pw = document.getElementById('auth-pass').value;
   if (pw === 'admintender') {
