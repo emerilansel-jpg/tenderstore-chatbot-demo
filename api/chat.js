@@ -159,8 +159,8 @@ module.exports = async function handler(req, res) {
                 var _fpP = _fpPts[_fpj];
                 var _fpCv = _fpP.match(/Closing:\s*(\d{1,2})[-\/](\w+)[-\/](\d{4})/i);
                 if (_fpCv) _fpEnt.closing = {d:+_fpCv[1], m:_fpCv[2].toLowerCase().substr(0,3), y:+_fpCv[3]};
-                var _fpVv = _fpP.match(/Nilai:\s*Rp\s*([\d.,]+)\s*M/i);
-                if (_fpVv) _fpEnt.nilai = parseFloat(_fpVv[1].replace(',','.'));
+                var _fpVv = _fpP.match(/Nilai:\s*Rp\s*([\d.,]+)\s*(M|JT)/i);
+            if (_fpVv) { _fpEnt.nilai = parseFloat(_fpVv[1].replace(',','.')); if(/jt/i.test(_fpVv[2])) _fpEnt.nilai /= 1000; }
               }
             }
             if (_fpLn.trim() === '' && _fpEnt && _fpEnt.nama) {
@@ -204,7 +204,7 @@ module.exports = async function handler(req, res) {
             if (_fpOk2) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, closing:_fpEnt.closing});
           }
           if (_fpRes.length > 0) {
-            var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilai!==null?' | Nilai: Rp '+it.nilai+' M':'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('<br>\n');
+            var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilai!==null?' | Nilai: Rp '+(it.nilai>=1?it.nilai+' M':Math.round(it.nilai*1000)+' JT')':'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('<br>\n');
             return res.json({reply:'Ditemukan <strong>'+_fpRes.length+' tender</strong> sesuai filter:\n'+_fpBody});
           } else {
             return res.json({reply:'Tidak ditemukan tender sesuai filter tanggal/nilai Anda.'});
