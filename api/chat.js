@@ -207,11 +207,12 @@ module.exports = async function handler(req, res) {
 var _fpDateW = /^(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|tender|dari|miliar|milyar|juta|triliun|rupiah|rp)$|^\d/i;
 var _fpKw = _fpQl.split(/\s+/).map(function(w){return w.replace(/[^a-z0-9\/]/g,'');}).filter(function(w){return w.length>1 && _fpStopW.indexOf(w)<0 && !_fpDateW.test(w);});
 if (_fpKw.length > 0) { _fpRes = _fpRes.filter(function(t){ var _nm = t.nama.toLowerCase() + ' ' + t.cat.toLowerCase(); return _fpKw.every(function(kw){ return _nm.indexOf(kw) >= 0; }); }); }
+var _fpDesc = ''; var _fpMonNames = {1:'Januari',2:'Februari',3:'Maret',4:'April',5:'Mei',6:'Juni',7:'Juli',8:'Agustus',9:'September',10:'Oktober',11:'November',12:'Desember'}; if (_fpKw && _fpKw.length > 0) _fpDesc += ' keyword <strong>' + _fpKw.join(' ').toUpperCase() + '</strong>'; if (_fpDF) { var _fpFmN = _fpMon[_fpDF.month]||0; _fpDesc += (_fpDesc?' di bulan ':' bulan ') + '<strong>' + (_fpMonNames[_fpFmN]||_fpDF.month) + '</strong>'; } if (_fpVF) _fpDesc += (_fpDesc?' dengan ':' ') + 'nilai <strong>' + (_fpVF.op==='gt'?'di atas':'di bawah') + ' ' + _fpVF.amount + ' Miliar</strong>'; if (!_fpDesc) _fpDesc = ' sesuai filter';
 if (_fpRes.length > 0) {
             var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilaiStr&&it.nilaiStr!=='N/A'?' | Nilai: Rp '+it.nilaiStr:'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('<br>\n');
-            return res.json({reply:'Ditemukan <strong>'+_fpRes.length+' tender</strong> sesuai filter:\n'+_fpBody});
+            return res.json({reply:'Ditemukan <strong>'+_fpRes.length+' tender</strong>'+_fpDesc+':\n'+_fpBody});
           } else {
-            return res.json({reply:'Tidak ditemukan tender sesuai filter tanggal/nilai Anda.'});
+            return res.json({reply:'Tidak ditemukan tender'+_fpDesc+'. Coba gunakan kata kunci yang berbeda.'});
           }
         }
       } catch(_fpE) { /* fallthrough to normal processing */ }
