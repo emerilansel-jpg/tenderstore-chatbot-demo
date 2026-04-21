@@ -103,6 +103,10 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
   border:1px solid #475569;background:#0f172a;color:#f1f5f9;
   font-size:1rem;margin-bottom:12px;box-sizing:border-box;
 }
+.pass-wrap{position:relative;width:100%;margin-bottom:12px;}
+.pass-wrap #auth-pass{margin-bottom:0;padding-right:40px;}
+.eye-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.2rem;padding:4px;}
+.eye-toggle:hover{color:#f1f5f9;}
 #auth-btn{
   width:100%;padding:10px;border-radius:8px;border:none;
   background:#3b82f6;color:#fff;font-size:1rem;cursor:pointer;font-weight:600;
@@ -117,7 +121,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
   <div id="auth-box">
     <h2>ð Admin Panel</h2>
     <p>Masukkan password untuk melanjutkan</p>
-    <input type="password" id="auth-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doAuth()">
+    <div class="pass-wrap"><input type="password" id="auth-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doAuth()"><button type="button" class="eye-toggle" onclick="togglePass()" title="Tampilkan password">&#128065;</button></div>
     <button id="auth-btn" onclick="doAuth()">Masuk</button>
     <div id="auth-err">â Password salah. Coba lagi.</div>
   </div>
@@ -332,6 +336,7 @@ function showStatus(id,msg,type){
 
 </script>
 <script>
+function togglePass(){var p=document.getElementById('auth-pass');var b=p.nextElementSibling;if(p.type==='password'){p.type='text';b.innerHTML='\u{1F441}\uFE0F';b.title='Sembunyikan password';}else{p.type='password';b.innerHTML='\u{1F441}';b.title='Tampilkan password';}}
 function doAuth() {
   var pw = document.getElementById('auth-pass').value;
   if (pw === 'admintender') {
