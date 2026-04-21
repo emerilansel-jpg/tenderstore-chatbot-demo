@@ -271,11 +271,11 @@ module.exports = async function handler(req, res) {
   var filterWords = userWords.filter(w => !stopWords.includes(w) && (w.length > 2 || preserveShort.includes(w)));
     var _wantsCount = /\b(berapa|total|jumlah|hitung|banyak|banyaknya)\b/i.test(message);
   // Strip date/month/year/value terms to prevent false category matches
-  var _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp)$|^\d/i;
+  var _dateFwExclude = /^(januari|jan|februari|feb|maret|mar|april|apr|mei|juni|jun|juli|jul|agustus|agus|agu|agt|september|sep|oktober|okt|november|nov|desember|des|tgl|tanggal|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|closing|tender|dari|miliar|juta|triliun|rupiah|rp|proyek|katagori|daftar|apakah|macam|tipe|ragam)$|^\d/i;
   filterWords = filterWords.filter(function(w){ return !_dateFwExclude.test(w); });
 
   var _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
-  var _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa)\b/.test(message.toLowerCase()) && filterWords.length === 0;
+  var _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa|apakah ada tender)\b/.test(message.toLowerCase()) && filterWords.length === 0;
   var _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
   
   var _contCategory = '';
