@@ -273,13 +273,13 @@ function submitProspect(){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({nama:nama,whatsapp:wa})
   }).then(function(r){return r.json();}).then(function(){
-    sessionStorage.setItem('prospectDone','1');
-    sessionStorage.setItem('prospectNama',nama);
+    localStorage.setItem('prospectDone','1');
+    localStorage.setItem('prospectNama',nama);
     document.getElementById('prospectOverlay').style.display='none';
     document.getElementById('pwOverlay').style.display='flex';
     document.getElementById('pwInput').focus();
   }).catch(function(){
-    sessionStorage.setItem('prospectDone','1');
+    localStorage.setItem('prospectDone','1');
     document.getElementById('prospectOverlay').style.display='none';
     document.getElementById('pwOverlay').style.display='flex';
     document.getElementById('pwInput').focus();
@@ -288,7 +288,7 @@ function submitProspect(){
 
 /* Prospect/Password flow init */
 (function(){
-  if(sessionStorage.getItem('prospectDone')){
+  if(localStorage.getItem('prospectDone')){
     var po=document.getElementById('prospectOverlay');
     if(po) po.style.display='none';
     var pw=document.getElementById('pwOverlay');
