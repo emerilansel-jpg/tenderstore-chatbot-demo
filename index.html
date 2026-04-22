@@ -107,12 +107,35 @@ html{scroll-behavior:smooth}
 @keyframes msgFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .message-bot,.message-user{animation:msgFadeIn .3s ease-out!important}
 @media(max-width:768px){.quick-buttons{padding:6px 0!important}.quick-btn{padding:10px 18px!important;font-size:13px!important}header{padding:12px 16px!important}}
+
+/* Prospect Form */
+.prospect-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,17,23,0.97);z-index:1000;display:flex;align-items:center;justify-content:center}
+.prospect-box{background:#141820;border:1px solid #1e2533;border-radius:16px;padding:32px;max-width:400px;width:90%;text-align:center}
+.prospect-title{font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
+.prospect-sub{font-size:14px;color:#8899bb;margin-bottom:20px}
+.prospect-input{width:100%;background:#0f1117;border:1px solid #1e2533;border-radius:12px;padding:12px 16px;font-size:16px;color:#fff;outline:none;margin-bottom:12px;text-align:center;font-family:'Inter',sans-serif;box-sizing:border-box}
+.prospect-input:focus{border-color:#3b82f6}
+.prospect-input::placeholder{color:#556}
+.prospect-btn{background:#2563eb;border:none;border-radius:12px;padding:12px 24px;color:#fff;font-weight:700;cursor:pointer;font-size:16px;width:100%;transition:background .2s}
+.prospect-btn:hover{background:#1d4ed8}
+.prospect-error{color:#f87171;font-size:13px;margin-top:8px;display:none}
 </style>
 </head>
 <body>
 
+<!-- Prospect Form Overlay -->
+<div id="prospectOverlay" class="prospect-overlay">
+<div class="prospect-box">
+<div class="prospect-title">Selamat Datang!</div>
+<div class="prospect-sub">Silakan isi data Anda untuk melanjutkan</div>
+<input id="prospectNama" class="prospect-input" type="text" placeholder="Nama Lengkap" onkeypress="if(event.key==='Enter')document.getElementById('prospectWa').focus()">
+<input id="prospectWa" class="prospect-input" type="tel" placeholder="Nomor WhatsApp (08xxx)" onkeypress="if(event.key==='Enter')submitProspect()">
+<button class="prospect-btn" onclick="submitProspect()">Lanjutkan</button>
+<div id="prospectError" class="prospect-error">Mohon isi Nama dan Nomor WhatsApp yang valid.</div>
+</div>
+</div>
 <!-- Password Overlay -->
-<div id="pwOverlay" class="pw-overlay">
+<div id="pwOverlay" class="pw-overlay" style="display:none">
 <div class="pw-box">
 <div class="pw-title">Tender-Indonesia</div>
 <div class="pw-sub">Masukkan password untuk mengakses sistem</div>
@@ -233,6 +256,45 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 <script>
 /* === Password Gate === */
 var isAuth = false;
+
+function submitProspect(){
+  var nama = document.getElementById('prospectNama').value.trim();
+  var wa = document.getElementById('prospectWa').value.trim().replace(/[^0-9+]/g,'');
+  if(!nama || nama.length < 2 || !wa || wa.length < 8){
+    document.getElementById('prospectError').style.display='block';
+    return;
+  }
+  document.getElementById('prospectError').style.display='none';
+  var btn = document.querySelector('.prospect-btn');
+  btn.textContent='Menyimpan...';
+  btn.disabled=true;
+  fetch('/api/save-prospect',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nama:nama,whatsapp:wa})
+  }).then(function(r){return r.json();}).then(function(){
+    sessionStorage.setItem('prospectDone','1');
+    sessionStorage.setItem('prospectNama',nama);
+    document.getElementById('prospectOverlay').style.display='none';
+    document.getElementById('pwOverlay').style.display='flex';
+    document.getElementById('pwInput').focus();
+  }).catch(function(){
+    sessionStorage.setItem('prospectDone','1');
+    document.getElementById('prospectOverlay').style.display='none';
+    document.getElementById('pwOverlay').style.display='flex';
+    document.getElementById('pwInput').focus();
+  });
+}
+
+/* Prospect/Password flow init */
+(function(){
+  if(sessionStorage.getItem('prospectDone')){
+    var po=document.getElementById('prospectOverlay');
+    if(po) po.style.display='none';
+    var pw=document.getElementById('pwOverlay');
+    if(pw) pw.style.display='flex';
+  }
+})();
 function checkPassword(){
 var inp=document.getElementById('pwInput');
 var raw=inp.value;
