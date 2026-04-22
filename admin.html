@@ -203,7 +203,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 function checkPw(){
  var v=document.getElementById('pwInput').value;
  var n=v.toLowerCase().replace(/[\s\-_]/g,'');
- if(n==='tender'){
+ if(n==='admintender'){
  document.getElementById('pwOverlay').style.display='none';
  loadData();
  } else {
@@ -342,7 +342,7 @@ function togglePw(id,btn){var p=document.getElementById(id);if(p.type==='passwor
 function togglePass(){togglePw('auth-pass',document.querySelector('#auth-box .eye-toggle'));}
 function doAuth() {
   var pw = document.getElementById('auth-pass').value;
-  if (pw === 'tender') {
+  if (pw === 'admintender') {
     sessionStorage.setItem('adminAuth','1');
     document.getElementById('auth-overlay').style.display='none';
     document.getElementById('auth-pass').value='';
