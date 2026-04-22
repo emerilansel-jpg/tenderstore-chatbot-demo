@@ -150,9 +150,9 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
  <div class="tabs">
  <div class="tab active" onclick="switchTab('input')"> Input Data Baru</div>
  <div class="tab" onclick="switchTab('data')"> Data Saat Ini <span id="dataBadge" class="count-badge">0</span></div>
- </div>
-
- <!-- Tab 1: Input baru -->
+ <div class="tab" onclick="switchTab('prospect')">Prospect <span id="prospectBadge" class="count-badge">0</span></div>
+</div>
+<!-- Tab 1: Input baru --><!-- Tab 1: Input baru -->
  <div id="panel-input" class="panel active">
  <div class="hint">
  Paste text tender dari sumber manapun (website, email, PDF, Word, dsb).<br>
@@ -195,7 +195,21 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
  <div id="saveStatus2" class="status"></div>
  <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Nama Tender</th><th>Milik</th><th>Nilai</th><th>Closing</th><th>Lokasi</th><th>Kategori</th><th>Diumumkan</th><th></th></tr></thead><tbody id="currentBody"></tbody></table></div>
  <div id="emptyMsg" style="display:none;text-align:center;padding:40px;color:#64748b">Belum ada data. Gunakan tab "Input Data Baru" untuk menambahkan.</div>
- </div>
+ 
+<!-- Tab 3: Prospect -->
+<div id="panel-prospect" class="panel">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+<h3 style="margin:0;color:#93c5fd">Daftar Prospect</h3>
+<div>
+<button onclick="exportProspects()" style="background:#059669;border:none;color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;margin-right:8px">Export CSV</button>
+<button onclick="loadProspects()" style="background:#2563eb;border:none;color:#fff;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px">Refresh</button>
+</div>
+</div>
+<div id="prospectTable" style="overflow-x:auto">
+<p style="color:#556">Memuat data prospect...</p>
+</div>
+</div>
+</div>
 </div>
 
 <script>
@@ -212,13 +226,7 @@ function checkPw(){
 }
 
 /* === Tabs === */
-function switchTab(t){
- document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===(t==='input'?0:1))});
- document.getElementById('panel-input').classList.toggle('active',t==='input');
- document.getElementById('panel-data').classList.toggle('active',t==='data');
- if(t==='data') loadData();
-}
-
+function switchTab(t){ var tabs=['input','data','prospect']; document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===tabs.indexOf(t))}); tabs.forEach(function(name){ var p=document.getElementById('panel-'+name); if(p) p.classList.toggle('active',name===t); }); if(t==='data') loadData(); if(t==='prospect') loadProspects(); }
 /* === State === */
 var currentData=[];
 var previewData=[];
@@ -415,6 +423,67 @@ function handleFileUpload(input) {
   } else {
     showStatus('parseStatus', 'Format tidak didukung. Gunakan .docx, .txt, atau .csv', 'err');
   }
+}
+
+/* === Prospect Management === */
+var prospectData=[];
+function loadProspects(){
+  var el=document.getElementById('prospectTable');
+  el.innerHTML='<p style="color:#556">Memuat data prospect...</p>';
+  fetch('https://api.github.com/repos/emerilansel-jpg/tenderstore-chatbot-demo/contents/data/prospects.json',{
+    headers:{'Accept':'application/vnd.github.v3+json'},
+    cache:'no-store'
+  }).then(function(r){return r.json();}).then(function(f){
+    var content=atob(f.content);
+    prospectData=JSON.parse(content);
+    document.getElementById('prospectBadge').textContent=prospectData.length;
+    if(prospectData.length===0){
+      el.innerHTML='<p style="color:#556">Belum ada prospect.</p>';
+      return;
+    }
+    var html='<table style="width:100%;border-collapse:collapse;font-size:14px">';
+    html+='<thead><tr style="border-bottom:2px solid #1e2533"><th style="padding:10px;text-align:left;color:#93c5fd">No</th><th style="padding:10px;text-align:left;color:#93c5fd">Nama</th><th style="padding:10px;text-align:left;color:#93c5fd">WhatsApp</th><th style="padding:10px;text-align:left;color:#93c5fd">Tanggal</th><th style="padding:10px;text-align:center;color:#93c5fd">Aksi</th></tr></thead><tbody>';
+    prospectData.forEach(function(p,i){
+      html+='<tr style="border-bottom:1px solid #1e2533">';
+      html+='<td style="padding:8px;color:#ccc">'+(i+1)+'</td>';
+      html+='<td style="padding:8px;color:#fff">'+p.nama+'</td>';
+      html+='<td style="padding:8px"><a href="https://wa.me/'+p.whatsapp.replace(/^0/,'62')+'" target="_blank" style="color:#22c55e;text-decoration:none">'+p.whatsapp+'</a></td>';
+      html+='<td style="padding:8px;color:#8899bb">'+(p.tanggal||'-')+'</td>';
+      html+='<td style="padding:8px;text-align:center"><button onclick="deleteProspect('+i+')" style="background:#dc2626;border:none;color:#fff;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px">Hapus</button></td>';
+      html+='</tr>';
+    });
+    html+='</tbody></table>';
+    el.innerHTML=html;
+  }).catch(function(e){
+    el.innerHTML='<p style="color:#f87171">Gagal memuat: '+e.message+'</p>';
+  });
+}
+
+function deleteProspect(idx){
+  if(!confirm('Hapus prospect "'+prospectData[idx].nama+'"?')) return;
+  prospectData.splice(idx,1);
+  var token=prompt('Masukkan GitHub token untuk menghapus:');
+  if(!token) return;
+  fetch('https://api.github.com/repos/emerilansel-jpg/tenderstore-chatbot-demo/contents/data/prospects.json',{
+    headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json'}
+  }).then(function(r){return r.json();}).then(function(f){
+    return fetch('https://api.github.com/repos/emerilansel-jpg/tenderstore-chatbot-demo/contents/data/prospects.json',{
+      method:'PUT',
+      headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:'Delete prospect',content:btoa(unescape(encodeURIComponent(JSON.stringify(prospectData,null,2)))),sha:f.sha,branch:'main'})
+    });
+  }).then(function(){loadProspects();}).catch(function(e){alert('Error: '+e.message);});
+}
+
+function exportProspects(){
+  if(prospectData.length===0){alert('Tidak ada data prospect');return;}
+  var csv='No,Nama,WhatsApp,Tanggal\n';
+  prospectData.forEach(function(p,i){csv+=(i+1)+',"'+p.nama+'",'+p.whatsapp+','+(p.tanggal||'-')+'\n';});
+  var blob=new Blob([csv],{type:'text/csv'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='prospects_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
 }
 </script>
 </body>
