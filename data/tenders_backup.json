@@ -5,7 +5,7 @@
     "nilai": "N/A",
     "closing": "20-Apr-2026",
     "lokasi": "Lampung Selatan - Lampung",
-    "kategori": "Chemical & Industrial Gas",
+    "kategori": "CHEMICAL & INDUSTRIAL GAS",
     "tanggal_pengumuman": "15-Apr-2026"
   },
   {
@@ -95,7 +95,7 @@
     "nilai": "N/A",
     "closing": "21-Apr-2026",
     "lokasi": "Jakarta Selatan - DKI Jakarta",
-    "kategori": "Survey & Inspection",
+    "kategori": "SURVEY & INSPECTION",
     "tanggal_pengumuman": "16-Apr-2026"
   },
   {
@@ -113,7 +113,7 @@
     "nilai": "N/A",
     "closing": "22-Apr-2026",
     "lokasi": "Kutai Kartanegara - Kalimantan Timur",
-    "kategori": "Man Power General Labour Outsourcing",
+    "kategori": "MAN POWER GENERAL LABOUR OUTSOURCING",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -122,7 +122,7 @@
     "nilai": "Rp 42 JT",
     "closing": "20-Apr-2026",
     "lokasi": "Demak - Jawa Tengah",
-    "kategori": "Man Power General Labour Outsourcing",
+    "kategori": "MAN POWER GENERAL LABOUR OUTSOURCING",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -131,7 +131,7 @@
     "nilai": "Rp 42 JT",
     "closing": "20-Apr-2026",
     "lokasi": "Demak - Jawa Tengah",
-    "kategori": "Man Power General Labour Outsourcing",
+    "kategori": "MAN POWER GENERAL LABOUR OUTSOURCING",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -140,7 +140,7 @@
     "nilai": "Rp 21 JT",
     "closing": "20-Apr-2026",
     "lokasi": "Demak - Jawa Tengah",
-    "kategori": "Man Power General Labour Outsourcing",
+    "kategori": "MAN POWER GENERAL LABOUR OUTSOURCING",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -185,7 +185,7 @@
     "nilai": "Rp 653.903 JT",
     "closing": "24-Apr-2026",
     "lokasi": "Lombok Barat - Nusa Tenggara Barat",
-    "kategori": "Survey & Inspection",
+    "kategori": "SURVEY & INSPECTION",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -194,7 +194,7 @@
     "nilai": "N/A",
     "closing": "22-Apr-2026",
     "lokasi": "Jakarta Selatan - DKI Jakarta",
-    "kategori": "Survey & Inspection",
+    "kategori": "SURVEY & INSPECTION",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -203,7 +203,7 @@
     "nilai": "N/A",
     "closing": "20-Apr-2026",
     "lokasi": "Pulang Pisau - Kalimantan Tengah",
-    "kategori": "Industrial Machine Part & Consumable",
+    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -212,7 +212,7 @@
     "nilai": "N/A",
     "closing": "21-Apr-2026",
     "lokasi": "Lampung Selatan - Lampung",
-    "kategori": "Industrial Machine Part & Consumable",
+    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -221,7 +221,7 @@
     "nilai": "N/A",
     "closing": "22-Apr-2026",
     "lokasi": "Wajo - Sulawesi Selatan",
-    "kategori": "Industrial Machine Part & Consumable",
+    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -230,7 +230,7 @@
     "nilai": "N/A",
     "closing": "22-Apr-2026",
     "lokasi": "Balikpapan - Kalimantan Timur",
-    "kategori": "Industrial Machine Part & Consumable",
+    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -239,7 +239,7 @@
     "nilai": "N/A",
     "closing": "20-Apr-2026",
     "lokasi": "Jakarta Selatan - DKI Jakarta",
-    "kategori": "Industrial Machine Part & Consumable",
+    "kategori": "INDUSTRIAL MACHINE PART & CONSUMABLE",
     "tanggal_pengumuman": "20-Apr-2026"
   },
   {
@@ -313,5 +313,77 @@
     "lokasi": "Banyuasin - Sumatera Selatan",
     "kategori": "SURVEY & INSPECTION",
     "tanggal_pengumuman": "20-Apr-2026"
+  },
+  {
+    "nama": "Pengadaan Renewal Software Endpoint Protection PT PLN NP Services Tahun 2026",
+    "milik": "PJB SERVICES",
+    "nilai": "N/A",
+    "closing": "27-Apr-2026",
+    "lokasi": "Sidoarjo - Jawa Timur",
+    "kategori": "KOMPUTER IT",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Peremajaan Server SIT Ellipse Data Center PT PLN NP Services Tahun 2025",
+    "milik": "PJB SERVICES",
+    "nilai": "N/A",
+    "closing": "28-Apr-2026",
+    "lokasi": "Sidoarjo - Jawa Timur",
+    "kategori": "KOMPUTER IT",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Kontrak Kesepakatan Harga Satuan (KHS) Pengadaan CCTV",
+    "milik": "PLN NUSA DAYA",
+    "nilai": "N/A",
+    "closing": "27-Apr-2026",
+    "lokasi": "Balikpapan - Kalimantan Timur",
+    "kategori": "KOMPUTER IT",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Drilling & Completion Technical Services For Block Corridor",
+    "milik": "MEDCO E&P GRISSIK",
+    "nilai": "N/A",
+    "closing": "24-Apr-2026",
+    "lokasi": "Musi Banyuasin - Sumatera Selatan",
+    "kategori": "DRILLING & WORKOVER WELL SERVICE",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Provision of Pack Off & Accessories",
+    "milik": "PT PERTAMINA HULU MAHAKAM",
+    "nilai": "N/A",
+    "closing": "23-Apr-2026",
+    "lokasi": "Jakarta Selatan - DKI Jakarta",
+    "kategori": "DRILLING & WORKOVER WELL SERVICE",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Jasa Penyediaan & Pengoperasian 1(Satu) Unit Rig 350HP untuk Pekerjaan WOWS di Zona 9 Tanjung Field",
+    "milik": "PERTAMINA EP",
+    "nilai": "N/A",
+    "closing": "24-Apr-2026",
+    "lokasi": "Jakarta Selatan - DKI Jakarta",
+    "kategori": "DRILLING & WORKOVER WELL SERVICE",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026",
+    "milik": "PLN ENERGI PRIMER INDONESIA",
+    "nilai": "N/A",
+    "closing": "21-Apr-2026",
+    "lokasi": "Jakarta Selatan - DKI Jakarta",
+    "kategori": "MARINE TRANSPORTATION",
+    "tanggal_pengumuman": "21-Apr-2026"
+  },
+  {
+    "nama": "Gate Valve Actuator",
+    "milik": "MEDCO E&P LEMATANG",
+    "nilai": "N/A",
+    "closing": "24-Apr-2026",
+    "lokasi": "Muara Enim - Sumatera Selatan",
+    "kategori": "VALVE",
+    "tanggal_pengumuman": "21-Apr-2026"
   }
 ]
