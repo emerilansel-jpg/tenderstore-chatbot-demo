@@ -493,5 +493,32 @@
     "lokasi": "Bekasi - Jawa Barat",
     "kategori": "SURVEY & INSPECTION",
     "tanggal_pengumuman": "22-Apr-2026"
+  },
+  {
+    "nama": "Pengadaan Penggantian Platform Virtualisasi Server",
+    "milik": "PLN NUSANTARA POWER",
+    "nilai": "N/A",
+    "closing": "29-Apr-2026",
+    "lokasi": "Surabaya - Jawa Timur",
+    "kategori": "KOMPUTER IT",
+    "tanggal_pengumuman": "23-Apr-2026"
+  },
+  {
+    "nama": "Jasa Pekerjaan Operasional Operasi Produksi secara Call of Order (COO) PT Pertamina EP Zona 14 Papua Field",
+    "milik": "PERTAMINA EP",
+    "nilai": "N/A",
+    "closing": "24-Apr-2026",
+    "lokasi": "Jakarta Selatan - DKI Jakarta",
+    "kategori": "DRILLING & WORKOVER WELL SERVICE",
+    "tanggal_pengumuman": "23-Apr-2026"
+  },
+  {
+    "nama": "Engineering Integrated Services For Production, Operation Surface Facilities and Support di Pertamina Hulu Rokan Regional 1",
+    "milik": "PERTAMINA EP",
+    "nilai": "N/A",
+    "closing": "27-Apr-2026",
+    "lokasi": "Jakarta Selatan - DKI Jakarta",
+    "kategori": "DRILLING & WORKOVER WELL SERVICE",
+    "tanggal_pengumuman": "23-Apr-2026"
   }
 ]
