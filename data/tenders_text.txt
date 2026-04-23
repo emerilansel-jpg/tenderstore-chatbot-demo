@@ -64,8 +64,8 @@
 20. Nama: Gate Valve Actuator
    Milik: MEDCO E&P LEMATANG | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Muara Enim - Sumatera Selatan | Diumumkan: 21-Apr-2026
 
-21. Nama: Pembelian 18in Axial Check Valve Untuk Lp1 Hdl Gas Comp
-   Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 23-Apr-2026
+21. Nama: Actuated Choke Valve
+   Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 23-Apr-2026
 
 --- KATEGORI: PIPE CASING TUBING & HOSE ---
 22. Nama: Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
