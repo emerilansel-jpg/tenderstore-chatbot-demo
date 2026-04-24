@@ -5,10 +5,10 @@ module.exports = async function handler(req, res) {
   if (!text || !text.trim()) return res.status(400).json({ error: 'Text is required' });
 
   const PROVIDERS = [
-    { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'qwen/qwen3.6-plus-preview:free', key: process.env.OPENROUTER_API_KEY },
+    { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'google/gemma-4-31b-it:free', key: process.env.OPENROUTER_API_KEY },
     { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'nvidia/nemotron-3-super-120b-a12b:free', key: process.env.OPENROUTER_API_KEY },
-    { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'stepfun/step-3.5-flash:free', key: process.env.OPENROUTER_API_KEY },
-    { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'arcee-ai/trinity-large-preview:free', key: process.env.OPENROUTER_API_KEY },
+    { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'meta-llama/llama-3.3-70b-instruct:free', key: process.env.OPENROUTER_API_KEY },
+    { url: 'https://openrouter.ai/api/v1/chat/completions', model: 'qwen/qwen3-coder:free', key: process.env.OPENROUTER_API_KEY },
   ];
 
   const systemPrompt = `Kamu adalah parser data tender Indonesia. Tugasmu:
