@@ -18,7 +18,7 @@ const _path = require('path');
 let TENDER_DATABASE;
 try {
   TENDER_DATABASE = _fs.readFileSync(_path.join(__dirname, '..', 'data', 'tenders_text.txt'), 'utf8');
-} catch(e) {
+} catch(e) {h
   TENDER_DATABASE = '=== DATABASE TENDER LENGKAP ===\nTidak ada data tender.';
 }
 
@@ -504,10 +504,10 @@ if (_fpRes.length > 0) {
   try {
     const PROVIDERS = [
       { name: 'Gemini', url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions', key: process.env.GEMINI_API_KEY || '', model: 'gemini-2.5-flash', max_tokens: 3000, temperature: 0.1 },
-      { name: 'Qwen 3.6 Plus', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'qwen/qwen3.6-plus-preview:free', max_tokens: 3000, temperature: 0.1 },
+      { name: 'Gemma 4 31B', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'google/gemma-4-31b-it:free', max_tokens: 3000, temperature: 0.1 },
       { name: 'Nemotron 3 Super', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'nvidia/nemotron-3-super-120b-a12b:free', max_tokens: 3000, temperature: 0.1 },
-      { name: 'Step 3.5 Flash', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'stepfun/step-3.5-flash:free', max_tokens: 3000, temperature: 0.1 },
-      { name: 'Trinity Large', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'arcee-ai/trinity-large-preview:free', max_tokens: 3000, temperature: 0.1 }
+      { name: 'Llama 3.3 70B', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'meta-llama/llama-3.3-70b-instruct:free', max_tokens: 3000, temperature: 0.1 },
+      { name: 'Qwen3 Coder', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY || '', model: 'qwen/qwen3-coder:free', max_tokens: 3000, temperature: 0.1 }
     ];
 
     let lastError = null; let data = null;
