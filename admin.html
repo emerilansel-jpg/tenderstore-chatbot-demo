@@ -294,48 +294,104 @@ function renderTable(data,tbodyId){
 function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
 
 /* === Save data === */
-function saveData(mode){
- var data;
- var statusEl=mode==='preview'?'saveStatus':'saveStatus2';
- if(mode==='preview'){
- var dupes=[];previewData.forEach(function(p){currentData.forEach(function(c){if(p.nama&&c.nama&&p.nama.toLowerCase().trim()===c.nama.toLowerCase().trim()){dupes.push(p.nama)}})});
- if(dupes.length>0){if(!confirm('\u26A0\uFE0F WARNING: '+dupes.length+' duplikat ditemukan:\n\n'+dupes.join('\n')+'\n\nLanjutkan simpan?')){showStatus(statusEl,'Dibatalkan - ada duplikat','warn');return}}
- data=currentData.concat(previewData);
- } else {
- data=currentData;
- }
+function saveData(mode) {
+  var statusEl = mode === 'preview' ? 'saveStatus' : 'saveStatus2';
 
- showStatus(statusEl,'<span class="loader"></span> Menyimpan ke Database...','info');
-
- fetch('/api/save-tenders',{
- method:'POST',
- headers:{'Content-Type':'application/json'},
- body:JSON.stringify({data:data})
- }).then(function(r){return r.json()}).then(function(d){
- if(d.error){
-      if(d.protection && d.loss){
-        if(confirm('\u26A0\uFE0F ' + d.error + '\n\nLanjutkan?')){
-          fetch('/api/save-tenders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:data,forceOverwrite:true})}).then(function(r2){return r2.json()}).then(function(d2){if(d2.error){showStatus(statusEl,'DIBLOKIR: '+d2.error,'err')}else{showStatus(statusEl,'Berhasil disimpan! '+data.length+' tender.','ok');currentData=data;loadData()}});
-          return;
-        } else { showStatus(statusEl,'Dibatalkan.','info'); return; }
-      }
-      showStatus(statusEl,'Error: '+d.error,'err');return;
+  if (mode === 'preview') {
+    // APPEND MODE: send only new tenders, API merges server-side
+    // This prevents false "data decrease" warnings from stale browser state.
+    if (previewData.length === 0) {
+      showStatus(statusEl, 'Tidak ada data preview untuk disimpan.', 'warn');
+      return;
     }
- showStatus(statusEl,'Berhasil disimpan! '+data.length+' tender. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.','ok');
- currentData=data;
- loadData();
- document.getElementById('dataBadge').textContent=currentData.length;
- document.getElementById('countInfo').textContent='Total: '+currentData.length+' tender';
- if(mode==='preview'){
- document.getElementById('previewSection').style.display='none';
- document.getElementById('rawInput').value='';
- previewData=[];
- }
- renderTable(currentData,'currentBody');
- }).catch(function(e){
- showStatus(statusEl,'Gagal: '+e.message,'err');
- });
-}
+
+    // Check for duplicates (informational only, user can proceed)
+    var dupes = [];
+    previewData.forEach(function(p) {
+      currentData.forEach(function(c) {
+        if (p.nama && c.nama && p.nama.toLowerCase().trim() === c.nama.toLowerCase().trim()) {
+          dupes.push(p.nama);
+        }
+      });
+    });
+    if (dupes.length > 0) {
+      if (!confirm('⚠️ WARNING: ' + dupes.length + ' duplikat ditemukan:\n\n' + dupes.join('\n') + '\n\nLanjutkan simpan? (Duplikat akan dilewati otomatis)')) {
+        showStatus(statusEl, 'Dibatalkan - ada duplikat', 'warn');
+        return;
+      }
+    }
+
+    showStatus(statusEl, '<span class="loader"></span> Menyimpan ke Database...', 'info');
+
+    // Send ONLY the new tenders with appendOnly:true
+    // API will fetch existing DB and merge server-side
+    fetch('/api/save-tenders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: previewData, appendOnly: true })
+    }).then(function(r) { return r.json(); }).then(function(d) {
+      if (d.error) {
+        showStatus(statusEl, 'Error: ' + d.error, 'err');
+        return;
+      }
+      var addedMsg = d.added !== undefined ? ' (+' + d.added + ' baru)' : '';
+      showStatus(statusEl, 'Berhasil disimpan! Total ' + d.count + ' tender' + addedMsg + '. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.', 'ok');
+      // Reload fresh data from DB
+      loadData();
+      document.getElementById('previewSection').style.display = 'none';
+      document.getElementById('rawInput').value = '';
+      previewData = [];
+    }).catch(function(e) {
+      showStatus(statusEl, 'Gagal: ' + e.message, 'err');
+    });
+
+  } else {
+    // REPLACE MODE: save currentData as-is (for editing existing tenders)
+    var data = currentData;
+
+    showStatus(statusEl, '<span class="loader"></span> Menyimpan ke Database...', 'info');
+
+    fetch('/api/save-tenders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: data })
+    }).then(function(r) { return r.json(); }).then(function(d) {
+      if (d.error) {
+        if (d.protection && d.loss) {
+          if (confirm('⚠️ ' + d.error + '\n\nLanjutkan?')) {
+            fetch('/api/save-tenders', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ data: data, forceOverwrite: true })
+            }).then(function(r2) { return r2.json(); }).then(function(d2) {
+              if (d2.error) {
+                showStatus(statusEl, 'DIBLOKIR: ' + d2.error, 'err');
+              } else {
+                showStatus(statusEl, 'Berhasil disimpan! ' + data.length + ' tender.', 'ok');
+                currentData = data;
+                loadData();
+              }
+            });
+            return;
+          } else {
+            showStatus(statusEl, 'Dibatalkan.', 'info');
+            return;
+          }
+        }
+        showStatus(statusEl, 'Error: ' + d.error, 'err');
+        return;
+      }
+      showStatus(statusEl, 'Berhasil disimpan! ' + data.length + ' tender. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.', 'ok');
+      currentData = data;
+      loadData();
+      document.getElementById('dataBadge').textContent = currentData.length;
+      document.getElementById('countInfo').textContent = 'Total: ' + currentData.length + ' tender';
+      renderTable(currentData, 'currentBody');
+    }).catch(function(e) {
+      showStatus(statusEl, 'Gagal: ' + e.message, 'err');
+    });
+  }
+}}
 
 function showStatus(id,msg,type){
  var el=document.getElementById(id);
