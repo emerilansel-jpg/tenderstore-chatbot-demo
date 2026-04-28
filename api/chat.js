@@ -280,7 +280,8 @@ if (_fpRes.length > 0) {
   filterWords = filterWords.filter(function(w){ return !_dateFwExclude.test(w); });
 
   var _wantsAll = /\b(semua|seluruh)\b/.test(message.toLowerCase()) && filterWords.length === 0;
-  var _wantsCategories = /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa|apakah ada tender)\b/.test(message.toLowerCase()) && filterWords.length === 0;
+  var _katQ = /kat[ae]gor[iy]?/i.test(message) && /\b(apa|saja)\b/i.test(message);
+  var _wantsCategories = (_katQ || /\b(apa saja|apa aja|semua kategori|kategori apa|tender apa|apakah ada tender)\b/.test(message.toLowerCase())) && (filterWords.length === 0 || filterWords.every(function(w){ return /^kat[ae]gor/i.test(w); }));
   var _wantsContinuation = /\b(lainnya|lagi|selanjutnya|berikutnya|sisanya)\b/i.test(message) && history.length > 0 && filterWords.length === 0;
   
   var _contCategory = '';
