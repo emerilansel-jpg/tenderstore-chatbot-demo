@@ -161,6 +161,10 @@ module.exports = async function handler(req, res) {
                 if (_fpCv) _fpEnt.closing = {d:+_fpCv[1], m:_fpCv[2].toLowerCase().substr(0,3), y:+_fpCv[3]};
                 var _fpVv = _fpP.match(/Nilai:\s*Rp\s*([\d.,]+)\s*(M|JT)/i);
             if (_fpVv) { _fpEnt.nilai = parseFloat(_fpVv[1].replace(',','.')); if(/jt/i.test(_fpVv[2])) _fpEnt.nilai /= 1000; }
+                var _fpMk = _fpP.match(/Milik:\s*(.+)/i);
+                if (_fpMk) _fpEnt.milik = _fpMk[1].trim();
+                var _fpLk = _fpP.match(/Lokasi:\s*(.+)/i);
+                if (_fpLk) _fpEnt.lokasi = _fpLk[1].trim();
               }
             }
             if (_fpLn.trim() === '' && _fpEnt && _fpEnt.nama) {
@@ -180,7 +184,7 @@ module.exports = async function handler(req, res) {
                   if (_fpVF.op === 'lt' && !(_fpEnt.nilai < _fpVF.amount)) _fpOk = false;
                 }
               }
-              if (_fpOk) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, nilaiStr:(_fpEnt.nilai!==null?(_fpEnt.nilai>=1?_fpEnt.nilai+' M':Math.round(_fpEnt.nilai*1000)+' JT'):'N/A'), closing:_fpEnt.closing});
+              if (_fpOk) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, nilaiStr:(_fpEnt.nilai!==null?(_fpEnt.nilai>=1?_fpEnt.nilai+' M':Math.round(_fpEnt.nilai*1000)+' JT'):'N/A'), closing:_fpEnt.closing, milik:_fpEnt.milik||'', lokasi:_fpEnt.lokasi||''});
               _fpEnt = null;
             }
           }
@@ -201,7 +205,7 @@ module.exports = async function handler(req, res) {
                 if (_fpVF.op === 'lt' && !(_fpEnt.nilai < _fpVF.amount)) _fpOk2 = false;
               }
             }
-            if (_fpOk2) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, nilaiStr:(_fpEnt.nilai!==null?(_fpEnt.nilai>=1?_fpEnt.nilai+' M':Math.round(_fpEnt.nilai*1000)+' JT'):'N/A'), closing:_fpEnt.closing});
+            if (_fpOk2) _fpRes.push({nama:_fpEnt.nama, cat:_fpEnt.cat, nilai:_fpEnt.nilai, nilaiStr:(_fpEnt.nilai!==null?(_fpEnt.nilai>=1?_fpEnt.nilai+' M':Math.round(_fpEnt.nilai*1000)+' JT'):'N/A'), closing:_fpEnt.closing, milik:_fpEnt.milik||'', lokasi:_fpEnt.lokasi||''});
           }
           var _fpStopW = ['ada','apa','tender','yang','dari','untuk','dengan','apakah','saya','mau','cari','lihat','tampilkan','bisa','tolong','minta','ini','itu','di','ke','dan','atau','kalo','kalau','gak','ga','dong','sih','nih','yah','lah','deh','aja','saja','juga','ya','tidak','bukan','semua','beberapa','lain','lainnya','sama','seperti','antara','berapa','total','jumlah','hitung','banyak'];
 var _fpDateW = /^(jan(?:uari)?|feb(?:ruari)?|mar(?:et)?|apr(?:il)?|mei|jun(?:i)?|jul(?:i)?|agu(?:stus)?|sep(?:tember)?|okt(?:ober)?|nov(?:ember)?|des(?:ember)?|closing|lebih|kurang|nilai|bulan|atas|bawah|dibawah|dibwah|diatas|melebihi|tender|dari|miliar|milyar|juta|triliun|rupiah|rp)$|^\d/i;
@@ -209,7 +213,9 @@ var _fpKw = _fpQl.split(/\s+/).map(function(w){return w.replace(/[^a-z0-9\/]/g,'
 if (_fpKw.length > 0) { _fpRes = _fpRes.filter(function(t){ var _nm = t.nama.toLowerCase() + ' ' + t.cat.toLowerCase(); return _fpKw.every(function(kw){ return _nm.indexOf(kw) >= 0; }); }); }
 var _fpDesc = ''; var _fpMonNames = {1:'Januari',2:'Februari',3:'Maret',4:'April',5:'Mei',6:'Juni',7:'Juli',8:'Agustus',9:'September',10:'Oktober',11:'November',12:'Desember'}; if (_fpKw && _fpKw.length > 0) _fpDesc += ' keyword <strong>' + _fpKw.join(' ').toUpperCase() + '</strong>'; if (_fpDF) { var _fpFmN = _fpMon[_fpDF.month]||0; _fpDesc += (_fpDesc?' di bulan ':' bulan ') + '<strong>' + (_fpMonNames[_fpFmN]||_fpDF.month) + '</strong>'; } if (_fpVF) _fpDesc += (_fpDesc?' dengan ':' ') + 'nilai <strong>' + (_fpVF.op==='gt'?'di atas':'di bawah') + ' ' + _fpVF.amount + ' Miliar</strong>'; if (!_fpDesc) _fpDesc = ' sesuai filter';
 if (_fpRes.length > 0) {
-            var _fpBody = _fpRes.slice(0,15).map(function(it,i){ return '<br><strong>'+(i+1)+'. '+it.nama+'</strong> | '+it.cat+(it.nilaiStr&&it.nilaiStr!=='N/A'?' | Nilai: Rp '+it.nilaiStr:'')+(it.closing?' | Closing: '+it.closing.d+'-'+it.closing.m+'-'+it.closing.y:''); }).join('<br>\n');
+            var _fpBody = '<ol class="reply-list">'+_fpRes.slice(0,15).map(function(it,i){
+              return '<li><strong>'+it.nama+'</strong><br>Milik: '+(it.milik||'N/A')+'<br>Nilai: '+(it.nilaiStr&&it.nilaiStr!=='N/A'?'Rp '+it.nilaiStr:'N/A')+'<br>Tanggal Closing: '+(it.closing?it.closing.d+'-'+it.closing.m+'-'+it.closing.y:'N/A')+'<br>Lokasi: '+(it.lokasi||'N/A')+'</li>';
+            }).join('\n')+'</ol>';
             return res.json({reply:'Ditemukan <strong>'+_fpRes.length+' tender</strong>'+_fpDesc+':\n'+_fpBody});
           } else {
             return res.json({reply:'Tidak ditemukan tender'+_fpDesc+'. Coba gunakan kata kunci yang berbeda.'});
