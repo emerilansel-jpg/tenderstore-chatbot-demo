@@ -123,7 +123,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
   <div id="auth-box">
     <h2>ð Admin Panel</h2>
     <p>Masukkan password untuk melanjutkan</p>
-    <div class="pass-wrap"><input type="password" id="auth-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doAuth()"><button type="button" class="eye-toggle" onclick="togglePass()" title="Tampilkan password">&#128065;</button></div>
+    <div class="pass-wrap"><input type="password" id="auth-pass" placeholder="Password" autocomplete="new-password" onkeydown="if(event.key==='Enter')doAuth()"><button type="button" class="eye-toggle" onclick="togglePass()" title="Tampilkan password">&#128065;</button></div>
     <button id="auth-btn" onclick="doAuth()">Masuk</button>
     <div id="auth-err">â Password salah. Coba lagi.</div>
   </div>
@@ -131,7 +131,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 
 
 <!-- Password Gate -->
-<div id="pwOverlay">
+<div id="pwOverlay" style="display:none">
  <h2>Admin Tender-Indonesia</h2>
  <p>Masukkan password admin</p>
  <div class="pass-wrap" style="margin-bottom:0"><input type="password" id="pwInput" placeholder="Password..." onkeydown="if(event.key==='Enter')checkPw()" style="margin-bottom:0;padding-right:40px"><button type="button" class="eye-toggle" onclick="togglePw('pwInput',this)" title="Tampilkan password">&#128065;</button></div>
@@ -414,6 +414,7 @@ function doAuth() {
     sessionStorage.setItem('adminAuth','1');
     document.getElementById('auth-overlay').style.display='none';
     document.getElementById('auth-pass').value='';
+    loadData();
   } else {
     document.getElementById('auth-err').style.display='block';
     document.getElementById('auth-pass').value='';
