@@ -9,7 +9,7 @@
 body{font-family:'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
 .header{background:linear-gradient(135deg,#1e293b,#0f172a);padding:16px 24px;border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center}
 .header h1{font-size:20px;color:#60a5fa}
-.header span{color:#94a3b8;font-size:13px}
+.header span{color:#94a3b8;font-size:13px}h
 .header a{color:#93c5fd;text-decoration:none;font-size:13px}
 
 /* Password overlay */
@@ -215,14 +215,18 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 <script>
 /* === Password === */
 function checkPw(){
- var v=document.getElementById('pwInput').value;
- var n=v.toLowerCase().replace(/[\s\-_]/g,'');
- if(n==='admintender'){
- document.getElementById('pwOverlay').style.display='none';
- loadData();
- } else {
- document.getElementById('pwError').style.display='block';
- }
+  var v=document.getElementById('pwInput').value;
+  var n=v.toLowerCase().replace(/[\s\-_]/g,'');
+  if(n==='admintender'){
+    document.getElementById('pwOverlay').style.display='none';
+    var ao=document.getElementById('auth-overlay');if(ao)ao.style.display='none';
+    sessionStorage.setItem('adminAuth','1');
+    loadData();
+  } else {
+    document.getElementById('pwError').style.display='block';
+    document.getElementById('pwInput').value='';
+    document.getElementById('pwInput').focus();
+  }
 }
 
 /* === Tabs === */
