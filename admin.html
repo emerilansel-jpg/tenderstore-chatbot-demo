@@ -409,7 +409,8 @@ function showStatus(id,msg,type){
 function togglePw(id,btn){var p=document.getElementById(id);if(p.type==='password'){p.type='text';btn.title='Sembunyikan password';}else{p.type='password';btn.title='Tampilkan password';}}
 function togglePass(){togglePw('auth-pass',document.querySelector('#auth-box .eye-toggle'));}
 function doAuth() {
-  var pw = document.getElementById('auth-pass').value;
+  var raw = document.getElementById('auth-pass').value;
+  var pw = raw.toLowerCase().replace(/[\s\-_]/g,'');
   if (pw === 'admintender') {
     sessionStorage.setItem('adminAuth','1');
     document.getElementById('auth-overlay').style.display='none';
