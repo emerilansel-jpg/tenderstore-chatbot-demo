@@ -44,13 +44,13 @@ module.exports = async function handler(req, res) {
     } catch (e) {}
 
     if (appendOnly) {
-      // Dedup by composite key: nama + closing date
-      // nama-only caused false duplicates (same title, different year/scope)
+      // Dedup by 3-field composite key: nama + closing + milik (owner)
+      // 2-field (nama+closing) still allows false dup if different owner, same name+date
       const existingKeys = new Set(existingItems.map(function(t) {
-        return (t.nama || '').toLowerCase().trim() + '|' + (t.closing || '').toLowerCase().trim();
+        return (t.nama || '').toLowerCase().trim() + '|' + (t.closing || '').toLowerCase().trim() + '|' + (t.milik || '').toLowerCase().trim();
       }));
       const dedupedNew = data.filter(function(t) {
-        var key = (t.nama || '').toLowerCase().trim() + '|' + (t.closing || '').toLowerCase().trim();
+        var key = (t.nama || '').toLowerCase().trim() + '|' + (t.closing || '').toLowerCase().trim() + '|' + (t.milik || '').toLowerCase().trim();
         return !existingKeys.has(key);
       });
       const skipped = data.length - dedupedNew.length;
