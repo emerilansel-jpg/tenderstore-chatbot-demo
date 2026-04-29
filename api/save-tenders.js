@@ -44,11 +44,14 @@ module.exports = async function handler(req, res) {
     } catch (e) {}
 
     if (appendOnly) {
-      const existingNames = new Set(existingItems.map(function(t) {
-        return (t.nama || '').toLowerCase().trim();
+      // Dedup by composite key: nama + closing date
+      // nama-only caused false duplicates (same title, different year/scope)
+      const existingKeys = new Set(existingItems.map(function(t) {
+        return (t.nama || '').toLowerCase().trim() + '|' + (t.closing || '').toLowerCase().trim();
       }));
       const dedupedNew = data.filter(function(t) {
-        return !existingNames.has((t.nama || '').toLowerCase().trim());
+        var key = (t.nama || '').toLowerCase().trim() + '|' + (t.closing || '').toLowerCase().trim();
+        return !existingKeys.has(key);
       });
       const skipped = data.length - dedupedNew.length;
       data = existingItems.concat(dedupedNew);
