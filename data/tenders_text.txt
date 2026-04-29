@@ -303,15 +303,24 @@
 98. Nama: Provision of Well Intervention Services
    Milik: EXXONMOBIL CEPU LIMITED | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Bojonegoro - Jawa Timur | Diumumkan: 24-Apr-2026
 
+99. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 350 Hp Untuk Wows Sumur-Sumur Pt Pertamina Ep Zona 1 Wilayah Utara
+   Milik: PERTAMINA EP | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Kotabaru - Kalimantan Selatan | Diumumkan: 29-Apr-2026
+
+100. Nama: HDE and Lifting Equipment Services for Drilling Rig B
+   Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 29-Apr-2026
+
+101. Nama: Call Off Order of 5-1/2” Premium Screen for MDK Development Wells
+   Milik: HUSKY - CNOOC MADURA LIMITED | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
+
 --- KATEGORI: MARINE TRANSPORTATION ---
-99. Nama: Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026
+102. Nama: Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026
    Milik: PLN ENERGI PRIMER INDONESIA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-100. Nama: Provision Of Offshore Support Vessel (Crew Boat) Charter Services
+103. Nama: Provision Of Offshore Support Vessel (Crew Boat) Charter Services
    Milik: EXXONMOBIL CEPU LIMITED | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Bojonegoro - Jawa Timur | Diumumkan: 24-Apr-2026
 
-101. Nama: Pengadaan Penyedia Jasa Untuk Pengangkutan dan Pendistribusian LNG Untuk Pelanggan di Wilayah Sumatera Bagian Utara.
+104. Nama: Pengadaan Penyedia Jasa Untuk Pengangkutan dan Pendistribusian LNG Untuk Pelanggan di Wilayah Sumatera Bagian Utara.
    Milik: PERTAGAS NIAGA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-102. Nama: Pengadaan Penyedia Jasa Pengangkutan dan Distribusi CNG di Jawa Timur, Jawa Tengah dan Daerah Istimewa Yogyakarta
+105. Nama: Pengadaan Penyedia Jasa Pengangkutan dan Distribusi CNG di Jawa Timur, Jawa Tengah dan Daerah Istimewa Yogyakarta
    Milik: PERTAGAS NIAGA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
