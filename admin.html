@@ -426,6 +426,8 @@ function doAuth() {
   if (sessionStorage.getItem('adminAuth')==='1') {
     var ov=document.getElementById('auth-overlay');
     if(ov) ov.style.display='none';
+    // Auto-load data if already authenticated
+    setTimeout(function(){ if(typeof loadData==='function') loadData(); if(typeof loadProspects==='function') loadProspects(); }, 100);
   }
 })();
 
