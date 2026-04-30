@@ -7,357 +7,366 @@
 2. Nama: Belanja Bahan-Bahan Kimia Pranktek Siswa (Otsus 1,25%)
    Milik: PROVINSI PAPUA | Nilai: Rp 750 JT | Closing: 21-apr-2026 | Lokasi: Jayapura - Papua | Diumumkan: 20-Apr-2026
 
+3. Nama: Pengadaan Kontrak Payung Bahan Kimia PLTU Ampana
+   Milik: PJB SERVICES | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Sidoarjo - Jawa Timur | Diumumkan: 30-Apr-2026
+
+4. Nama: Pengadaan Chemical Fire Plaster Area Tt1 Tt2 Dan Crusher Tahun 2026
+   Milik: PJB UB PLTU TANJUNG AWAR - AWAR | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Tuban - Jawa Timur | Diumumkan: 30-Apr-2026
+
+5. Nama: Belanja Bahan-Bahan Kimia
+   Milik: PROVINSI NUSA TENGGARA BARAT | Nilai: Rp 71 JT | Closing: 04-mei-2026 | Lokasi: Sumbawa - Nusa Tenggara Barat | Diumumkan: 30-Apr-2026
+
 --- KATEGORI: FABRICATION & MECHANICAL CONSTRUCTION ---
-3. Nama: Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
+6. Nama: Pekerjaan Scaffolding Untuk Area Balikpapan dan Lapangan
    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 15-Apr-2026
 
-4. Nama: Relokasi Tangki 100 kL Dari PLTD Bobong Lama ke SEWA Baru Bobong
+7. Nama: Relokasi Tangki 100 kL Dari PLTD Bobong Lama ke SEWA Baru Bobong
    Milik: PLN (PERSERO) WILAYAH MALUKU DAN MALUKU UTARA | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Ambon - Maluku | Diumumkan: 28-Apr-2026
 
 --- KATEGORI: KOMPUTER IT ---
-5. Nama: Pengadaan Bahan Pelatihan Berbasis Kompetensi BBPVP Bandung di UPTD BLK Kab. Kuningan, UPTD KLK Ciamis dan UPTD BLK Kota Banjar
+8. Nama: Pengadaan Bahan Pelatihan Berbasis Kompetensi BBPVP Bandung di UPTD BLK Kab. Kuningan, UPTD KLK Ciamis dan UPTD BLK Kota Banjar
    Milik: KEMENTERIANA TENAGA KERJA DAN TRANSMIGRASI | Nilai: Rp 159 JT | Closing: 16-apr-2026 | Lokasi: Bandung - Jawa Barat | Diumumkan: 15-Apr-2026
 
-6. Nama: Pekerjaan Jasa Sewa Laptop UP Kaltimra Periode 2026-2028
+9. Nama: Pekerjaan Jasa Sewa Laptop UP Kaltimra Periode 2026-2028
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 15-Apr-2026
 
-7. Nama: Pengadaan Sistem Monitoring Kegiatan Unit Alkal
+10. Nama: Pengadaan Sistem Monitoring Kegiatan Unit Alkal
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 193.5 JT | Closing: 19-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 15-Apr-2026
 
-8. Nama: Pengadaan Tenaga Ahli Programmer Sistem Rekomendasi Teknis Dinas SDA
+11. Nama: Pengadaan Tenaga Ahli Programmer Sistem Rekomendasi Teknis Dinas SDA
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 70.95 JT | Closing: 19-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 16-Apr-2026
 
-9. Nama: Pengadaan Langganan Grammar Checking UIN Salatiga 2026
+12. Nama: Pengadaan Langganan Grammar Checking UIN Salatiga 2026
    Milik: KEMENTERIAN AGAMA | Nilai: Rp 66 JT | Closing: 19-apr-2026 | Lokasi: Salatiga - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-10. Nama: Pengadaan Sewa perangkat dan jaringan berbasis satelit untuk layanan adminduk
+13. Nama: Pengadaan Sewa perangkat dan jaringan berbasis satelit untuk layanan adminduk
    Milik: KEMENTERIAN DALAM NEGERI | Nilai: Rp 7.99 M | Closing: 08-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 20-Apr-2026
 
-11. Nama: Pengadaan Perangkat Pendukung Operasional Teknis Pusdatin
+14. Nama: Pengadaan Perangkat Pendukung Operasional Teknis Pusdatin
    Milik: KEMENTERIAN DALAM NEGERI | Nilai: Rp 197.52 JT | Closing: 21-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 20-Apr-2026
 
-12. Nama: Pengadaan Renewal Software Endpoint Protection PT PLN NP Services Tahun 2026
+15. Nama: Pengadaan Renewal Software Endpoint Protection PT PLN NP Services Tahun 2026
    Milik: PJB SERVICES | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Sidoarjo - Jawa Timur | Diumumkan: 21-Apr-2026
 
-13. Nama: Peremajaan Server SIT Ellipse Data Center PT PLN NP Services Tahun 2025
+16. Nama: Peremajaan Server SIT Ellipse Data Center PT PLN NP Services Tahun 2025
    Milik: PJB SERVICES | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Sidoarjo - Jawa Timur | Diumumkan: 21-Apr-2026
 
-14. Nama: Kontrak Kesepakatan Harga Satuan (KHS) Pengadaan CCTV
+17. Nama: Kontrak Kesepakatan Harga Satuan (KHS) Pengadaan CCTV
    Milik: PLN NUSA DAYA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 21-Apr-2026
 
-15. Nama: Jasa Sewa RDP Manajemen PT Pertamina EP Zona 11
+18. Nama: Jasa Sewa RDP Manajemen PT Pertamina EP Zona 11
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 22-Apr-2026
 
-16. Nama: Pengadaan Renewal License Talend
+19. Nama: Pengadaan Renewal License Talend
    Milik: PLN (PERSERO) KANTOR PUSAT | Nilai: N/A | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 22-Apr-2026
 
-17. Nama: Pengadaan Alat Pengolah Data
+20. Nama: Pengadaan Alat Pengolah Data
    Milik: KEMENTERIAN PERHUBUNGAN | Nilai: Rp 159 JT | Closing: 23-apr-2026 | Lokasi: Dumai - Riau | Diumumkan: 22-Apr-2026
 
-18. Nama: Pengadaan Penggantian Platform Virtualisasi Server
+21. Nama: Pengadaan Penggantian Platform Virtualisasi Server
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Surabaya - Jawa Timur | Diumumkan: 23-Apr-2026
 
-19. Nama: Penyediaan Perpanjangan Paket Pulsa GPS Tracker Izzytrack
+22. Nama: Penyediaan Perpanjangan Paket Pulsa GPS Tracker Izzytrack
    Milik: PROVINSI DKI JAKARTA | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Timur - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-20. Nama: Pengadaan Renewal Email Server
+23. Nama: Pengadaan Renewal Email Server
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Surabaya - Jawa Timur | Diumumkan: 28-Apr-2026
 
-21. Nama: Pengadaan Renewal License Cloudera
+24. Nama: Pengadaan Renewal License Cloudera
    Milik: PLN (PERSERO) DISTRIBUSI JAKARTA RAYA | Nilai: N/A | Closing: 03-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-22. Nama: Business Application Development Software Maintenance and Support
+25. Nama: Business Application Development Software Maintenance and Support
    Milik: MEDCO E&P INDONESIA | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
 --- KATEGORI: VALVE ---
-23. Nama: Pengadaan Pneumatic Shut Down Valve Size 3IN-10IN untuk Proyek Pengembangan Lapangan Risma
+26. Nama: Pengadaan Pneumatic Shut Down Valve Size 3IN-10IN untuk Proyek Pengembangan Lapangan Risma
    Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 15-Apr-2026
 
-24. Nama: Auto Drain Valve
+27. Nama: Auto Drain Valve
    Milik: MEDCO E&P LEMATANG | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Muara Enim - Sumatera Selatan | Diumumkan: 16-Apr-2026
 
-25. Nama: Gate Valve Actuator
+28. Nama: Gate Valve Actuator
    Milik: MEDCO E&P LEMATANG | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Muara Enim - Sumatera Selatan | Diumumkan: 21-Apr-2026
 
-26. Nama: Actuated Choke Valve
+29. Nama: Actuated Choke Valve
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 23-Apr-2026
 
-27. Nama: Pembelian 18in Axial Check Valve Untuk Lp1 Hdl Gas Comp
+30. Nama: Pembelian 18in Axial Check Valve Untuk Lp1 Hdl Gas Comp
    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 23-Apr-2026
 
-28. Nama: Kontrak Payung Jasa Perbaikan Valve - M1 (0006/Ujpc/Kp/Tu/#2/Ao-2026/3/2026)
+31. Nama: Kontrak Payung Jasa Perbaikan Valve - M1 (0006/Ujpc/Kp/Tu/#2/Ao-2026/3/2026)
    Milik: PJB UBJOM PLTU PACITAN | Nilai: N/A | Closing: 05-mei-2026 | Lokasi: Pacitan - Jawa Timur | Diumumkan: 24-Apr-2026
 
-29. Nama: Ball Valve
+32. Nama: Ball Valve
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 28-Apr-2026
 
-30. Nama: Gate Valve
+33. Nama: Gate Valve
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 28-Apr-2026
 
-31. Nama: Ball Valve TARAKAN
+34. Nama: Ball Valve TARAKAN
    Milik: MEDCO E&P TARAKAN | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Tarakan - Kalimantan Timur | Diumumkan: 29-Apr-2026
 
-32. Nama: Gate Valve GRISSIK
+35. Nama: Gate Valve GRISSIK
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
 --- KATEGORI: PIPE CASING TUBING & HOSE ---
-33. Nama: Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
+36. Nama: Penyediaan Jasa Material Studi & Laboratorium Tes untuk Oil Country Tubular Goods (OCTG) dan Wellhead Lapangan Senoro & Lapangan Cendanapura
    Milik: JOB PERTAMINA - MEDCO E&P TOMORI SULAWESI | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Banggai - Sulawesi Tengah | Diumumkan: 16-Apr-2026
 
-34. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
+37. Nama: Pengadaan Casing 20 in melalui Kontrak Call of Order untuk Kebutuhan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
 
-35. Nama: Pengadaan Casing High Grade Untuk Memenuhi Kebutuhan Regional 1
+38. Nama: Pengadaan Casing High Grade Untuk Memenuhi Kebutuhan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 20-Apr-2026
 
-36. Nama: Pengadaan Threadolet
+39. Nama: Pengadaan Threadolet
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 23-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 20-Apr-2026
 
-37. Nama: Pengadaan Pipa HFW/ERW 3 In Sch 40 Untuk Zona 1&4 Selama 2 Tahun Secara Call Of Order Di Regional 1
+40. Nama: Pengadaan Pipa HFW/ERW 3 In Sch 40 Untuk Zona 1&4 Selama 2 Tahun Secara Call Of Order Di Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 20-Apr-2026
 
-38. Nama: Call Off Order of 13-3/8” OCTG API Connection for MDK Development Wells
+41. Nama: Call Off Order of 13-3/8” OCTG API Connection for MDK Development Wells
    Milik: HUSKY - CNOOC MADURA LIMITED | Nilai: N/A | Closing: 17-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 20-Apr-2026
 
-39. Nama: Supply Of Cladded Line Pipes And Hot Bends For Rebonjaro Project
+42. Nama: Supply Of Cladded Line Pipes And Hot Bends For Rebonjaro Project
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 20-Apr-2026
 
-40. Nama: Anchor Flange
+43. Nama: Anchor Flange
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 24-Apr-2026
 
-41. Nama: Seamless Pipe Duplex Stainless Steel
+44. Nama: Seamless Pipe Duplex Stainless Steel
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 24-Apr-2026
 
-42. Nama: Pipe Fittings
+45. Nama: Pipe Fittings
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 28-Apr-2026
 
-43. Nama: Supply of Linepipe for GEP (32” OD) SAWL – wt 25.4mm
+46. Nama: Supply of Linepipe for GEP (32” OD) SAWL – wt 25.4mm
    Milik: INPEX MASELA, LTD. (INPEX) | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-44. Nama: Supply Of Carbon Steel Pipes And Hot Bends For Corridor Development Projects
+47. Nama: Supply Of Carbon Steel Pipes And Hot Bends For Corridor Development Projects
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
 --- KATEGORI: SURVEY & INSPECTION ---
-45. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
+48. Nama: Jasa Heliport Annual Inspection dan Evaluasi Register Heliport
    Milik: PT PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 16-Apr-2026
 
-46. Nama: Pemutakhiran Peta Daerah Irigasi Kewenangan Pusat
+49. Nama: Pemutakhiran Peta Daerah Irigasi Kewenangan Pusat
    Milik: KEMENTRIAN PEKERJAAN UMUM | Nilai: Rp 653.903 JT | Closing: 24-apr-2026 | Lokasi: Lombok Barat - Nusa Tenggara Barat | Diumumkan: 20-Apr-2026
 
-47. Nama: Jasa Pelaksanaan lnspeksi Peralatan dan Simulasi Drill KedaruratanPT Pertamina EP Donggi Matindok Field
+50. Nama: Jasa Pelaksanaan lnspeksi Peralatan dan Simulasi Drill KedaruratanPT Pertamina EP Donggi Matindok Field
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 20-Apr-2026
 
-48. Nama: Survey Potensi Pembangunan Sumur Bor di Desa Remayu, Kec. Tuah Negeri
+51. Nama: Survey Potensi Pembangunan Sumur Bor di Desa Remayu, Kec. Tuah Negeri
    Milik: PROVINSI SUMATERA SELATAN | Nilai: Rp 55.3 JT | Closing: 19-apr-2026 | Lokasi: Musi Rawas - Sumatera Selatan | Diumumkan: 20-Apr-2026
 
-49. Nama: Survey Potensi Pembangunan Sumur Bor di Kec. Sembawa
+52. Nama: Survey Potensi Pembangunan Sumur Bor di Kec. Sembawa
    Milik: PROVINSI SUMATERA SELATAN | Nilai: Rp 55.3 JT | Closing: 19-apr-2026 | Lokasi: Banyuasin - Sumatera Selatan | Diumumkan: 20-Apr-2026
 
-50. Nama: Survei Batimetri Daerah Penetapan Alur Pulau Alalak,Tamban,Tabunganen,Anjir Muara ,Jembatan Rumpiang Tindak Lanjut Prakualifikasi Ulang Jumlah Peserta Yang Lulus 1
+53. Nama: Survei Batimetri Daerah Penetapan Alur Pulau Alalak,Tamban,Tabunganen,Anjir Muara ,Jembatan Rumpiang Tindak Lanjut Prakualifikasi Ulang Jumlah Peserta Yang Lulus 1
    Milik: KABUPATEN BARITO KUALA | Nilai: Rp 1.8 M | Closing: 27-apr-2026 | Lokasi: Barito Kuala - Kalimantan Selatan | Diumumkan: 22-Apr-2026
 
-51. Nama: Penyusunan Peta Dasar untuk Rencana Detail Tata Ruang (RDTR) di Kecamatan Gunung Timang dan Kecamatan Gunung Purei Kabupaten Barito Utara
+54. Nama: Penyusunan Peta Dasar untuk Rencana Detail Tata Ruang (RDTR) di Kecamatan Gunung Timang dan Kecamatan Gunung Purei Kabupaten Barito Utara
    Milik: KABUPATEN BARITO UTARA | Nilai: Rp 1 M | Closing: 23-apr-2026 | Lokasi: Barito Utara - Kalimantan Tengah | Diumumkan: 22-Apr-2026
 
-52. Nama: Survey Jalan Kabupaten Bekasi
+55. Nama: Survey Jalan Kabupaten Bekasi
    Milik: KABUPATEN BEKASI | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Bekasi - Jawa Barat | Diumumkan: 22-Apr-2026
 
-53. Nama: Survey Kondisi Jalan Paket 1
+56. Nama: Survey Kondisi Jalan Paket 1
    Milik: KABUPATEN BENGKAYANG | Nilai: Rp 75 JT | Closing: 24-apr-2026 | Lokasi: Bengkayang - Kalimantan Barat | Diumumkan: 23-Apr-2026
 
-54. Nama: Belanja Jasa Konsultansi Berorientasi Layanan-Jasa Survei (Pemetaan dan Penegasan Batas Tanah Aset Pemerintah Daerah Kecamatan Sukamakmur)
+57. Nama: Belanja Jasa Konsultansi Berorientasi Layanan-Jasa Survei (Pemetaan dan Penegasan Batas Tanah Aset Pemerintah Daerah Kecamatan Sukamakmur)
    Milik: KABUPATEN BOGOR | Nilai: Rp 100 JT | Closing: 24-apr-2026 | Lokasi: Bogor - Jawa Barat | Diumumkan: 23-Apr-2026
 
-55. Nama: Belanja Jasa Konsultansi Berorientasi Layanan-Jasa Survei (Pemetaan dan Penegasan Batas Tanah Aset Pemerintah Daerah Kecamatan Sukajaya)
+58. Nama: Belanja Jasa Konsultansi Berorientasi Layanan-Jasa Survei (Pemetaan dan Penegasan Batas Tanah Aset Pemerintah Daerah Kecamatan Sukajaya)
    Milik: KABUPATEN BOGOR | Nilai: Rp 100 JT | Closing: 24-apr-2026 | Lokasi: Bogor - Jawa Barat | Diumumkan: 23-Apr-2026
 
-56. Nama: Facility Integrity Engineering Services
+59. Nama: Facility Integrity Engineering Services
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 24-Apr-2026
 
-57. Nama: Study Local Geoid Modeling Jabung Block
+60. Nama: Study Local Geoid Modeling Jabung Block
    Milik: PETROCHINA INTERNATIONAL JABUNG LTD. | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-58. Nama: Jasa Konsultansi Pembuatan Peta Batas Wilayah
+61. Nama: Jasa Konsultansi Pembuatan Peta Batas Wilayah
    Milik: KOTA BIMA | Nilai: Rp 50 JT | Closing: 30-apr-2026 | Lokasi: Bima - Nusa Tenggara Barat | Diumumkan: 28-Apr-2026
 
-59. Nama: Provision Of Rkl-Rpl Monitoring And Demography Census 2026
+62. Nama: Provision Of Rkl-Rpl Monitoring And Demography Census 2026
    Milik: GENTING OIL KASURI PTE. LTD. | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-60. Nama: Jasa Konsultansi Survei Tapal Batas Persetujuan Penggunaan Kawasan Hutan (PPKH)
+63. Nama: Jasa Konsultansi Survei Tapal Batas Persetujuan Penggunaan Kawasan Hutan (PPKH)
    Milik: PROVINSI KEPULAUAN RIAU | Nilai: Rp 100 JT | Closing: 29-apr-2026 | Lokasi: Bintan - Kepulauan Riau | Diumumkan: 29-Apr-2026
 
 --- KATEGORI: MAN POWER GENERAL LABOUR OUTSOURCING ---
-61. Nama: Provision of Technical HSEQ Assurance Services
+64. Nama: Provision of Technical HSEQ Assurance Services
    Milik: ENI MUARA BAKAU B.V. | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Kutai Kartanegara - Kalimantan Timur | Diumumkan: 20-Apr-2026
 
-62. Nama: Pengadaan Tenaga Pendukung Kegiatan Akses Reforma Agraria Kategori Jawa - Bali 1
+65. Nama: Pengadaan Tenaga Pendukung Kegiatan Akses Reforma Agraria Kategori Jawa - Bali 1
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 42 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-63. Nama: Pengadaan tenaga pendukung kegiatan Akses Reforma Agraria Kategori Jawa - Bali
+66. Nama: Pengadaan tenaga pendukung kegiatan Akses Reforma Agraria Kategori Jawa - Bali
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 42 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-64. Nama: Pengadaan tenaga pendukung dalam rangka fasilitas pendampingan usaha Akses Reforma Agraria
+67. Nama: Pengadaan tenaga pendukung dalam rangka fasilitas pendampingan usaha Akses Reforma Agraria
    Milik: BADAN PERTANHANAN NASIONAL / KEMENTERIAN AGRARIA DAN TATA RANG | Nilai: Rp 21 JT | Closing: 20-apr-2026 | Lokasi: Demak - Jawa Tengah | Diumumkan: 20-Apr-2026
 
-65. Nama: Operator Keg. Pembangunan Tanggul Sungai 3
+68. Nama: Operator Keg. Pembangunan Tanggul Sungai 3
    Milik: N/A | Nilai: Rp 51.1 JT | Closing: 20-apr-2026 | Lokasi: Banjarmasin - Kalimantan Selatan | Diumumkan: 20-Apr-2026
 
-66. Nama: Jasa Tenaga Operasional Warehouse Dan Administration Pt Pertamina Ep Field Subang
+69. Nama: Jasa Tenaga Operasional Warehouse Dan Administration Pt Pertamina Ep Field Subang
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Cirebon - Jawa Barat | Diumumkan: 20-Apr-2026
 
-67. Nama: Belanja Jasa Tenaga Supir 1
+70. Nama: Belanja Jasa Tenaga Supir 1
    Milik: KABUPATEN BELITUNG TIMUR | Nilai: Rp 85.68 JT | Closing: 23-apr-2026 | Lokasi: Belitung Timur - Kepulauan Babel | Diumumkan: 22-Apr-2026
 
-68. Nama: Belanja Jasa Tenaga Supir 02
+71. Nama: Belanja Jasa Tenaga Supir 02
    Milik: KABUPATEN BELITUNG TIMUR | Nilai: Rp 85.68 JT | Closing: 23-apr-2026 | Lokasi: Belitung Timur - Kepulauan Babel | Diumumkan: 22-Apr-2026
 
-69. Nama: Belanja Jasa Tenaga Supir 3
+72. Nama: Belanja Jasa Tenaga Supir 3
    Milik: KABUPATEN BELITUNG TIMUR | Nilai: Rp 85.68 JT | Closing: 23-apr-2026 | Lokasi: Belitung Timur - Kepulauan Babel | Diumumkan: 22-Apr-2026
 
-70. Nama: Provision of Sworn Translator Services
+73. Nama: Provision of Sworn Translator Services
    Milik: KUFPEC INDONESIA (ANAMBAS) B.V. | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-71. Nama: Belanja Jasa Assistant Professional Staf
+74. Nama: Belanja Jasa Assistant Professional Staf
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 56.76 JT | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-72. Nama: Pengadaan Tenaga Ahli Pentester 4
+75. Nama: Pengadaan Tenaga Ahli Pentester 4
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 81.4 JT | Closing: 24-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-73. Nama: Belanja Jasa Pegawai Non PNS
+76. Nama: Belanja Jasa Pegawai Non PNS
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 534.28 JT | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-74. Nama: Penyediaan Jasa PJLP Petugas Pengamanan Dalam - Penyedia 181
+77. Nama: Penyediaan Jasa PJLP Petugas Pengamanan Dalam - Penyedia 181
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 12.63 M | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-75. Nama: Penyediaan Jasa PJLP Petugas Jaringan Listrik - Penyedia 56
+78. Nama: Penyediaan Jasa PJLP Petugas Jaringan Listrik - Penyedia 56
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 4.00 M | Closing: 23-apr-2026 | Lokasi: Jakarta Utara - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-76. Nama: Penyediaan Jasa PJLP Petugas Jaringan Listrik - Penyedia 54
+79. Nama: Penyediaan Jasa PJLP Petugas Jaringan Listrik - Penyedia 54
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 4.00 M | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-77. Nama: Penyediaan Jasa PJLP Petugas Jaringan Listrik - Penyedia 55
+80. Nama: Penyediaan Jasa PJLP Petugas Jaringan Listrik - Penyedia 55
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 4.00 M | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-78. Nama: BPAD - Peningkatan Kerjasama Pemanfaatan Aset -Petugas Administrasi Sistem Pendataan Barang Milik Daerah
+81. Nama: BPAD - Peningkatan Kerjasama Pemanfaatan Aset -Petugas Administrasi Sistem Pendataan Barang Milik Daerah
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 75.27 JT | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
-79. Nama: Petugas Administrasi 6
+82. Nama: Petugas Administrasi 6
    Milik: PROVINSI DKI JAKARTA | Nilai: Rp 45.13 JT | Closing: 23-apr-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 24-Apr-2026
 
 --- KATEGORI: INDUSTRIAL MACHINE PART & CONSUMABLE ---
-80. Nama: Jasa Kontrak Payung Hot Splicing Belt Conveyor Dan Relaging
+83. Nama: Jasa Kontrak Payung Hot Splicing Belt Conveyor Dan Relaging
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Pulang Pisau - Kalimantan Tengah | Diumumkan: 20-Apr-2026
 
-81. Nama: Jasa Hot Splicing Belt Conveyor Relagging Pulley UP Tarahan
+84. Nama: Jasa Hot Splicing Belt Conveyor Relagging Pulley UP Tarahan
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Lampung Selatan - Lampung | Diumumkan: 20-Apr-2026
 
-82. Nama: Pengadaan Strategic Part Major Insp Gt.21 Dan Gt.22
+85. Nama: Pengadaan Strategic Part Major Insp Gt.21 Dan Gt.22
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Wajo - Sulawesi Selatan | Diumumkan: 20-Apr-2026
 
-83. Nama: Kontrak Payung Jasa Hot Splicing Belt Conveyor Pltu Kaltim Teluk 2026-2028 (Ro0023-Ms2)
+86. Nama: Kontrak Payung Jasa Hot Splicing Belt Conveyor Pltu Kaltim Teluk 2026-2028 (Ro0023-Ms2)
    Milik: PJB UNIT BISNIS JASA O&M KALTIM TELUK | Nilai: N/A | Closing: 22-apr-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 20-Apr-2026
 
-84. Nama: Pengadaan Spare Part dan Material Consumable Fire & Gas Donggi Matindok Field
+87. Nama: Pengadaan Spare Part dan Material Consumable Fire & Gas Donggi Matindok Field
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 20-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 20-Apr-2026
 
-85. Nama: Pengadaan Strategic Material Membran SWRO PLTU Ketapang
+88. Nama: Pengadaan Strategic Material Membran SWRO PLTU Ketapang
    Milik: PJB SERVICES | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Sidoarjo - Jawa Timur | Diumumkan: 22-Apr-2026
 
-86. Nama: Pengadaan Bearing De Nde Motor 6 Kv Up Tarahan
+89. Nama: Pengadaan Bearing De Nde Motor 6 Kv Up Tarahan
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Lampung Selatan - Lampung | Diumumkan: 22-Apr-2026
 
-87. Nama: Pengadaan Material Mesin 1 Area Boiler Aux UP Tarahan
+90. Nama: Pengadaan Material Mesin 1 Area Boiler Aux UP Tarahan
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Lampung Selatan - Lampung | Diumumkan: 23-Apr-2026
 
-88. Nama: Pengadaan Material Floating Hose untuk Marine Terminal 2026
+91. Nama: Pengadaan Material Floating Hose untuk Marine Terminal 2026
    Milik: PERTAMINA HULU ENERGI OFFSHORE NORTH WEST JAVA | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-89. Nama: Supply Of Carbon Steel Pipes And Hot Bends For Corridor Development Projects
+92. Nama: Supply Of Carbon Steel Pipes And Hot Bends For Corridor Development Projects
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 23-Apr-2026
 
-90. Nama: Mesin Turning Single Spindle Single Turret Diameter 6, Dll Sebanyak 3 (Tiga) Item Program Investasi Divisi Senjata Tahun 2026
+93. Nama: Mesin Turning Single Spindle Single Turret Diameter 6, Dll Sebanyak 3 (Tiga) Item Program Investasi Divisi Senjata Tahun 2026
    Milik: PT PINDAD | Nilai: N/A | Closing: 28-apr-2026 | Lokasi: Bandung - Jawa Barat | Diumumkan: 24-Apr-2026
 
-91. Nama: Pengadaan Material Instrument Kategori Criticallity-A (Q1-2026)
+94. Nama: Pengadaan Material Instrument Kategori Criticallity-A (Q1-2026)
    Milik: PLN MANDAU CIPTA TENAGA NUSANTARA (MCTN) | Nilai: N/A | Closing: 06-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-92. Nama: Pengadaan Replenishment Material Filtration & Supplies Kategori Criticallity B (Q1-2026)
+95. Nama: Pengadaan Replenishment Material Filtration & Supplies Kategori Criticallity B (Q1-2026)
    Milik: PLN MANDAU CIPTA TENAGA NUSANTARA (MCTN) | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-93. Nama: Pengadaan Material Additional PMS 32K (Rubber Coupling Generator PLTMG Kendari)
+96. Nama: Pengadaan Material Additional PMS 32K (Rubber Coupling Generator PLTMG Kendari)
    Milik: PJB SERVICES | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Sidoarjo - Jawa Timur | Diumumkan: 28-Apr-2026
 
-94. Nama: Pengadaan Hydraulic Tools Set
+97. Nama: Pengadaan Hydraulic Tools Set
    Milik: PLN NUSANTARA POWER | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Surabaya - Jawa Timur | Diumumkan: 28-Apr-2026
 
-95. Nama: Pengadaan Material Part Chlorine
+98. Nama: Pengadaan Material Part Chlorine
    Milik: PJB UP. PAITON | Nilai: N/A | Closing: 05-mei-2026 | Lokasi: Probolinggo - Jawa Timur | Diumumkan: 28-Apr-2026
 
-96. Nama: Purchasing of Special Tools for Vibration, Temperature and Hydraulic Pressure Maintenance at Jetty and Coal Handling Plant
+99. Nama: Purchasing of Special Tools for Vibration, Temperature and Hydraulic Pressure Maintenance at Jetty and Coal Handling Plant
    Milik: PT KOMIPO PEMBANGKITAN JAWA BALI (KPJB) | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Jepara - Jawa Tengah | Diumumkan: 28-Apr-2026
 
-97. Nama: Air Dryer Package
+100. Nama: Air Dryer Package
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
-98. Nama: Supply and Delivery of Spare Part Overhaul I&C for PLTU Cilacap
+101. Nama: Supply and Delivery of Spare Part Overhaul I&C for PLTU Cilacap
    Milik: PT DONGFANG ELECTRIC INDONESIA | Nilai: N/A | Closing: 07-mei-2026 | Lokasi: Cilacap - Jawa Tengah | Diumumkan: 29-Apr-2026
 
 --- KATEGORI: DRILLING & WORKOVER WELL SERVICE ---
-99. Nama: Drilling & Completion Technical Services For Block Corridor
+102. Nama: Drilling & Completion Technical Services For Block Corridor
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 21-Apr-2026
 
-100. Nama: Provision of Pack Off & Accessories
+103. Nama: Provision of Pack Off & Accessories
    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 23-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-101. Nama: Jasa Penyediaan & Pengoperasian 1(Satu) Unit Rig 350HP untuk Pekerjaan WOWS di Zona 9 Tanjung Field
+104. Nama: Jasa Penyediaan & Pengoperasian 1(Satu) Unit Rig 350HP untuk Pekerjaan WOWS di Zona 9 Tanjung Field
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-102. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4
+105. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 22-Apr-2026
 
-103. Nama: Jasa Pekerjaan Operasional Operasi Produksi secara Call of Order (COO) PT Pertamina EP Zona 14 Papua Field
+106. Nama: Jasa Pekerjaan Operasional Operasi Produksi secara Call of Order (COO) PT Pertamina EP Zona 14 Papua Field
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-104. Nama: Engineering Integrated Services For Production, Operation Surface Facilities and Support di Pertamina Hulu Rokan Regional 1
+107. Nama: Engineering Integrated Services For Production, Operation Surface Facilities and Support di Pertamina Hulu Rokan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-105. Nama: Penyediaan Jasa Mud Logging Unit Lengkap Dengan Peralatan dan Personel Untuk Sumur Pemboran PT Pertamina EP Zona 4 Field Pendopo, Field Adera, dan Field Ramba
+108. Nama: Penyediaan Jasa Mud Logging Unit Lengkap Dengan Peralatan dan Personel Untuk Sumur Pemboran PT Pertamina EP Zona 4 Field Pendopo, Field Adera, dan Field Ramba
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-106. Nama: Provision of Electrical Wireline Logging Services
+109. Nama: Provision of Electrical Wireline Logging Services
    Milik: PT. EMP ENERGI RIAU | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-107. Nama: Provision of Well Intervention Services
+110. Nama: Provision of Well Intervention Services
    Milik: EXXONMOBIL CEPU LIMITED | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Bojonegoro - Jawa Timur | Diumumkan: 24-Apr-2026
 
-108. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 350 Hp Untuk Wows Sumur-Sumur Pt Pertamina Ep Zona 1 Wilayah Utara
+111. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 350 Hp Untuk Wows Sumur-Sumur Pt Pertamina Ep Zona 1 Wilayah Utara
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Kotabaru - Kalimantan Selatan | Diumumkan: 29-Apr-2026
 
-109. Nama: HDE and Lifting Equipment Services for Drilling Rig B
+112. Nama: HDE and Lifting Equipment Services for Drilling Rig B
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
-110. Nama: Call Off Order of 5-1/2” Premium Screen for MDK Development Wells
+113. Nama: Call Off Order of 5-1/2” Premium Screen for MDK Development Wells
    Milik: HUSKY - CNOOC MADURA LIMITED | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-111. Nama: Provision of Electrical Wireline Logging Services EMP Energi Riau
+114. Nama: Provision of Electrical Wireline Logging Services EMP Energi Riau
    Milik: PT. EMP ENERGI RIAU | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-112. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4 Prabumulih
+115. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4 Prabumulih
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
 --- KATEGORI: MARINE TRANSPORTATION ---
-113. Nama: Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026
+116. Nama: Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026
    Milik: PLN ENERGI PRIMER INDONESIA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-114. Nama: Provision Of Offshore Support Vessel (Crew Boat) Charter Services
+117. Nama: Provision Of Offshore Support Vessel (Crew Boat) Charter Services
    Milik: EXXONMOBIL CEPU LIMITED | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Bojonegoro - Jawa Timur | Diumumkan: 24-Apr-2026
 
-115. Nama: Pengadaan Penyedia Jasa Untuk Pengangkutan dan Pendistribusian LNG Untuk Pelanggan di Wilayah Sumatera Bagian Utara.
+118. Nama: Pengadaan Penyedia Jasa Untuk Pengangkutan dan Pendistribusian LNG Untuk Pelanggan di Wilayah Sumatera Bagian Utara.
    Milik: PERTAGAS NIAGA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-116. Nama: Pengadaan Penyedia Jasa Pengangkutan dan Distribusi CNG di Jawa Timur, Jawa Tengah dan Daerah Istimewa Yogyakarta
+119. Nama: Pengadaan Penyedia Jasa Pengangkutan dan Distribusi CNG di Jawa Timur, Jawa Tengah dan Daerah Istimewa Yogyakarta
    Milik: PERTAGAS NIAGA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
 --- KATEGORI: EPC (ENGINEERING PROCUREMENT CONSTRUCTION) ---
-117. Nama: Jasa EPCI Fasilitas Sumuran WK Siak
+120. Nama: Jasa EPCI Fasilitas Sumuran WK Siak
    Milik: PT EMP ENERGI GANDEWA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
