@@ -139,7 +139,7 @@ html{scroll-behavior:smooth}
 <div class="pw-box">
 <div class="pw-title">Tender-Indonesia</div>
 <div class="pw-sub">Masukkan password untuk mengakses sistem</div>
-<input id="loginUser" class="pw-input" type="text" placeholder="Username" onkeypress="if(event.key==='Enter')checkPassword()">
+<div style="position:relative;"><input id="loginUser" class="pw-input" type="text" placeholder="Username" onkeypress="if(event.key==='Enter')checkPassword()"><button type="button" onclick="toggleLoginPw()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#888;padding:0;line-height:1;" id="eyeBtn">&#128065;</button></div>
 <input id="pwInput" class="pw-input" type="password" placeholder="Ketik password..." onkeypress="if(event.key==='Enter')checkPassword()">
 <button class="pw-btn" onclick="checkPassword()">Masuk</button>
 <div id="pwError" class="pw-error">Password salah. Silakan coba lagi.</div>
@@ -410,5 +410,6 @@ inp.disabled=false;btn.disabled=false;inp.focus();
 /* Focus password input on load */
 window.addEventListener('load',function(){document.getElementById('pwInput').focus();});
 </script>
+<script>function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
 </body>
 </html>
