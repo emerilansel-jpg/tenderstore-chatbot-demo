@@ -232,7 +232,7 @@ function checkPw(){
 }
 
 /* === Tabs === */
-function switchTab(t){ var tabs=['input','data','prospect']; document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===tabs.indexOf(t))}); tabs.forEach(function(name){ var p=document.getElementById('panel-'+name); if(p) p.classList.toggle('active',name===t); }); if(t==='data') loadData(); if(t==='prospect') loadProspects(); }
+function switchTab(t){ var tabs=['input','data','prospect','users']; document.querySelectorAll('.tab').forEach(function(el,i){el.classList.toggle('active',i===tabs.indexOf(t))}); tabs.forEach(function(name){ var p=document.getElementById('panel-'+name); if(p) p.classList.toggle('active',name===t); }); if(t==='data') loadData(); if(t==='prospect') loadProspects(); }
 /* === State === */
 var currentData=[];
 var previewData=[];
