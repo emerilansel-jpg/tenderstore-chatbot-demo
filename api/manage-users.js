@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
-const OWNER = process.env.GITHUB_OWNER;
-const REPO  = process.env.GITHUB_REPO;
+const OWNER = process.env.GITHUB_OWNER || "emerilansel-jpg";
+const REPO  = process.env.GITHUB_REPO  || "tenderstore-chatbot-demo";
 const TOKEN = process.env.GITHUB_TOKEN;
 const FILE_PATH = "data/users.json";
 
