@@ -43,7 +43,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   overflow:hidden;
 }
 .hero-bg::before {
-  content:'✓';
+  content:'â';
   position:absolute; top:0; left:0; right:0; bottom:0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g' width='60' height='60' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='30' cy='30' r='0.8' fill='%232563EB' opacity='0.15'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23g)'/%3E%3C/svg%3E");
   opacity:0.6;
@@ -155,7 +155,7 @@ body { font-family:'Inter',system-ui,-apple-system,sans-serif; color:#E2E8F0; ba
   background:rgba(10,22,40,0.5);
 }
 .stats-grid {
-  display:grid; grid-template-columns:repeat(4,1fr); gap:32px;
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:32px;
   text-align:center;
 }
 .stat-item { }
@@ -399,7 +399,7 @@ footer {
 /* ===== RESPONSIVE ===== */
 @media(max-width:968px) {
   .solution-grid { grid-template-columns:1fr; }
-  .stats-grid { grid-template-columns:repeat(2,1fr); gap:24px; }
+  /* stats-grid: auto-fit handles responsive */
   .steps-grid { grid-template-columns:1fr; max-width:400px; margin:0 auto; }
   .nav-links { display:none; }
 }
@@ -407,7 +407,7 @@ footer {
   .hero { padding:130px 0 60px; }
   .hero-ctas { flex-direction:column; }
   .btn-primary, .btn-secondary { width:100%; justify-content:center; }
-  .stats-grid { grid-template-columns:1fr 1fr; }
+  /* stats-grid: auto-fit minmax(140px,1fr) handles mobile */
   .pricing-grid { grid-template-columns:1fr; }
   .testimonial-grid { grid-template-columns:1fr; }
   .pain-grid { grid-template-columns:1fr; }
@@ -503,12 +503,12 @@ footer {
 
   <div class="pain-grid">
     <div class="pain-card">
-      <div class="pain-icon">⏰</div>
+      <div class="pain-icon">â°</div>
       <h3 class="pain-title">Terlalu Sibuk</h3>
       <p class="pain-text">Info Tender mengalir setiap hari, namun seringkali kita terlalu sibuk untuk mencermati satu demi satu data tender tsb.</p>
     </div>
     <div class="pain-card">
-      <div class="pain-icon">👥</div>
+      <div class="pain-icon">ð¥</div>
       <h3 class="pain-title">Kesulitan Memantau Tim Marketing</h3>
       <p class="pain-text">Sebagai pemimpin yang sibuk, anda akan sulit mensupervisi untuk memastikan tim marketing melaksanakan tugas mencermati info tender yang berlangsung.</p>
     </div>
@@ -527,21 +527,21 @@ footer {
 
       <div class="solution-features">
         <div class="feature-item">
-          <div class="feature-icon">🎯</div>
+          <div class="feature-icon">ð¯</div>
           <div class="feature-content">
             <h4>Filter Cerdas</h4>
             <p>Bahasa bebas namun terstruktur akan membuat AI bekerja optimal menyaring info yang anda mau</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">📊</div>
+          <div class="feature-icon">ð</div>
           <div class="feature-content">
             <h4>Berbasis Parameter</h4>
             <p>Agar AI optimal, maka ada parameter yang dapat anda pakai saat bertanya ke system AI. Parameter mencakup: Deskripsi proyek, Category, Tanggal Tender Diumumkan, Pemilik Proyek, maupun Value Proyek.</p>
           </div>
         </div>
         <div class="feature-item">
-          <div class="feature-icon">💡</div>
+          <div class="feature-icon">ð¡</div>
           <div class="feature-content">
             <h4>Panduan Pertanyaan</h4>
             <p>System AI ini dibuat khusus bagi para member, yang selama ini terbiasa aktif mencari tender dalam system TENDER INDONESIA. Namun kini dengan system AI, cukup dengan cara mengajukan pertanyaan maka sistem akan mengumpan cerdas info tender yang diinginkan.</p>
@@ -821,6 +821,87 @@ document.querySelectorAll('.pain-card, .feature-item, .step-card, .testimonial-c
   el.style.transition = 'all 0.6s ease';
   observer.observe(el);
 });
+
+
+// ===== LIVE STATS from API =====
+(function() {
+  var API_URL = 'https://tenderstore-chatbot-demo.vercel.app/api/load-tenders';
+
+  function animateNum(el, target) {
+    if (!el) return;
+    el.dataset.counted = 'true';
+    var duration = 1200, start = performance.now();
+    function tick(now) {
+      var p = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(eased * target);
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = target;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function animateWhenVisible(el, target) {
+    el.dataset.counted = 'true';
+    function startAnim() {
+      if (el.dataset.liveAnim) return;
+      el.dataset.liveAnim = '1';
+      animateNum(el, target);
+    }
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
+      startAnim();
+    } else {
+      var obs = new IntersectionObserver(function(e) {
+        if (e[0].isIntersecting) { startAnim(); obs.disconnect(); }
+      }, {threshold: 0.3});
+      obs.observe(el);
+    }
+  }
+
+  function makeCard(label) {
+    var d = document.createElement('div');
+    d.className = 'stat-item';
+    d.innerHTML = '<div class="stat-number">0</div><div class="stat-label">' + label + '</div>';
+    return d;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    fetch(API_URL)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var tenders = Array.isArray(data) ? data : (data.tenders || []);
+        if (!tenders.length) return;
+        var total = tenders.length;
+        var pertamina = tenders.filter(function(t) {
+          return t.milik && t.milik.toLowerCase().indexOf('pertamina') !== -1;
+        }).length;
+        var katMap = {};
+        tenders.forEach(function(t) { if (t.kategori) katMap[t.kategori] = 1; });
+        var katCount = Object.keys(katMap).length;
+
+        var grid = document.querySelector('.stats-grid');
+        if (!grid) return;
+        var items = grid.querySelectorAll('.stat-item');
+        if (!items.length) return;
+
+        var n1 = items[0].querySelector('.stat-number');
+        if (n1) animateWhenVisible(n1, total);
+
+        var pc = makeCard('Tender Pertamina');
+        var kc = makeCard('Kategori Industri');
+        items[0].insertAdjacentElement('afterend', kc);
+        items[0].insertAdjacentElement('afterend', pc);
+        animateWhenVisible(pc.querySelector('.stat-number'), pertamina);
+        animateWhenVisible(kc.querySelector('.stat-number'), katCount);
+
+        document.querySelectorAll('li').forEach(function(li) {
+          var t = li.textContent;
+          if (/500\+/.test(t) && /tender/i.test(t)) li.textContent = t.replace('500+', total);
+          if (/\d+\s+kategori\s+industri/i.test(t)) li.textContent = t.replace(/\d+\s+kategori\s+industri/i, katCount + ' kategori industri');
+        });
+      })
+      .catch(function() {});
+  });
+})();
 
 // Counter animation for stats
 const statObserver = new IntersectionObserver((entries) => {
