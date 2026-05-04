@@ -139,6 +139,7 @@ html{scroll-behavior:smooth}
 <div class="pw-box">
 <div class="pw-title">Tender-Indonesia</div>
 <div class="pw-sub">Masukkan password untuk mengakses sistem</div>
+<input id="loginUser" class="pw-input" type="text" placeholder="Username" onkeypress="if(event.key==='Enter')checkPassword()">
 <input id="pwInput" class="pw-input" type="password" placeholder="Ketik password..." onkeypress="if(event.key==='Enter')checkPassword()">
 <button class="pw-btn" onclick="checkPassword()">Masuk</button>
 <div id="pwError" class="pw-error">Password salah. Silakan coba lagi.</div>
@@ -286,29 +287,7 @@ function submitProspect(){
   });
 }
 
-/* Prospect/Password flow init */
-(function(){
-  if(localStorage.getItem('prospectDone')){
-    var po=document.getElementById('prospectOverlay');
-    if(po) po.style.display='none';
-    var pw=document.getElementById('pwOverlay');
-    if(pw) pw.style.display='flex';
-  }
-})();
-function checkPassword(){
-var inp=document.getElementById('pwInput');
-var raw=inp.value;
-var norm=raw.toLowerCase().replace(/[\s\-_]/g,'');
-if(norm==='tender'){
-isAuth=true;
-document.getElementById('pwOverlay').style.display='none';
-document.getElementById('userInput').focus();
-}else{
-document.getElementById('pwError').style.display='block';
-inp.value='';
-inp.focus();
-}
-}
+/* Login flow init */(function(){var raw=localStorage.getItem('tsUser');if(raw){try{var u=JSON.parse(raw);if(u&&u.username){isAuth=true;document.getElementById('pwOverlay').style.display='none';document.getElementById('userInput').focus();return;}}catch(e){}}localStorage.removeItem('tsUser');if(localStorage.getItem('prospectDone')){document.getElementById('prospectOverlay').style.display='none';document.getElementById('pwOverlay').style.display='flex';}})();async function doLogin(){var un=document.getElementById('loginUser');var username=un?un.value.trim():'';var password=document.getElementById('pwInput').value;var errEl=document.getElementById('pwError');if(errEl)errEl.style.display='none';if(!username||!password){if(errEl){errEl.textContent='Username dan password wajib diisi.';errEl.style.display='block';}return;}try{var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});var data=await res.json();if(data.success){localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));document.getElementById('pwOverlay').style.display='none';isAuth=true;document.getElementById('userInput').focus();}else{if(errEl){errEl.textContent='Username atau password salah.';errEl.style.display='block';}}}catch(e){if(errEl){errEl.textContent='Koneksi error.';errEl.style.display='block';}}}function checkPassword(){doLogin();}
 
 /* === Guidance Modal === */
 function openGuide(){

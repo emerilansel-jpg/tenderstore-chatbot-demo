@@ -1,0 +1,10 @@
+[
+    {
+        "username": "demo",
+        "password": "4e8ddff3650292ab5a4108c3aa9f0dcd0a3d79042f2f1c4afb77540182c212c3",
+        "name": "Demo User",
+        "wa": "08123456789",
+        "active": true,
+        "createdAt": "2026-05-04"
+    }
+]
