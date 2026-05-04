@@ -30,5 +30,13 @@
     "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "active": true,
     "createdAt": "2026-05-04"
+  },
+  {
+    "username": "qatest1777907019638",
+    "password": "136facd12fc399563afa1f48b73e35aa25599b43e2561d16a2d9c0ffae7b8644",
+    "name": "QA Test User",
+    "wa": "08123456789",
+    "active": true,
+    "createdAt": "2026-05-04"
   }
 ]
