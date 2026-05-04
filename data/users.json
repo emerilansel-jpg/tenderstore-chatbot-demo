@@ -30,5 +30,13 @@
     "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "active": true,
     "createdAt": "2026-05-04"
+  },
+  {
+    "username": "qatest2026",
+    "name": "QA Auto Test",
+    "wa": "08100000001",
+    "passwordHash": "c1b8b58c3e7ac442b525e87709d5c1aef49a5d5acb70551be645887a978e238a",
+    "active": true,
+    "createdAt": "2026-05-04"
   }
 ]
