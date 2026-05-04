@@ -139,8 +139,8 @@ html{scroll-behavior:smooth}
 <div class="pw-box">
 <div class="pw-title">Tender-Indonesia</div>
 <div class="pw-sub">Masukkan password untuk mengakses sistem</div>
-<div style="position:relative;"><input id="loginUser" class="pw-input" type="text" placeholder="Username" onkeypress="if(event.key==='Enter')checkPassword()"><button type="button" onclick="toggleLoginPw()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#888;padding:0;line-height:1;" id="eyeBtn">&#128065;</button></div>
-<input id="pwInput" class="pw-input" type="password" placeholder="Ketik password..." onkeypress="if(event.key==='Enter')checkPassword()">
+<input id="loginUser" class="pw-input" type="text" placeholder="Username" onkeypress="if(event.key==='Enter')document.getElementById('pwInput').focus();" autocomplete="username">>
+<div style="position:relative;"><input id="pwInput" class="pw-input" type="password" placeholder="Ketik password..." onkeypress="if(event.key==='Enter')checkPassword();" autocomplete="current-password"><button type="button" onclick="toggleLoginPw()" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:18px;color:#888;padding:0;line-height:1;" id="eyeBtn">&#128065;</button></div>>
 <button class="pw-btn" onclick="checkPassword()">Masuk</button>
 <div id="pwError" class="pw-error">Password salah. Silakan coba lagi.</div>
 </div>
@@ -238,9 +238,9 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 </div>
 <div class="footer-stats">
 <div class="stats-inner">
-<div><div class="stat-val" style="color:#3b82f6">32</div><div class="stat-lbl">Tender</div></div>
-<div><div class="stat-val" style="color:#22c55e">5</div><div class="stat-lbl">Kategori</div></div>
-<div><div class="stat-val" style="color:#a78bfa">25</div><div class="stat-lbl">Pertamina</div></div>
+<div><div id="statTender" class="stat-val" style="color:#3b82f6">32</div><div class="stat-lbl">Tender</div></div>>
+<div><div id="statKategori" class="stat-val" style="color:#22c55e">5</div><div class="stat-lbl">Kategori</div></div>>
+<div><div id="statPertamina" class="stat-val" style="color:#a78bfa">25</div><div class="stat-lbl">Pertamina</div></div>>
 </div>
 </div>
 </main>
@@ -287,7 +287,7 @@ function submitProspect(){
   });
 }
 
-/* Login flow init */(function(){var raw=localStorage.getItem('tsUser');if(raw){try{var u=JSON.parse(raw);if(u&&u.username){isAuth=true;document.getElementById('pwOverlay').style.display='none';document.getElementById('userInput').focus();return;}}catch(e){}}localStorage.removeItem('tsUser');if(localStorage.getItem('prospectDone')){document.getElementById('prospectOverlay').style.display='none';document.getElementById('pwOverlay').style.display='flex';}})();async function doLogin(){var un=document.getElementById('loginUser');var username=un?un.value.trim():'';var password=document.getElementById('pwInput').value;var errEl=document.getElementById('pwError');if(errEl)errEl.style.display='none';if(!username||!password){if(errEl){errEl.textContent='Username dan password wajib diisi.';errEl.style.display='block';}return;}try{var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});var data=await res.json();if(data.success){localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));document.getElementById('pwOverlay').style.display='none';isAuth=true;document.getElementById('userInput').focus();}else{if(errEl){errEl.textContent='Username atau password salah.';errEl.style.display='block';}}}catch(e){if(errEl){errEl.textContent='Koneksi error.';errEl.style.display='block';}}}function checkPassword(){doLogin();}
+/* Login flow init */(function(){var raw=localStorage.getItem('tsUser');if(raw){try{var u=JSON.parse(raw);if(u&&u.username){isAuth=true;document.getElementById('pwOverlay').style.display='none';document.getElementById('userInput').focus();return;}}catch(e){}}localStorage.removeItem('tsUser');if(localStorage.getItem('prospectDone')){document.getElementById('prospectOverlay').style.display='none';document.getElementById('pwOverlay').style.display='flex';}})();async function doLogin(){var un=document.getElementById('loginUser');var username=un?un.value.trim():'';var password=document.getElementById('pwInput').value;var errEl=document.getElementById('pwError');if(errEl)errEl.style.display='none';if(!username||!password){if(errEl){errEl.textContent='Username dan password wajib diisi.';errEl.style.display='block';}return;}try{var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});var data=await res.json();if(data.success){localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));document.getElementById('pwOverlay').style.display='none';isAuth=true;document.getElementById('userInput').focus();}else{if(errEl){errEl.textContent='Username atau password salah.';errEl.style.display='block';}}}catch(e){if(errEl){errEl.textContent='Koneksi error.';errEl.style.display='block';}}}function checkPassword(){doLogin();}
 
 /* === Guidance Modal === */
 function openGuide(){
@@ -408,8 +408,8 @@ inp.disabled=false;btn.disabled=false;inp.focus();
 }
 
 /* Focus password input on load */
-window.addEventListener('load',function(){document.getElementById('pwInput').focus();});
+window.addEventListener('load',function(){document.getElementById('pwInput').focus();loadStats();});
 </script>
-<script>function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
+<script>function loadStats(){fetch('/api/stats').then(function(r){return r.json();}).then(function(d){if(d.tender!==undefined)document.getElementById('statTender').textContent=d.tender;if(d.kategori!==undefined)document.getElementById('statKategori').textContent=d.kategori;if(d.pertamina!==undefined)document.getElementById('statPertamina').textContent=d.pertamina;}).catch(function(){});}function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
 </body>
 </html>
