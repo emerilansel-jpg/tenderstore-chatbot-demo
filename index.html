@@ -123,19 +123,8 @@ html{scroll-behavior:smooth}
 </head>
 <body>
 
-<!-- Prospect Form Overlay -->
-<div id="prospectOverlay" class="prospect-overlay">
-<div class="prospect-box">
-<div class="prospect-title">Selamat Datang!</div>
-<div class="prospect-sub">Silakan isi data Anda untuk melanjutkan</div>
-<input id="prospectNama" class="prospect-input" type="text" placeholder="Nama Lengkap" onkeypress="if(event.key==='Enter')document.getElementById('prospectWa').focus()">
-<input id="prospectWa" class="prospect-input" type="tel" placeholder="Nomor WhatsApp (08xxx)" onkeypress="if(event.key==='Enter')submitProspect()">
-<button class="prospect-btn" onclick="submitProspect()">Lanjutkan</button>
-<div id="prospectError" class="prospect-error">Mohon isi Nama dan Nomor WhatsApp yang valid.</div>
-</div>
-</div>
 <!-- Password Overlay -->
-<div id="pwOverlay" class="pw-overlay" style="display:none">
+<div id="pwOverlay" class="pw-overlay">
 <div class="pw-box">
 <div class="pw-title">Tender-Indonesia</div>
 <div class="pw-sub">Masukkan password untuk mengakses sistem</div>
@@ -258,13 +247,6 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 /* === Password Gate === */
 var isAuth = false;
 
-function submitProspect(){
-  var nama = document.getElementById('prospectNama').value.trim();
-  var wa = document.getElementById('prospectWa').value.trim().replace(/[^0-9+]/g,'');
-  if(!nama || nama.length < 2 || !wa || wa.length < 8){
-    document.getElementById('prospectError').style.display='block';
-    return;
-  }
   document.getElementById('prospectError').style.display='none';
   var btn = document.querySelector('.prospect-btn');
   btn.textContent='Menyimpan...';
@@ -274,20 +256,9 @@ function submitProspect(){
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({nama:nama,whatsapp:wa})
   }).then(function(r){return r.json();}).then(function(){
-    localStorage.setItem('prospectDone','1');
-    localStorage.setItem('prospectNama',nama);
-    document.getElementById('prospectOverlay').style.display='none';
     document.getElementById('pwOverlay').style.display='flex';
-    document.getElementById('pwInput').focus();
-  }).catch(function(){
-    localStorage.setItem('prospectDone','1');
-    document.getElementById('prospectOverlay').style.display='none';
-    document.getElementById('pwOverlay').style.display='flex';
-    document.getElementById('pwInput').focus();
-  });
-}
 
-/* Login flow init */(function(){var raw=localStorage.getItem('tsUser');if(raw){try{var u=JSON.parse(raw);if(u&&u.username){isAuth=true;document.getElementById('pwOverlay').style.display='none';document.getElementById('userInput').focus();return;}}catch(e){}}localStorage.removeItem('tsUser');if(localStorage.getItem('prospectDone')){document.getElementById('prospectOverlay').style.display='none';document.getElementById('pwOverlay').style.display='flex';}})();async function doLogin(){var un=document.getElementById('loginUser');var username=un?un.value.trim():'';var password=document.getElementById('pwInput').value;var errEl=document.getElementById('pwError');if(errEl)errEl.style.display='none';if(!username||!password){if(errEl){errEl.textContent='Username dan password wajib diisi.';errEl.style.display='block';}return;}try{var res=await fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});var data=await res.json();if(data.success){localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));localStorage.setItem('tsUser',JSON.stringify({username:data.username,name:data.name}));document.getElementById('pwOverlay').style.display='none';isAuth=true;document.getElementById('userInput').focus();}else{if(errEl){errEl.textContent='Username atau password salah.';errEl.style.display='block';}}}catch(e){if(errEl){errEl.textContent='Koneksi error.';errEl.style.display='block';}}}function checkPassword(){doLogin();}
+    document.getElementById('pwOverlay').style.display='flex';
 
 /* === Guidance Modal === */
 function openGuide(){
