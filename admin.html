@@ -219,7 +219,7 @@ textarea:focus{border-color:rgba(96,165,250,.5)!important;box-shadow:0 0 0 3px r
 /* === Password === */
 function checkPw(){
   var v=document.getElementById('pwInput').value;
-  var n=v.toLowerCase().replace/([\s\-_]/g,'');
+  var n=v.toLowerCase().replace(/[\s\-_]/g,'');
   if(n==='admintender'){
     document.getElementById('pwOverlay').style.display='none';
     var ao=document.getElementById('auth-overlay');if(ao)ao.style.display='none';
@@ -294,22 +294,25 @@ function renderTable(data,tbodyId){
  '<td><input value="'+esc(item.lokasi)+'" onchange="'+src+'['+i+'].lokasi=this.value"></td>'+
  '<td><input value="'+esc(item.kategori)+'" onchange="'+src+'['+i+'].kategori=this.value"></td>'+
  '<td><input value="'+esc(item.tanggal_pengumuman||'')+'" onchange="'+src+'['+i+'].tanggal_pengumuman=this.value"></td>'+
- '<td><button onclick="if(confirm(\'Hapus tender ini?\')){'+src+'.splice('+i+',1);renderTable('+src+\',\''+ tbodyId+\'\')}\'" style="background:none;border:none;cursor:pointer;font-size:18px;padding:4px" title="Hapus tender">&#10060;</button></td>';
+ '<td><button onclick="if(confirm(\'Hapus tender ini?\')){'+src+'.splice('+i+',1);renderTable('+src+',\''+tbodyId+'\')}" style="background:none;border:none;cursor:pointer;font-size:18px;padding:4px" title="Hapus tender">&#10060;</button></td>';
  tb.appendChild(tr);
  });
 }
-function esc(s){return (s||'').replace///g,'&quot;').replace/</g,'&lt;')}
+function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
 
 /* === Save data === */
 function saveData(mode) {
   var statusEl = mode === 'preview' ? 'saveStatus' : 'saveStatus2';
 
   if (mode === 'preview') {
+    // APPEND MODE: send only new tenders, API merges server-side
+    // This prevents false "data decrease" warnings from stale browser state.
     if (previewData.length === 0) {
       showStatus(statusEl, 'Tidak ada data preview untuk disimpan.', 'warn');
       return;
     }
 
+    // Check for duplicates (informational only, user can proceed)
     var dupes = [];
     previewData.forEach(function(p) {
       currentData.forEach(function(c) {
@@ -319,7 +322,7 @@ function saveData(mode) {
       });
     });
     if (dupes.length > 0) {
-      if (!confirm('⚠️ WARNING: ' + dupes.length + ' duplikat ditemukan:\n\n' + dupes.join('\n') + '\n\nLanjutkan simpan? (Duplikat akan dilewati otomatis)')) {
+      if (!confirm('â ï¸ WARNING: ' + dupes.length + ' duplikat ditemukan:\n\n' + dupes.join('\n') + '\n\nLanjutkan? (Duplikat akan dilewati otomatis)')) {
         showStatus(statusEl, 'Dibatalkan - ada duplikat', 'warn');
         return;
       }
@@ -327,6 +330,8 @@ function saveData(mode) {
 
     showStatus(statusEl, '<span class="loader"></span> Menyimpan ke Database...', 'info');
 
+    // Send ONLY the new tenders with appendOnly:true
+    // API will fetch existing DB and merge server-side
     fetch('/api/save-tenders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -338,6 +343,7 @@ function saveData(mode) {
       }
       var addedMsg = d.added !== undefined ? ' (+' + d.added + ' baru)' : '';
       showStatus(statusEl, 'Berhasil disimpan! Total ' + d.count + ' tender' + addedMsg + '. Perubahan aktif dalam ~15 detik setelah Vercel redeploy.', 'ok');
+      // Reload fresh data from DB
       loadData();
       document.getElementById('previewSection').style.display = 'none';
       document.getElementById('rawInput').value = '';
@@ -347,8 +353,11 @@ function saveData(mode) {
     });
 
   } else {
+    // REPLACE MODE: save currentData as-is (for editing existing tenders)
     var data = currentData;
+
     showStatus(statusEl, '<span class="loader"></span> Menyimpan ke Database...', 'info');
+
     fetch('/api/save-tenders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -356,7 +365,7 @@ function saveData(mode) {
     }).then(function(r) { return r.json(); }).then(function(d) {
       if (d.error) {
         if (d.protection && d.loss) {
-          if (confirm('⚠️ ' + d.error + '\n\nLanjutkan?')) {
+          if (confirm('â ï¸ ' + d.error + '\n\nLanjutkan?')) {
             fetch('/api/save-tenders', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
