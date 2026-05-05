@@ -1645,5 +1645,32 @@
     "lokasi": "Jakarta Selatan - DKI Jakarta",
     "kategori": "SURVEY & INSPECTION",
     "tanggal_pengumuman": "30-Apr-2026"
+  },
+  {
+    "nama": "Belanja Bahan-Bahan Kimia E-Pengadaan Langsung",
+    "milik": "KOTA BEKASI",
+    "nilai": "Rp 189 JT",
+    "closing": "04-May-2026",
+    "lokasi": "Bekasi - Jawa Barat",
+    "kategori": "CHEMICAL & INDUSTRIAL GAS",
+    "tanggal_pengumuman": "05-May-2026"
+  },
+  {
+    "nama": "Belanja CCTV Prakarsa RW 01,03,04,05,06,08,09 (Pembangunan Sarana dan Prasarana Kelurahan ) Kelurahan Ciroyom",
+    "milik": "KOTA BANDUNG",
+    "nilai": "Rp 209 JT",
+    "closing": "04-May-2026",
+    "lokasi": "Bandung - Jawa Barat",
+    "kategori": "KOMPUTER IT",
+    "tanggal_pengumuman": "05-May-2026"
+  },
+  {
+    "nama": "CCTV RW Kegiatan Prakarsa",
+    "milik": "KOTA BANDUNG",
+    "nilai": "Rp 160 JT",
+    "closing": "04-May-2026",
+    "lokasi": "Bandung - Jawa Barat",
+    "kategori": "KOMPUTER IT",
+    "tanggal_pengumuman": "05-May-2026"
   }
 ]
