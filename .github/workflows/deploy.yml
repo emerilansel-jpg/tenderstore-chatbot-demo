@@ -1,77 +1,21 @@
-name: Deploy to Production
+name: Deploy to Production (Manual)
+
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
+
+# NOTE: GitHub Actions IPs are blocked by server firewall (CSF).
+# This workflow is kept for reference only.
+# Deploy manually: ssh -p 8323 root@202.10.37.147
+# Then run: bash <(curl -fsSL https://raw.githubusercontent.com/emerilansel-jpg/tenderstore-chatbot-demo/main/deploy.sh)
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Whitelist runner IP via WHM and deploy via SSH
-        env:
-          WHM_HOST: ${{ secrets.SSH_HOST }}
-          WHM_PASS: ${{ secrets.SSH_PASS }}
-          SSH_USER: ${{ secrets.SSH_USER }}
+      - name: Notify
         run: |
-          set -e
-
-          # Get this runner's public IP
-          RUNNER_IP=$(curl -s --max-time 5 https://api.ipify.org || echo "")
-          echo "Runner IP: $RUNNER_IP"
-
-          # Try to whitelist via WHM CSF plugin
-          if [ -n "$RUNNER_IP" ]; then
-            echo "Attempting CSF whitelist via WHM API..."
-            curl -sk --max-time 10 \
-              -H "Authorization: WHM root:${WHM_PASS}" \
-              -X POST "https://${WHM_HOST}:2087/cgi/addon_csf.cgi" \
-              --data "action=allow&ip=${RUNNER_IP}&comment=GitHub+Actions+runner" || true
-
-            # Also try direct iptables via WHM exec (some panels allow this)
-            curl -sk --max-time 10 \
-              -H "Authorization: WHM root:${WHM_PASS}" \
-              "https://${WHM_HOST}:2087/json-api/version" | head -c 50 || true
-
-            echo "Waiting 5s for firewall to update..."
-            sleep 5
-          fi
-
-          # Install sshpass if needed
-          sudo apt-get install -y -q sshpass 2>/dev/null || true
-
-          # Deploy via SSH
-          echo "Connecting to ${WHM_HOST}:8323..."
-          sshpass -p "${WHM_PASS}" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=15 -p 8323 "${SSH_USER}@${WHM_HOST}" '
-            set -e
-            echo "=== TenderStore Deploy ==="
-            APP_DIR=/home/aigrowlab/tenderstore
-            REPO=https://github.com/emerilansel-jpg/tenderstore-chatbot-demo.git
-
-            command -v node || (curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs)
-            command -v pm2 || npm install -g pm2
-
-            if [ -d "$APP_DIR/.git" ]; then
-              cd "$APP_DIR" && git pull origin main
-            else
-              mkdir -p "$APP_DIR" && git clone "$REPO" "$APP_DIR" && cd "$APP_DIR"
-            fi
-
-            cd "$APP_DIR"
-            npm install --production
-
-            if [ ! -f "$APP_DIR/.env" ]; then
-              printf "PORT=3000\nGITHUB_REPO=emerilansel-jpg/tenderstore-chatbot-demo\nGITHUB_TOKEN=REPLACE_ME\nGEMINI_API_KEY=REPLACE_ME\nOPENROUTER_API_KEY=REPLACE_ME\n" > "$APP_DIR/.env"
-              echo "IMPORTANT: Fill in .env with real API keys"
-            fi
-
-            pm2 delete tenderstore 2>/dev/null || true
-            pm2 start "$APP_DIR/app.js" --name tenderstore
-            pm2 save
-
-            mkdir -p /home/aigrowlab/public_html
-            printf "Options -Indexes\nRewriteEngine On\nRewriteCond %%{REQUEST_FILENAME} !-f\nRewriteCond %%{REQUEST_FILENAME} !-d\nRewriteRule ^(.*)\$ http://127.0.0.1:3000/\$1 [P,L]\n" > /home/aigrowlab/public_html/.htaccess
-
-            echo "=== Deploy complete! ==="
-            pm2 status
-          '
+          echo "Manual deploy workflow triggered."
+          echo "Server firewall blocks GitHub Actions IPs on port 8323."
+          echo "Use manual SSH deploy from your own machine instead."
+          echo "SSH: ssh -p 8323 root@202.10.37.147"
+          echo "Then: bash <(curl -fsSL https://raw.githubusercontent.com/emerilansel-jpg/tenderstore-chatbot-demo/main/deploy.sh)"
