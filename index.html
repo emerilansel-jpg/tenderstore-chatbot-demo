@@ -382,5 +382,45 @@ inp.disabled=false;btn.disabled=false;inp.focus();
 window.addEventListener('load',function(){document.getElementById('pwInput').focus();loadStats();});
 </script>
 <script>function loadStats(){fetch('/api/stats').then(function(r){return r.json();}).then(function(d){if(d.tender!==undefined)document.getElementById('statTender').textContent=d.tender;if(d.kategori!==undefined)document.getElementById('statKategori').textContent=d.kategori;if(d.pertamina!==undefined)document.getElementById('statPertamina').textContent=d.pertamina;}).catch(function(){});}function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
+
+<script>
+async function checkPassword() {
+  var username = (document.getElementById('loginUser') || {}).value || '';
+  var raw      = (document.getElementById('pwInput')   || {}).value || '';
+  var errEl    = document.getElementById('pwError');
+  if (errEl) errEl.style.display = 'none';
+
+  // Master password (case-insensitive, ignore spaces/dashes)
+  var pw = raw.toLowerCase().replace(/[\s\-_]/g, '');
+  if (!username && pw === 'admintender') {
+    document.getElementById('pwOverlay').style.display = 'none';
+    localStorage.setItem('tsAuth', JSON.stringify({name:'Admin'}));
+    return;
+  }
+  if (!username) {
+    if (errEl) { errEl.textContent = 'Masukkan username atau gunakan master password.'; errEl.style.display = 'block'; }
+    return;
+  }
+
+  try {
+    var res  = await fetch('/api/manage-users', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({action:'auth', username: username, password: raw})
+    });
+    var data = await res.json();
+    if (data.success) {
+      document.getElementById('pwOverlay').style.display = 'none';
+      localStorage.setItem('tsAuth', JSON.stringify({username: username, name: data.name || username}));
+    } else {
+      if (errEl) { errEl.textContent = 'Username atau password salah.'; errEl.style.display = 'block'; }
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  } catch(e) {
+    if (errEl) { errEl.textContent = 'Koneksi error. Coba lagi.'; errEl.style.display = 'block'; }
+  }
+}
+</script>
 </body>
 </html>
