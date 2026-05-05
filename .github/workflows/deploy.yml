@@ -1,0 +1,39 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+          script: |
+            if ! command -v node &>/dev/null; then
+              curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+              apt-get install -y nodejs
+            fi
+            npm install -g pm2 2>/dev/null || true
+            APP_DIR="/home/aigrowlab/tenderstore"
+            if [ -d "$APP_DIR/.git" ]; then
+              cd "$APP_DIR" && git pull origin main
+            else
+              git clone https://github.com/emerilansel-jpg/tenderstore-chatbot-demo.git "$APP_DIR"
+            fi
+            cd "$APP_DIR" && npm install --production
+            if [ ! -f "$APP_DIR/.env" ]; then
+              printf "PORT=3000\nGITHUB_REPO=emerilansel-jpg/tenderstore-chatbot-demo\nGITHUB_TOKEN=REPLACE_ME\nGEMINI_API_KEY=REPLACE_ME\nOPENROUTER_API_KEY=REPLACE_ME\n" > "$APP_DIR/.env"
+            fi
+            pm2 delete tenderstore 2>/dev/null || true
+            pm2 start "$APP_DIR/app.js" --name tenderstore && pm2 save
+            mkdir -p /home/aigrowlab/public_html
+            printf 'Options -Indexes\nRewriteEngine On\nRewriteCond %%{REQUEST_FILENAME} !-f\nRewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]\n' > /home/aigrowlab/public_html/.htaccess
+            pm2 status
