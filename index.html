@@ -227,9 +227,9 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 </div>
 <div class="footer-stats">
 <div class="stats-inner">
-<div><div id="statTender" class="stat-val" style="color:#3b82f6">32</div><div class="stat-lbl">Tender</div></div>
-<div><div id="statKategori" class="stat-val" style="color:#22c55e">5</div><div class="stat-lbl">Kategori</div></div>
-<div><div id="statPertamina" class="stat-val" style="color:#a78bfa">25</div><div class="stat-lbl">Pertamina</div></div>
+<div><div id="statTender" class="stat-val" style="color:#3b82f6">...</div><div class="stat-lbl">Tender</div></div>
+<div><div id="statKategori" class="stat-val" style="color:#22c55e">...</div><div class="stat-lbl">Kategori</div></div>
+<div><div id="statPertamina" class="stat-val" style="color:#a78bfa">...</div><div class="stat-lbl">Pertamina</div></div>
 </div>
 </div>
 </main>
@@ -381,7 +381,7 @@ inp.disabled=false;btn.disabled=false;inp.focus();
 /* Focus password input on load */
 window.addEventListener('load',function(){document.getElementById('pwInput').focus();loadStats();});
 </script>
-<script>function loadStats(){fetch('/api/stats').then(function(r){return r.json();}).then(function(d){if(d.tender!==undefined)document.getElementById('statTender').textContent=d.tender;if(d.kategori!==undefined)document.getElementById('statKategori').textContent=d.kategori;if(d.pertamina!==undefined)document.getElementById('statPertamina').textContent=d.pertamina;}).catch(function(){});}function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
+<script>function loadStats(retry){retry=retry||0;fetch('/api/stats?t='+Date.now()).then(function(r){return r.json();}).then(function(d){if(d.tender!==undefined)document.getElementById('statTender').textContent=d.tender;if(d.kategori!==undefined)document.getElementById('statKategori').textContent=d.kategori;if(d.pertamina!==undefined)document.getElementById('statPertamina').textContent=d.pertamina;}).catch(function(){if(retry<2){setTimeout(function(){loadStats(retry+1);},3000);}else{document.getElementById('statTender').textContent='-';document.getElementById('statKategori').textContent='-';document.getElementById('statPertamina').textContent='-';}}).catch(function(){});}function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
 
 <script>
 async function checkPassword() {
