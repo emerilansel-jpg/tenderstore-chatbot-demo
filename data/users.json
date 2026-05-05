@@ -14,13 +14,5 @@
     "passwordHash": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae",
     "active": false,
     "createdAt": "2026-05-04"
-  },
-  {
-    "username": "nell",
-    "name": "Nell VH",
-    "wa": "081290401240",
-    "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
-    "active": false,
-    "createdAt": "2026-05-04"
   }
 ]
