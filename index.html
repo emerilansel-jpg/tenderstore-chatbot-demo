@@ -227,9 +227,9 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 </div>
 <div class="footer-stats">
 <div class="stats-inner">
-<div><div id="statTender" class="stat-val" style="color:#3b82f6">...</div><div class="stat-lbl">Tender</div></div>
-<div><div id="statKategori" class="stat-val" style="color:#22c55e">...</div><div class="stat-lbl">Kategori</div></div>
-<div><div id="statPertamina" class="stat-val" style="color:#a78bfa">...</div><div class="stat-lbl">Pertamina</div></div>
+<div onclick="quickAsk('ada tender apa hari ini?')" style="cursor:pointer"><div id="statTender" class="stat-val" style="color:#3b82f6">...</div><div class="stat-lbl">Tender</div></div>
+<div onclick="quickAsk('ada kategori tender apa saja?')" style="cursor:pointer"><div id="statKategori" class="stat-val" style="color:#22c55e">...</div><div class="stat-lbl">Kategori</div></div>
+<div onclick="quickAsk('Apakah ada tender Pertamina?')" style="cursor:pointer"><div id="statPertamina" class="stat-val" style="color:#a78bfa">...</div><div class="stat-lbl">Pertamina</div></div>
 </div>
 </div>
 </main>
@@ -422,5 +422,6 @@ async function checkPassword() {
   }
 }
 </script>
+<script>window.addEventListener("load",function(){setTimeout(loadStats,300);});</script>
 </body>
 </html>
