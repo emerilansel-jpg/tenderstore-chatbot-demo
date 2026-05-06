@@ -259,6 +259,7 @@ var isAuth = false;
     document.getElementById('pwOverlay').style.display='flex';
 
     document.getElementById('pwOverlay').style.display='flex';
+});
 
 /* === Guidance Modal === */
 function openGuide(){
@@ -381,7 +382,7 @@ inp.disabled=false;btn.disabled=false;inp.focus();
 /* Focus password input on load */
 window.addEventListener('load',function(){document.getElementById('pwInput').focus();loadStats();});
 
-}</script>
+</script>
 <script>function loadStats(retry){retry=retry||0;fetch('/api/stats?t='+Date.now()).then(function(r){return r.json();}).then(function(d){if(d.tender!==undefined)document.getElementById('statTender').textContent=d.tender;if(d.kategori!==undefined)document.getElementById('statKategori').textContent=d.kategori;if(d.pertamina!==undefined)document.getElementById('statPertamina').textContent=d.pertamina;}).catch(function(){if(retry<2){setTimeout(function(){loadStats(retry+1);},3000);}else{document.getElementById('statTender').textContent='-';document.getElementById('statKategori').textContent='-';document.getElementById('statPertamina').textContent='-';}}).catch(function(){});}function toggleLoginPw(){var p=document.getElementById('pwInput');var btn=document.getElementById('eyeBtn');if(p.type==='password'){p.type='text';btn.innerHTML='&#128064;';}else{p.type='password';btn.innerHTML='&#128065;';}}</script>
 
 <script>
