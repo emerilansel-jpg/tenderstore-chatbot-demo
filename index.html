@@ -245,10 +245,12 @@ Silakan klik tombol di atas atau ketik pertanyaan Anda.<br>
 
 <script>
 /* === Password Gate === */
-var isAuth = false;
+var isAuth = !!localStorage.getItem('tsAuth');
 
+function saveProspect(nama,wa){
   document.getElementById('prospectError').style.display='none';
   var btn = document.querySelector('.prospect-btn');
+if(!btn)return;
   btn.textContent='Menyimpan...';
   btn.disabled=true;
   fetch('/api/save-prospect',{
@@ -260,6 +262,7 @@ var isAuth = false;
 
     document.getElementById('pwOverlay').style.display='flex';
 });
+}
 
 /* === Guidance Modal === */
 function openGuide(){
@@ -397,6 +400,7 @@ async function checkPassword() {
   if (!username && pw === 'admintender') {
     document.getElementById('pwOverlay').style.display = 'none';
     localStorage.setItem('tsAuth', JSON.stringify({name:'Admin'}));
+isAuth=true;
     return;
   }
   if (!username) {
