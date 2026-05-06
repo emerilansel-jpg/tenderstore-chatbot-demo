@@ -623,104 +623,107 @@
 205. Nama: Pengadaan Material Watermist Botol
    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 08-mei-2026 | Lokasi: Balikpapan - Kalimantan Timur | Diumumkan: 06-May-2026
 
+206. Nama: Pengadaan Material Dan Jasa Instalasi Kelistrikan Instrument Pendingin Utama Ulpltu Sumbawa PLN
+   Milik: PLN (PERSERO) WILAYAH NUSA TENGGARA BARAT | Nilai: N/A | Closing: 06-mei-2026 | Lokasi: Mataram - Nusa Tenggara Barat | Diumumkan: 06-May-2026
+
 --- KATEGORI: DRILLING & WORKOVER WELL SERVICE ---
-206. Nama: Drilling & Completion Technical Services For Block Corridor
+207. Nama: Drilling & Completion Technical Services For Block Corridor
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 21-Apr-2026
 
-207. Nama: Provision of Pack Off & Accessories
+208. Nama: Provision of Pack Off & Accessories
    Milik: PT PERTAMINA HULU MAHAKAM | Nilai: N/A | Closing: 23-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-208. Nama: Jasa Penyediaan & Pengoperasian 1(Satu) Unit Rig 350HP untuk Pekerjaan WOWS di Zona 9 Tanjung Field
+209. Nama: Jasa Penyediaan & Pengoperasian 1(Satu) Unit Rig 350HP untuk Pekerjaan WOWS di Zona 9 Tanjung Field
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-209. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4
+210. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 22-Apr-2026
 
-210. Nama: Jasa Pekerjaan Operasional Operasi Produksi secara Call of Order (COO) PT Pertamina EP Zona 14 Papua Field
+211. Nama: Jasa Pekerjaan Operasional Operasi Produksi secara Call of Order (COO) PT Pertamina EP Zona 14 Papua Field
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-211. Nama: Engineering Integrated Services For Production, Operation Surface Facilities and Support di Pertamina Hulu Rokan Regional 1
+212. Nama: Engineering Integrated Services For Production, Operation Surface Facilities and Support di Pertamina Hulu Rokan Regional 1
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-212. Nama: Penyediaan Jasa Mud Logging Unit Lengkap Dengan Peralatan dan Personel Untuk Sumur Pemboran PT Pertamina EP Zona 4 Field Pendopo, Field Adera, dan Field Ramba
+213. Nama: Penyediaan Jasa Mud Logging Unit Lengkap Dengan Peralatan dan Personel Untuk Sumur Pemboran PT Pertamina EP Zona 4 Field Pendopo, Field Adera, dan Field Ramba
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-213. Nama: Provision of Electrical Wireline Logging Services
+214. Nama: Provision of Electrical Wireline Logging Services
    Milik: PT. EMP ENERGI RIAU | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 23-Apr-2026
 
-214. Nama: Provision of Well Intervention Services
+215. Nama: Provision of Well Intervention Services
    Milik: EXXONMOBIL CEPU LIMITED | Nilai: N/A | Closing: 24-apr-2026 | Lokasi: Bojonegoro - Jawa Timur | Diumumkan: 24-Apr-2026
 
-215. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 350 Hp Untuk Wows Sumur-Sumur Pt Pertamina Ep Zona 1 Wilayah Utara
+216. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 350 Hp Untuk Wows Sumur-Sumur Pt Pertamina Ep Zona 1 Wilayah Utara
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Kotabaru - Kalimantan Selatan | Diumumkan: 29-Apr-2026
 
-216. Nama: HDE and Lifting Equipment Services for Drilling Rig B
+217. Nama: HDE and Lifting Equipment Services for Drilling Rig B
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 29-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
-217. Nama: Call Off Order of 5-1/2” Premium Screen for MDK Development Wells
+218. Nama: Call Off Order of 5-1/2” Premium Screen for MDK Development Wells
    Milik: HUSKY - CNOOC MADURA LIMITED | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-218. Nama: Provision of Electrical Wireline Logging Services EMP Energi Riau
+219. Nama: Provision of Electrical Wireline Logging Services EMP Energi Riau
    Milik: PT. EMP ENERGI RIAU | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-219. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4 Prabumulih
+220. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Rig 1500 Hp Untuk Pemboran Eksplorasi Dan Development Pt Pertamina Ep Zona 4 Prabumulih
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Prabumulih - Sumatera Selatan | Diumumkan: 29-Apr-2026
 
-220. Nama: Lifting Equipment and Services
+221. Nama: Lifting Equipment and Services
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 30-Apr-2026
 
-221. Nama: Mud Logging Services 
+222. Nama: Mud Logging Services 
    Milik: MEDCO E&P GRISSIK | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Musi Banyuasin - Sumatera Selatan | Diumumkan: 30-Apr-2026
 
-222. Nama: Directional Drilling Services and LWD/MWD Logging 
+223. Nama: Directional Drilling Services and LWD/MWD Logging 
    Milik: PERTAMINA HULU ROKAN | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 30-Apr-2026
 
-223. Nama: Penyediaan Jasa 1 (Satu) Unit Jack Up Rig Drilling Services untuk Kebutuhan di Wilayah PT Pertamina Hulu Energi OSES
+224. Nama: Penyediaan Jasa 1 (Satu) Unit Jack Up Rig Drilling Services untuk Kebutuhan di Wilayah PT Pertamina Hulu Energi OSES
    Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 30-Apr-2026
 
-224. Nama: Cementing and Bulk Plant Services PHE ONWJ
+225. Nama: Cementing and Bulk Plant Services PHE ONWJ
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 30-Apr-2026
 
-225. Nama: Workover Rig Service
+226. Nama: Workover Rig Service
    Milik: TROPIK ENERGI PANDAN | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Jakarta Pusat - DKI Jakarta | Diumumkan: 30-Apr-2026
 
-226. Nama: Provision Of MODU Drillship Rig Services
+227. Nama: Provision Of MODU Drillship Rig Services
    Milik: PETRONAS E&P BOBARA SDN. BHD. | Nilai: N/A | Closing: 06-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 30-Apr-2026
 
-227. Nama: Penyediaan Jasa Perforasi & Wireline Logging
+228. Nama: Penyediaan Jasa Perforasi & Wireline Logging
    Milik: CITIC SERAM ENERGY LIMITED | Nilai: N/A | Closing: 07-mei-2026 | Lokasi: Seram Bagian Timur - Maluku | Diumumkan: 05-May-2026
 
-228. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 750 Hp Untuk Sumur Rbg Blok I
+229. Nama: Jasa Penyediaan 1 (Satu) Unit Perangkat Pemboran Kapasitas Minimum 750 Hp Untuk Sumur Rbg Blok I
    Milik: TIS PETROLEUM E & P BLORA PTE. LTD. | Nilai: N/A | Closing: 06-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 05-May-2026
 
-229. Nama: Onshore Tubular Running Services
+230. Nama: Onshore Tubular Running Services
    Milik: MEDCO E&P INDONESIA | Nilai: N/A | Closing: 11-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 06-May-2026
 
-230. Nama: Provision Rental Of Supporting Equipment And Tools Services For 750hp/1000hp Drilling Rigs
+231. Nama: Provision Rental Of Supporting Equipment And Tools Services For 750hp/1000hp Drilling Rigs
    Milik: PT. ENERTECH INDO | Nilai: N/A | Closing: 11-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 06-May-2026
 
 --- KATEGORI: MARINE TRANSPORTATION ---
-231. Nama: Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026
+232. Nama: Pengadaan Jasa Sewa Kapal Liquefied Natural Gas (Lng) Berdasarkan Waktu (Time Charter Party) Untuk Pembangkit Tersebar Periode Mei 2026
    Milik: PLN ENERGI PRIMER INDONESIA | Nilai: N/A | Closing: 21-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 21-Apr-2026
 
-232. Nama: Provision Of Offshore Support Vessel (Crew Boat) Charter Services
+233. Nama: Provision Of Offshore Support Vessel (Crew Boat) Charter Services
    Milik: EXXONMOBIL CEPU LIMITED | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Bojonegoro - Jawa Timur | Diumumkan: 24-Apr-2026
 
-233. Nama: Pengadaan Penyedia Jasa Untuk Pengangkutan dan Pendistribusian LNG Untuk Pelanggan di Wilayah Sumatera Bagian Utara.
+234. Nama: Pengadaan Penyedia Jasa Untuk Pengangkutan dan Pendistribusian LNG Untuk Pelanggan di Wilayah Sumatera Bagian Utara.
    Milik: PERTAGAS NIAGA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-234. Nama: Pengadaan Penyedia Jasa Pengangkutan dan Distribusi CNG di Jawa Timur, Jawa Tengah dan Daerah Istimewa Yogyakarta
+235. Nama: Pengadaan Penyedia Jasa Pengangkutan dan Distribusi CNG di Jawa Timur, Jawa Tengah dan Daerah Istimewa Yogyakarta
    Milik: PERTAGAS NIAGA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 28-Apr-2026
 
-235. Nama: Sewa Landing Craft Tank (LCT) Penunjang di Lingkungan Wilayah Kerja PT Pertamina EP Field Papua
+236. Nama: Sewa Landing Craft Tank (LCT) Penunjang di Lingkungan Wilayah Kerja PT Pertamina EP Field Papua
    Milik: PERTAMINA EP | Nilai: N/A | Closing: 30-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 30-Apr-2026
 
-236. Nama: Jasa Sewa Kapal dan Penunjang
+237. Nama: Jasa Sewa Kapal dan Penunjang
    Milik: JOB PERTAMINA - MEDCO E&P SIMENGGARIS | Nilai: N/A | Closing: 04-mei-2026 | Lokasi: Nunukan - Kalimantan Timur | Diumumkan: 30-Apr-2026
 
 --- KATEGORI: EPC (ENGINEERING PROCUREMENT CONSTRUCTION) ---
-237. Nama: Jasa EPCI Fasilitas Sumuran WK Siak
+238. Nama: Jasa EPCI Fasilitas Sumuran WK Siak
    Milik: PT EMP ENERGI GANDEWA | Nilai: N/A | Closing: 27-apr-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 29-Apr-2026
 
-238. Nama: EPCI Wellhead Platform, Subsea Pipeline, and Subsea Cable for Risma Field Development Project
+239. Nama: EPCI Wellhead Platform, Subsea Pipeline, and Subsea Cable for Risma Field Development Project
    Milik: PERTAMINA HULU ENERGI OFFSHORE SOUTHEAST SUMATRA (PHE OSES) | Nilai: N/A | Closing: 06-mei-2026 | Lokasi: Jakarta Selatan - DKI Jakarta | Diumumkan: 05-May-2026
