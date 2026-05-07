@@ -1,7 +1,7 @@
 const EXACT_QA = `
 === JAWABAN WAJIB YANG HARUS DIGUNAKAN PERSIS (IKUTI FORMAT INI) ===
 
-PERTANYAAN 3: Ada tender apa saja hari ini? / semua tender / tender apa saja? / kategori apa saja?
+PERTANYAAN 3: Ada tender apa saja hari ini? / Ada tender hari ini? / Tender hari ini? / Tender sekarang? / semua tender / tender apa saja? / kategori apa saja?
 JAWABAN: JANGAN gunakan jawaban hardcoded. Hitung SEMUA kategori unik dari DATABASE TENDER di bawah (lihat semua baris "--- KATEGORI: xxx ---"). Tampilkan SEMUA kategori yang ada beserta contoh tender dan jumlah per kategori. Format HTML dengan <strong> untuk nama kategori.
 
 PERTANYAAN 4: Apakah ada tender yang nilainya lebih dari 20 miliar? / tender nilai lebih 20 M?
@@ -18,7 +18,7 @@ const _path = require('path');
 let TENDER_DATABASE;
 try {
   TENDER_DATABASE = _fs.readFileSync(_path.join(__dirname, '..', 'data', 'tenders_text.txt'), 'utf8');
-} catch(e) {h
+} catch(e) {
   TENDER_DATABASE = '=== DATABASE TENDER LENGKAP ===\nTidak ada data tender.';
 }
 
@@ -126,12 +126,25 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { message } = req.body;
+  let { message } = req.body;
   if (message && message.length > 2000) { return res.status(400).json({ error: "Message too long (max 2000 chars)" }); }
   const page = parseInt(req.body.page) || 1;
   const PAGE_SIZE = 10;
   const history = req.body.history || req.body.conversationHistory || [];
   if (!message) return res.status(400).json({ error: 'Message required' });
+
+  // === Intent normalization: "tender hari ini" / "tender sekarang" -> "Ada tender hari ini?" ===
+  {
+    const _norm = message.trim().toLowerCase().replace(/[?!.\s]+$/,'').replace(/\s+/g,' ');
+    const _aliases = [
+      'tender hari ini','tender sekarang','tender hari ini ?','tender sekarang ?',
+      'tender hr ini','tender skrg','tender skrng','ada tender skrng',
+      'ada tender sekarang','tender today','today tender'
+    ];
+    if (_aliases.indexOf(_norm) !== -1) {
+      message = 'Ada tender hari ini?';
+    }
+  }
 
   // === EARLY DATE/VALUE FAST PATH (date/value queries bypass LLM) ===
   {
