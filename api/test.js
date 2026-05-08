@@ -65,7 +65,7 @@ module.exports = async function handler(req, res) {
   test('All 11+ categories present', jsonCats.length >= 11, 'Only ' + jsonCats.length + ': ' + jsonCats.join(', '));
 
   const testQueries = [
-    { msg: 'halo', expect: 'Halo|Selamat|TenderStore', desc: 'Greeting' },
+    { msg: 'halo', expect: 'Halo|Selamat|AITenderIndonesia', desc: 'Greeting' },
     { msg: 'ada tender apa saja', expect: 'kategori|Drilling|Marine', desc: 'Categories' },
     { msg: 'tender drilling', expect: 'Drilling|Rig|Pemboran', desc: 'Drilling' },
     { msg: 'tender pertamina', expect: 'PERTAMINA|Pertamina', desc: 'Company' },

@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# TenderStore — Deploy Script (cPanel VPS)
+# AITenderIndonesia — Deploy Script (cPanel VPS)
 # Run sebagai root di server baru
 # Usage: bash deploy.sh
 # ============================================================
@@ -12,7 +12,7 @@ APP_DIR="/home/aigrowlab/tenderstore"
 APP_PORT=3000
 
 echo "========================================"
-echo "  TenderStore Deploy — $(date)"
+echo "  AITenderIndonesia Deploy — $(date)"
 echo "========================================"
 
 # 1. Install Node.js 20 LTS (jika belum ada)
@@ -57,7 +57,7 @@ if [ ! -f "$APP_DIR/.env" ]; then
 fi
 
 # 7. Start / restart dengan PM2
-echo "🚀 Starting TenderStore with PM2..."
+echo "🚀 Starting AITenderIndonesia with PM2..."
 pm2 delete tenderstore 2>/dev/null || true
 pm2 start "$APP_DIR/app.js" --name tenderstore --env production
 pm2 save

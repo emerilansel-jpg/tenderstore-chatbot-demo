@@ -1,5 +1,5 @@
 /**
- * TenderStore Chatbot — Express Server Wrapper
+ * AITenderIndonesia Chatbot — Express Server Wrapper
  * Wraps Vercel serverless API routes for cPanel / VPS deployment
  */
 
@@ -61,5 +61,5 @@ app.get('*', (req, res) => {
 // ── Start ─────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`\n🚀 TenderStore running on port ${PORT}`);
+  console.log(`\n🚀 AITenderIndonesia running on port ${PORT}`);
 });

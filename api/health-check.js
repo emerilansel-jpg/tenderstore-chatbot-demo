@@ -50,7 +50,7 @@ module.exports = async function handler(req, res) {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + provider.key,
-          'HTTP-Referer': 'https://tenderstore-chatbot-demo.vercel.app',
+          'HTTP-Referer': 'https://aitenderindonesia.com',
         },
         body: JSON.stringify({
           model: provider.model,

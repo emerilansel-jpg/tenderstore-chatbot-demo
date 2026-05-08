@@ -1,7 +1,7 @@
 {
-  "name": "tenderstore-chatbot",
+  "name": "aitenderindonesia-chatbot",
   "version": "1.0.0",
-  "description": "TenderStore.id Chatbot - Production Server",
+  "description": "AITenderIndonesia.com Chatbot - Production Server",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"

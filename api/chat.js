@@ -22,7 +22,7 @@ try {
   TENDER_DATABASE = '=== DATABASE TENDER LENGKAP ===\nTidak ada data tender.';
 }
 
-const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi TenderStore.id. Jawab dalam Bahasa Indonesia yang ramah dan profesional.
+const SYSTEM_PROMPT = `Kamu adalah Asisten AI resmi AITenderIndonesia.com. Jawab dalam Bahasa Indonesia yang ramah dan profesional.
 
 === ATURAN ABSOLUT - TIDAK BOLEH DILANGGAR ===
 KAMU HANYA BOLEH menggunakan data tender dari knowledge base yang ada di prompt ini.
@@ -330,7 +330,7 @@ if (_fpRes.length > 0) {
     // Greeting handler
     var _isGreeting = /^(halo|hai|hello|hey|hi|selamat\s+(pagi|siang|sore|malam))[!?.\s]*$/i.test(message.trim());
     if (_isGreeting) {
-      return res.json({ reply: 'Halo! Selamat datang di TenderStore.id. Saya siap membantu Anda mencari tender.<br><br>Silakan sebutkan kategori (contoh: <strong>drilling</strong>, <strong>marine</strong>, <strong>IT</strong>) atau nama perusahaan (contoh: <strong>Pertamina</strong>, <strong>PLN</strong>, <strong>BP</strong>) untuk memulai pencarian.' });
+      return res.json({ reply: 'Halo! Selamat datang di AITenderIndonesia.com. Saya siap membantu Anda mencari tender.<br><br>Silakan sebutkan kategori (contoh: <strong>drilling</strong>, <strong>marine</strong>, <strong>IT</strong>) atau nama perusahaan (contoh: <strong>Pertamina</strong>, <strong>PLN</strong>, <strong>BP</strong>) untuk memulai pencarian.' });
     }
 
     // Pure count handler
@@ -595,7 +595,7 @@ if (_fpRes.length > 0) {
       });
 
       if (kbItems.length > 0 && kbValidItems.length === 0) {
-        reply = 'Maaf, data tender tersebut tidak tersedia dalam database kami. Silakan hubungi tim TenderStore untuk informasi lebih lanjut.';
+        reply = 'Maaf, data tender tersebut tidak tersedia dalam database kami. Silakan hubungi tim AITenderIndonesia untuk informasi lebih lanjut.';
       } else if (kbValidItems.length < kbItems.length) {
         reply = kbIntro + kbValidItems.join('');
       }
