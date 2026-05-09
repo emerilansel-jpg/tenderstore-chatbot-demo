@@ -147,8 +147,14 @@ module.exports = async function handler(req, res) {
   }
 
   // === DB-DIRECT: "Ada tender hari ini?" — bypass LLM, instant reply ===
-  const _hariIniRe = /^(ada\s+)?tender(\s+apa(\s+saja)?)?\s+(hari\s+ini|sekarang|skrg|skrng|hr\s+ini|today)\??$/i;
-  const _isHariIniQ = _hariIniRe.test(message.trim()) || message === 'Ada tender hari ini?';
+  const _msgLow = message.trim().toLowerCase();
+  const _hasTender = /\btender\b/.test(_msgLow);
+  const _hasTemporal = /\b(hari\s+ini|sekarang|skrg|skrng|hr\s+ini|today|skarang)\b/.test(_msgLow);
+  // Generic / categorical question (no specific keyword like marine/drilling/pertamina)
+  const _hasSpecific = /\b(drilling|marine|seismic|geotechnic|geophysic|computer|it|man\s*power|chemical|fabrication|mechanical|valve|pipe|casing|tubing|hose|survey|inspection|pertamina|pln|bp|chevron|exxon|shell|hess|saka|medco)\b/.test(_msgLow);
+  const _hasMonth = /\b(jan(uari)?|feb(ruari)?|mar(et)?|apr(il)?|mei|jun(i)?|jul(i)?|agu(stus)?|sep(tember)?|okt(ober)?|nov(ember)?|des(ember)?)\b/.test(_msgLow);
+  const _hasValue = /\b(\d+\s*(miliar|m|juta|jt))\b|lebih\s+dari|kurang\s+dari|di\s+atas|di\s+bawah/.test(_msgLow);
+  const _isHariIniQ = (_hasTender && _hasTemporal && !_hasSpecific && !_hasMonth && !_hasValue) || message === 'Ada tender hari ini?';
   if (_isHariIniQ) {
     try {
       const _ddLines = TENDER_DATABASE.split('\n');
