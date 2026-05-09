@@ -146,6 +146,29 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // === DB-DIRECT: "Ada tender hari ini?" — bypass LLM, instant reply ===
+  const _hariIniRe = /^(ada\s+)?tender(\s+apa(\s+saja)?)?\s+(hari\s+ini|sekarang|skrg|skrng|hr\s+ini|today)\??$/i;
+  const _isHariIniQ = _hariIniRe.test(message.trim()) || message === 'Ada tender hari ini?';
+  if (_isHariIniQ) {
+    try {
+      const _ddLines = TENDER_DATABASE.split('\n');
+      const _ddCats = {};
+      let _ddCur = null;
+      for (const _ddL of _ddLines) {
+        const _ddKm = _ddL.match(/^---\s*KATEGORI:\s*(.+?)\s*---$/i);
+        if (_ddKm) { _ddCur = _ddKm[1].trim(); _ddCats[_ddCur] = 0; continue; }
+        if (_ddCur && /^\d+\.\s*Nama:/.test(_ddL.trim())) _ddCats[_ddCur]++;
+      }
+      const _ddTotal = Object.values(_ddCats).reduce(function(a,b){return a+b;}, 0);
+      const _ddCatN = Object.keys(_ddCats).length;
+      if (_ddTotal > 0) {
+        const _ddList = Object.entries(_ddCats).sort(function(a,b){return b[1]-a[1];})
+          .map(function(p){return '<li><strong>' + p[0] + '</strong> (' + p[1] + ' tender)</li>';}).join('');
+        return res.json({ reply: 'Saat ini tersedia total <strong>' + _ddTotal + ' tender</strong> dalam <strong>' + _ddCatN + ' kategori</strong>:<br><br><ol class="reply-list" start="1">' + _ddList + '</ol><br>Ketik nama kategori (contoh: <strong>drilling</strong>, <strong>marine</strong>, <strong>IT</strong>) atau nama perusahaan (contoh: <strong>Pertamina</strong>, <strong>PLN</strong>) untuk detail.' });
+      }
+    } catch (_ddErr) { console.error('DB-direct hari ini error:', _ddErr); }
+  }
+
   // === EARLY DATE/VALUE FAST PATH (date/value queries bypass LLM) ===
   {
     var _fpQl = message.toLowerCase();

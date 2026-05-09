@@ -22,5 +22,6 @@ check "GET /api/health-check"   "curl -s $BASE/api/health-check | head -c 100"  
 check "POST /api/chat (Halo)"   "curl -s -X POST -H 'Content-Type: application/json' -d '{\"message\":\"Halo\"}' $BASE/api/chat | head -c 200"  "AITenderIndonesia"
 check "POST /api/manage-users"  "curl -s -X POST -H 'Content-Type: application/json' -d '{\"action\":\"list\"}' $BASE/api/manage-users | head -c 100" "username"
 check "POST /api/manage-users auth" "curl -s -X POST -H 'Content-Type: application/json' -d '{\"action\":\"auth\",\"username\":\"nell\",\"password\":\"123456\"}' $BASE/api/manage-users" "success"
+check "POST /api/chat (tender hari ini)" "curl -s -X POST -H 'Content-Type: application/json' -d '{\"message\":\"ada tender hari ini?\"}' $BASE/api/chat | head -c 200" "245 tender"
 echo "=== RESULT: $PASS passed, $FAIL failed ==="
 exit $FAIL
