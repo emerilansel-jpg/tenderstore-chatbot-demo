@@ -62,7 +62,7 @@ app.get('*', (req, res) => {
 
 // === STARTUP_CHECK — fail fast on env misconfig ===
 function startupCheck(){
-  const required = ['GITHUB_TOKEN','GEMINI_API_KEY','OPENROUTER_API_KEY'];
+  const required = ['GEMINI_API_KEY','OPENROUTER_API_KEY'];
   const missing = required.filter(k => !process.env[k] || process.env[k].includes('PLACEHOLDER'));
   if (missing.length) console.warn('\u26A0\uFE0F Missing/placeholder env vars:', missing.join(','));
   const repo = process.env.GITHUB_REPO || '';
