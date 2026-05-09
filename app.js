@@ -59,6 +59,18 @@ app.get('*', (req, res) => {
 });
 
 // ── Start ─────────────────────────────────────────────────────────────────
+
+// === STARTUP_CHECK — fail fast on env misconfig ===
+function startupCheck(){
+  const required = ['GITHUB_TOKEN','GEMINI_API_KEY','OPENROUTER_API_KEY'];
+  const missing = required.filter(k => !process.env[k] || process.env[k].includes('PLACEHOLDER'));
+  if (missing.length) console.warn('\u26A0\uFE0F Missing/placeholder env vars:', missing.join(','));
+  const repo = process.env.GITHUB_REPO || '';
+  if (repo && !repo.includes('/')) console.warn('\u26A0\uFE0F GITHUB_REPO should be "owner/repo" format. Got:', repo);
+  console.log('\u2705 Startup check done. Env:', {repo: repo||'(default)', llmKeys: required.filter(k=>process.env[k]&&!process.env[k].includes('PLACE')).length+'/3'});
+}
+startupCheck();
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`\n🚀 AITenderIndonesia running on port ${PORT}`);
