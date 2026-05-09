@@ -36,7 +36,7 @@ const apiHandlers = [
 
 for (const name of apiHandlers) {
   try {
-    const handler = require(`./api/${name}`);
+    const _mod = require(`./api/${name}`); const handler = typeof _mod === "function" ? _mod : (_mod && _mod.default) || _mod;
     app.all(`/api/${name}`, async (req, res) => {
       try {
         await handler(req, res);
