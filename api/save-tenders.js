@@ -1,4 +1,4 @@
-// LOCAL FS — safe save with anti-wipe safeguards + history archive
+// LOCAL FS — APPEND mode (default) + REPLACE mode (explicit) + anti-wipe + history
 const path = require('path');
 const fs = require('fs').promises;
 const { readJson, writeJson, writeText, exists, DATA_DIR } = require('../lib/datastore');
@@ -32,15 +32,12 @@ function buildTextDatabase(data) {
   });
   return lines.join('\n');
 }
-
 async function archiveHistory(currentData) {
-  // Save snapshot to data/.history/ before overwriting
   const histDir = path.join(DATA_DIR, '.history');
   await fs.mkdir(histDir, { recursive: true });
   const ts = new Date().toISOString().replace(/[:.]/g, '-');
   const histFile = path.join(histDir, 'tenders-' + ts + '.json');
   await fs.writeFile(histFile, JSON.stringify(currentData, null, 2));
-  // Rotate: keep last 50
   try {
     const files = (await fs.readdir(histDir)).filter(f => f.startsWith('tenders-')).sort();
     if (files.length > 50) {
@@ -55,41 +52,72 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, error: 'Method not allowed' });
   try {
-    const { data, force } = req.body || {};
+    const { data, replace, force } = req.body || {};
     if (!Array.isArray(data)) return res.status(400).json({ success: false, error: 'data must be array' });
-    if (data.length === 0 && !force) return res.status(400).json({ success: false, error: 'Empty array refused. Add ?force=true to override.' });
+    if (data.length === 0 && !force) return res.status(400).json({ success: false, error: 'Empty array refused.' });
 
-    // === ANTI-WIPE SAFEGUARD ===
-    let currentCount = 0;
+    // Read current
     let currentData = [];
     if (await exists('tenders.json')) {
-      currentData = await readJson('tenders.json');
-      currentCount = Array.isArray(currentData) ? currentData.length : 0;
+      const cur = await readJson('tenders.json');
+      if (Array.isArray(cur)) currentData = cur;
     }
-    const THRESHOLD = 0.5; // refuse if new < 50% of current
-    if (currentCount >= 10 && data.length < currentCount * THRESHOLD && !force) {
-      console.warn('[save-tenders] REFUSED: ' + data.length + ' < ' + Math.floor(currentCount * THRESHOLD) + ' (50% of ' + currentCount + ')');
-      return res.status(409).json({
-        success: false,
-        error: 'BLOCKED: New count (' + data.length + ') is more than 50% smaller than current (' + currentCount + '). This is likely accidental. To force, send {"force":true} in body. Current data preserved.',
-        currentCount: currentCount,
-        newCount: data.length
-      });
+    const currentCount = currentData.length;
+
+    let finalData;
+    let mode;
+    if (replace === true) {
+      // === REPLACE MODE ===
+      mode = 'replace';
+      // Anti-wipe guard
+      if (currentCount >= 10 && data.length < currentCount * 0.5 && !force) {
+        return res.status(409).json({
+          success: false,
+          error: 'BLOCKED REPLACE: New count (' + data.length + ') is more than 50% smaller than current (' + currentCount + '). Use APPEND mode (default) for adding new tenders, or send {"replace":true,"force":true} to force replace.',
+          currentCount: currentCount,
+          newCount: data.length,
+          hint: 'Did you mean to append? Default mode is APPEND. Only use replace:true for full re-import.'
+        });
+      }
+      finalData = data;
+    } else {
+      // === APPEND MODE (default) ===
+      mode = 'append';
+      // Dedup by nama (case-insensitive, trimmed)
+      const existingNames = new Set(currentData.map(t => (t.nama || '').trim().toLowerCase()));
+      const newItems = [];
+      const skipped = [];
+      for (const item of data) {
+        const key = (item.nama || '').trim().toLowerCase();
+        if (existingNames.has(key)) { skipped.push(item.nama); continue; }
+        newItems.push(item);
+        existingNames.add(key);
+      }
+      finalData = [...currentData, ...newItems];
+      console.log('[save-tenders] APPEND: +' + newItems.length + ' new, ' + skipped.length + ' duplicates skipped');
+      // If everything was duplicate
+      if (newItems.length === 0) {
+        return res.status(200).json({ success: true, count: currentCount, added: 0, skipped: skipped.length, message: 'All ' + data.length + ' items already exist (duplicate nama).' });
+      }
     }
 
-    // === Archive history before overwrite ===
+    // Archive history + legacy backup
     if (currentCount > 0) {
-      const hist = await archiveHistory(currentData);
-      console.log('[save-tenders] history archived:', hist, '(' + currentCount + ' records)');
+      await archiveHistory(currentData);
+      await writeJson('tenders_backup.json', currentData);
     }
-    // Backup file (legacy)
-    if (currentCount > 0) await writeJson('tenders_backup.json', currentData);
 
-    // Write new
-    await writeJson('tenders.json', data);
-    await writeText('tenders_text.txt', buildTextDatabase(data));
-    console.log('[save-tenders] SAVED ' + data.length + ' records (was ' + currentCount + ')');
-    return res.status(200).json({ success: true, count: data.length, previousCount: currentCount });
+    // Write
+    await writeJson('tenders.json', finalData);
+    await writeText('tenders_text.txt', buildTextDatabase(finalData));
+    console.log('[save-tenders] SAVED ' + finalData.length + ' records (was ' + currentCount + ', mode=' + mode + ')');
+    return res.status(200).json({
+      success: true,
+      count: finalData.length,
+      previousCount: currentCount,
+      mode: mode,
+      added: mode === 'append' ? finalData.length - currentCount : null
+    });
   } catch (err) {
     console.error('save-tenders error:', err);
     return res.status(500).json({ success: false, error: 'Server error: ' + err.message });
